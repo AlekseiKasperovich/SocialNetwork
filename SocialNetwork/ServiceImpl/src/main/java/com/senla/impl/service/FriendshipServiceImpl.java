@@ -1,0 +1,131 @@
+package com.senla.impl.service;
+
+import com.senla.api.dto.friendship.FriendshipDto;
+import com.senla.api.exception.MyAccessDeniedException;
+import com.senla.api.service.FriendshipService;
+import com.senla.impl.mapper.Mapper;
+import com.senla.impl.model.Friendship;
+import com.senla.impl.model.User;
+import com.senla.impl.repository.FriendshipRepository;
+import com.senla.impl.service.custom.CustomFriendshipService;
+import com.senla.impl.service.custom.CustomUserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ *
+ * @author Aliaksei Kaspiarovich
+ */
+@Service
+@RequiredArgsConstructor
+@Transactional
+public class FriendshipServiceImpl implements FriendshipService {
+
+    private final CustomFriendshipService friendshipService;
+    private final CustomUserService userService;
+    private final FriendshipRepository friendshipRepository;
+    private final Mapper mapper;
+
+    /**
+     *
+     * @param friendshipId friendship ID
+     * @return friendship
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public FriendshipDto getFriendshipById(Long friendshipId) {
+        Friendship friendship = friendshipService.findFriendshipById(friendshipId);
+        User user = userService.getCurrentUser();
+        if (friendship.getReceiver().getId().equals(user.getId())
+                || friendship.getSender().getId().equals(user.getId())) {
+            return mapper.map(friendship, FriendshipDto.class);
+        }
+        throw new MyAccessDeniedException("Access is denied");
+    }
+
+    /**
+     *
+     * @param friendId user ID
+     * @return friendship
+     */
+    @Override
+    public FriendshipDto createFriendship(Long friendId) {
+        User user = userService.getCurrentUser();
+        if (friendshipRepository.findFriendshipRequest(user.getId(), friendId).isEmpty()) {
+            Friendship friendship = Friendship
+                    .builder()
+                    .sender(user)
+                    .receiver(userService.findUserById(friendId))
+                    .accepted(Boolean.FALSE)
+                    .build();
+            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
+        }
+        throw new MyAccessDeniedException("Access is denied");
+    }
+
+    /**
+     *
+     * @param friendshipId friendship ID
+     * @return accepted friendship
+     */
+    @Override
+    public FriendshipDto acceptFriendship(Long friendshipId) {
+        Friendship friendship = friendshipService.findFriendshipById(friendshipId);
+        User user = userService.getCurrentUser();
+        if (friendship.getReceiver().getId().equals(user.getId())) {
+            friendship.setAccepted(Boolean.TRUE);
+            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
+        }
+        throw new MyAccessDeniedException("Access is denied");
+    }
+
+    /**
+     *
+     * @param friendshipId friendship ID
+     */
+    @Override
+    public void deleteFriendship(Long friendshipId) {
+        Friendship friendship = friendshipService.findFriendshipById(friendshipId);
+        User user = userService.getCurrentUser();
+        if (friendship.getReceiver().getId().equals(user.getId())
+                || friendship.getSender().getId().equals(user.getId())) {
+            friendshipRepository.deleteById(friendshipId);
+        } else {
+            throw new MyAccessDeniedException("Access is denied");
+        }
+    }
+
+    /**
+     *
+     * @param pageable pagination information
+     * @return friendships
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<FriendshipDto> findAll(Pageable pageable) {
+        User user = userService.getCurrentUser();
+        Page<Friendship> friendshipPage = friendshipRepository.findMyFriends(
+                user.getId(), pageable);
+        return friendshipPage.map(friendship -> mapper.map(friendship,
+                FriendshipDto.class));
+    }
+
+    /**
+     *
+     * @param pageable pagination information
+     * @return friend request list
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Page<FriendshipDto> findMyFriendshipRequests(Pageable pageable) {
+        User user = userService.getCurrentUser();
+        Page<Friendship> friendshipPage = friendshipRepository.getMyFriendshipRequests(
+                user.getId(), pageable);
+        return friendshipPage.map(friendship -> mapper.map(friendship,
+                FriendshipDto.class));
+    }
+
+}

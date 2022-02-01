@@ -1,0 +1,2576 @@
+{
+  "version": 6,
+  "entities": [
+    {
+      "entity": {
+        "type": "Project",
+        "description": "Api Documentation",
+        "id": "df0f4c63-e339-4867-9218-c821b72b261c",
+        "name": "Social Network Documentation"
+      },
+      "children": [
+        {
+          "entity": {
+            "type": "Service",
+            "id": "4e618e16-dad0-466b-9fbb-699f5ec77e86",
+            "name": "/api/admin/communities"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"description\": \"string\",\n  \"name\": \"string\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/admin/communities"
+                },
+                "id": "f93469cd-cae6-4135-b0ba-5dc765058272",
+                "name": "createCommunity",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2NDM0MDM2MDB9.JZKKEMrocOL2kgVsVhxoH1Vi0RjC_sV79cEeA597oShw1n2KaSZx7dFuGy19qzXAIyQSQVFepmhQiKIPiD5uqA"
+                  },
+                  {
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "be593ca1-dfc6-4e8c-9cf6-bfee4c95a77e",
+            "name": "/api/admin/communities/{id}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/admin/communities/89"
+                },
+                "id": "01bc5ab7-ad5a-4687-b054-6af06f5c1868",
+                "name": "deleteCommunity",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2NDM0MDM2MDB9.JZKKEMrocOL2kgVsVhxoH1Vi0RjC_sV79cEeA597oShw1n2KaSZx7dFuGy19qzXAIyQSQVFepmhQiKIPiD5uqA"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"description\": \"string\",\n  \"name\": \"string\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/admin/communities/88"
+                },
+                "id": "f7549f53-b496-46c6-bed2-e907360dcf78",
+                "name": "updateCommunity",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2NDM0MDM2MDB9.JZKKEMrocOL2kgVsVhxoH1Vi0RjC_sV79cEeA597oShw1n2KaSZx7dFuGy19qzXAIyQSQVFepmhQiKIPiD5uqA"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "70a0e3bf-59ea-4f75-94ec-02203846d203",
+            "name": "/api/admin/users/{id}/block"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc5789",
+                  "name": "PATCH"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/admin/users/2/block"
+                },
+                "id": "82b567ff-529a-4697-ad29-592f4faf27f7",
+                "name": "blockUser",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2NDM0MDM2MDB9.JZKKEMrocOL2kgVsVhxoH1Vi0RjC_sV79cEeA597oShw1n2KaSZx7dFuGy19qzXAIyQSQVFepmhQiKIPiD5uqA"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "e7d75be0-ae1f-41ce-80a6-a772c6e058d4",
+            "name": "/api/admin/users/{id}/unblock"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc5789",
+                  "name": "PATCH"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/admin/users/2/unblock"
+                },
+                "id": "6adad15f-41be-45f8-bac6-24c77f17b9cb",
+                "name": "unblockUser",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJleHAiOjE2NDM0MDM2MDB9.JZKKEMrocOL2kgVsVhxoH1Vi0RjC_sV79cEeA597oShw1n2KaSZx7dFuGy19qzXAIyQSQVFepmhQiKIPiD5uqA"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "5d586654-c5bc-4fa4-afc2-c85462190c8e",
+            "name": "/api/auth/login"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"email\": \"user@gmail.com\",\n  \"password\": \"User1\",\n  \"matchingPassword\": \"User1\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/auth/login"
+                },
+                "id": "d5b84263-d880-4c09-93b1-0aad96e19d70",
+                "name": "createAuthenticationToken",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "94ba125e-384f-43b1-94e2-5b3b467c5f4d",
+            "name": "/api/auth/password/new"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"email\": \"user@gmail.com\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/auth/password/new"
+                },
+                "id": "0b5a1005-7608-492f-b813-b6f5128564d2",
+                "name": "sendPassword",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "d099061d-2e03-4742-923d-b882a2200819",
+            "name": "/api/auth/registration"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"email\": \"user8@gmail.com\",\n  \"password\": \"User8\",\n  \"matchingPassword\": \"User8\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/auth/registration"
+                },
+                "id": "c491d7ce-b852-418f-956f-069c57a657bc",
+                "name": "createUser",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "442469f6-e5bb-4a86-93f4-0e32713b1f7b",
+            "name": "/api/communities"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities"
+                },
+                "id": "6e1c2ccd-e25e-459d-a4d9-4931b78c0fcf",
+                "name": "findAllCommunities",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMzMTcyMDB9.li5F06FP1B7HjZ_Kx2NZSJW9R42-LIUai_ts5S6q7ma-NASJb-jI2hFlquwUOYN_qCYia9T-0Grj4K67J3HHbw"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "0589dac5-1ea5-488e-b6b4-6add2189e839",
+            "name": "/api/communities/{communityId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/88"
+                },
+                "id": "9b0b7571-7b34-4cda-bfb3-2d8599c6d999",
+                "name": "getCommunityById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTY0Mjc5ODgwMH0.4T8kZUSBfU_ChGULHrjOljNEmyvriRoH3C7MStZxHS9wIO-w2THWwrcuLr9Ei3YiG-7u02OaoIaopN9XyQrymw"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/88"
+                },
+                "id": "7a629a90-acdd-4e89-8c1b-e0feb5277320",
+                "name": "joinToCommunity",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE2NDMzMTcyMDB9.mtVhcXUeiZKgTr-bX7pAWhsROiFeGSWrVdvM5tXrsyxJtdPr-n9NgrzH1Y8g1PX7dqK5ymfs98ATgJn8BJKFOQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/88"
+                },
+                "id": "79bf4eee-9a11-4751-a98e-4c88351c1d00",
+                "name": "leaveCommunity",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyNkBnbWFpbC5jb20iLCJleHAiOjE2NDMzMTcyMDB9.mtVhcXUeiZKgTr-bX7pAWhsROiFeGSWrVdvM5tXrsyxJtdPr-n9NgrzH1Y8g1PX7dqK5ymfs98ATgJn8BJKFOQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "28c68e6f-0a58-4da4-ae95-a37155b08bb1",
+            "name": "/api/communities/{communityId}/messages"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"body\": \"string\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/88/messages"
+                },
+                "id": "7c349ad6-20ad-4cbc-976b-3e90a5fe851d",
+                "name": "createMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTY0MzIzMDgwMH0.3_ch01hlScGZneMLbng0F63ZwvNr5vYvn76CfCbPShdOq7rYIQt_guNvJ16kTDV_ctkB11yhnVK-ItE0MmiE3Q"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/88/messages"
+                },
+                "id": "3c28b0f8-99c6-435f-adca-95372153c0fb",
+                "name": "findAllMessages",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTY0MzIzMDgwMH0.3_ch01hlScGZneMLbng0F63ZwvNr5vYvn76CfCbPShdOq7rYIQt_guNvJ16kTDV_ctkB11yhnVK-ItE0MmiE3Q"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "48fbd31b-7439-4d43-b018-59cceeddc388",
+            "name": "/api/communities/{communityId}/messages/{messageId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/30/messages/72"
+                },
+                "id": "e6dbcc41-bbf8-4f24-9fd6-c06fda0d1f81",
+                "name": "deleteMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/30/messages/71"
+                },
+                "id": "771c253c-de36-4de4-b7f6-5aee8d2af74e",
+                "name": "getMessageById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"body\": \"string222\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/communities/30/messages/71"
+                },
+                "id": "487f654e-ab8f-44a3-b5b1-04d8b0604f19",
+                "name": "updateMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "cf77e010-66b1-4ca6-983a-8817bd3f4b62",
+            "name": "/api/events"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"description\": \"string\",\n  \"name\": \"string\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events"
+                },
+                "id": "b8cad513-76d4-4531-bd8b-110d08d76a9d",
+                "name": "createEvent",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events"
+                },
+                "id": "a8f23522-df9a-492e-b67c-641659c1b2db",
+                "name": "findMyEvents",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTY0MzY2MjgwMH0.Iy7B1e78oOyKLhYck5uKZz2V5pz5-zTZY_fczdsswegSKJgecabOEQCUrjV2UJrPnWjbq5HmxVC_hFhigqCqkg"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "99129a27-9ec7-4583-b0d3-a97629351e9c",
+            "name": "/api/events/{eventId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/74"
+                },
+                "id": "e6181006-a927-4033-bb2f-36bb9a66c3c1",
+                "name": "deleteEvent",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75"
+                },
+                "id": "243d36cc-618a-4091-9afa-aa2779ef91fd",
+                "name": "getEventById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"description\": \"string2\",\n  \"name\": \"string2\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75"
+                },
+                "id": "2699dace-0105-4dfb-ba28-5c64db365dd9",
+                "name": "updateEvent",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "014b1263-207c-4c8b-9802-2f301e33b775",
+            "name": "/api/events/{eventId}/messages"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"body\": \"string\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/messages"
+                },
+                "id": "4f5816fe-3368-4932-8e36-525533866608",
+                "name": "createMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/messages"
+                },
+                "id": "7efa5420-8bb7-4987-9501-9bc221adf968",
+                "name": "findAllMessages",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "ce3a5feb-4878-4318-81f5-480ed0546041",
+            "name": "/api/events/{eventId}/messages/{messageId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/messages/76"
+                },
+                "id": "5a68212d-48e1-4d80-927e-310c27854dc4",
+                "name": "deleteMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/messages/77"
+                },
+                "id": "8cac3788-b6d7-48ea-86e7-2f52df181fac",
+                "name": "getMessageById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"body\": \"strin2g\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/messages/77"
+                },
+                "id": "b2402bd9-f12e-4050-ae6f-b760d116e556",
+                "name": "updateMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "1f56b3a1-3374-4483-9f6d-eb774c4b5ca8",
+            "name": "/api/events/{eventId}/users/{userId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/users/8"
+                },
+                "id": "142eb239-b364-44e0-8e90-10145d174bb5",
+                "name": "addUserToEvent",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/events/75/users/8"
+                },
+                "id": "b7830fc1-3cb4-4098-8d3f-39fd21a58fa4",
+                "name": "deleteUserFromEvent",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "c44eb3cd-2299-495c-aa49-5b36d0b3c998",
+            "name": "/api/friendships"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "name": "friendId",
+                        "value": "8"
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/friendships"
+                },
+                "id": "b527d845-ece4-420e-9e0e-2ac5d3bdd8c3",
+                "name": "addToFriends",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/friendships"
+                },
+                "id": "9f982e58-3e96-49ce-82aa-708a9688dde8",
+                "name": "findMyFriends",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "22ddd8f5-3968-4ed1-8a6f-5c3ec1d2f89a",
+            "name": "/api/friendships/requests"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/friendships/requests"
+                },
+                "id": "e7cfcb33-b905-4463-92db-54d50a96c8ea",
+                "name": "findMyFriendshipRequests",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "e9fa9507-2f86-4a62-9243-e810993d2299",
+            "name": "/api/friendships/{friendshipId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/friendships/83"
+                },
+                "id": "6bb02de3-7de6-4fe5-a4a5-26956a8edd98",
+                "name": "acceptFriendship",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBnbWFpbC5jb20iLCJleHAiOjE2NDI3OTg4MDB9.qHAuMxZ1EFdsc24_mM-ZnXiAvnZklpXUWB1ItODTaNbPpQ-cn8yDEXQmiPF84MsUkBdIw4BNP8LkcKOut6NI-A"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/friendships/82"
+                },
+                "id": "c7c3f7d3-e600-44c6-9267-610c3d25e814",
+                "name": "declineFriendship",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/friendships/83"
+                },
+                "id": "b44d2b26-8d2c-443c-a421-5f089e6f6c83",
+                "name": "getFriendshipById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBnbWFpbC5jb20iLCJleHAiOjE2NDI3OTg4MDB9.qHAuMxZ1EFdsc24_mM-ZnXiAvnZklpXUWB1ItODTaNbPpQ-cn8yDEXQmiPF84MsUkBdIw4BNP8LkcKOut6NI-A"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "88cbb6ea-9018-45ec-a4ea-eac93b3bbb8a",
+            "name": "/api/messages"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"body\": \"string\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "name": "receiverId",
+                        "value": "8"
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/messages"
+                },
+                "id": "6a1b56ef-dbaa-4974-8f89-357a06b40d3f",
+                "name": "createMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "name": "receiverId",
+                        "value": "8"
+                      },
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/messages"
+                },
+                "id": "e4407a00-69d7-4858-87ba-4e1e310f600f",
+                "name": "findMyMessages",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "7ca2defc-c825-4f94-8e87-f89249b51587",
+            "name": "/api/messages/{messageId}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/messages/84"
+                },
+                "id": "146084b7-493c-4a7f-a236-7c601369a128",
+                "name": "deleteMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "lang",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/messages/86"
+                },
+                "id": "74f3b80f-b82d-44ea-94d7-c45498fb2df4",
+                "name": "getMessageById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"body\": \"str2222ing\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/messages/86"
+                },
+                "id": "b80343b0-f034-412a-907e-21ba3aa2fdf0",
+                "name": "updateMessage",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "501e047c-091b-4564-a5c1-e1ac94bf7907",
+            "name": "/api/users"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": [
+                      {
+                        "name": "firstName",
+                        "value": "ad"
+                      },
+                      {
+                        "name": "lastName",
+                        "value": "user"
+                      },
+                      {
+                        "encoded": true,
+                        "name": "offset",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "paged",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageNumber",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "pageSize",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.sorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "sort.unsorted",
+                        "value": ""
+                      },
+                      {
+                        "encoded": true,
+                        "name": "unpaged",
+                        "value": ""
+                      }
+                    ]
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/users"
+                },
+                "id": "4b0cbd17-418d-43c0-8a94-cbbee981ef07",
+                "name": "searchUsers",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTY0MzY2MjgwMH0.Iy7B1e78oOyKLhYck5uKZz2V5pz5-zTZY_fczdsswegSKJgecabOEQCUrjV2UJrPnWjbq5HmxVC_hFhigqCqkg"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "7158a40e-6240-4eac-9ef0-edaf0c77a5d7",
+            "name": "/api/users/profile"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc5789",
+                  "name": "PATCH"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"matchingPassword\": \"String1\",\n  \"password\": \"String1\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/users/profile"
+                },
+                "id": "b6716930-3df8-428e-a5dd-21c70a292bb5",
+                "name": "changePassword",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/users/profile"
+                },
+                "id": "0c715a0e-9703-4159-b5c6-b1002aaa5f5f",
+                "name": "deleteProfile",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/users/profile"
+                },
+                "id": "ac7f9288-b6aa-4fec-b0c5-e9c9a61a6dcd",
+                "name": "getCurrentUserProfile",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyQGdtYWlsLmNvbSIsImV4cCI6MTY0MzY2MjgwMH0.Iy7B1e78oOyKLhYck5uKZz2V5pz5-zTZY_fczdsswegSKJgecabOEQCUrjV2UJrPnWjbq5HmxVC_hFhigqCqkg"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"birthday\": \"18.01.2021\",\n  \"firstName\": \"strin212131g\",\n  \"lastName\": \"stri123123123ng\",\n  \"phone\": \"str1212ing26262\",\n  \"sex\": \"FEMALE\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/users/profile"
+                },
+                "id": "ded6c12e-a621-4213-9c6e-55dce9c6a265",
+                "name": "updateProfile",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMzMTcyMDB9.li5F06FP1B7HjZ_Kx2NZSJW9R42-LIUai_ts5S6q7ma-NASJb-jI2hFlquwUOYN_qCYia9T-0Grj4K67J3HHbw"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "de81910d-1cf5-4588-867e-b5a44206fc95",
+            "name": "/api/users/{id}"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": []
+                  }
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "localhost:8080",
+                  "path": "/api/users/56"
+                },
+                "id": "3134e005-172a-4ec9-aec9-5301d0ab319b",
+                "name": "getUserById",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyM0BnbWFpbC5jb20iLCJleHAiOjE2NDMxNDQ0MDB9.z2rrCgIdygRpjlPRxiDlHHh8ZBZs7JiR74AP2cTgXs7t9AOsT8yNN69FQSu1oqmH-3pUhRA52tMOQPiefqdzDQ"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept-Language",
+                    "value": "en"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
