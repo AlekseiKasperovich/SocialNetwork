@@ -1,6 +1,6 @@
 package com.senla.config;
 
-import com.senla.rest.security.JwtTokenFilter;
+import com.senla.security.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -45,13 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/api/admin/**").hasRole(roleAdmin)
-                .antMatchers("/api/auth/**", "/swagger-ui/**").permitAll()
+                .antMatchers("/api/auth/**", "/swagger-ui/**", "/", "/go").permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
-    public PasswordEncoder passwordEncod() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
@@ -66,8 +66,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         authenticationManagerBuilder
                 .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncod());
+                .passwordEncoder(passwordEncoder());
     }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui",

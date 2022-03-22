@@ -16,7 +16,12 @@
     <description>RestApp</description>
     
     <dependencies>
-         
+         <dependency>
+            <groupId>com.senla</groupId>
+            <artifactId>ServiceApi</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

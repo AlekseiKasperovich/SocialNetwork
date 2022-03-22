@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  frontend:
+    build: WebProject/RestApp/
+    image: kasperovich/frontend
+    container_name: frontend
+    ports:
+      - 8080:8080
+    depends_on:
+      - backend
+    depends_on:
+      - postgres
+  backend:
+    build: SocialNetwork/ServiceImpl/
+    image: kasperovich/backend
+    container_name: backend
+    ports:
+      - 8081:8081
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:14.1
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=social_network_db

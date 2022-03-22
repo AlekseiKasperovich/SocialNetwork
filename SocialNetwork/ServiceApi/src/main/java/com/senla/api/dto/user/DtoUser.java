@@ -23,5 +23,5 @@ public class DtoUser {
     private String sex;
     private String phone;
     private String status;
-
+   
 }

@@ -16,11 +16,6 @@
     <description>ServiceApi</description>
         
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.passay/passay -->
-        <dependency>
-            <groupId>org.passay</groupId>
-            <artifactId>passay</artifactId>
-            <version>1.6.1</version>
-        </dependency>                            
+                        
     </dependencies>
 </project>
