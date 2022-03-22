@@ -53,7 +53,7 @@
  - Docker
  
  ### Steps:
- - git clone --branch=final https://git-students.senla.eu/brest-java-ee-training/aliaksei-kaspiarovich.git
+ - git clone https://gitlab.com/AlekseiKasperovich/aliaksei-kaspiarovich.git
  - cd aliaksei-kaspiarovich/SocialNetwork
  - mvn clean package 
  - cd ..
