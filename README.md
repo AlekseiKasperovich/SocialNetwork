@@ -53,7 +53,7 @@
  - Docker
  
  ### Steps:
- - git clone https://gitlab.com/AlekseiKasperovich/aliaksei-kaspiarovich.git
+ - git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
  - cd aliaksei-kaspiarovich/SocialNetwork
  - mvn clean package 
  - cd ..
