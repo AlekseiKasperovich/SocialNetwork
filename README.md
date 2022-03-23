@@ -54,7 +54,7 @@
  
  ### Steps:
  - git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
- - cd aliaksei-kaspiarovich/SocialNetwork
+ - cd SocialNetwork
  - mvn clean package 
  - cd ..
  - cd WebProject
