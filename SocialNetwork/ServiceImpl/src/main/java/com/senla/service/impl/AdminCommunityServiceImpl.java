@@ -56,6 +56,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
      */
     @Override
     public void deleteCommunity(Long id) {
+        //Кто угодно может удалить выходит?
         Community community = communityService.findCommunityById(id);
         communityService.delete(id);
     }

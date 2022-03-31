@@ -25,6 +25,7 @@ import org.springframework.util.StringUtils;
 @Service
 public class JwtTokenProvider {
 
+    //ToDo  собрать секьюрные проперти в один класс пропертей и юзать оттуда
     @Value("${jwt.secret}")
     private String jwtSecret;
 

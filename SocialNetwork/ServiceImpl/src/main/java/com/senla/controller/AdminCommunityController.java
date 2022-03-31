@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Aliaksei Kaspiarovich
  */
 @RestController
-@RequestMapping(value = "/api/admin/communities",
+@RequestMapping(value = "/api/admin/communities", //Можно часть перфикса который ен меняется вынести в проперти
+// и появится гибкость в плане урлы
+//прим. value = "${my-application.rest-api.prefix}/admin/communities"
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -34,6 +36,7 @@ public class AdminCommunityController {
      * @param email
      * @return community
      */
+    //ToDo описать аннотициями только этот контроллер чисто посмотреть как это происходит и делается
     @PostMapping
     public CommunityDto createCommunity(@RequestBody CreateCommunityDto createCommunityDto,
             @RequestHeader(Constants.EMAIL_HEADER) String email) {
