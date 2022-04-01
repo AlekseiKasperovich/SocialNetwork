@@ -17,6 +17,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
 
 /**
  * @author Aliaksei Kaspiarovich
@@ -38,7 +39,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("User Already Exist Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.CONFLICT.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
@@ -53,7 +55,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Mail Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.SERVICE_UNAVAILABLE.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE,
                 request);
@@ -69,7 +72,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Entity Not Found Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.NOT_FOUND.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
@@ -84,7 +88,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Access Denied Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.FORBIDDEN.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
@@ -99,7 +104,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Constraint Violation Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
@@ -114,7 +120,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Runtime Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,
                 request);

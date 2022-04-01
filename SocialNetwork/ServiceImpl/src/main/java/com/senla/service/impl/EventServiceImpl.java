@@ -33,7 +33,7 @@ public class EventServiceImpl implements EventService {
 
     /**
      * @param eventId event ID
-     * @param email
+     * @param email email
      * @return event
      */
     @Override
@@ -46,7 +46,7 @@ public class EventServiceImpl implements EventService {
 
     /**
      * @param createEventDto event name and description
-     * @param email
+     * @param email email
      * @return event
      */
     @Override
@@ -61,7 +61,7 @@ public class EventServiceImpl implements EventService {
     /**
      * @param eventId        event ID
      * @param createEventDto event name and description
-     * @param email
+     * @param email email
      * @return updated event
      */
     @Override
@@ -74,7 +74,7 @@ public class EventServiceImpl implements EventService {
 
     /**
      * @param eventId event ID
-     * @param email
+     * @param email email
      */
     @Override
     public void deleteEvent(Long eventId, String email) {
@@ -86,7 +86,7 @@ public class EventServiceImpl implements EventService {
     /**
      * @param eventId event ID
      * @param userId  user ID
-     * @param email
+     * @param email email
      * @return event
      */
     @Override
@@ -105,7 +105,7 @@ public class EventServiceImpl implements EventService {
     /**
      * @param eventId event ID
      * @param userId  user ID
-     * @param email
+     * @param email email
      * @return event
      */
     @Override
@@ -122,7 +122,7 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return events
      */

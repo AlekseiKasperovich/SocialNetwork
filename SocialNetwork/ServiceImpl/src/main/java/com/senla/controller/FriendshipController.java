@@ -22,7 +22,7 @@ public class FriendshipController {
 
     /**
      * @param friendshipId friendship ID
-     * @param email
+     * @param email email
      * @return friendship
      */
     @GetMapping("{friendshipId}")
@@ -33,7 +33,7 @@ public class FriendshipController {
 
     /**
      * @param friendId user ID
-     * @param email
+     * @param email email
      * @return friendship
      */
     @PostMapping
@@ -44,7 +44,7 @@ public class FriendshipController {
 
     /**
      * @param friendshipId friendship ID
-     * @param email
+     * @param email email
      * @return accepted friendship
      */
     @PutMapping("{friendshipId}")
@@ -55,7 +55,7 @@ public class FriendshipController {
 
     /**
      * @param friendshipId friendship ID
-     * @param email
+     * @param email email
      */
     @DeleteMapping("{friendshipId}")
     public void declineFriendship(@PathVariable Long friendshipId,
@@ -64,7 +64,7 @@ public class FriendshipController {
     }
 
     /**
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return friend request list
      */
@@ -75,7 +75,7 @@ public class FriendshipController {
     }
 
     /**
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return friendships
      */

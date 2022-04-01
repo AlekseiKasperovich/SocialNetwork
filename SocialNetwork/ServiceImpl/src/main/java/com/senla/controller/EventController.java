@@ -23,7 +23,7 @@ public class EventController {
 
     /**
      * @param eventId event ID
-     * @param email
+     * @param email email
      * @return event
      */
     @GetMapping("{eventId}")
@@ -34,7 +34,7 @@ public class EventController {
 
     /**
      * @param createEventDto event name and description
-     * @param email
+     * @param email email
      * @return event
      */
     @PostMapping
@@ -46,7 +46,7 @@ public class EventController {
     /**
      * @param eventId        event ID
      * @param createEventDto event name and description
-     * @param email
+     * @param email email
      * @return updated event
      */
     @PutMapping("{eventId}")
@@ -58,7 +58,7 @@ public class EventController {
 
     /**
      * @param eventId event ID
-     * @param email
+     * @param email email
      */
     @DeleteMapping("{eventId}")
     public void deleteEvent(@PathVariable Long eventId,
@@ -69,7 +69,7 @@ public class EventController {
     /**
      * @param eventId event ID
      * @param userId  user ID
-     * @param email
+     * @param email email
      * @return event
      */
     @PutMapping("{eventId}/users/{userId}")
@@ -82,7 +82,7 @@ public class EventController {
     /**
      * @param eventId event ID
      * @param userId  user ID
-     * @param email
+     * @param email email
      * @return event
      */
     @DeleteMapping("{eventId}/users/{userId}")
@@ -93,7 +93,7 @@ public class EventController {
     }
 
     /**
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return events
      */

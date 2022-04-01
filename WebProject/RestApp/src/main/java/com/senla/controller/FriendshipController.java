@@ -59,7 +59,7 @@ public class FriendshipController {
 
     /**
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return friend request list
      */
     @GetMapping("requests")
@@ -70,7 +70,7 @@ public class FriendshipController {
 
     /**
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return friendships
      */
     @GetMapping

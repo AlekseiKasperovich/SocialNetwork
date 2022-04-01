@@ -18,8 +18,8 @@ public class MyUserDetailService implements IUserDetailService {
     private final Mapper mapper;
 
     /**
-     * @param email
-     * @return
+     * @param email email
+     * @return UserDetailsDto
      */
     @Override
     public UserDetailsDto getUserByEmail(String email) {

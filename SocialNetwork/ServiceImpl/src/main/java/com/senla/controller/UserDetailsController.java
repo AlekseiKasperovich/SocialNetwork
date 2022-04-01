@@ -22,8 +22,8 @@ public class UserDetailsController {
     private final IUserDetailService userDetailService;
 
     /**
-     * @param email
-     * @return
+     * @param email email
+     * @return UserDetailsDto
      */
     @GetMapping
     public UserDetailsDto getUserByEmail(@RequestHeader("${request.email}") String email) {

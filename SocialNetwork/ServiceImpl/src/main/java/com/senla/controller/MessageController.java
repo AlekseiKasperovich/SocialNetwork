@@ -23,7 +23,7 @@ public class MessageController {
 
     /**
      * @param messageId message ID
-     * @param email
+     * @param email email
      * @return message
      */
     @GetMapping("{messageId}")
@@ -35,7 +35,7 @@ public class MessageController {
     /**
      * @param receiverId       receiver ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return message
      */
     @PostMapping
@@ -48,7 +48,7 @@ public class MessageController {
     /**
      * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return updated message
      */
     @PutMapping("{messageId}")
@@ -60,7 +60,7 @@ public class MessageController {
 
     /**
      * @param messageId message ID
-     * @param email
+     * @param email email
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(@PathVariable Long messageId,
@@ -70,7 +70,7 @@ public class MessageController {
 
     /**
      * @param receiverId receiver ID
-     * @param email
+     * @param email email
      * @param pageable   pagination information
      * @return messages
      */

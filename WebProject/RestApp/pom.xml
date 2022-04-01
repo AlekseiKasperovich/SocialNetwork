@@ -9,7 +9,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.senla</groupId>
     <artifactId>RestApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>RestApp</name>
@@ -26,7 +25,7 @@
 
     <build>
         <plugins>
-            <plugin>
+              <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>

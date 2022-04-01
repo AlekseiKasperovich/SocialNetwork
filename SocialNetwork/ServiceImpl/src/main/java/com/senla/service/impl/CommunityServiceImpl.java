@@ -38,7 +38,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * @param communityId community ID
-     * @param email
+     * @param email email
      * @return community
      */
     @Override
@@ -54,7 +54,7 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * @param communityId community ID
-     * @param email
+     * @param email email
      * @return community
      */
     @Override

@@ -35,7 +35,7 @@ public class UserController {
      * @param firstName First Name
      * @param lastName  Last Name
      * @param pageable  pagination information
-     * @param request
+     * @param request request
      * @return users
      */
     @GetMapping

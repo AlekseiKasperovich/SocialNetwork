@@ -24,7 +24,7 @@ public class ProfileServiceImpl implements ProfileService {
     private final Mapper mapper;
 
     /**
-     * @param email
+     * @param email email
      * @return user profile
      */
     @Override
@@ -34,7 +34,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     /**
      * @param updateUserDto user information
-     * @param email
+     * @param email email
      * @return updated user profile
      */
     @Override
@@ -45,8 +45,8 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     /**
-     * @param email
-     * @return updated user profile whith status = deleted
+     * @param email email
+     * @return updated user profile with status = deleted
      */
     @Override
     public DtoUser deleteUser(String email) {
@@ -57,7 +57,7 @@ public class ProfileServiceImpl implements ProfileService {
 
     /**
      * @param changePasswordDto new password
-     * @param email
+     * @param email email
      * @return updated user profile
      */
     @Override

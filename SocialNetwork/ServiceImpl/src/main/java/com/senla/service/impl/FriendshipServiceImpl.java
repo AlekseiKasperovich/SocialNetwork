@@ -30,7 +30,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendshipId friendship ID
-     * @param email
+     * @param email email
      * @return friendship
      */
     @Override
@@ -47,7 +47,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendId user ID
-     * @param email
+     * @param email email
      * @return friendship
      */
     @Override
@@ -67,7 +67,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendshipId friendship ID
-     * @param email
+     * @param email email
      * @return accepted friendship
      */
     @Override
@@ -83,7 +83,7 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendshipId friendship ID
-     * @param email
+     * @param email email
      */
     @Override
     public void deleteFriendship(Long friendshipId, String email) {
@@ -98,7 +98,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return friendships
      */
@@ -113,7 +113,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return friend request list
      */

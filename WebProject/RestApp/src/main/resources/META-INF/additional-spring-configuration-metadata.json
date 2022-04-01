@@ -1,0 +1,38 @@
+{
+  "properties": [
+    {
+      "name": "request.host",
+      "type": "java.lang.String",
+      "description": "Description for request.host."
+    },
+    {
+      "name": "request.question",
+      "type": "java.lang.String",
+      "description": "Description for request.question."
+    },
+    {
+      "name": "role.admin",
+      "type": "java.lang.String",
+      "description": "Description for role.admin."
+    },
+    {
+      "name": "jwt.bearer",
+      "type": "java.lang.String",
+      "description": "Description for jwt.bearer."
+    },
+    {
+      "name": "jwt.secret",
+      "type": "java.lang.String",
+      "description": "Description for jwt.secret."
+    },
+    {
+      "name": "jwt.authorization",
+      "type": "java.lang.String",
+      "description": "Description for jwt.authorization."
+    },
+    {
+      "name": "jwt.expiration",
+      "type": "java.lang.String",
+      "description": "Description for jwt.expiration."
+    }
+  ] }

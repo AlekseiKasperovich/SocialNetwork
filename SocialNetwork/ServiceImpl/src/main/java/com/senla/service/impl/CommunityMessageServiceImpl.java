@@ -47,7 +47,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     /**
      * @param communityId community ID
      * @param messageId   message ID
-     * @param email
+     * @param email email
      * @return message
      */
     @Override
@@ -61,7 +61,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     /**
      * @param communityId      community ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return message
      */
     @Override
@@ -84,7 +84,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      * @param communityId      community ID
      * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return updated message
      */
     @Override
@@ -102,7 +102,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     /**
      * @param communityId community ID
      * @param messageId   message ID
-     * @param email
+     * @param email email
      */
     @Override
     public void deleteCommunityMessage(Long communityId, Long messageId, String email) {
@@ -115,7 +115,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
 
     /**
      * @param communityId community ID
-     * @param email
+     * @param email email
      * @param pageable    pagination information
      * @return messages
      */
@@ -132,7 +132,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     }
 
     /**
-     * @param communityMessage community мessage
+     * @param communityMessage community message
      * @param id               message author ID
      */
     private void checkMessageAuthor(CommunityMessage communityMessage, Long id) {

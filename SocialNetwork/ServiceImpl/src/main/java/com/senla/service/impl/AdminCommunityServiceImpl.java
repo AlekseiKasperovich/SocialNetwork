@@ -25,7 +25,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 
     /**
      * @param createCommunityDto community name and description
-     * @param email
+     * @param email              email
      * @return community
      */
     @Override
@@ -52,7 +52,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
      */
     @Override
     public void deleteCommunity(Long id) {
-        Community community = communityService.findCommunityById(id);
+        communityService.findCommunityById(id);
         communityService.delete(id);
     }
 }

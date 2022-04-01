@@ -85,7 +85,7 @@ public class EventController {
 
     /**
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return events
      */
     @GetMapping

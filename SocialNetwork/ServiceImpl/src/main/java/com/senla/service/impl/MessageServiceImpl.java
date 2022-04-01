@@ -43,7 +43,7 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * @param messageId message ID
-     * @param email
+     * @param email email
      * @return message
      */
     @Override
@@ -60,7 +60,7 @@ public class MessageServiceImpl implements MessageService {
     /**
      * @param receiverId       receiver ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return message
      */
     @Override
@@ -82,7 +82,7 @@ public class MessageServiceImpl implements MessageService {
     /**
      * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return updated message
      */
     @Override
@@ -99,7 +99,7 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * @param messageId message ID
-     * @param email
+     * @param email email
      */
     @Override
     public void deleteMessage(Long messageId, String email) {
@@ -114,7 +114,7 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * @param receiverId receiver ID
-     * @param email
+     * @param email email
      * @param pageable   pagination information
      * @return messages
      */

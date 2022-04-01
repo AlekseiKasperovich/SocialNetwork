@@ -51,7 +51,7 @@ public class CommunityController {
 
     /**
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return communities
      */
     @GetMapping

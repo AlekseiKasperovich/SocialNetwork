@@ -84,7 +84,7 @@ public class JwtTokenProvider {
     public String getTokenFromRequest(HttpServletRequest request) {
         String token = request.getHeader(jwtProperty.getAuthorization());
         if (StringUtils.hasText(token) && token.startsWith(jwtProperty.getBearer())) {
-            return token.substring(7, token.length());
+            return token.substring(7);
         }
         return null;
     }

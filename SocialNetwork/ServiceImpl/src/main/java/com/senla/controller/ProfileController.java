@@ -21,7 +21,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     /**
-     * @param email
+     * @param email email
      * @return user profile
      */
     @GetMapping
@@ -31,7 +31,7 @@ public class ProfileController {
 
     /**
      * @param updateUserDto user information
-     * @param email
+     * @param email email
      * @return updated user profile
      */
     @PutMapping
@@ -42,7 +42,7 @@ public class ProfileController {
 
     /**
      * @param changePasswordDto new password
-     * @param email
+     * @param email email
      * @return updated user profile
      */
     @PatchMapping
@@ -52,8 +52,8 @@ public class ProfileController {
     }
 
     /**
-     * @param email
-     * @return updated user profile whith status = deleted
+     * @param email email
+     * @return updated user profile with status = deleted
      */
     @DeleteMapping
     public DtoUser deleteProfile(@RequestHeader("${request.email}") String email) {

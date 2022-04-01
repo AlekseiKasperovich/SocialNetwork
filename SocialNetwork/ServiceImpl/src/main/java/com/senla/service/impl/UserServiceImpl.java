@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
             return userPage.map(user -> mapper.map(user, DtoUser.class));
         }
         Specification<User> specification1 = (root, query, criteriaBuilder)
-                //ToDo замени на метомодели https://www.baeldung.com/hibernate-criteria-queries-metamodel
+                //TODO замени на метомодели https://www.baeldung.com/hibernate-criteria-queries-metamodel
                 -> criteriaBuilder.like(root.get("firstName"), "%" + firstName + "%");
         Specification<User> specification2 = (root, query, criteriaBuilder)
                 -> criteriaBuilder.like(root.get("lastName"), "%" + lastName + "%");

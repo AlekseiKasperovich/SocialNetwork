@@ -73,7 +73,7 @@ public class CommunityMessageController {
     /**
      * @param communityId community ID
      * @param pageable    pagination information
-     * @param request
+     * @param request request
      * @return messages
      */
     @GetMapping

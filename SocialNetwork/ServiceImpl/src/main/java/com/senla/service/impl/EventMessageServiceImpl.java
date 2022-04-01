@@ -47,7 +47,7 @@ public class EventMessageServiceImpl implements EventMessageService {
     /**
      * @param eventId   event ID
      * @param messageId message ID
-     * @param email
+     * @param email email
      * @return message
      */
     @Override
@@ -60,7 +60,7 @@ public class EventMessageServiceImpl implements EventMessageService {
     /**
      * @param eventId          event ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return message
      */
     @Override
@@ -83,7 +83,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      * @param eventId          event ID
      * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param email email
      * @return updated message
      */
     @Override
@@ -102,7 +102,7 @@ public class EventMessageServiceImpl implements EventMessageService {
     /**
      * @param eventId   event ID
      * @param messageId message ID
-     * @param email
+     * @param email email
      */
     @Override
     public void deleteEventMessage(Long eventId, Long messageId, String email) {
@@ -116,7 +116,7 @@ public class EventMessageServiceImpl implements EventMessageService {
 
     /**
      * @param eventId  event ID
-     * @param email
+     * @param email email
      * @param pageable pagination information
      * @return messages
      */

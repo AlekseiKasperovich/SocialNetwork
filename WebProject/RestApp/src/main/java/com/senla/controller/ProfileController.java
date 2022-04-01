@@ -49,7 +49,7 @@ public class ProfileController {
     }
 
     /**
-     * @return updated user profile whith status = deleted
+     * @return updated user profile with status = deleted
      */
     @DeleteMapping
     public DtoUser deleteProfile() {

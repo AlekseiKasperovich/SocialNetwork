@@ -31,7 +31,7 @@ public class CommunityController {
 
     /**
      * @param communityId community ID
-     * @param email
+     * @param email email
      * @return community
      */
     @PutMapping("{communityId}")
@@ -42,7 +42,7 @@ public class CommunityController {
 
     /**
      * @param communityId community ID
-     * @param email
+     * @param email email
      * @return community
      */
     @DeleteMapping("{communityId}")

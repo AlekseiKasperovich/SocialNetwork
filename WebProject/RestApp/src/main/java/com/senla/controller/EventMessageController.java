@@ -73,7 +73,7 @@ public class EventMessageController {
     /**
      * @param eventId  event ID
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return messages
      */
     @GetMapping

@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                //ToDo урлы в проперти
+                //TODO урлы в проперти
                 .antMatchers("/api/admin/**").hasRole("${role.admin}")
                 .antMatchers("/api/auth/**", "/swagger-ui/**", "/", "/go").permitAll()
                 .anyRequest().authenticated().and()
