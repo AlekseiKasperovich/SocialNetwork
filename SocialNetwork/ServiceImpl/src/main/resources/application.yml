@@ -51,3 +51,6 @@ email:
   body: Your new password
 request:
   email: email
+application:
+  rest-api:
+    prefix: api
