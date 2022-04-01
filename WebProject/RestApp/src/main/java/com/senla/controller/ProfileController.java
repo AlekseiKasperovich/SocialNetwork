@@ -4,19 +4,13 @@ import com.senla.api.dto.profile.ChangePasswordDto;
 import com.senla.api.dto.profile.UpdateUserDto;
 import com.senla.api.dto.user.DtoUser;
 import com.senla.client.ProfileRestClient;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -29,7 +23,6 @@ public class ProfileController {
     private final ProfileRestClient profileRestClient;
 
     /**
-     *
      * @return user profile
      */
     @GetMapping
@@ -38,7 +31,6 @@ public class ProfileController {
     }
 
     /**
-     *
      * @param updateUserDto user information
      * @return updated user profile
      */
@@ -48,7 +40,6 @@ public class ProfileController {
     }
 
     /**
-     *
      * @param changePasswordDto new password
      * @return updated user profile
      */
@@ -58,7 +49,6 @@ public class ProfileController {
     }
 
     /**
-     *
      * @return updated user profile whith status = deleted
      */
     @DeleteMapping

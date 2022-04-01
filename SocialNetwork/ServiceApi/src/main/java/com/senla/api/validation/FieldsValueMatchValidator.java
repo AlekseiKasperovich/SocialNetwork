@@ -25,11 +25,9 @@ public class FieldsValueMatchValidator
                            ConstraintValidatorContext context) {
         Object fieldValue = new BeanWrapperImpl(value).getPropertyValue(field);
         Object fieldMatchValue = new BeanWrapperImpl(value).getPropertyValue(fieldMatch);
-        //ToDo поменяй местами чтобы было без else, так не будешь постоянно углябляться в else если таковых проверок будет несоклько
-        if (fieldValue != null) {
-            return fieldValue.equals(fieldMatchValue);
-        } else {
+        if (fieldValue == null) {
             return false;
         }
+        return fieldValue.equals(fieldMatchValue);
     }
 }

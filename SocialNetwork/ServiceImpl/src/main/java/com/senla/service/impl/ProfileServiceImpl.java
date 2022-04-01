@@ -3,17 +3,16 @@ package com.senla.service.impl;
 import com.senla.api.dto.profile.ChangePasswordDto;
 import com.senla.api.dto.profile.UpdateUserDto;
 import com.senla.api.dto.user.DtoUser;
-import com.senla.service.ProfileService;
+import com.senla.api.dto.сonstants.Status;
 import com.senla.mapper.Mapper;
 import com.senla.model.User;
-import com.senla.api.dto.сonstants.Status;
 import com.senla.service.CustomUserService;
+import com.senla.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -25,7 +24,6 @@ public class ProfileServiceImpl implements ProfileService {
     private final Mapper mapper;
 
     /**
-     *
      * @param email
      * @return user profile
      */
@@ -35,7 +33,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     /**
-     *
      * @param updateUserDto user information
      * @param email
      * @return updated user profile
@@ -48,7 +45,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     /**
-     *
      * @param email
      * @return updated user profile whith status = deleted
      */
@@ -60,7 +56,6 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     /**
-     *
      * @param changePasswordDto new password
      * @param email
      * @return updated user profile

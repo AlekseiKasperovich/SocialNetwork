@@ -1,14 +1,20 @@
 package com.senla.api.dto.community;
 
 import com.senla.api.dto.user.DtoUser;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
-import lombok.Data;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommunityDto {
 
     private Long id;

@@ -2,14 +2,21 @@ package com.senla.api.dto.profile;
 
 import com.senla.api.validation.FieldsValueMatch;
 import com.senla.api.validation.ValidPassword;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
-import lombok.Data;
 
 /**
  *
  * @author Aliaksei Kaspiarovich
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @FieldsValueMatch(field = "password",
         fieldMatch = "matchingPassword",
         message = "Passwords do not match!")

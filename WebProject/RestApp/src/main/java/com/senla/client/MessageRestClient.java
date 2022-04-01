@@ -2,12 +2,12 @@ package com.senla.client;
 
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.api.dto.message.MessageDto;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface MessageRestClient {

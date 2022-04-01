@@ -2,16 +2,15 @@ package com.senla.repository;
 
 import com.senla.api.dto.сonstants.Roles;
 import com.senla.model.Role;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RunWith(SpringRunner.class)

@@ -1,28 +1,16 @@
 package com.senla.model;
 
+import lombok.*;
+
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
-@Data //ToDo обычно не используют на сущностях ибо они переопределяют equals/hashCode
-      // лучше всего отдельно написать все те анноташки что скрывеает @Data только без @EqualsAndHashCode
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,10 +30,10 @@ public class Community {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_communities", joinColumns = {
-        @JoinColumn(name = "community_id")},
+            @JoinColumn(name = "community_id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "user_id")},
+                    @JoinColumn(name = "user_id")},
             uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"community_id", "user_id"})})
+                    @UniqueConstraint(columnNames = {"community_id", "user_id"})})
     private Set<User> followers = new HashSet<>();
 }

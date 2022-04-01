@@ -1,21 +1,26 @@
 package com.senla.api.dto.community;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.senla.api.dto.user.DtoUser;
-import com.senla.api.dto.сonstants.Constants;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
-import lombok.Data;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CommunityMessageDto {
 
     private Long id;
 
-    @JsonFormat(pattern = Constants.DATE_TIME_PATTERN)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime posted;
 
     private String body;

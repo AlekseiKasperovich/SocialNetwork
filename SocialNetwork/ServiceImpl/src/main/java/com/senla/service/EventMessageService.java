@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface EventMessageService {
@@ -16,7 +15,7 @@ public interface EventMessageService {
     EventMessageDto getEventMessageById(Long eventId, Long messageId, String email);
 
     EventMessageDto updateEventMessage(Long eventId, Long messageId,
-            CreateMessageDto createMessageDto, String email);
+                                       CreateMessageDto createMessageDto, String email);
 
     void deleteEventMessage(Long eventId, Long messageId, String email);
 

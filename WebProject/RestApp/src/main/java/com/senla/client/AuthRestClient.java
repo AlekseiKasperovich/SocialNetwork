@@ -5,7 +5,6 @@ import com.senla.api.dto.user.DtoUser;
 import com.senla.api.dto.user.ForgotPasswordDto;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface AuthRestClient {

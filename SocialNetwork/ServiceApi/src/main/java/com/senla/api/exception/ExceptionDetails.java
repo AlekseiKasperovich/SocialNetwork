@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Data

@@ -18,7 +18,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Slf4j
@@ -32,7 +31,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleHttpClientErrorException(
             HttpClientErrorException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.http.сlient.error",
+        String message = messageSource.getMessage("message.http.client.error",
                 null, request.getLocale());
         ExceptionDetails details = ExceptionDetails.builder()
                 .title("Http Client Error Exception")
@@ -60,7 +59,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({LockedException.class})
     public ResponseEntity<Object> handleLockedException(LockedException ex,
-            WebRequest request) {
+                                                        WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.account.is.locked.error",
                 null, request.getLocale());
@@ -91,7 +90,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleException(RuntimeException ex,
-            WebRequest request) {
+                                                  WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.error", null,
                 request.getLocale());
@@ -109,7 +108,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMyAccessDeniedException(
             MyAccessDeniedException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.acces.denied.error",
+        String message = messageSource.getMessage("message.access.denied.error",
                 null, request.getLocale());
         ExceptionDetails details = ExceptionDetails.builder()
                 .title("Access Denied Exception")

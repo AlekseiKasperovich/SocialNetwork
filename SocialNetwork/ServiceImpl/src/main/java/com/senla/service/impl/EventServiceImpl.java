@@ -3,7 +3,6 @@ package com.senla.service.impl;
 import com.senla.api.dto.event.CreateEventDto;
 import com.senla.api.dto.event.EventDto;
 import com.senla.api.exception.MyAccessDeniedException;
-import com.senla.service.EventService;
 import com.senla.mapper.Mapper;
 import com.senla.model.Event;
 import com.senla.model.User;
@@ -11,6 +10,7 @@ import com.senla.repository.EventRepository;
 import com.senla.service.CustomEventService;
 import com.senla.service.CustomFriendshipService;
 import com.senla.service.CustomUserService;
+import com.senla.service.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -33,7 +32,6 @@ public class EventServiceImpl implements EventService {
     private final Mapper mapper;
 
     /**
-     *
      * @param eventId event ID
      * @param email
      * @return event
@@ -47,7 +45,6 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
      * @param createEventDto event name and description
      * @param email
      * @return event
@@ -62,8 +59,7 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId        event ID
      * @param createEventDto event name and description
      * @param email
      * @return updated event
@@ -77,7 +73,6 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
      * @param eventId event ID
      * @param email
      */
@@ -89,9 +84,8 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
      * @param eventId event ID
-     * @param userId user ID
+     * @param userId  user ID
      * @param email
      * @return event
      */
@@ -109,9 +103,8 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
      * @param eventId event ID
-     * @param userId user ID
+     * @param userId  user ID
      * @param email
      * @return event
      */
@@ -129,7 +122,6 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
      * @param email
      * @param pageable pagination information
      * @return events
@@ -143,9 +135,8 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     *
      * @param event event
-     * @param id event author ID
+     * @param id    event author ID
      */
     private void checkEventAuthor(Event event, Long id) {
         if (!event.getAuthor().getId().equals(id)) {

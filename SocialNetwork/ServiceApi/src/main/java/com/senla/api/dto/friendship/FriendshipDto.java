@@ -1,13 +1,19 @@
 package com.senla.api.dto.friendship;
 
 import com.senla.api.dto.user.DtoUser;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author Aliaksei Kaspiarovich
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class FriendshipDto {
 
     private Long id;

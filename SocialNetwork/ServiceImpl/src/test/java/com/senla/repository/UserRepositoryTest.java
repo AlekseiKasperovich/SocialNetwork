@@ -1,18 +1,19 @@
 package com.senla.repository;
 
 import com.senla.model.User;
-import static com.senla.prototype.UserPrototype.getUser;
-import java.util.Optional;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
+import static com.senla.prototype.UserPrototype.getUser;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RunWith(SpringRunner.class)

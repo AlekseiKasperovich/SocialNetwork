@@ -1,11 +1,11 @@
 package com.senla.service.impl;
 
 import com.senla.api.dto.community.CommunityDto;
-import com.senla.service.CommunityService;
 import com.senla.mapper.Mapper;
 import com.senla.model.Community;
 import com.senla.model.User;
 import com.senla.repository.CommunityRepository;
+import com.senla.service.CommunityService;
 import com.senla.service.CustomCommunityService;
 import com.senla.service.CustomUserService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -29,7 +28,6 @@ public class CommunityServiceImpl implements CommunityService {
     private final Mapper mapper;
 
     /**
-     *
      * @param id community ID
      * @return community
      */
@@ -39,7 +37,6 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     /**
-     *
      * @param communityId community ID
      * @param email
      * @return community
@@ -56,7 +53,6 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     /**
-     *
      * @param communityId community ID
      * @param email
      * @return community
@@ -73,7 +69,6 @@ public class CommunityServiceImpl implements CommunityService {
     }
 
     /**
-     *
      * @param pageable pagination information
      * @return communities
      */

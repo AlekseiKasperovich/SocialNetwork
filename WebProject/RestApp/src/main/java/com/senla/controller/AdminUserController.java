@@ -1,16 +1,15 @@
 package com.senla.controller;
 
 import com.senla.api.dto.user.DtoUser;
+import com.senla.client.AdminUserRestClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.senla.client.AdminUserRestClient;
-import org.springframework.http.MediaType;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -23,7 +22,6 @@ public class AdminUserController {
     private final AdminUserRestClient adminUseRestClient;
 
     /**
-     *
      * @param id user ID
      * @return blocked user
      */
@@ -33,7 +31,6 @@ public class AdminUserController {
     }
 
     /**
-     *
      * @param id user ID
      * @return unblocked user
      */

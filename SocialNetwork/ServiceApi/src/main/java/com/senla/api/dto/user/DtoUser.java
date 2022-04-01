@@ -1,15 +1,20 @@
 package com.senla.api.dto.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.senla.api.dto.сonstants.Constants;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
-import lombok.Data;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class DtoUser {
 
     private Long id;
@@ -17,11 +22,11 @@ public class DtoUser {
     private String firstName;
     private String lastName;
 
-    @JsonFormat(pattern = Constants.DATE_PATTERN)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
     private String sex;
     private String phone;
     private String status;
-   
+
 }

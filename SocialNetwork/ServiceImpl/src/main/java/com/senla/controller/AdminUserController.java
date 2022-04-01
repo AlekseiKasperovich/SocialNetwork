@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -23,7 +22,6 @@ public class AdminUserController {
     private final AdminUserService adminUserService;
 
     /**
-     *
      * @param id user ID
      * @return blocked user
      */
@@ -33,7 +31,6 @@ public class AdminUserController {
     }
 
     /**
-     *
      * @param id user ID
      * @return unblocked user
      */

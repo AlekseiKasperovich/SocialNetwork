@@ -1,12 +1,10 @@
 package com.senla.controller;
 
 import com.senla.api.dto.user.DtoCreateUser;
-import com.senla.api.dto.user.ForgotPasswordDto;
 import com.senla.api.dto.user.DtoUser;
+import com.senla.api.dto.user.ForgotPasswordDto;
 import com.senla.client.AuthRestClient;
 import com.senla.security.JwtTokenProvider;
-
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -33,7 +32,6 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     /**
-     *
      * @param createUserDto user email and password
      * @return user
      */
@@ -43,7 +41,6 @@ public class AuthController {
     }
 
     /**
-     *
      * @param createUserDto user email and password
      * @return token
      */
@@ -53,11 +50,10 @@ public class AuthController {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 createUserDto.getEmail(), createUserDto.getPassword()));
         String token = jwtTokenProvider.generateToken(createUserDto.getEmail());
-        return ResponseEntity.ok("Token: "+token);
+        return ResponseEntity.ok("Token: " + token);
     }
 
     /**
-     *
      * @param emailDto user email
      * @return sent new password to email
      */

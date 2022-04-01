@@ -9,16 +9,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     /**
-     *
-     * @param user1 user ID
-     * @param user2 other user ID
+     * @param user1    user ID
+     * @param user2    other user ID
      * @param pageable pagination information
      * @return user messages
      */

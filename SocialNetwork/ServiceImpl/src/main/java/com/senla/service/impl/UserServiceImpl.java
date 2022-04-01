@@ -4,20 +4,18 @@ import com.senla.api.dto.user.DtoUser;
 import com.senla.mapper.Mapper;
 import com.senla.model.User;
 import com.senla.repository.UserRepository;
-import com.senla.service.UserService;
 import com.senla.service.CustomUserService;
-
+import com.senla.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import static org.springframework.data.jpa.domain.Specification.where;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.data.jpa.domain.Specification.where;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -30,7 +28,6 @@ public class UserServiceImpl implements UserService {
     private final Mapper mapper;
 
     /**
-     *
      * @param id user ID
      * @return user
      */
@@ -40,10 +37,9 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     *
      * @param firstName First Name
-     * @param lastName Last Name
-     * @param pageable pagination information
+     * @param lastName  Last Name
+     * @param pageable  pagination information
      * @return users
      */
     @Override

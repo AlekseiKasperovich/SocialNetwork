@@ -4,7 +4,6 @@ import com.senla.api.exception.EntityNotFoundException;
 import com.senla.api.exception.ExceptionDetails;
 import com.senla.api.exception.MyAccessDeniedException;
 import com.senla.api.exception.UserAlreadyExistException;
-import javax.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -17,8 +16,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Slf4j
@@ -45,7 +45,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({MailException.class})
     public ResponseEntity<Object> handleMailException(MailException ex,
-            WebRequest request) {
+                                                      WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.email.error", null,
                 request.getLocale());
@@ -78,7 +78,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMyAccessDeniedException(
             MyAccessDeniedException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.acces.denied.error",
+        String message = messageSource.getMessage("message.access.denied.error",
                 null, request.getLocale());
         ExceptionDetails details = ExceptionDetails.builder()
                 .title("Access Denied Exception")
@@ -106,7 +106,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleException(RuntimeException ex,
-            WebRequest request) {
+                                                  WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.error", null,
                 request.getLocale());

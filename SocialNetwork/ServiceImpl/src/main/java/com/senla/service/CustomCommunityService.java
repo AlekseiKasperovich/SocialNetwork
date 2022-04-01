@@ -4,7 +4,6 @@ import com.senla.model.Community;
 import com.senla.model.User;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface CustomCommunityService {

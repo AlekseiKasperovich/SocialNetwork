@@ -4,23 +4,23 @@ import com.senla.api.dto.community.CommunityMessageDto;
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.api.exception.CommunityMessageNotFoundException;
 import com.senla.api.exception.MyAccessDeniedException;
-import com.senla.service.CommunityMessageService;
 import com.senla.mapper.Mapper;
 import com.senla.model.Community;
 import com.senla.model.CommunityMessage;
 import com.senla.model.User;
 import com.senla.repository.CommunityMessageRepository;
+import com.senla.service.CommunityMessageService;
 import com.senla.service.CustomCommunityService;
 import com.senla.service.CustomUserService;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -34,7 +34,6 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     private final Mapper mapper;
 
     /**
-     *
      * @param id message ID
      * @return message
      */
@@ -46,30 +45,28 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     }
 
     /**
-     *
      * @param communityId community ID
-     * @param messageId message ID
+     * @param messageId   message ID
      * @param email
      * @return message
      */
     @Override
     public CommunityMessageDto getCommunityMessageById(Long communityId,
-            Long messageId, String email) {
+                                                       Long messageId, String email) {
         communityService.checkUserOnCommunity(userService.findUserByEmail(email),
                 communityService.findCommunityById(communityId));
         return mapper.map(findCommunityMessageById(messageId), CommunityMessageDto.class);
     }
 
     /**
-     *
-     * @param communityId community ID
+     * @param communityId      community ID
      * @param createMessageDto message body
      * @param email
      * @return message
      */
     @Override
     public CommunityMessageDto createCommunityMessage(Long communityId,
-            CreateMessageDto createMessageDto, String email) {
+                                                      CreateMessageDto createMessageDto, String email) {
         Community community = communityService.findCommunityById(communityId);
         User sender = userService.findUserByEmail(email);
         communityService.checkUserOnCommunity(sender, community);
@@ -84,16 +81,15 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     }
 
     /**
-     *
-     * @param communityId community ID
-     * @param messageId message ID
+     * @param communityId      community ID
+     * @param messageId        message ID
      * @param createMessageDto message body
      * @param email
      * @return updated message
      */
     @Override
     public CommunityMessageDto updateCommunityMessage(Long communityId, Long messageId,
-            CreateMessageDto createMessageDto, String email) {
+                                                      CreateMessageDto createMessageDto, String email) {
         User user = userService.findUserByEmail(email);
         communityService.checkUserOnCommunity(user, communityService.findCommunityById(communityId));
         CommunityMessage communityMessage = findCommunityMessageById(messageId);
@@ -104,9 +100,8 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     }
 
     /**
-     *
      * @param communityId community ID
-     * @param messageId message ID
+     * @param messageId   message ID
      * @param email
      */
     @Override
@@ -119,16 +114,15 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     }
 
     /**
-     *
      * @param communityId community ID
      * @param email
-     * @param pageable pagination information
+     * @param pageable    pagination information
      * @return messages
      */
     @Override
     @Transactional(readOnly = true)
     public Page<CommunityMessageDto> findAll(Long communityId, String email,
-            Pageable pageable) {
+                                             Pageable pageable) {
         communityService.checkUserOnCommunity(userService.findUserByEmail(email),
                 communityService.findCommunityById(communityId));
         Page<CommunityMessage> communityMessagePage = communityMessageRepository.
@@ -138,9 +132,8 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
     }
 
     /**
-     *
      * @param communityMessage community мessage
-     * @param id message author ID
+     * @param id               message author ID
      */
     private void checkMessageAuthor(CommunityMessage communityMessage, Long id) {
         if (!communityMessage.getSender().getId().equals(id)) {

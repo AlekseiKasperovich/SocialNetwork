@@ -2,13 +2,13 @@ package com.senla.service.impl;
 
 import com.senla.api.dto.friendship.FriendshipDto;
 import com.senla.api.exception.MyAccessDeniedException;
-import com.senla.service.FriendshipService;
 import com.senla.mapper.Mapper;
 import com.senla.model.Friendship;
 import com.senla.model.User;
 import com.senla.repository.FriendshipRepository;
 import com.senla.service.CustomFriendshipService;
 import com.senla.service.CustomUserService;
+import com.senla.service.FriendshipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -30,7 +29,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     private final Mapper mapper;
 
     /**
-     *
      * @param friendshipId friendship ID
      * @param email
      * @return friendship
@@ -48,7 +46,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     *
      * @param friendId user ID
      * @param email
      * @return friendship
@@ -69,7 +66,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     *
      * @param friendshipId friendship ID
      * @param email
      * @return accepted friendship
@@ -86,7 +82,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     *
      * @param friendshipId friendship ID
      * @param email
      */
@@ -103,7 +98,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     *
      * @param email
      * @param pageable pagination information
      * @return friendships
@@ -119,7 +113,6 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     *
      * @param email
      * @param pageable pagination information
      * @return friend request list

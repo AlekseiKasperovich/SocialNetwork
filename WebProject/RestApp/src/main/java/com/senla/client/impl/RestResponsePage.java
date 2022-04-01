@@ -5,14 +5,14 @@ import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
-import java.util.ArrayList;
-import java.util.List;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -31,15 +31,15 @@ public class RestResponsePage<T> extends PageImpl<T> {
 
     @JsonCreator(mode = Mode.PROPERTIES)
     public RestResponsePage(@JsonProperty(CONTENT) List<T> content,
-            @JsonProperty(NUMBER) int number,
-            @JsonProperty(SIZE) int size,
-            @JsonProperty(TOTAL_ELEMENTS) Long totalElements,
-            @JsonProperty(PAGEABLE) JsonNode pageable,
-            @JsonProperty(LAST) boolean last,
-            @JsonProperty(TOTAL_PAGES) int totalPages,
-            @JsonProperty(SORT) JsonNode sort,
-            @JsonProperty(FIRST) boolean first,
-            @JsonProperty(NUMBER_OF_ELEMENTS) int numberOfElements) {
+                            @JsonProperty(NUMBER) int number,
+                            @JsonProperty(SIZE) int size,
+                            @JsonProperty(TOTAL_ELEMENTS) Long totalElements,
+                            @JsonProperty(PAGEABLE) JsonNode pageable,
+                            @JsonProperty(LAST) boolean last,
+                            @JsonProperty(TOTAL_PAGES) int totalPages,
+                            @JsonProperty(SORT) JsonNode sort,
+                            @JsonProperty(FIRST) boolean first,
+                            @JsonProperty(NUMBER_OF_ELEMENTS) int numberOfElements) {
 
         super(content, PageRequest.of(number, size), totalElements);
     }
