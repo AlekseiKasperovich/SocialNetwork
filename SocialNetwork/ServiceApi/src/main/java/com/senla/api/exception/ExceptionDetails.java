@@ -11,6 +11,7 @@ import lombok.Data;
 @Builder
 public class ExceptionDetails {
 
+    //Обычное ещё таймкод добавляют для мэссэджа, но это чисто для удобства
     private String title;
     private String detail;
     private int status;

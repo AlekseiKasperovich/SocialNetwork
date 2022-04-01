@@ -34,6 +34,7 @@ import org.springframework.stereotype.Component;
 public class Mapper extends ConfigurableMapper {
 
     @Override
+    //можно почитать про мапстракт очень часто исользуется в проектах в последнее время https://www.baeldung.com/mapstruct
     protected void configure(MapperFactory factory) {
         factory.classMap(Role.class, RoleDto.class)
                 .byDefault()

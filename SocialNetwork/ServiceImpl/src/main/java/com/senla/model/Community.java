@@ -21,7 +21,8 @@ import lombok.NoArgsConstructor;
  *
  * @author Aliaksei Kaspiarovich
  */
-@Data
+@Data //ToDo обычно не используют на сущностях ибо они переопределяют equals/hashCode
+      // лучше всего отдельно написать все те анноташки что скрывеает @Data только без @EqualsAndHashCode
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
