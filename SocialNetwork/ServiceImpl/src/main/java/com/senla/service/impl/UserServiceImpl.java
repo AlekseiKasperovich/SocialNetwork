@@ -3,6 +3,7 @@ package com.senla.service.impl;
 import com.senla.api.dto.user.DtoUser;
 import com.senla.mapper.Mapper;
 import com.senla.model.User;
+import com.senla.model.User_;
 import com.senla.repository.UserRepository;
 import com.senla.service.CustomUserService;
 import com.senla.service.UserService;
@@ -49,10 +50,9 @@ public class UserServiceImpl implements UserService {
             return userPage.map(user -> mapper.map(user, DtoUser.class));
         }
         Specification<User> specification1 = (root, query, criteriaBuilder)
-                //TODO замени на метомодели https://www.baeldung.com/hibernate-criteria-queries-metamodel
-                -> criteriaBuilder.like(root.get("firstName"), "%" + firstName + "%");
+                -> criteriaBuilder.like(root.get(User_.firstName), "%" + firstName + "%");
         Specification<User> specification2 = (root, query, criteriaBuilder)
-                -> criteriaBuilder.like(root.get("lastName"), "%" + lastName + "%");
+                -> criteriaBuilder.like(root.get(User_.lastName), "%" + lastName + "%");
         Page<User> userPage = userRepository.findAll(where(specification1).or(specification2), pageable);
         return userPage.map(user -> mapper.map(user, DtoUser.class));
 

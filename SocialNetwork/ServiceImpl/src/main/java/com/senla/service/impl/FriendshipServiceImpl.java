@@ -2,6 +2,7 @@ package com.senla.service.impl;
 
 import com.senla.api.dto.friendship.FriendshipDto;
 import com.senla.api.exception.MyAccessDeniedException;
+import com.senla.mapper.MapStructMapper;
 import com.senla.mapper.Mapper;
 import com.senla.model.Friendship;
 import com.senla.model.User;
@@ -27,10 +28,11 @@ public class FriendshipServiceImpl implements FriendshipService {
     private final CustomUserService userService;
     private final FriendshipRepository friendshipRepository;
     private final Mapper mapper;
+    private final MapStructMapper mapStructMapper;
 
     /**
      * @param friendshipId friendship ID
-     * @param email email
+     * @param email        email
      * @return friendship
      */
     @Override
@@ -40,14 +42,15 @@ public class FriendshipServiceImpl implements FriendshipService {
         User user = userService.findUserByEmail(email);
         if (friendship.getReceiver().getId().equals(user.getId())
                 || friendship.getSender().getId().equals(user.getId())) {
-            return mapper.map(friendship, FriendshipDto.class);
+            return mapStructMapper.friendshipToDto(friendship);
+//            return mapper.map(friendship, FriendshipDto.class);
         }
         throw new MyAccessDeniedException("Access is denied");
     }
 
     /**
      * @param friendId user ID
-     * @param email email
+     * @param email    email
      * @return friendship
      */
     @Override
@@ -60,14 +63,15 @@ public class FriendshipServiceImpl implements FriendshipService {
                     .receiver(userService.findUserById(friendId))
                     .accepted(Boolean.FALSE)
                     .build();
-            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
+            return mapStructMapper.friendshipToDto(friendshipRepository.save(friendship));
+//            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
         }
         throw new MyAccessDeniedException("Access is denied");
     }
 
     /**
      * @param friendshipId friendship ID
-     * @param email email
+     * @param email        email
      * @return accepted friendship
      */
     @Override
@@ -76,14 +80,15 @@ public class FriendshipServiceImpl implements FriendshipService {
         User user = userService.findUserByEmail(email);
         if (friendship.getReceiver().getId().equals(user.getId())) {
             friendship.setAccepted(Boolean.TRUE);
-            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
+            return mapStructMapper.friendshipToDto(friendshipRepository.save(friendship));
+//            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
         }
         throw new MyAccessDeniedException("Access is denied");
     }
 
     /**
      * @param friendshipId friendship ID
-     * @param email email
+     * @param email        email
      */
     @Override
     public void deleteFriendship(Long friendshipId, String email) {
@@ -98,7 +103,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     * @param email email
+     * @param email    email
      * @param pageable pagination information
      * @return friendships
      */
@@ -113,7 +118,7 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     * @param email email
+     * @param email    email
      * @param pageable pagination information
      * @return friend request list
      */

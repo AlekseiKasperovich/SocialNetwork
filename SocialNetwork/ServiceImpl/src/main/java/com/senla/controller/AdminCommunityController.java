@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.api.dto.community.CommunityDto;
 import com.senla.api.dto.community.CreateCommunityDto;
 import com.senla.service.AdminCommunityService;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.*;
  * @author Aliaksei Kaspiarovich
  */
 @RestController
-@RequestMapping(value = "/${application.rest-api.prefix}/admin/communities", // TODO Можно часть перфикса который ен меняется вынести в проперти
+@RequestMapping(value = "/${application.rest-api.prefix}/admin/communities",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
+@Api(tags = "Create/update/delete community")
 public class AdminCommunityController {
 
     private final AdminCommunityService adminCommunityService;
@@ -24,9 +26,15 @@ public class AdminCommunityController {
      * @param email              email
      * @return community
      */
-    //TODO описать аннотициями только этот контроллер чисто посмотреть как это происходит и делается
+    @ApiOperation(value = "This method is used to create a community.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Community successfully created"),
+            @ApiResponse(code = 400, message = "Bad request")
+    })
     @PostMapping
-    public CommunityDto createCommunity(@RequestBody CreateCommunityDto createCommunityDto,
+    public CommunityDto createCommunity(@ApiParam(name = "Community name and description")
+                                        @RequestBody CreateCommunityDto createCommunityDto,
+                                        @ApiParam(name = "email")
                                         @RequestHeader("${request.email}") String email) {
         return adminCommunityService.createCommunity(createCommunityDto, email);
     }
