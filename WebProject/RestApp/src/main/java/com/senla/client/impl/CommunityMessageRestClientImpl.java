@@ -4,6 +4,7 @@ import com.senla.api.dto.community.CommunityMessageDto;
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.client.CommunityMessageRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -26,10 +27,11 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
     private static final String MESSAGES = "/messages/";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public CommunityMessageDto getCommunityMessageById(Long communityId, Long messageId) {
-        return restTemplate.exchange("${request.host}" + URL + communityId + MESSAGES + messageId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + communityId + MESSAGES + messageId,
                 HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build()),
                 CommunityMessageDto.class).getBody();
     }
@@ -37,7 +39,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
     @Override
     public CommunityMessageDto createCommunityMessage(Long communityId,
                                                       CreateMessageDto createMessageDto) {
-        return restTemplate.exchange("${request.host}" + URL + communityId + MESSAGES,
+        return restTemplate.exchange(requestProperty.getHost() + URL + communityId + MESSAGES,
                 HttpMethod.POST,
                 new HttpEntity<>(createMessageDto, httpHeaderBuilder.build()),
                 CommunityMessageDto.class).getBody();
@@ -46,7 +48,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
     @Override
     public CommunityMessageDto updateCommunityMessage(Long communityId, Long messageId,
                                                       CreateMessageDto createMessageDto) {
-        return restTemplate.exchange("${request.host}" + URL + communityId + MESSAGES + messageId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + communityId + MESSAGES + messageId,
                 HttpMethod.PUT,
                 new HttpEntity<>(createMessageDto, httpHeaderBuilder.build()),
                 CommunityMessageDto.class).getBody();
@@ -54,7 +56,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
 
     @Override
     public void deleteCommunityMessage(Long communityId, Long messageId) {
-        restTemplate.exchange("${request.host}" + URL + communityId + MESSAGES + messageId,
+        restTemplate.exchange(requestProperty.getHost() + URL + communityId + MESSAGES + messageId,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 Void.class);
     }
@@ -65,9 +67,9 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
         String requestParam = request.getQueryString();
         String url = null;
         if (requestParam == null) {
-            url = "${request.host}" + URL + communityId;
+            url = requestProperty.getHost() + URL + communityId;
         } else {
-            url = "${request.host}" + URL + communityId + "${request.question}" + requestParam;
+            url = requestProperty.getHost() + URL + communityId + requestProperty.getQuestion() + requestParam;
         }
         return restTemplate.exchange(url, HttpMethod.GET,
                 new HttpEntity<>(httpHeaderBuilder.build()),

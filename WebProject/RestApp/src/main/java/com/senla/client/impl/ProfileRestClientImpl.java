@@ -5,6 +5,7 @@ import com.senla.api.dto.profile.UpdateUserDto;
 import com.senla.api.dto.user.DtoUser;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.ProfileRestClient;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -23,17 +24,18 @@ public class ProfileRestClientImpl implements ProfileRestClient {
     private final PasswordEncoder bCryptPasswordEncoder;
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public DtoUser getUserProfile() {
-        return restTemplate.exchange("${request.host}" + URL,
+        return restTemplate.exchange(requestProperty.getHost() + URL,
                 HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
     }
 
     @Override
     public DtoUser updateUser(UpdateUserDto updateUserDto) {
-        return restTemplate.exchange("${request.host}" + URL,
+        return restTemplate.exchange(requestProperty.getHost() + URL,
                 HttpMethod.PUT, new HttpEntity<>(updateUserDto, httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
     }
@@ -44,14 +46,14 @@ public class ProfileRestClientImpl implements ProfileRestClient {
         String hashPassword = bCryptPasswordEncoder.encode(password);
         changePasswordDto.setPassword(hashPassword);
         changePasswordDto.setMatchingPassword(hashPassword);
-        return restTemplate.exchange("${request.host}" + URL,
+        return restTemplate.exchange(requestProperty.getHost() + URL,
                 HttpMethod.PATCH, new HttpEntity<>(changePasswordDto, httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
     }
 
     @Override
     public DtoUser deleteUser() {
-        return restTemplate.exchange("${request.host}" + URL,
+        return restTemplate.exchange(requestProperty.getHost() + URL,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
     }

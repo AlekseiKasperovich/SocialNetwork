@@ -2,6 +2,8 @@ package com.senla.config;
 
 import com.senla.security.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +30,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenFilter jwtTokenFilter;
 
+    @Value("${role.admin}")
+    private String role;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -37,8 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                //TODO урлы в проперти
-                .antMatchers("/api/admin/**").hasRole("${role.admin}")
+                .antMatchers("/api/admin/**").hasRole(role)
                 .antMatchers("/api/auth/**", "/swagger-ui/**", "/", "/go").permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);

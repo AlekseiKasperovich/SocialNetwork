@@ -6,9 +6,9 @@ logging:
       senla: INFO
 jwt:
   expiration: '7'
-  authorization: Authorization
-  secret: SocialNetworkSecret
-  bearer: Bearer
+  authorization: "Authorization"
+  secret: "SocialNetworkSecret"
+  bearer: "Bearer "
 spring:
   mvc:
     pathmatch:
@@ -18,3 +18,4 @@ role:
 request:
   question: '?'
   host: http://backend:8081
+  email: "email"

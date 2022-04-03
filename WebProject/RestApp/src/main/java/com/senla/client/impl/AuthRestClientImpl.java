@@ -5,6 +5,7 @@ import com.senla.api.dto.user.DtoUser;
 import com.senla.api.dto.user.ForgotPasswordDto;
 import com.senla.client.AuthRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,7 @@ public class AuthRestClientImpl implements AuthRestClient {
     private final PasswordEncoder bCryptPasswordEncoder;
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public DtoUser registerNewUserAccount(DtoCreateUser createUserDto) {
@@ -32,7 +34,7 @@ public class AuthRestClientImpl implements AuthRestClient {
         String hashPassword = bCryptPasswordEncoder.encode(password);
         createUserDto.setPassword(hashPassword);
         createUserDto.setMatchingPassword(hashPassword);
-        return restTemplate.exchange("${request.host}" + URL + REGISTRATION,
+        return restTemplate.exchange(requestProperty.getHost() + URL + REGISTRATION,
                 HttpMethod.POST,
                 new HttpEntity<>(createUserDto,
                         httpHeaderBuilder.build(createUserDto.getEmail())),
@@ -41,7 +43,7 @@ public class AuthRestClientImpl implements AuthRestClient {
 
     @Override
     public void sendNewPassword(ForgotPasswordDto emailDto) {
-        restTemplate.exchange("${request.host}" + URL + PASSWORD,
+        restTemplate.exchange(requestProperty.getHost() + URL + PASSWORD,
                 HttpMethod.POST,
                 new HttpEntity<>(emailDto, httpHeaderBuilder.build(emailDto.getEmail())),
                 Void.class);

@@ -34,5 +34,10 @@
       "name": "jwt.expiration",
       "type": "java.lang.String",
       "description": "Description for jwt.expiration."
+    },
+    {
+      "name": "jwt.authorization",
+      "type": "java.lang.String",
+      "description": "Description for jwt.authorization."
     }
   ] }

@@ -3,6 +3,7 @@ package com.senla.client.impl;
 import com.senla.api.dto.friendship.FriendshipDto;
 import com.senla.client.FriendshipRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -26,31 +27,32 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     private static final String REQUESTS = "requests";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public FriendshipDto getFriendshipById(Long friendshipId) {
-        return restTemplate.exchange("${request.host}" + URL + friendshipId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + friendshipId,
                 HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build()),
                 FriendshipDto.class).getBody();
     }
 
     @Override
     public FriendshipDto createFriendship(Long friendId) {
-        return restTemplate.exchange("${request.host}" + URL + FRIEND + friendId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + FRIEND + friendId,
                 HttpMethod.POST, new HttpEntity<>(httpHeaderBuilder.build()),
                 FriendshipDto.class).getBody();
     }
 
     @Override
     public FriendshipDto acceptFriendship(Long friendshipId) {
-        return restTemplate.exchange("${request.host}" + URL + friendshipId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + friendshipId,
                 HttpMethod.PUT, new HttpEntity<>(httpHeaderBuilder.build()),
                 FriendshipDto.class).getBody();
     }
 
     @Override
     public void deleteFriendship(Long friendshipId) {
-        restTemplate.exchange("${request.host}" + URL + friendshipId,
+        restTemplate.exchange(requestProperty.getHost() + URL + friendshipId,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 Void.class);
     }
@@ -60,9 +62,9 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
         String requestParam = request.getQueryString();
         String url = null;
         if (requestParam == null) {
-            url = "${request.host}" + URL + REQUESTS;
+            url = requestProperty.getHost() + URL + REQUESTS;
         } else {
-            url = "${request.host}" + URL + REQUESTS + "${request.question}" + requestParam;
+            url = requestProperty.getHost() + URL + REQUESTS + requestProperty.getQuestion() + requestParam;
         }
         return restTemplate.exchange(url, HttpMethod.GET,
                 new HttpEntity<>(httpHeaderBuilder.build()),
@@ -75,9 +77,9 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
         String requestParam = request.getQueryString();
         String url = null;
         if (requestParam == null) {
-            url = "${request.host}" + URL;
+            url = requestProperty.getHost() + URL;
         } else {
-            url = "${request.host}" + URL + "${request.question}" + requestParam;
+            url = requestProperty.getHost() + URL + requestProperty.getQuestion() + requestParam;
         }
         return restTemplate.exchange(url, HttpMethod.GET,
                 new HttpEntity<>(httpHeaderBuilder.build()),

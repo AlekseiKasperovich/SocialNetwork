@@ -4,6 +4,7 @@ import com.senla.api.dto.event.EventMessageDto;
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.client.EventMessageRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -26,10 +27,11 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     private static final String MESSAGES = "/messages/";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public EventMessageDto getEventMessageById(Long eventId, Long messageId) {
-        return restTemplate.exchange("${request.host}" + URL + eventId + MESSAGES + messageId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId + MESSAGES + messageId,
                 HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build()),
                 EventMessageDto.class).getBody();
     }
@@ -37,7 +39,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     @Override
     public EventMessageDto createEventMessage(Long eventId,
                                               CreateMessageDto createMessageDto) {
-        return restTemplate.exchange("${request.host}" + URL + eventId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId,
                 HttpMethod.POST,
                 new HttpEntity<>(createMessageDto, httpHeaderBuilder.build()),
                 EventMessageDto.class).getBody();
@@ -46,7 +48,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     @Override
     public EventMessageDto updateEventMessage(Long eventId, Long messageId,
                                               CreateMessageDto createMessageDto) {
-        return restTemplate.exchange("${request.host}" + URL + eventId + MESSAGES + messageId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId + MESSAGES + messageId,
                 HttpMethod.PUT,
                 new HttpEntity<>(createMessageDto, httpHeaderBuilder.build()),
                 EventMessageDto.class).getBody();
@@ -54,7 +56,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
 
     @Override
     public void deleteEventMessage(Long eventId, Long messageId) {
-        restTemplate.exchange("${request.host}" + URL + eventId + MESSAGES + messageId,
+        restTemplate.exchange(requestProperty.getHost() + URL + eventId + MESSAGES + messageId,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 Void.class);
     }
@@ -65,9 +67,9 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
         String requestParam = request.getQueryString();
         String url = null;
         if (requestParam == null) {
-            url = "${request.host}" + URL + eventId;
+            url = requestProperty.getHost() + URL + eventId;
         } else {
-            url = "${request.host}" + URL + eventId + "${request.question}" + requestParam;
+            url = requestProperty.getHost() + URL + eventId + requestProperty.getQuestion() + requestParam;
         }
         return restTemplate.exchange(url, HttpMethod.GET,
                 new HttpEntity<>(httpHeaderBuilder.build()),

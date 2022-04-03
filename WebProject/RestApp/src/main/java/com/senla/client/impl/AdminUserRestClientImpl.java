@@ -3,6 +3,7 @@ package com.senla.client.impl;
 import com.senla.api.dto.user.DtoUser;
 import com.senla.client.AdminUserRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -21,10 +22,11 @@ public class AdminUserRestClientImpl implements AdminUserRestClient {
     private static final String UNBLOCK = "/unblock";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public DtoUser blockUser(Long id) {
-        return restTemplate.exchange("${request.host}" + URL + id + BLOCK,
+        return restTemplate.exchange(requestProperty.getHost() + URL + id + BLOCK,
                 HttpMethod.PATCH,
                 new HttpEntity<>(httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
@@ -32,7 +34,7 @@ public class AdminUserRestClientImpl implements AdminUserRestClient {
 
     @Override
     public DtoUser unblockUser(Long id) {
-        return restTemplate.exchange("${request.host}" + URL + id + UNBLOCK,
+        return restTemplate.exchange(requestProperty.getHost() + URL + id + UNBLOCK,
                 HttpMethod.PATCH, new HttpEntity<>(httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
     }

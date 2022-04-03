@@ -4,6 +4,7 @@ import com.senla.api.dto.event.CreateEventDto;
 import com.senla.api.dto.event.EventDto;
 import com.senla.client.EventRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -26,17 +27,18 @@ public class EventRestClientImpl implements EventRestClient {
     private static final String USERS = "/users/";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public EventDto getEventById(Long eventId) {
-        return restTemplate.exchange("${request.host}" + URL + eventId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId,
                 HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build()),
                 EventDto.class).getBody();
     }
 
     @Override
     public EventDto createEvent(CreateEventDto createEventDto) {
-        return restTemplate.exchange("${request.host}" + URL,
+        return restTemplate.exchange(requestProperty.getHost() + URL,
                 HttpMethod.POST,
                 new HttpEntity<>(createEventDto, httpHeaderBuilder.build()),
                 EventDto.class).getBody();
@@ -44,7 +46,7 @@ public class EventRestClientImpl implements EventRestClient {
 
     @Override
     public EventDto updateEvent(Long eventId, CreateEventDto createEventDto) {
-        return restTemplate.exchange("${request.host}" + URL + eventId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId,
                 HttpMethod.PUT,
                 new HttpEntity<>(createEventDto, httpHeaderBuilder.build()),
                 EventDto.class).getBody();
@@ -52,21 +54,21 @@ public class EventRestClientImpl implements EventRestClient {
 
     @Override
     public void deleteEvent(Long eventId) {
-        restTemplate.exchange("${request.host}" + URL + eventId,
+        restTemplate.exchange(requestProperty.getHost() + URL + eventId,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 Void.class);
     }
 
     @Override
     public EventDto addUser(Long eventId, Long userId) {
-        return restTemplate.exchange("${request.host}" + URL + eventId + USERS + userId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId + USERS + userId,
                 HttpMethod.PUT, new HttpEntity<>(httpHeaderBuilder.build()),
                 EventDto.class).getBody();
     }
 
     @Override
     public EventDto deleteUser(Long eventId, Long userId) {
-        return restTemplate.exchange("${request.host}" + URL + eventId + USERS + userId,
+        return restTemplate.exchange(requestProperty.getHost() + URL + eventId + USERS + userId,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 EventDto.class).getBody();
     }
@@ -76,9 +78,9 @@ public class EventRestClientImpl implements EventRestClient {
         String requestParam = request.getQueryString();
         String url = null;
         if (requestParam == null) {
-            url = "${request.host}" + URL;
+            url = requestProperty.getHost() + URL;
         } else {
-            url = "${request.host}" + URL + "${request.question}" + requestParam;
+            url = requestProperty.getHost() + URL + requestProperty.getQuestion() + requestParam;
         }
         return restTemplate.exchange(url, HttpMethod.GET,
                 new HttpEntity<>(httpHeaderBuilder.build()),

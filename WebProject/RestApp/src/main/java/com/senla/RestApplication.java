@@ -1,10 +1,16 @@
 package com.senla;
 
+import com.senla.property.JwtProperty;
+import com.senla.property.RequestProperty;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@EnableFeignClients
+@EnableConfigurationProperties({JwtProperty.class, RequestProperty.class})
 public class RestApplication {
 
     public static void main(String[] args) {

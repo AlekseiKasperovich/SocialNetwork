@@ -3,6 +3,7 @@ package com.senla.client.impl;
 import com.senla.api.dto.user.DtoUser;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.UserRestClient;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -24,10 +25,11 @@ public class UserRestClientImpl implements UserRestClient {
     private static final String URL = "/api/users/";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
+    private final RequestProperty requestProperty;
 
     @Override
     public DtoUser getUserById(Long id) {
-        return restTemplate.exchange("${request.host}" + URL + id,
+        return restTemplate.exchange(requestProperty.getHost() + URL + id,
                 HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build()),
                 DtoUser.class).getBody();
     }
@@ -37,9 +39,9 @@ public class UserRestClientImpl implements UserRestClient {
         String requestParam = request.getQueryString();
         String url = null;
         if (requestParam == null) {
-            url = "${request.host}" + URL;
+            url = requestProperty.getHost() + URL;
         } else {
-            url = "${request.host}" + URL + "${request.question}" + requestParam;
+            url = requestProperty.getHost() + URL + requestProperty.getQuestion() + requestParam;
         }
         return restTemplate.exchange(url, HttpMethod.GET,
                 new HttpEntity<>(httpHeaderBuilder.build()),
