@@ -2,10 +2,7 @@ package com.senla.api.dto.profile;
 
 import com.senla.api.validation.FieldsValueMatch;
 import com.senla.api.validation.ValidPassword;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -13,8 +10,7 @@ import javax.validation.constraints.NotBlank;
  *
  * @author Aliaksei Kaspiarovich
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldsValueMatch(field = "password",

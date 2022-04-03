@@ -1,10 +1,8 @@
 package com.senla.api.dto.profile;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.senla.api.dto.сonstants.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
@@ -13,11 +11,9 @@ import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateUserDto {
@@ -29,7 +25,7 @@ public class UpdateUserDto {
     private String lastName;
 
     @Past
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern="${date.pattern}")
     @NotNull
     private LocalDate birthday;
 

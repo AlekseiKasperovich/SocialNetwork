@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Aliaksei Kaspiarovich
  */
 @RestController
-@RequestMapping(value = "/${application.rest-api.prefix}/admin/communities",
+@RequestMapping(value = "api/admin/communities",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
