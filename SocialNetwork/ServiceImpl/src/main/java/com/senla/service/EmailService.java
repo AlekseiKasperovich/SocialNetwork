@@ -6,4 +6,6 @@ package com.senla.service;
 public interface EmailService {
 
     void sendMessage(String to, String subject, String text);
+
+    void send(String messageText);
 }

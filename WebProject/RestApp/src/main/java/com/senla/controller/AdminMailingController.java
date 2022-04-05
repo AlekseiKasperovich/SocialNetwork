@@ -1,7 +1,7 @@
 package com.senla.controller;
 
-import com.senla.api.dto.community.CommunityDto;
 import com.senla.api.dto.mailing.MailingDto;
+import com.senla.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,12 +19,13 @@ import javax.validation.Valid;
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-public class AdminController {
+public class AdminMailingController {
 
+    private final KafkaProducer producer;
 
     @PostMapping
-    public CommunityDto createMailing(
+    public String createMailing(
             @Valid @RequestBody MailingDto mailingDto) {
-        return null;
+        return producer.send(mailingDto);
     }
 }

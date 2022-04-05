@@ -11,6 +11,7 @@ import com.senla.repository.MessageRepository;
 import com.senla.service.CustomUserService;
 import com.senla.service.MessageService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 /**
  * @author Aliaksei Kaspiarovich
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -124,6 +126,11 @@ public class MessageServiceImpl implements MessageService {
         User user = userService.findUserByEmail(email);
         Page<Message> messagePage = messageRepository.findMessages(user.getId(), receiverId, pageable);
         return messagePage.map(message -> mapper.map(message, MessageDto.class));
+    }
+
+    @Override
+    public void send(String messageText) {
+        log.info("Message sent from MessageService");
     }
 
 }

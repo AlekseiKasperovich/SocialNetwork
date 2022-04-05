@@ -39,5 +39,10 @@
       "name": "jwt.authorization",
       "type": "java.lang.String",
       "description": "Description for jwt.authorization."
+    },
+    {
+      "name": "spring.kafka.producer.group_id",
+      "type": "java.lang.String",
+      "description": "Description for spring.kafka.producer.group_id."
     }
   ] }

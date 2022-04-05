@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author Aliaksei Kaspiarovich
  */
@@ -13,8 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MailingDto {
 
-    private String topic;
+    @NotBlank
     private String messageText;
+
     private Type type;
 
 }

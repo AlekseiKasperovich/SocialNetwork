@@ -13,6 +13,15 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+  kafka:
+    producer:
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      group-id: group_id
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      bootstrap-servers: 127.0.0.1:9092
+topic:
+  name:
+    producer: newTopic
 role:
   admin: ADMIN
 request:

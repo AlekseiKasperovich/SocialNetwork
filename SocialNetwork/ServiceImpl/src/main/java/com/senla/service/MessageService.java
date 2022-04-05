@@ -20,4 +20,5 @@ public interface MessageService {
 
     Page<MessageDto> findAll(Long receiverId, String email, Pageable pageable);
 
+    void send(String messageText);
 }
