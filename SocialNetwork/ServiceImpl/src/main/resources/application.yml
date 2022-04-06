@@ -1,11 +1,19 @@
 spring:
+  liquibase:
+    enabled: true
+
   kafka:
     consumer:
       auto-offset-reset: earliest
-      bootstrap-servers: 127.0.0.1:9092
+      bootstrap-servers: http://broker:9092
       group-id: group_id
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
   jpa:
     generate-ddl: 'true'
     hibernate:
@@ -36,6 +44,7 @@ spring:
     password: postgres
     username: postgres
     url: jdbc:postgresql://postgres:5432/social_network_db
+
   sql:
     init:
       mode: always

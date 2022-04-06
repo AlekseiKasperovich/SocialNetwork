@@ -1,9 +1,20 @@
 package com.senla.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
-import java.util.HashSet;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.util.Set;
 
 /**
@@ -28,12 +39,12 @@ public class Community {
     @Column(nullable = false)
     private String description;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @OneToMany(orphanRemoval = true)
     @JoinTable(name = "users_communities", joinColumns = {
-            @JoinColumn(name = "community_id")},
+            @JoinColumn(name = "community_id", referencedColumnName = "id")},
             inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")},
+                    @JoinColumn(name = "user_id", referencedColumnName = "id")},
             uniqueConstraints = {
                     @UniqueConstraint(columnNames = {"community_id", "user_id"})})
-    private Set<User> followers = new HashSet<>();
+    private Set<User> followers = new java.util.LinkedHashSet<>();
 }

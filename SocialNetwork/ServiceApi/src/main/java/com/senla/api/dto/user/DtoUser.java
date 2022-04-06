@@ -1,8 +1,9 @@
 package com.senla.api.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 

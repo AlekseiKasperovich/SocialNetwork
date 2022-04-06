@@ -2,7 +2,9 @@ package com.senla.api.dto.profile;
 
 import com.senla.api.validation.FieldsValueMatch;
 import com.senla.api.validation.ValidPassword;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 

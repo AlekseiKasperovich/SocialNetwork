@@ -1,7 +1,9 @@
 package com.senla.api.dto.friendship;
 
 import com.senla.api.dto.user.DtoUser;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  *

@@ -1,7 +1,9 @@
 package com.senla.api.dto.user;
 
 import com.senla.api.dto.сonstants.Status;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Aliaksei Kaspiarovich

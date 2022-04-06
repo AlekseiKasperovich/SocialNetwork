@@ -15,7 +15,7 @@ public class Producer implements KafkaProducer {
     @Value("${topic.name.producer}")
     private String topicName;
 
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final KafkaTemplate<String, MailingDto> kafkaTemplate;
 
     public String send(MailingDto mailingDto) {
         log.info("message sent: {}", mailingDto.getMessageText());

@@ -2,8 +2,9 @@ package com.senla.api.dto.message;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.senla.api.dto.user.DtoUser;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 

@@ -2,8 +2,9 @@ package com.senla.api.dto.profile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.senla.api.dto.сonstants.Gender;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

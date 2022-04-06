@@ -15,10 +15,10 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
   kafka:
     producer:
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       group-id: group_id
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      bootstrap-servers: 127.0.0.1:9092
+      bootstrap-servers: http://broker:9092
 topic:
   name:
     producer: newTopic
