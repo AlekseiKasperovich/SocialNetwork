@@ -1,7 +1,8 @@
 spring:
   liquibase:
     enabled: true
-
+    change-log: classpath:db/changelog/db.changelog-master.yml
+    contexts: dev
   kafka:
     consumer:
       auto-offset-reset: earliest
@@ -17,7 +18,7 @@ spring:
   jpa:
     generate-ddl: 'true'
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     database: postgresql
     defer-datasource-initialization: 'true'
@@ -59,6 +60,7 @@ server:
   port: '8081'
 logging:
   level:
+    liquibase: INFO
     org:
       springframework: INFO
     com:
