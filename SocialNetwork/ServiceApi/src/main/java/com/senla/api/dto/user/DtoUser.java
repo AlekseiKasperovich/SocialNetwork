@@ -20,7 +20,7 @@ public class DtoUser {
     private String firstName;
     private String lastName;
 
-    @JsonFormat(pattern="${date.pattern}")
+    @JsonFormat(pattern="dd.MM.yyyy")
     private LocalDate birthday;
 
     private String sex;

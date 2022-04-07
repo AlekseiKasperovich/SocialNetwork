@@ -18,7 +18,7 @@ public class CommunityMessageDto {
 
     private Long id;
 
-    @JsonFormat(pattern="${date.time.pattern}")
+    @JsonFormat(pattern="dd.MM.yyyy HH:mm:ss")
     private LocalDateTime posted;
 
     private String body;

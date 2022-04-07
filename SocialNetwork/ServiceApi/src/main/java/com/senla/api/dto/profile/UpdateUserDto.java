@@ -26,7 +26,7 @@ public class UpdateUserDto {
     private String lastName;
 
     @Past
-    @JsonFormat(pattern="${date.pattern}")
+    @JsonFormat(pattern="dd.MM.yyyy")
     @NotNull
     private LocalDate birthday;
 

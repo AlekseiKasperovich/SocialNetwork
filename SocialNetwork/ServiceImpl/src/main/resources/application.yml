@@ -1,8 +1,6 @@
 spring:
   liquibase:
     enabled: true
-    change-log: classpath:db/changelog/db.changelog-master.yml
-    contexts: dev
   kafka:
     consumer:
       auto-offset-reset: earliest
@@ -21,7 +19,7 @@ spring:
       ddl-auto: validate
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     database: postgresql
-    defer-datasource-initialization: 'true'
+    defer-datasource-initialization: 'false'
     show-sql: 'true'
   mail:
     properties:
