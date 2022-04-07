@@ -4,7 +4,7 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
-      bootstrap-servers: http://broker:9092
+      bootstrap-servers: ${BROKER_URL:http://localhost:9092}
       group-id: group_id
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -42,8 +42,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     password: postgres
     username: postgres
-    url: jdbc:postgresql://postgres:5432/social_network_db
-
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/social_network_db}
   sql:
     init:
       mode: always
@@ -70,4 +69,6 @@ request:
 topic:
   name:
     consumer: newTopic
+api:
+  prefix: api
 
