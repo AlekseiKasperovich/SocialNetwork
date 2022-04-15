@@ -31,83 +31,83 @@ public class EventController {
 
     /**
      * @param eventId event ID
-     * @param email email
+     * @param id id
      * @return event
      */
     @GetMapping("{eventId}")
     public EventDto getEventById(@PathVariable Long eventId,
-                                 @RequestHeader("${request.email}") String email) {
-        return eventService.getEventById(eventId, email);
+                                 @RequestHeader("${request.id}") Long id) {
+        return eventService.getEventById(eventId, id);
     }
 
     /**
      * @param createEventDto event name and description
-     * @param email email
+     * @param id id
      * @return event
      */
     @PostMapping
     public EventDto createEvent(@RequestBody CreateEventDto createEventDto,
-                                @RequestHeader("${request.email}") String email) {
-        return eventService.createEvent(createEventDto, email);
+                                @RequestHeader("${request.id}") Long id) {
+        return eventService.createEvent(createEventDto, id);
     }
 
     /**
      * @param eventId        event ID
      * @param createEventDto event name and description
-     * @param email email
+     * @param id id
      * @return updated event
      */
     @PutMapping("{eventId}")
     public EventDto updateEvent(@PathVariable Long eventId,
                                 @RequestBody CreateEventDto createEventDto,
-                                @RequestHeader("${request.email}") String email) {
-        return eventService.updateEvent(eventId, createEventDto, email);
+                                @RequestHeader("${request.id}") Long id) {
+        return eventService.updateEvent(eventId, createEventDto, id);
     }
 
     /**
      * @param eventId event ID
-     * @param email email
+     * @param id id
      */
     @DeleteMapping("{eventId}")
     public void deleteEvent(@PathVariable Long eventId,
-                            @RequestHeader("${request.email}") String email) {
-        eventService.deleteEvent(eventId, email);
+                            @RequestHeader("${request.id}") Long id) {
+        eventService.deleteEvent(eventId, id);
     }
 
     /**
      * @param eventId event ID
      * @param userId  user ID
-     * @param email email
+     * @param id id
      * @return event
      */
     @PutMapping("{eventId}/users/{userId}")
     public EventDto addUserToEvent(@PathVariable Long eventId,
                                    @PathVariable Long userId,
-                                   @RequestHeader("${request.email}") String email) {
-        return eventService.addUser(eventId, userId, email);
+                                   @RequestHeader("${request.id}") Long id) {
+        return eventService.addUser(eventId, userId, id);
     }
 
     /**
      * @param eventId event ID
      * @param userId  user ID
-     * @param email email
+     * @param id id
      * @return event
      */
     @DeleteMapping("{eventId}/users/{userId}")
     public EventDto deleteUserFromEvent(@PathVariable Long eventId,
                                         @PathVariable Long userId,
-                                        @RequestHeader("${request.email}") String email) {
-        return eventService.deleteUser(eventId, userId, email);
+                                        @RequestHeader("${request.id}") Long id) {
+        return eventService.deleteUser(eventId, userId, id);
     }
 
     /**
-     * @param email email
+     * @param id id
      * @param pageable pagination information
      * @return events
      */
     @GetMapping
     public Page<EventDto> findMyEvents(
-            @RequestHeader("${request.email}") String email, Pageable pageable) {
-        return eventService.findMyEvents(email, pageable);
+            @RequestHeader("${request.id}") Long id, Pageable pageable) {
+        return eventService.findMyEvents(id, pageable);
     }
 }

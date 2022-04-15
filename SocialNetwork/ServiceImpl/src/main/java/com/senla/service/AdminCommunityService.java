@@ -8,7 +8,7 @@ import com.senla.api.dto.community.CreateCommunityDto;
  */
 public interface AdminCommunityService {
 
-    CommunityDto createCommunity(CreateCommunityDto createCommunityDto, String email);
+    CommunityDto createCommunity(CreateCommunityDto createCommunityDto, Long id);
 
     CommunityDto updateCommunity(Long id, CreateCommunityDto createCommunityDto);
 

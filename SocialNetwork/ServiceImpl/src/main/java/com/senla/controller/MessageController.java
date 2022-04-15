@@ -32,61 +32,61 @@ public class MessageController {
 
     /**
      * @param messageId message ID
-     * @param email email
+     * @param id        id
      * @return message
      */
     @GetMapping("{messageId}")
     public MessageDto getMessageById(@PathVariable Long messageId,
-                                     @RequestHeader("${request.email}") String email) {
-        return messageService.getMessageById(messageId, email);
+                                     @RequestHeader("${request.id}") Long id) {
+        return messageService.getMessageById(messageId, id);
     }
 
     /**
      * @param receiverId       receiver ID
      * @param createMessageDto message body
-     * @param email email
+     * @param id               id
      * @return message
      */
     @PostMapping
     public MessageDto createMessage(@RequestParam Long receiverId,
                                     @RequestBody CreateMessageDto createMessageDto,
-                                    @RequestHeader("${request.email}") String email) {
-        return messageService.createMessage(receiverId, createMessageDto, email);
+                                    @RequestHeader("${request.id}") Long id) {
+        return messageService.createMessage(receiverId, createMessageDto, id);
     }
 
     /**
      * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email email
+     * @param id               id
      * @return updated message
      */
     @PutMapping("{messageId}")
     public MessageDto updateMessage(@PathVariable Long messageId,
                                     @RequestBody CreateMessageDto createMessageDto,
-                                    @RequestHeader("${request.email}") String email) {
-        return messageService.updateMessage(messageId, createMessageDto, email);
+                                    @RequestHeader("${request.id}") Long id) {
+        return messageService.updateMessage(messageId, createMessageDto, id);
     }
 
     /**
      * @param messageId message ID
-     * @param email email
+     * @param id        id
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(@PathVariable Long messageId,
-                              @RequestHeader("${request.email}") String email) {
-        messageService.deleteMessage(messageId, email);
+                              @RequestHeader("${request.id}") Long id) {
+        messageService.deleteMessage(messageId, id);
     }
 
     /**
      * @param receiverId receiver ID
-     * @param email email
+     * @param id         id
      * @param pageable   pagination information
      * @return messages
      */
     @GetMapping
     public Page<MessageDto> findMyMessages(@RequestParam Long receiverId,
-                                           @RequestHeader("${request.email}") String email, Pageable pageable) {
-        return messageService.findAll(receiverId, email, pageable);
+                                           @RequestHeader("${request.id}") Long id, Pageable pageable) {
+        return messageService.findAll(receiverId, id, pageable);
     }
 
 }

@@ -5,7 +5,6 @@ import com.senla.api.exception.MyAccessDeniedException;
 import com.senla.mapper.MapStructMapper;
 import com.senla.mapper.Mapper;
 import com.senla.model.Friendship;
-import com.senla.model.User;
 import com.senla.repository.FriendshipRepository;
 import com.senla.service.CustomFriendshipService;
 import com.senla.service.CustomUserService;
@@ -32,16 +31,14 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendshipId friendship ID
-     * @param email        email
+     * @param id           id
      * @return friendship
      */
     @Override
     @Transactional(readOnly = true)
-    public FriendshipDto getFriendshipById(Long friendshipId, String email) {
+    public FriendshipDto getFriendshipById(Long friendshipId, Long id) {
         Friendship friendship = friendshipService.findFriendshipById(friendshipId);
-        User user = userService.findUserByEmail(email);
-        if (friendship.getReceiver().getId().equals(user.getId())
-                || friendship.getSender().getId().equals(user.getId())) {
+        if (friendship.getReceiver().getId().equals(id) || friendship.getSender().getId().equals(id)) {
             return mapStructMapper.friendshipToDto(friendship);
 //            return mapper.map(friendship, FriendshipDto.class);
         }
@@ -50,16 +47,15 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendId user ID
-     * @param email    email
+     * @param id       id
      * @return friendship
      */
     @Override
-    public FriendshipDto createFriendship(Long friendId, String email) {
-        User user = userService.findUserByEmail(email);
-        if (friendshipRepository.findFriendshipRequest(user.getId(), friendId).isEmpty()) {
+    public FriendshipDto createFriendship(Long friendId, Long id) {
+        if (friendshipRepository.findFriendshipRequest(id, friendId).isEmpty()) {
             Friendship friendship = Friendship
                     .builder()
-                    .sender(user)
+                    .sender(userService.findUserById(id))
                     .receiver(userService.findUserById(friendId))
                     .accepted(Boolean.FALSE)
                     .build();
@@ -71,14 +67,13 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendshipId friendship ID
-     * @param email        email
+     * @param id           id
      * @return accepted friendship
      */
     @Override
-    public FriendshipDto acceptFriendship(Long friendshipId, String email) {
+    public FriendshipDto acceptFriendship(Long friendshipId, Long id) {
         Friendship friendship = friendshipService.findFriendshipById(friendshipId);
-        User user = userService.findUserByEmail(email);
-        if (friendship.getReceiver().getId().equals(user.getId())) {
+        if (friendship.getReceiver().getId().equals(id)) {
             friendship.setAccepted(Boolean.TRUE);
             return mapStructMapper.friendshipToDto(friendshipRepository.save(friendship));
 //            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
@@ -88,14 +83,12 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     /**
      * @param friendshipId friendship ID
-     * @param email        email
+     * @param id           id
      */
     @Override
-    public void deleteFriendship(Long friendshipId, String email) {
+    public void deleteFriendship(Long friendshipId, Long id) {
         Friendship friendship = friendshipService.findFriendshipById(friendshipId);
-        User user = userService.findUserByEmail(email);
-        if (friendship.getReceiver().getId().equals(user.getId())
-                || friendship.getSender().getId().equals(user.getId())) {
+        if (friendship.getReceiver().getId().equals(id) || friendship.getSender().getId().equals(id)) {
             friendshipRepository.deleteById(friendshipId);
         } else {
             throw new MyAccessDeniedException("Access is denied");
@@ -103,31 +96,27 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     /**
-     * @param email    email
+     * @param id       id
      * @param pageable pagination information
      * @return friendships
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<FriendshipDto> findAll(String email, Pageable pageable) {
-        User user = userService.findUserByEmail(email);
-        Page<Friendship> friendshipPage = friendshipRepository.findMyFriends(
-                user.getId(), pageable);
+    public Page<FriendshipDto> findAll(Long id, Pageable pageable) {
+        Page<Friendship> friendshipPage = friendshipRepository.findMyFriends(id, pageable);
         return friendshipPage.map(friendship -> mapper.map(friendship,
                 FriendshipDto.class));
     }
 
     /**
-     * @param email    email
+     * @param id       id
      * @param pageable pagination information
      * @return friend request list
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<FriendshipDto> findMyFriendshipRequests(String email, Pageable pageable) {
-        User user = userService.findUserByEmail(email);
-        Page<Friendship> friendshipPage = friendshipRepository.getMyFriendshipRequests(
-                user.getId(), pageable);
+    public Page<FriendshipDto> findMyFriendshipRequests(Long id, Pageable pageable) {
+        Page<Friendship> friendshipPage = friendshipRepository.getMyFriendshipRequests(id, pageable);
         return friendshipPage.map(friendship -> mapper.map(friendship,
                 FriendshipDto.class));
     }

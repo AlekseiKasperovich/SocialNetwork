@@ -12,10 +12,15 @@ import java.util.Collection;
 @Builder
 public class UserDetailsImpl implements UserDetails {
 
+    private Long id;
     private final String username;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
     private final boolean isActive;
+
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

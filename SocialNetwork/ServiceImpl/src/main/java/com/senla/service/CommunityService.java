@@ -11,9 +11,9 @@ public interface CommunityService {
 
     CommunityDto getCommunityById(Long id);
 
-    CommunityDto addUser(Long communityId, String email);
+    CommunityDto addUser(Long communityId, Long id);
 
-    CommunityDto deleteUser(Long communityId, String email);
+    CommunityDto deleteUser(Long communityId, Long id);
 
     Page<CommunityDto> findAll(Pageable pageable);
 }

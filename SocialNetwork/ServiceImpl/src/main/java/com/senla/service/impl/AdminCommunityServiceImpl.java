@@ -25,13 +25,13 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 
     /**
      * @param createCommunityDto community name and description
-     * @param email              email
+     * @param id              id
      * @return community
      */
     @Override
-    public CommunityDto createCommunity(CreateCommunityDto createCommunityDto, String email) {
+    public CommunityDto createCommunity(CreateCommunityDto createCommunityDto, Long id) {
         Community community = mapper.map(createCommunityDto, Community.class);
-        community.getFollowers().add(userService.findUserByEmail(email));
+        community.getFollowers().add(userService.findUserById(id));
         return mapper.map(communityService.save(community), CommunityDto.class);
     }
 

@@ -21,6 +21,12 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
     database: postgresql
     show-sql: 'true'
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
   mail:
     properties:
       mail:
@@ -64,6 +70,7 @@ email:
   body: "Your new password"
 request:
   email: "email"
+  id: "id"
 topic:
   name:
     consumer: newTopic

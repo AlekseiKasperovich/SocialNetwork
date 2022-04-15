@@ -34,7 +34,7 @@ public class AdminCommunityController {
 
     /**
      * @param createCommunityDto community name and description
-     * @param email              email
+     * @param id                 id
      * @return community
      */
     @ApiOperation(value = "This method is used to create a community.")
@@ -45,9 +45,9 @@ public class AdminCommunityController {
     @PostMapping
     public CommunityDto createCommunity(@ApiParam(name = "Community name and description")
                                         @RequestBody CreateCommunityDto createCommunityDto,
-                                        @ApiParam(name = "email")
-                                        @RequestHeader("${request.email}") String email) {
-        return adminCommunityService.createCommunity(createCommunityDto, email);
+                                        @ApiParam(name = "id")
+                                        @RequestHeader("${request.id}") Long id) {
+        return adminCommunityService.createCommunity(createCommunityDto, id);
     }
 
     /**

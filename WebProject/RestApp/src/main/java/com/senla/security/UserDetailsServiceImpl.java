@@ -32,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return UserDetailsImpl
                 .builder()
+                .id(user.getId())
                 .username(user.getEmail())
                 .password(user.getPassword())
                 .authorities(mapRoleToAuthorities(user.getRole()))

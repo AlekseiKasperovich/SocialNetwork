@@ -9,16 +9,16 @@ import org.springframework.data.domain.Pageable;
  */
 public interface FriendshipService {
 
-    FriendshipDto getFriendshipById(Long friendshipId, String email);
+    FriendshipDto getFriendshipById(Long friendshipId, Long id);
 
-    FriendshipDto createFriendship(Long friendId, String email);
+    FriendshipDto createFriendship(Long friendId, Long id);
 
-    FriendshipDto acceptFriendship(Long friendshipId, String email);
+    FriendshipDto acceptFriendship(Long friendshipId, Long id);
 
-    void deleteFriendship(Long friendshipId, String email);
+    void deleteFriendship(Long friendshipId, Long id);
 
-    Page<FriendshipDto> findAll(String email, Pageable pageable);
+    Page<FriendshipDto> findAll(Long id, Pageable pageable);
 
-    Page<FriendshipDto> findMyFriendshipRequests(String email, Pageable pageable);
+    Page<FriendshipDto> findMyFriendshipRequests(Long id, Pageable pageable);
 
 }

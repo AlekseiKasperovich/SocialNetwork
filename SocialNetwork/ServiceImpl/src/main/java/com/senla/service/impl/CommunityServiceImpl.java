@@ -38,13 +38,13 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * @param communityId community ID
-     * @param email email
+     * @param id id
      * @return community
      */
     @Override
-    public CommunityDto addUser(Long communityId, String email) {
+    public CommunityDto addUser(Long communityId, Long id) {
         Community community = communityService.findCommunityById(communityId);
-        User user = userService.findUserByEmail(email);
+        User user = userService.findUserById(id);
         if (community.getFollowers().add(user)) {
             return mapper.map(communityService.save(community), CommunityDto.class);
         } else {
@@ -54,13 +54,13 @@ public class CommunityServiceImpl implements CommunityService {
 
     /**
      * @param communityId community ID
-     * @param email email
+     * @param id id
      * @return community
      */
     @Override
-    public CommunityDto deleteUser(Long communityId, String email) {
+    public CommunityDto deleteUser(Long communityId, Long id) {
         Community community = communityService.findCommunityById(communityId);
-        User user = userService.findUserByEmail(email);
+        User user = userService.findUserById(id);
         if (community.getFollowers().remove(user)) {
             return mapper.map(communityService.save(community), CommunityDto.class);
         } else {

@@ -10,15 +10,15 @@ import org.springframework.data.domain.Pageable;
  */
 public interface MessageService {
 
-    MessageDto getMessageById(Long messageId, String email);
+    MessageDto getMessageById(Long messageId, Long id);
 
-    MessageDto createMessage(Long receiverId, CreateMessageDto createMessageDto, String email);
+    MessageDto createMessage(Long receiverId, CreateMessageDto createMessageDto, Long id);
 
-    MessageDto updateMessage(Long messageId, CreateMessageDto createMessageDto, String email);
+    MessageDto updateMessage(Long messageId, CreateMessageDto createMessageDto, Long id);
 
-    void deleteMessage(Long messageId, String email);
+    void deleteMessage(Long messageId, Long id);
 
-    Page<MessageDto> findAll(Long receiverId, String email, Pageable pageable);
+    Page<MessageDto> findAll(Long receiverId, Long id, Pageable pageable);
 
     void send(String messageText);
 }

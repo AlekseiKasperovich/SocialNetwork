@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "request")
 public class RequestProperty {
 
+    private String id;
     private String email;
     private String host;
     private String question;

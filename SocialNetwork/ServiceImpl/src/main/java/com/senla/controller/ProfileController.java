@@ -28,42 +28,42 @@ public class ProfileController {
     private final ProfileService profileService;
 
     /**
-     * @param email email
+     * @param id id
      * @return user profile
      */
     @GetMapping
-    public DtoUser getCurrentUserProfile(@RequestHeader("${request.email}") String email) {
-        return profileService.getUserProfile(email);
+    public DtoUser getCurrentUserProfile(@RequestHeader("${request.id}") Long id) {
+        return profileService.getUserProfile(id);
     }
 
     /**
      * @param updateUserDto user information
-     * @param email email
+     * @param id id
      * @return updated user profile
      */
     @PutMapping
     public DtoUser updateProfile(@RequestBody UpdateUserDto updateUserDto,
-                                 @RequestHeader("${request.email}") String email) {
-        return profileService.updateUser(updateUserDto, email);
+                                 @RequestHeader("${request.id}") Long id) {
+        return profileService.updateUser(updateUserDto, id);
     }
 
     /**
      * @param changePasswordDto new password
-     * @param email email
+     * @param id id
      * @return updated user profile
      */
     @PatchMapping
     public DtoUser changePassword(@RequestBody ChangePasswordDto changePasswordDto,
-                                  @RequestHeader("${request.email}") String email) {
-        return profileService.changePassword(changePasswordDto, email);
+                                  @RequestHeader("${request.id}") Long id) {
+        return profileService.changePassword(changePasswordDto, id);
     }
 
     /**
-     * @param email email
+     * @param id id
      * @return updated user profile with status = deleted
      */
     @DeleteMapping
-    public DtoUser deleteProfile(@RequestHeader("${request.email}") String email) {
-        return profileService.deleteUser(email);
+    public DtoUser deleteProfile(@RequestHeader("${request.id}") Long id) {
+        return profileService.deleteUser(id);
     }
 }

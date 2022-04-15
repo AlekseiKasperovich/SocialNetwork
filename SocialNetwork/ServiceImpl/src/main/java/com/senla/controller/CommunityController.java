@@ -37,24 +37,24 @@ public class CommunityController {
 
     /**
      * @param communityId community ID
-     * @param email email
+     * @param id id
      * @return community
      */
     @PutMapping("{communityId}")
     public CommunityDto joinToCommunity(@PathVariable Long communityId,
-                                        @RequestHeader("${request.email}") String email) {
-        return communityService.addUser(communityId, email);
+                                        @RequestHeader("${request.id}") Long id) {
+        return communityService.addUser(communityId, id);
     }
 
     /**
      * @param communityId community ID
-     * @param email email
+     * @param id id
      * @return community
      */
     @DeleteMapping("{communityId}")
     public CommunityDto leaveCommunity(@PathVariable Long communityId,
-                                       @RequestHeader("${request.email}") String email) {
-        return communityService.deleteUser(communityId, email);
+                                       @RequestHeader("${request.id}") Long id) {
+        return communityService.deleteUser(communityId, id);
     }
 
     /**

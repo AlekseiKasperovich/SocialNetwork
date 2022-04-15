@@ -10,15 +10,15 @@ import org.springframework.data.domain.Pageable;
  */
 public interface EventMessageService {
 
-    EventMessageDto createEventMessage(Long eventId, CreateMessageDto createMessageDto, String email);
+    EventMessageDto createEventMessage(Long eventId, CreateMessageDto createMessageDto, Long id);
 
-    EventMessageDto getEventMessageById(Long eventId, Long messageId, String email);
+    EventMessageDto getEventMessageById(Long eventId, Long messageId, Long id);
 
     EventMessageDto updateEventMessage(Long eventId, Long messageId,
-                                       CreateMessageDto createMessageDto, String email);
+                                       CreateMessageDto createMessageDto, Long id);
 
-    void deleteEventMessage(Long eventId, Long messageId, String email);
+    void deleteEventMessage(Long eventId, Long messageId, Long id);
 
-    Page<EventMessageDto> findAll(Long eventId, String email, Pageable pageable);
+    Page<EventMessageDto> findAll(Long eventId, Long id, Pageable pageable);
 
 }
