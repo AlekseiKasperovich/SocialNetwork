@@ -5,16 +5,15 @@ import com.senla.api.dto.profile.UpdateUserDto;
 import com.senla.api.dto.user.DtoUser;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface ProfileService {
 
-    DtoUser getUserProfile(String email);
+    DtoUser getUserProfile(Long id);
 
-    DtoUser updateUser(UpdateUserDto updateUserDto, String email);
+    DtoUser updateUser(UpdateUserDto updateUserDto, Long id);
 
-    DtoUser changePassword(ChangePasswordDto changePasswordDto, String email);
+    DtoUser changePassword(ChangePasswordDto changePasswordDto, Long id);
 
-    DtoUser deleteUser(String email);
+    DtoUser deleteUser(Long id);
 }

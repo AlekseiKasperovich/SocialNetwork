@@ -3,14 +3,12 @@ package com.senla.controller;
 import org.junit.jupiter.api.Test;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public class ProfileControllerTest {
 
     /**
      * Test of getCurrentUserProfile method, of class ProfileController.
-     *
      */
     @Test
     public void testGetCurrentUserProfile() {

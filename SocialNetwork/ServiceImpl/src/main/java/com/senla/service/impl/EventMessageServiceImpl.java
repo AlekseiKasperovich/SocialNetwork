@@ -4,7 +4,6 @@ import com.senla.api.dto.event.EventMessageDto;
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.api.exception.EventMessageNotFoundException;
 import com.senla.api.exception.MyAccessDeniedException;
-import com.senla.service.EventMessageService;
 import com.senla.mapper.Mapper;
 import com.senla.model.Event;
 import com.senla.model.EventMessage;
@@ -12,15 +11,16 @@ import com.senla.model.User;
 import com.senla.repository.EventMessageRepository;
 import com.senla.service.CustomEventService;
 import com.senla.service.CustomUserService;
-import java.time.LocalDateTime;
+import com.senla.service.EventMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -34,7 +34,6 @@ public class EventMessageServiceImpl implements EventMessageService {
     private final Mapper mapper;
 
     /**
-     *
      * @param id message ID
      * @return message
      */
@@ -46,31 +45,29 @@ public class EventMessageServiceImpl implements EventMessageService {
     }
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId   event ID
      * @param messageId message ID
-     * @param email
+     * @param id id
      * @return message
      */
     @Override
-    public EventMessageDto getEventMessageById(Long eventId, Long messageId, String email) {
-        eventService.checkUserOnEvent(userService.findUserByEmail(email),
+    public EventMessageDto getEventMessageById(Long eventId, Long messageId, Long id) {
+        eventService.checkUserOnEvent(userService.findUserById(id),
                 eventService.findEventById(eventId));
         return mapper.map(findEventMessageById(messageId), EventMessageDto.class);
     }
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId          event ID
      * @param createMessageDto message body
-     * @param email
+     * @param id id
      * @return message
      */
     @Override
     public EventMessageDto createEventMessage(Long eventId,
-            CreateMessageDto createMessageDto,String email) {
+                                              CreateMessageDto createMessageDto, Long id) {
         Event event = eventService.findEventById(eventId);
-        User sender = userService.findUserByEmail(email);
+        User sender = userService.findUserById(id);
         eventService.checkUserOnEvent(sender, event);
         EventMessage eventMessage = EventMessage.builder()
                 .body(createMessageDto.getBody())
@@ -83,17 +80,16 @@ public class EventMessageServiceImpl implements EventMessageService {
     }
 
     /**
-     *
-     * @param eventId event ID
-     * @param messageId message ID
+     * @param eventId          event ID
+     * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param id id
      * @return updated message
      */
     @Override
     public EventMessageDto updateEventMessage(Long eventId, Long messageId,
-            CreateMessageDto createMessageDto,String email) {
-        User user = userService.findUserByEmail(email);
+                                              CreateMessageDto createMessageDto, Long id) {
+        User user = userService.findUserById(id);
         eventService.checkUserOnEvent(user, eventService.findEventById(eventId));
         EventMessage eventMessage = findEventMessageById(messageId);
         checkMessageAuthor(eventMessage, user.getId());
@@ -104,14 +100,13 @@ public class EventMessageServiceImpl implements EventMessageService {
     }
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId   event ID
      * @param messageId message ID
-     * @param email
+     * @param id id
      */
     @Override
-    public void deleteEventMessage(Long eventId, Long messageId,String email) {
-        User user = userService.findUserByEmail(email);
+    public void deleteEventMessage(Long eventId, Long messageId, Long id) {
+        User user = userService.findUserById(id);
         eventService.checkUserOnEvent(user, eventService.findEventById(eventId));
         EventMessage eventMessage = findEventMessageById(messageId);
         checkMessageAuthor(eventMessage, user.getId());
@@ -120,16 +115,15 @@ public class EventMessageServiceImpl implements EventMessageService {
     }
 
     /**
-     *
-     * @param eventId event ID
-     * @param email
+     * @param eventId  event ID
+     * @param id id
      * @param pageable pagination information
      * @return messages
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<EventMessageDto> findAll(Long eventId,String email, Pageable pageable) {
-        eventService.checkUserOnEvent(userService.findUserByEmail(email),
+    public Page<EventMessageDto> findAll(Long eventId, Long id, Pageable pageable) {
+        eventService.checkUserOnEvent(userService.findUserById(id),
                 eventService.findEventById(eventId));
         Page<EventMessage> eventMessagePage = eventMessageRepository.
                 findByEventIdOrderByPostedDesc(eventId, pageable);
@@ -138,9 +132,8 @@ public class EventMessageServiceImpl implements EventMessageService {
     }
 
     /**
-     *
      * @param eventMessage event message
-     * @param id message author ID
+     * @param id           message author ID
      */
     private void checkMessageAuthor(EventMessage eventMessage, Long id) {
         if (!eventMessage.getSender().getId().equals(id)) {

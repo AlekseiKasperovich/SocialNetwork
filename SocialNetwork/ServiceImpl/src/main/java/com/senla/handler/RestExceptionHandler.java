@@ -4,7 +4,6 @@ import com.senla.api.exception.EntityNotFoundException;
 import com.senla.api.exception.ExceptionDetails;
 import com.senla.api.exception.MyAccessDeniedException;
 import com.senla.api.exception.UserAlreadyExistException;
-import javax.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -17,8 +16,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+import java.time.LocalDateTime;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Slf4j
@@ -38,14 +39,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("User Already Exist Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.CONFLICT.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler({MailException.class})
     public ResponseEntity<Object> handleMailException(MailException ex,
-            WebRequest request) {
+                                                      WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.email.error", null,
                 request.getLocale());
@@ -53,7 +55,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Mail Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.SERVICE_UNAVAILABLE.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE,
                 request);
@@ -69,7 +72,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Entity Not Found Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.NOT_FOUND.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
@@ -78,13 +82,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMyAccessDeniedException(
             MyAccessDeniedException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.acces.denied.error",
+        String message = messageSource.getMessage("message.access.denied.error",
                 null, request.getLocale());
         ExceptionDetails details = ExceptionDetails.builder()
                 .title("Access Denied Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.FORBIDDEN.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
@@ -99,14 +104,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Constraint Violation Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleException(RuntimeException ex,
-            WebRequest request) {
+                                                  WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.error", null,
                 request.getLocale());
@@ -114,7 +120,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Runtime Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,
                 request);

@@ -4,7 +4,6 @@ import com.senla.api.dto.community.CommunityDto;
 import com.senla.api.dto.community.CreateCommunityDto;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface AdminCommunityRestClient {

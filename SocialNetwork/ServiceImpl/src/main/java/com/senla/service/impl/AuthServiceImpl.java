@@ -1,17 +1,16 @@
 package com.senla.service.impl;
 
-import com.senla.service.EmailService;
-import com.senla.service.PasswordService;
 import com.senla.api.dto.user.DtoCreateUser;
-import com.senla.api.dto.user.ForgotPasswordDto;
 import com.senla.api.dto.user.DtoUser;
-import com.senla.service.AuthService;
-
-import com.senla.mapper.Mapper;
-import com.senla.model.User;
+import com.senla.api.dto.user.ForgotPasswordDto;
 import com.senla.api.dto.сonstants.Roles;
 import com.senla.api.dto.сonstants.Status;
+import com.senla.mapper.Mapper;
+import com.senla.model.User;
+import com.senla.service.AuthService;
 import com.senla.service.CustomUserService;
+import com.senla.service.EmailService;
+import com.senla.service.PasswordService;
 import com.senla.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -37,7 +35,6 @@ public class AuthServiceImpl implements AuthService {
     private String emailBody;
 
     /**
-     *
      * @param createUserDto user email and password
      * @return user
      */
@@ -54,7 +51,6 @@ public class AuthServiceImpl implements AuthService {
     }
 
     /**
-     *
      * @param emailDto user email
      */
     @Override

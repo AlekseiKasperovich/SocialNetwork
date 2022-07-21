@@ -17,8 +17,9 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.LocalDateTime;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Slf4j
@@ -32,13 +33,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleHttpClientErrorException(
             HttpClientErrorException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.http.сlient.error",
+        String message = messageSource.getMessage("message.http.client.error",
                 null, request.getLocale());
         ExceptionDetails details = ExceptionDetails.builder()
                 .title("Http Client Error Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.CONFLICT.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
@@ -53,14 +55,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Authentication Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.UNAUTHORIZED.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
     @ExceptionHandler({LockedException.class})
     public ResponseEntity<Object> handleLockedException(LockedException ex,
-            WebRequest request) {
+                                                        WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.account.is.locked.error",
                 null, request.getLocale());
@@ -68,7 +71,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Locked Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.UNAUTHORIZED.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
@@ -84,14 +88,15 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Method Argument Not Valid Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleException(RuntimeException ex,
-            WebRequest request) {
+                                                  WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.error", null,
                 request.getLocale());
@@ -99,7 +104,8 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .title("Runtime Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,
                 request);
@@ -109,13 +115,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleMyAccessDeniedException(
             MyAccessDeniedException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.acces.denied.error",
+        String message = messageSource.getMessage("message.access.denied.error",
                 null, request.getLocale());
         ExceptionDetails details = ExceptionDetails.builder()
                 .title("Access Denied Exception")
                 .detail(ex.getMessage())
                 .status(HttpStatus.FORBIDDEN.value())
-                .message(message).build();
+                .message(message)
+                .time(LocalDateTime.now()).build();
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }

@@ -2,7 +2,6 @@ package com.senla.controller;
 
 import com.senla.api.dto.community.CommunityDto;
 import com.senla.client.CommunityRestClient;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,8 +13,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -28,7 +28,6 @@ public class CommunityController {
     private final CommunityRestClient communityRestClient;
 
     /**
-     *
      * @param communityId community ID
      * @return community
      */
@@ -38,7 +37,6 @@ public class CommunityController {
     }
 
     /**
-     *
      * @param communityId community ID
      * @return community
      */
@@ -48,7 +46,6 @@ public class CommunityController {
     }
 
     /**
-     *
      * @param communityId community ID
      * @return community
      */
@@ -58,9 +55,8 @@ public class CommunityController {
     }
 
     /**
-     *
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return communities
      */
     @GetMapping

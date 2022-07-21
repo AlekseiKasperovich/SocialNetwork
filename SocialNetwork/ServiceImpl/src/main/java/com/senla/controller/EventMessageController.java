@@ -2,7 +2,6 @@ package com.senla.controller;
 
 import com.senla.api.dto.event.EventMessageDto;
 import com.senla.api.dto.message.CreateMessageDto;
-import com.senla.api.dto.сonstants.Constants;
 import com.senla.service.EventMessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -32,75 +30,70 @@ public class EventMessageController {
     private final EventMessageService eventMessageService;
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId          event ID
      * @param createMessageDto message body
-     * @param email
+     * @param id id
      * @return message
      */
     @PostMapping
     public EventMessageDto createMessage(@PathVariable Long eventId,
-            @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
+                                         @RequestBody CreateMessageDto createMessageDto,
+                                         @RequestHeader("${request.id}") Long id) {
         return eventMessageService.createEventMessage(eventId,
-                createMessageDto, email);
+                createMessageDto, id);
     }
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId   event ID
      * @param messageId message ID
-     * @param email
+     * @param id id
      * @return message
      */
     @GetMapping("{messageId}")
     public EventMessageDto getMessageById(@PathVariable Long eventId,
-            @PathVariable Long messageId,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
+                                          @PathVariable Long messageId,
+                                          @RequestHeader("${request.id}") Long id) {
         return eventMessageService.getEventMessageById(eventId, messageId,
-                email);
+                id);
     }
 
     /**
-     *
-     * @param eventId event ID
-     * @param messageId message ID
+     * @param eventId          event ID
+     * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param id id
      * @return updated message
      */
     @PutMapping("{messageId}")
     public EventMessageDto updateMessage(@PathVariable Long eventId,
-            @PathVariable Long messageId,
-            @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
+                                         @PathVariable Long messageId,
+                                         @RequestBody CreateMessageDto createMessageDto,
+                                         @RequestHeader("${request.id}") Long id) {
         return eventMessageService.updateEventMessage(eventId, messageId,
-                createMessageDto, email);
+                createMessageDto, id);
     }
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId   event ID
      * @param messageId message ID
-     * @param email
+     * @param id id
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(@PathVariable Long eventId, @PathVariable Long messageId,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        eventMessageService.deleteEventMessage(eventId, messageId, email);
+                              @RequestHeader("${request.id}") Long id) {
+        eventMessageService.deleteEventMessage(eventId, messageId, id);
     }
 
     /**
-     *
-     * @param eventId event ID
-     * @param email
+     * @param eventId  event ID
+     * @param id id
      * @param pageable pagination information
      * @return messages
      */
     @GetMapping
     public Page<EventMessageDto> findAllMessages(@PathVariable Long eventId,
-            @RequestHeader(Constants.EMAIL_HEADER) String email, Pageable pageable) {
-        return eventMessageService.findAll(eventId, email, pageable);
+                                                 @RequestHeader("${request.id}") Long id, Pageable pageable) {
+        return eventMessageService.findAll(eventId, id, pageable);
     }
 
 }

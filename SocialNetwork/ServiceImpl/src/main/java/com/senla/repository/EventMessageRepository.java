@@ -7,15 +7,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Repository
 public interface EventMessageRepository extends JpaRepository<EventMessage, Long> {
 
     /**
-     *
-     * @param eventId event ID
+     * @param eventId  event ID
      * @param pageable pagination information
      * @return messages on event
      */

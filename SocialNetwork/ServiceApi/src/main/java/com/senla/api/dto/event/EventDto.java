@@ -1,14 +1,19 @@
 package com.senla.api.dto.event;
 
 import com.senla.api.dto.user.DtoUser;
-import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  *
  * @author Aliaksei Kaspiarovich
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventDto {
 
     private Long id;

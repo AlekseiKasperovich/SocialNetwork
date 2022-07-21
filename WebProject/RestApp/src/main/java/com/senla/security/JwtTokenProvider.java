@@ -1,66 +1,58 @@
 package com.senla.security;
 
-import com.senla.api.dto.сonstants.Constants;
 import com.senla.api.exception.MyAccessDeniedException;
+import com.senla.property.JwtProperty;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-import javax.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class JwtTokenProvider {
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
-
-    @Value("${jwt.expiration.days}")
-    private long expirationDays;
-
-    @Value("${jwt.authorization.header}")
-    private String authorizationHeader;
+    private final JwtProperty jwtProperty;
 
     /**
-     *
      * @param email user email
      * @return token
      */
     public String generateToken(String email) {
         Date expirationDate = Date.from(
                 LocalDate.now()
-                        .plusDays(expirationDays)
+                        .plusDays(jwtProperty.getExpiration())
                         .atStartOfDay(ZoneId.systemDefault())
                         .toInstant());
         return Jwts.builder()
                 .setSubject(email)
                 .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
                 .compact();
     }
 
     /**
-     *
      * @param token token from request
      * @return {@literal true}, if everything is ok, {@literal false} otherwise
      */
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
-                    .setSigningKey(jwtSecret)
+                    .setSigningKey(jwtProperty.getSecret())
                     .parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {
@@ -79,27 +71,25 @@ public class JwtTokenProvider {
     }
 
     /**
-     *
      * @param token token from request
      * @return email
      */
     public String getUsernameFromToken(String token) {
         return Jwts.parser()
-                .setSigningKey(jwtSecret)
+                .setSigningKey(jwtProperty.getSecret())
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }
 
     /**
-     *
      * @param request HttpServletRequest request
      * @return token, if everything is ok, {@literal null} otherwise
      */
     public String getTokenFromRequest(HttpServletRequest request) {
-        String bearer = request.getHeader(authorizationHeader);
-        if (StringUtils.hasText(bearer) && bearer.startsWith(Constants.BEARER)) {
-            return bearer.substring(7, bearer.length());
+        String token = request.getHeader(jwtProperty.getAuthorization());
+        if (StringUtils.hasText(token) && token.startsWith(jwtProperty.getBearer())) {
+            return token.substring(7);
         }
         return null;
     }

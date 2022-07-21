@@ -1,0 +1,79 @@
+spring:
+  liquibase:
+    enabled: true
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+#      bootstrap-servers: ${BROKER_URL:http://localhost:9092}
+      bootstrap-servers: http://broker:9092
+      group-id: group_id
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: validate
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    database: postgresql
+    show-sql: 'true'
+    properties:
+      hibernate:
+        cache:
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+  mail:
+    properties:
+      mail:
+        smtp:
+          ssl:
+            trust: smtp.gmail.com
+          starttls:
+            enable: 'true'
+          auth: 'true'
+          connectiontimeout: '5000'
+          writetimeout: '5000'
+          timeout: '5000'
+    username: socialnetworkemailservice@gmail.com
+    port: '587'
+    host: smtp.gmail.com
+    protocol: smtp
+    password: pxpcoaoycyfhzzwj
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: postgres
+    username: postgres
+#    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/social_network_db}
+    url: jdbc:postgresql://postgres:5432/social_network_db
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+server:
+  error:
+    include-stacktrace: always
+    include-exception: 'true'
+    include-message: always
+  port: '8081'
+logging:
+  level:
+    liquibase: INFO
+    org:
+      springframework: INFO
+    com:
+      senla: INFO
+email:
+  body: "Your new password"
+request:
+  email: "email"
+  id: "id"
+topic:
+  name:
+    consumer: newTopic
+api:
+  prefix: api
+

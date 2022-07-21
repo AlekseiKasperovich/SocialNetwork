@@ -6,21 +6,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface CommunityMessageService {
 
-    CommunityMessageDto getCommunityMessageById(Long communityId, Long messageId, String email);
+    CommunityMessageDto getCommunityMessageById(Long communityId, Long messageId, Long id);
 
     CommunityMessageDto updateCommunityMessage(Long communityId, Long messageId,
-            CreateMessageDto createMessageDto, String email);
+                                               CreateMessageDto createMessageDto, Long id);
 
     CommunityMessageDto createCommunityMessage(Long communityId,
-            CreateMessageDto createMessageDto, String email);
+                                               CreateMessageDto createMessageDto, Long id);
 
-    void deleteCommunityMessage(Long communityId, Long messageId, String email);
+    void deleteCommunityMessage(Long communityId, Long messageId, Long id);
 
-    Page<CommunityMessageDto> findAll(Long communityId, String email, Pageable pageable);
+    Page<CommunityMessageDto> findAll(Long communityId, Long id, Pageable pageable);
 
 }

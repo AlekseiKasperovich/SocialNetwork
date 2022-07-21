@@ -3,8 +3,6 @@ package com.senla.controller;
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.api.dto.message.MessageDto;
 import com.senla.client.MessageRestClient;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -33,7 +33,6 @@ public class MessageController {
     private final MessageRestClient messageRestClient;
 
     /**
-     *
      * @param messageId message ID
      * @return message
      */
@@ -43,31 +42,28 @@ public class MessageController {
     }
 
     /**
-     *
-     * @param receiverId receiver ID
+     * @param receiverId       receiver ID
      * @param createMessageDto message body
      * @return message
      */
     @PostMapping
     public MessageDto createMessage(@RequestParam Long receiverId,
-            @Valid @RequestBody CreateMessageDto createMessageDto) {
+                                    @Valid @RequestBody CreateMessageDto createMessageDto) {
         return messageRestClient.createMessage(receiverId, createMessageDto);
     }
 
     /**
-     *
-     * @param messageId message ID
+     * @param messageId        message ID
      * @param createMessageDto message body
      * @return updated message
      */
     @PutMapping("{messageId}")
     public MessageDto updateMessage(@PathVariable Long messageId,
-            @Valid @RequestBody CreateMessageDto createMessageDto) {
+                                    @Valid @RequestBody CreateMessageDto createMessageDto) {
         return messageRestClient.updateMessage(messageId, createMessageDto);
     }
 
     /**
-     *
      * @param messageId message ID
      */
     @DeleteMapping("{messageId}")
@@ -76,15 +72,14 @@ public class MessageController {
     }
 
     /**
-     *
      * @param receiverId receiver ID
-     * @param pageable pagination information
-     * @param request
+     * @param pageable   pagination information
+     * @param request request
      * @return messages
      */
     @GetMapping
     public Page<MessageDto> findMyMessages(@RequestParam Long receiverId,
-            Pageable pageable, HttpServletRequest request) {
+                                           Pageable pageable, HttpServletRequest request) {
         return messageRestClient.findAll(receiverId, pageable, request);
     }
 

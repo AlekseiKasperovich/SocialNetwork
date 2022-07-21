@@ -53,8 +53,8 @@
  - Docker
  
  ### Steps:
- - git clone https://gitlab.com/AlekseiKasperovich/aliaksei-kaspiarovich.git
- - cd aliaksei-kaspiarovich/SocialNetwork
+ - git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
+ - cd SocialNetwork
  - mvn clean package 
  - cd ..
  - cd WebProject

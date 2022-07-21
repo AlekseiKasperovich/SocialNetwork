@@ -5,7 +5,6 @@ import com.senla.api.dto.profile.UpdateUserDto;
 import com.senla.api.dto.user.DtoUser;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface ProfileRestClient {

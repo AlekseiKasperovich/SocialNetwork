@@ -2,13 +2,12 @@ package com.senla.service.impl;
 
 import com.senla.api.dto.user.UserDetailsDto;
 import com.senla.mapper.Mapper;
-import com.senla.service.IUserDetailService;
 import com.senla.service.CustomUserService;
+import com.senla.service.IUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -19,9 +18,8 @@ public class MyUserDetailService implements IUserDetailService {
     private final Mapper mapper;
 
     /**
-     *
-     * @param email
-     * @return
+     * @param email email
+     * @return UserDetailsDto
      */
     @Override
     public UserDetailsDto getUserByEmail(String email) {

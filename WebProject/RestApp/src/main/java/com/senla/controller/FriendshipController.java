@@ -2,7 +2,6 @@ package com.senla.controller;
 
 import com.senla.api.dto.friendship.FriendshipDto;
 import com.senla.client.FriendshipRestClient;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -30,7 +30,6 @@ public class FriendshipController {
     private final FriendshipRestClient friendshipRestClient;
 
     /**
-     *
      * @param friendshipId friendship ID
      * @return friendship
      */
@@ -40,7 +39,6 @@ public class FriendshipController {
     }
 
     /**
-     *
      * @param friendId user ID
      * @return friendship
      */
@@ -50,7 +48,6 @@ public class FriendshipController {
     }
 
     /**
-     *
      * @param friendshipId friendship ID
      * @return accepted friendship
      */
@@ -60,7 +57,6 @@ public class FriendshipController {
     }
 
     /**
-     *
      * @param friendshipId friendship ID
      */
     @DeleteMapping("{friendshipId}")
@@ -69,21 +65,19 @@ public class FriendshipController {
     }
 
     /**
-     *
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return friend request list
      */
     @GetMapping("requests")
     public Page<FriendshipDto> findMyFriendshipRequests(Pageable pageable,
-            HttpServletRequest request) {
+                                                        HttpServletRequest request) {
         return friendshipRestClient.findMyFriendshipRequests(pageable, request);
     }
 
     /**
-     *
      * @param pageable pagination information
-     * @param request
+     * @param request request
      * @return friendships
      */
     @GetMapping

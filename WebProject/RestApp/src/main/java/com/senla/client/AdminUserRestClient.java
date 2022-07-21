@@ -3,7 +3,6 @@ package com.senla.client;
 import com.senla.api.dto.user.DtoUser;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface AdminUserRestClient {

@@ -1,7 +1,6 @@
 package com.senla.service;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface PasswordService {

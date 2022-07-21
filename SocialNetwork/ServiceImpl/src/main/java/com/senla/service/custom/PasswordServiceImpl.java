@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -19,9 +18,9 @@ public class PasswordServiceImpl implements PasswordService {
     private final PasswordEncoder bCryptPasswordEncoder;
 
     /**
-     *
      * @return new generated password
      */
+    @Override
     public String generatePassword() {
         PasswordGenerator passwordGenerator = new PasswordGenerator();
         return passwordGenerator.generatePassword(16,
@@ -31,10 +30,10 @@ public class PasswordServiceImpl implements PasswordService {
     }
 
     /**
-     *
      * @param password raw password
      * @return hashed password
      */
+    @Override
     public String encode(String password) {
         return bCryptPasswordEncoder.encode(password);
     }

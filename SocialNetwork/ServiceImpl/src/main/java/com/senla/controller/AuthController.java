@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -25,7 +24,6 @@ public class AuthController {
     private final AuthService authService;
 
     /**
-     *
      * @param createUserDto user email and password
      * @return user
      */
@@ -35,7 +33,6 @@ public class AuthController {
     }
 
     /**
-     *
      * @param emailDto user email
      */
     @PostMapping("password/new")

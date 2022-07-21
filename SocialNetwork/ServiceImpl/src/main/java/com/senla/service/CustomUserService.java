@@ -3,7 +3,6 @@ package com.senla.service;
 import com.senla.model.User;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public interface CustomUserService {

@@ -2,15 +2,15 @@ package com.senla.mapper;
 
 import com.senla.api.dto.community.CommunityDto;
 import com.senla.api.dto.community.CommunityMessageDto;
+import com.senla.api.dto.community.CreateCommunityDto;
+import com.senla.api.dto.event.CreateEventDto;
 import com.senla.api.dto.event.EventDto;
 import com.senla.api.dto.event.EventMessageDto;
 import com.senla.api.dto.friendship.FriendshipDto;
-import com.senla.api.dto.message.MessageDto;
-import com.senla.api.dto.community.CreateCommunityDto;
-import com.senla.api.dto.event.CreateEventDto;
 import com.senla.api.dto.message.CreateMessageDto;
-import com.senla.api.dto.user.DtoCreateUser;
+import com.senla.api.dto.message.MessageDto;
 import com.senla.api.dto.profile.UpdateUserDto;
+import com.senla.api.dto.user.DtoCreateUser;
 import com.senla.api.dto.user.DtoUser;
 import com.senla.api.dto.user.RoleDto;
 import com.senla.api.dto.user.UserDetailsDto;
@@ -27,7 +27,6 @@ import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Component

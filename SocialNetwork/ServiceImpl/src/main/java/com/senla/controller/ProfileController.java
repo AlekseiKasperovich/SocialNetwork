@@ -3,7 +3,6 @@ package com.senla.controller;
 import com.senla.api.dto.profile.ChangePasswordDto;
 import com.senla.api.dto.profile.UpdateUserDto;
 import com.senla.api.dto.user.DtoUser;
-import com.senla.api.dto.сonstants.Constants;
 import com.senla.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -30,46 +28,42 @@ public class ProfileController {
     private final ProfileService profileService;
 
     /**
-     *
-     * @param email
+     * @param id id
      * @return user profile
      */
     @GetMapping
-    public DtoUser getCurrentUserProfile(@RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return profileService.getUserProfile(email);
+    public DtoUser getCurrentUserProfile(@RequestHeader("${request.id}") Long id) {
+        return profileService.getUserProfile(id);
     }
 
     /**
-     *
      * @param updateUserDto user information
-     * @param email
+     * @param id id
      * @return updated user profile
      */
     @PutMapping
     public DtoUser updateProfile(@RequestBody UpdateUserDto updateUserDto,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return profileService.updateUser(updateUserDto, email);
+                                 @RequestHeader("${request.id}") Long id) {
+        return profileService.updateUser(updateUserDto, id);
     }
 
     /**
-     *
      * @param changePasswordDto new password
-     * @param email
+     * @param id id
      * @return updated user profile
      */
     @PatchMapping
     public DtoUser changePassword(@RequestBody ChangePasswordDto changePasswordDto,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return profileService.changePassword(changePasswordDto, email);
+                                  @RequestHeader("${request.id}") Long id) {
+        return profileService.changePassword(changePasswordDto, id);
     }
 
     /**
-     *
-     * @param email
-     * @return updated user profile whith status = deleted
+     * @param id id
+     * @return updated user profile with status = deleted
      */
     @DeleteMapping
-    public DtoUser deleteProfile(@RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return profileService.deleteUser(email);
+    public DtoUser deleteProfile(@RequestHeader("${request.id}") Long id) {
+        return profileService.deleteUser(id);
     }
 }

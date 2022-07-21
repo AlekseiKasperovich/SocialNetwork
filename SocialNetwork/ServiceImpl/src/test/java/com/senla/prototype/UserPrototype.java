@@ -6,10 +6,10 @@ import com.senla.api.dto.сonstants.Roles;
 import com.senla.api.dto.сonstants.Status;
 import com.senla.model.Role;
 import com.senla.model.User;
+
 import java.time.LocalDate;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public class UserPrototype {

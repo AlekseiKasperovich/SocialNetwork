@@ -1,18 +1,17 @@
 package com.senla.service.impl;
 
 import com.senla.api.dto.user.DtoUser;
-import com.senla.service.AdminUserService;
-import com.senla.mapper.Mapper;
-import com.senla.model.User;
 import com.senla.api.dto.сonstants.Roles;
 import com.senla.api.dto.сonstants.Status;
+import com.senla.mapper.Mapper;
+import com.senla.model.User;
+import com.senla.service.AdminUserService;
 import com.senla.service.CustomUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -24,7 +23,6 @@ public class AdminUserServiceImpl implements AdminUserService {
     private final CustomUserService userService;
 
     /**
-     *
      * @param id user ID
      * @return blocked user
      */
@@ -39,7 +37,6 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     /**
-     *
      * @param id user ID
      * @return unblocked user
      */

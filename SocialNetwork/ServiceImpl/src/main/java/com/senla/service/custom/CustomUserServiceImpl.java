@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -21,10 +20,10 @@ public class CustomUserServiceImpl implements CustomUserService {
     private final UserRepository userRepository;
 
     /**
-     *
      * @param id user ID
      * @return user
      */
+    @Override
     public User findUserById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(()
@@ -33,10 +32,10 @@ public class CustomUserServiceImpl implements CustomUserService {
     }
 
     /**
-     *
      * @param email user email
      * @return user
      */
+    @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email)
                 .orElseThrow(()
@@ -45,9 +44,9 @@ public class CustomUserServiceImpl implements CustomUserService {
     }
 
     /**
-     *
      * @param email user email
      */
+    @Override
     public void existsByEmail(String email) {
         if (userRepository.existsByEmail(email)) {
             throw new UserAlreadyExistException(
@@ -57,10 +56,10 @@ public class CustomUserServiceImpl implements CustomUserService {
     }
 
     /**
-     *
      * @param user user
      * @return user
      */
+    @Override
     @Transactional
     public User save(User user) {
         return userRepository.save(user);

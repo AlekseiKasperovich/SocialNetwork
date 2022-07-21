@@ -2,9 +2,9 @@ package com.senla.client.impl;
 
 import com.senla.api.dto.community.CommunityDto;
 import com.senla.api.dto.community.CreateCommunityDto;
-import com.senla.api.dto.сonstants.Constants;
 import com.senla.client.AdminCommunityRestClient;
 import com.senla.client.HttpHeaderBuilder;
+import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -12,20 +12,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
 @RequiredArgsConstructor
 public class AdminCommunityRestClientImpl implements AdminCommunityRestClient {
 
+    private static final String URL = "/api/admin/communities/";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
-    private static final String URL = "/api/admin/communities/";
+    private final RequestProperty requestProperty;
 
     @Override
     public CommunityDto createCommunity(CreateCommunityDto createCommunityDto) {
-        return restTemplate.exchange(Constants.HOST_PORT + URL,
+        return restTemplate.exchange(requestProperty.getHost() + URL,
                 HttpMethod.POST,
                 new HttpEntity<>(createCommunityDto, httpHeaderBuilder.build()),
                 CommunityDto.class).getBody();
@@ -33,7 +33,7 @@ public class AdminCommunityRestClientImpl implements AdminCommunityRestClient {
 
     @Override
     public CommunityDto updateCommunity(Long id, CreateCommunityDto createCommunityDto) {
-        return restTemplate.exchange(Constants.HOST_PORT + URL + id,
+        return restTemplate.exchange(requestProperty.getHost() + URL + id,
                 HttpMethod.PUT,
                 new HttpEntity<>(createCommunityDto, httpHeaderBuilder.build()),
                 CommunityDto.class).getBody();
@@ -41,7 +41,7 @@ public class AdminCommunityRestClientImpl implements AdminCommunityRestClient {
 
     @Override
     public void deleteCommunity(Long id) {
-        restTemplate.exchange(Constants.HOST_PORT + URL + id,
+        restTemplate.exchange(requestProperty.getHost() + URL + id,
                 HttpMethod.DELETE, new HttpEntity<>(httpHeaderBuilder.build()),
                 Void.class);
     }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -22,10 +21,10 @@ public class CustomEventServiceImpl implements CustomEventService {
     private final EventRepository eventRepository;
 
     /**
-     *
      * @param id event ID
      * @return event
      */
+    @Override
     public Event findEventById(Long id) {
         return eventRepository.findById(id)
                 .orElseThrow(()
@@ -34,10 +33,10 @@ public class CustomEventServiceImpl implements CustomEventService {
     }
 
     /**
-     *
-     * @param user user
+     * @param user  user
      * @param event event
      */
+    @Override
     public void checkUserOnEvent(User user, Event event) {
         if (!event.getParticipants().contains(user)) {
             throw new MyAccessDeniedException("Access is denied");

@@ -1,19 +1,16 @@
-
 package com.senla.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
 public class HelloController {
 
     /**
-     *
-     * @return
+     * @return Hello
      */
     @GetMapping("/")
     public String home() {

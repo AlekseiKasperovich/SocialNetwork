@@ -2,7 +2,6 @@ package com.senla.controller;
 
 import com.senla.api.dto.message.CreateMessageDto;
 import com.senla.api.dto.message.MessageDto;
-import com.senla.api.dto.сonstants.Constants;
 import com.senla.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @RestController
@@ -33,67 +31,62 @@ public class MessageController {
     private final MessageService messageService;
 
     /**
-     *
      * @param messageId message ID
-     * @param email
+     * @param id        id
      * @return message
      */
     @GetMapping("{messageId}")
     public MessageDto getMessageById(@PathVariable Long messageId,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return messageService.getMessageById(messageId, email);
+                                     @RequestHeader("${request.id}") Long id) {
+        return messageService.getMessageById(messageId, id);
     }
 
     /**
-     *
-     * @param receiverId receiver ID
+     * @param receiverId       receiver ID
      * @param createMessageDto message body
-     * @param email
+     * @param id               id
      * @return message
      */
     @PostMapping
     public MessageDto createMessage(@RequestParam Long receiverId,
-            @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return messageService.createMessage(receiverId, createMessageDto, email);
+                                    @RequestBody CreateMessageDto createMessageDto,
+                                    @RequestHeader("${request.id}") Long id) {
+        return messageService.createMessage(receiverId, createMessageDto, id);
     }
 
     /**
-     *
-     * @param messageId message ID
+     * @param messageId        message ID
      * @param createMessageDto message body
-     * @param email
+     * @param id               id
      * @return updated message
      */
     @PutMapping("{messageId}")
     public MessageDto updateMessage(@PathVariable Long messageId,
-            @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        return messageService.updateMessage(messageId, createMessageDto, email);
+                                    @RequestBody CreateMessageDto createMessageDto,
+                                    @RequestHeader("${request.id}") Long id) {
+        return messageService.updateMessage(messageId, createMessageDto, id);
     }
 
     /**
-     *
      * @param messageId message ID
-     * @param email
+     * @param id        id
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(@PathVariable Long messageId,
-            @RequestHeader(Constants.EMAIL_HEADER) String email) {
-        messageService.deleteMessage(messageId, email);
+                              @RequestHeader("${request.id}") Long id) {
+        messageService.deleteMessage(messageId, id);
     }
 
     /**
-     *
      * @param receiverId receiver ID
-     * @param email
-     * @param pageable pagination information
+     * @param id         id
+     * @param pageable   pagination information
      * @return messages
      */
     @GetMapping
     public Page<MessageDto> findMyMessages(@RequestParam Long receiverId,
-            @RequestHeader(Constants.EMAIL_HEADER) String email, Pageable pageable) {
-        return messageService.findAll(receiverId, email, pageable);
+                                           @RequestHeader("${request.id}") Long id, Pageable pageable) {
+        return messageService.findAll(receiverId, id, pageable);
     }
 
 }

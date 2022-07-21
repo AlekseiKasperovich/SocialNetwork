@@ -1,11 +1,11 @@
 package com.senla.api.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapperImpl;
 
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 public class FieldsValueMatchValidator
@@ -22,13 +22,12 @@ public class FieldsValueMatchValidator
 
     @Override
     public boolean isValid(Object value,
-            ConstraintValidatorContext context) {
+                           ConstraintValidatorContext context) {
         Object fieldValue = new BeanWrapperImpl(value).getPropertyValue(field);
         Object fieldMatchValue = new BeanWrapperImpl(value).getPropertyValue(fieldMatch);
-        if (fieldValue != null) {
-            return fieldValue.equals(fieldMatchValue);
-        } else {
+        if (fieldValue == null) {
             return false;
         }
+        return fieldValue.equals(fieldMatchValue);
     }
 }

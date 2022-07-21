@@ -4,8 +4,6 @@ import com.senla.api.dto.user.RoleDto;
 import com.senla.api.dto.user.UserDetailsDto;
 import com.senla.api.dto.сonstants.Status;
 import com.senla.client.UserDetailsClient;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,8 +11,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author Aliaksei Kaspiarovich
  */
 @Service
@@ -32,6 +32,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
         return UserDetailsImpl
                 .builder()
+                .id(user.getId())
                 .username(user.getEmail())
                 .password(user.getPassword())
                 .authorities(mapRoleToAuthorities(user.getRole()))
@@ -40,7 +41,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     /**
-     *
      * @param role user role
      * @return list of roles
      */
