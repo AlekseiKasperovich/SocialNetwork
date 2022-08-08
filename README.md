@@ -1,5 +1,5 @@
 # Aliaksei Kaspiarovich 
-
+![Travis (.org)](https://img.shields.io/travis/AlekseiKasperovich/SocialNetwork)
 ## SpringBoot Social Network Project
 
 ## Functionality
