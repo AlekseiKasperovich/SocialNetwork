@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   frontend:
-    build: WebProject/RestApp/
+    build: RestApp/
     image: kasperovich/frontend
     container_name: frontend
     ports:
@@ -10,7 +10,7 @@ services:
       - backend
       - postgres
   backend:
-    build: BackendProject/Backend/
+    build: Backend/
     image: kasperovich/backend
     container_name: backend
     ports:
