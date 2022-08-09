@@ -8,12 +8,14 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -112,9 +114,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 request);
     }
 
-    @ExceptionHandler({MyAccessDeniedException.class})
+    @ExceptionHandler({MyAccessDeniedException.class, BadCredentialsException.class, ResourceAccessException.class})
     public ResponseEntity<Object> handleMyAccessDeniedException(
-            MyAccessDeniedException ex, WebRequest request) {
+            RuntimeException ex, WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage("message.access.denied.error",
                 null, request.getLocale());
