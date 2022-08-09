@@ -1,7 +1,7 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.event.CreateEventDto;
-import com.senla.api.dto.event.EventDto;
+import com.senla.dto.event.CreateEventDto;
+import com.senla.dto.event.EventDto;
 import com.senla.client.EventRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.property.RequestProperty;
@@ -76,7 +76,7 @@ public class EventRestClientImpl implements EventRestClient {
     @Override
     public Page<EventDto> findMyEvents(Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL;
         } else {

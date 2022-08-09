@@ -1,6 +1,6 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.community.CommunityDto;
+import com.senla.dto.community.CommunityDto;
 import com.senla.client.CommunityRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.property.RequestProperty;
@@ -52,7 +52,7 @@ public class CommunityRestClientImpl implements CommunityRestClient {
     @Override
     public Page<CommunityDto> findAll(Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL;
         } else {

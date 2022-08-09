@@ -1,6 +1,6 @@
 package com.senla.security;
 
-import com.senla.api.exception.MyAccessDeniedException;
+import com.senla.exception.MyAccessDeniedException;
 import com.senla.property.JwtProperty;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

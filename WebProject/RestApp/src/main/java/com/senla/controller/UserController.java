@@ -1,6 +1,6 @@
 package com.senla.controller;
 
-import com.senla.api.dto.user.DtoUser;
+import com.senla.dto.user.DtoUser;
 import com.senla.client.UserRestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

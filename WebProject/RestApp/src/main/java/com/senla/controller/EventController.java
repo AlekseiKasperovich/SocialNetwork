@@ -1,7 +1,7 @@
 package com.senla.controller;
 
-import com.senla.api.dto.event.CreateEventDto;
-import com.senla.api.dto.event.EventDto;
+import com.senla.dto.event.CreateEventDto;
+import com.senla.dto.event.EventDto;
 import com.senla.client.EventRestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

@@ -1,7 +1,7 @@
 package com.senla.client;
 
-import com.senla.api.dto.community.CommunityMessageDto;
-import com.senla.api.dto.message.CreateMessageDto;
+import com.senla.dto.community.CommunityMessageDto;
+import com.senla.dto.message.CreateMessageDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

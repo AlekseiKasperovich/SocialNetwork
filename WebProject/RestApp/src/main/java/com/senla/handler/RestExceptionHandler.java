@@ -1,7 +1,7 @@
 package com.senla.handler;
 
-import com.senla.api.exception.ExceptionDetails;
-import com.senla.api.exception.MyAccessDeniedException;
+import com.senla.exception.ExceptionDetails;
+import com.senla.exception.MyAccessDeniedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -17,6 +17,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
 
 /**
@@ -127,4 +128,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
+    @ExceptionHandler({ConstraintViolationException.class})
+    public ResponseEntity<Object> handleConstraintViolationException(
+            ConstraintViolationException ex, WebRequest request) {
+        log.error(ex.getMessage(), ex);
+        String message = messageSource.getMessage("message.validation.error",
+                null, request.getLocale());
+        ExceptionDetails details = ExceptionDetails.builder()
+                .title("Constraint Violation Exception")
+                .detail(ex.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .message(message)
+                .time(LocalDateTime.now()).build();
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
 }

@@ -1,7 +1,7 @@
 package com.senla.controller;
 
-import com.senla.api.dto.community.CommunityMessageDto;
-import com.senla.api.dto.message.CreateMessageDto;
+import com.senla.dto.community.CommunityMessageDto;
+import com.senla.dto.message.CreateMessageDto;
 import com.senla.client.CommunityMessageRestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

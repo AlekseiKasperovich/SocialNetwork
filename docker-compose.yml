@@ -10,7 +10,7 @@ services:
       - backend
       - postgres
   backend:
-    build: SocialNetwork/ServiceImpl/
+    build: SocialNetwork/Backend/
     image: kasperovich/backend
     container_name: backend
     ports:

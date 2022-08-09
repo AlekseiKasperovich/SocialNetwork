@@ -1,6 +1,6 @@
 package com.senla.producer;
 
-import com.senla.api.dto.mailing.MailingDto;
+import com.senla.dto.mailing.MailingDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

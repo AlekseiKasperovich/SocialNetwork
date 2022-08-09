@@ -1,7 +1,7 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.event.EventMessageDto;
-import com.senla.api.dto.message.CreateMessageDto;
+import com.senla.dto.event.EventMessageDto;
+import com.senla.dto.message.CreateMessageDto;
 import com.senla.client.EventMessageRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.property.RequestProperty;
@@ -65,7 +65,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     public Page<EventMessageDto> findAll(Long eventId, Pageable pageable,
                                          HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL + eventId;
         } else {

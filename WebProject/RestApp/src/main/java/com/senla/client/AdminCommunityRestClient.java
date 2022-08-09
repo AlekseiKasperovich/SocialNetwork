@@ -1,7 +1,7 @@
 package com.senla.client;
 
-import com.senla.api.dto.community.CommunityDto;
-import com.senla.api.dto.community.CreateCommunityDto;
+import com.senla.dto.community.CommunityDto;
+import com.senla.dto.community.CreateCommunityDto;
 
 /**
  * @author Aliaksei Kaspiarovich

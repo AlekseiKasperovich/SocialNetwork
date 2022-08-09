@@ -1,7 +1,7 @@
 package com.senla.client;
 
-import com.senla.api.dto.event.CreateEventDto;
-import com.senla.api.dto.event.EventDto;
+import com.senla.dto.event.CreateEventDto;
+import com.senla.dto.event.EventDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

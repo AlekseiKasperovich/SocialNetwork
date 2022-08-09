@@ -1,6 +1,6 @@
 package com.senla.controller;
 
-import com.senla.api.dto.community.CommunityDto;
+import com.senla.dto.community.CommunityDto;
 import com.senla.client.CommunityRestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

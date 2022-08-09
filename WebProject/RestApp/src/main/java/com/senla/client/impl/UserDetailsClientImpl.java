@@ -1,6 +1,6 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.user.UserDetailsDto;
+import com.senla.dto.user.UserDetailsDto;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.UserDetailsClient;
 import com.senla.property.RequestProperty;

@@ -1,6 +1,6 @@
 package com.senla.client;
 
-import com.senla.api.dto.friendship.FriendshipDto;
+import com.senla.dto.friendship.FriendshipDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

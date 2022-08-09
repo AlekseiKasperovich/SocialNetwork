@@ -1,7 +1,7 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.message.CreateMessageDto;
-import com.senla.api.dto.message.MessageDto;
+import com.senla.dto.message.CreateMessageDto;
+import com.senla.dto.message.MessageDto;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.MessageRestClient;
 import com.senla.property.RequestProperty;

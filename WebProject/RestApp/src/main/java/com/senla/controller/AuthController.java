@@ -1,8 +1,8 @@
 package com.senla.controller;
 
-import com.senla.api.dto.user.DtoCreateUser;
-import com.senla.api.dto.user.DtoUser;
-import com.senla.api.dto.user.ForgotPasswordDto;
+import com.senla.dto.user.DtoCreateUser;
+import com.senla.dto.user.DtoUser;
+import com.senla.dto.user.ForgotPasswordDto;
 import com.senla.client.AuthRestClient;
 import com.senla.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.senla.controller;
 
-import com.senla.api.dto.mailing.MailingDto;
+import com.senla.dto.mailing.MailingDto;
 import com.senla.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

@@ -1,8 +1,8 @@
 package com.senla.security;
 
-import com.senla.api.dto.user.RoleDto;
-import com.senla.api.dto.user.UserDetailsDto;
-import com.senla.api.dto.сonstants.Status;
+import com.senla.dto.user.RoleDto;
+import com.senla.dto.user.UserDetailsDto;
+import com.senla.dto.constants.Status;
 import com.senla.client.UserDetailsClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

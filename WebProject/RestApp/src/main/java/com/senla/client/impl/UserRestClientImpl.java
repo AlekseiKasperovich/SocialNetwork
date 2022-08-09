@@ -1,6 +1,6 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.user.DtoUser;
+import com.senla.dto.user.DtoUser;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.UserRestClient;
 import com.senla.property.RequestProperty;
@@ -37,7 +37,7 @@ public class UserRestClientImpl implements UserRestClient {
     @Override
     public Page<DtoUser> searchUsers(Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL;
         } else {

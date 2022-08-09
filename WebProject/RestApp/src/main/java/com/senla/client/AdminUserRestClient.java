@@ -1,6 +1,6 @@
 package com.senla.client;
 
-import com.senla.api.dto.user.DtoUser;
+import com.senla.dto.user.DtoUser;
 
 /**
  * @author Aliaksei Kaspiarovich

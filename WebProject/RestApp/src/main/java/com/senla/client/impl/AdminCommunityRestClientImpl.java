@@ -1,7 +1,7 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.community.CommunityDto;
-import com.senla.api.dto.community.CreateCommunityDto;
+import com.senla.dto.community.CommunityDto;
+import com.senla.dto.community.CreateCommunityDto;
 import com.senla.client.AdminCommunityRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.property.RequestProperty;

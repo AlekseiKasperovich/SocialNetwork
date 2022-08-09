@@ -1,6 +1,6 @@
 package com.senla.controller;
 
-import com.senla.api.dto.friendship.FriendshipDto;
+import com.senla.dto.friendship.FriendshipDto;
 import com.senla.client.FriendshipRestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

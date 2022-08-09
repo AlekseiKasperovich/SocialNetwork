@@ -1,7 +1,7 @@
 package com.senla.controller;
 
-import com.senla.api.dto.community.CommunityDto;
-import com.senla.api.dto.community.CreateCommunityDto;
+import com.senla.dto.community.CommunityDto;
+import com.senla.dto.community.CreateCommunityDto;
 import com.senla.client.AdminCommunityRestClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

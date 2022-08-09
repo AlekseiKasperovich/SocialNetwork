@@ -1,6 +1,6 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.friendship.FriendshipDto;
+import com.senla.dto.friendship.FriendshipDto;
 import com.senla.client.FriendshipRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.property.RequestProperty;
@@ -60,7 +60,7 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     @Override
     public Page<FriendshipDto> findMyFriendshipRequests(Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL + REQUESTS;
         } else {
@@ -75,7 +75,7 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     @Override
     public Page<FriendshipDto> findAll(Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL;
         } else {

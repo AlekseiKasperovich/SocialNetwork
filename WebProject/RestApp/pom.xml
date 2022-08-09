@@ -15,12 +15,6 @@
     <description>RestApp</description>
 
     <dependencies>
-        <dependency>
-            <groupId>com.senla</groupId>
-            <artifactId>ServiceApi</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -31,6 +25,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.passay/passay -->
+        <dependency>
+            <groupId>org.passay</groupId>
+            <artifactId>passay</artifactId>
+            <version>1.6.1</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -52,6 +52,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

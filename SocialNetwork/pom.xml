@@ -22,8 +22,7 @@
     </parent>
 
     <modules>
-        <module>ServiceApi</module>
-        <module>ServiceImpl</module>
+        <module>Backend</module>
     </modules>
 
     <dependencies>

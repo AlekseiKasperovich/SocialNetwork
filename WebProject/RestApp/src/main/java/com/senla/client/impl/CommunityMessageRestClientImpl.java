@@ -1,7 +1,7 @@
 package com.senla.client.impl;
 
-import com.senla.api.dto.community.CommunityMessageDto;
-import com.senla.api.dto.message.CreateMessageDto;
+import com.senla.dto.community.CommunityMessageDto;
+import com.senla.dto.message.CreateMessageDto;
 import com.senla.client.CommunityMessageRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.property.RequestProperty;
@@ -65,7 +65,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
     public Page<CommunityMessageDto> findAll(Long communityId, Pageable pageable,
                                              HttpServletRequest request) {
         String requestParam = request.getQueryString();
-        String url = null;
+        String url;
         if (requestParam == null) {
             url = requestProperty.getHost() + URL + communityId;
         } else {

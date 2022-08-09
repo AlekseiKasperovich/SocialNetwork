@@ -1,6 +1,6 @@
 package com.senla.client;
 
-import com.senla.api.dto.community.CommunityDto;
+import com.senla.dto.community.CommunityDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
