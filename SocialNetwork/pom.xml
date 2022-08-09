@@ -21,6 +21,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <modules>
+        <module>ServiceApi</module>
+        <module>ServiceImpl</module>
+    </modules>
+
     <dependencies>
 
         <dependency>
@@ -110,20 +115,9 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -144,9 +138,6 @@
             </plugin>
         </plugins>
     </build>
-    <modules>
-        <module>ServiceApi</module>
-        <module>ServiceImpl</module>
-    </modules>
+
 
 </project>
