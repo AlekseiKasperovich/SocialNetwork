@@ -57,7 +57,7 @@
  - Docker
  
  ### Steps:
- '''
+```
  - git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
  - cd Backend
  - mvn clean package 
@@ -66,8 +66,8 @@
  - mvn clean package 
  - cd ..
  - docker-compose up -d
- - Go to http://localhost:8080/swagger-ui/ - read api documentation
-'''
+ - Go to http://localhost:8080/swagger-ui/ - read api documentation 
+```
 
  ## Postman:
  You can import API specifications directly into Postman. To import data into Postman, select Import in upper left:
