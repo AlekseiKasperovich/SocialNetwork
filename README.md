@@ -26,7 +26,7 @@
 - View messages on communities/events
 - Internationalization: English and Russian languages
 - Localization
-
+![image](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Functionality.pdf)
 ### Admin
 - Create/update/remove communities
 - Block/unblock user
