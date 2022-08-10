@@ -2,7 +2,7 @@
 ![workflow](https://github.com/AlekseiKasperovich/SocialNetwork/actions/workflows/maven.yml/badge.svg)
 ## SpringBoot Social Network Project
 ![image](https://images.theconversation.com/files/198568/original/file-20171211-15358-w51s6s.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip)
-## Functionality
+## [Functionality](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Functionality.pdf)
 ### Base
 - Registration
 - Login
@@ -26,7 +26,7 @@
 - View messages on communities/events
 - Internationalization: English and Russian languages
 - Localization
-![image](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Functionality.pdf)
+
 ### Admin
 - Create/update/remove communities
 - Block/unblock user
