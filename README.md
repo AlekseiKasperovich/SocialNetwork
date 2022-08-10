@@ -2,6 +2,10 @@
 ![workflow](https://github.com/AlekseiKasperovich/SocialNetwork/actions/workflows/maven.yml/badge.svg)
 ## SpringBoot Social Network Project
 ![image](https://images.theconversation.com/files/198568/original/file-20171211-15358-w51s6s.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip)
+## Description
+ - [Class diagram (UML)] (https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Class%20Diagram.pdf)
+ - [Entity Relationship Diagram (MySQL)] (https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/mysql_db/ERD.pdf)
+ - [Entity Relationship Diagram (PostgreSQL)] (https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/mysql_db/ERD.pdf)
 ## [Functionality](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Functionality.pdf)
 ### Base
 - Registration
@@ -66,7 +70,7 @@
  ## Postman:
  You can import API specifications directly into Postman. To import data into Postman, select Import in upper left:
   - select "Upload Files"
-  - choose aliaksei-kaspiarovich\info\postman\postman_backup
+  - choose SocialNetwork\info\postman\postman_backup
   - click "Import"
 
 Go to {{baseUrl}}/api/auth/login
