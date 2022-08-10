@@ -54,10 +54,10 @@
  
  ### Steps:
  - git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
- - cd SocialNetwork
+ - cd Backend
  - mvn clean package 
  - cd ..
- - cd WebProject
+ - cd RestApp
  - mvn clean package 
  - cd ..
  - docker-compose up -d
