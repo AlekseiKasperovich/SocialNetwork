@@ -33,116 +33,63 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private final MessageSource messageSource;
 
     @ExceptionHandler({HttpClientErrorException.class})
-    public ResponseEntity<Object> handleHttpClientErrorException(
-            HttpClientErrorException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.http.client.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Http Client Error Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.CONFLICT.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    public ResponseEntity<Object> handleHttpClientErrorException(HttpClientErrorException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.http.client.error", HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler({AuthenticationException.class})
-    public ResponseEntity<Object> handleAuthenticationException(
-            AuthenticationException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.authentication.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Authentication Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.UNAUTHORIZED.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.authentication.error", HttpStatus.UNAUTHORIZED, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
     @ExceptionHandler({LockedException.class})
-    public ResponseEntity<Object> handleLockedException(LockedException ex,
-                                                        WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.account.is.locked.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Locked Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.UNAUTHORIZED.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    public ResponseEntity<Object> handleLockedException(LockedException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.account.is.locked.error", HttpStatus.UNAUTHORIZED, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex, HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.validation.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Method Argument Not Valid Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
+                                                                  HttpStatus status, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<Object> handleException(RuntimeException ex,
-                                                  WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.error", null,
-                request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Runtime Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,
-                request);
+    public ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.error", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     @ExceptionHandler({MyAccessDeniedException.class, BadCredentialsException.class, ResourceAccessException.class})
-    public ResponseEntity<Object> handleMyAccessDeniedException(
-            RuntimeException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.access.denied.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Access Denied Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.FORBIDDEN.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+    public ResponseEntity<Object> handleMyAccessDeniedException(RuntimeException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.access.denied.error", HttpStatus.FORBIDDEN, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})
-    public ResponseEntity<Object> handleConstraintViolationException(
-            ConstraintViolationException ex, WebRequest request) {
+    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    private ExceptionDetails exceptionDetailsBuilder(Exception ex, String code, HttpStatus status, WebRequest request) {
         log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.validation.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Constraint Violation Exception")
+        String message = messageSource.getMessage(code, null, request.getLocale());
+        return ExceptionDetails.builder()
+                .title(ex.getCause().toString())
                 .detail(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST.value())
+                .status(status.value())
                 .message(message)
                 .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }
