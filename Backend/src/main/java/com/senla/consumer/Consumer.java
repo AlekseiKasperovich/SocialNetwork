@@ -19,12 +19,12 @@ public class Consumer implements KafkaConsumer {
     private final EmailService emailService;
 
     @KafkaListener(topics = "${topic.name.consumer}")
-    public void receive(ConsumerRecord<String, MailingDto> record) {
-        log.info("message received: {}", record.value().getMessageText());
-        if (Type.PRIVATE_MESSAGE.equals(record.value().getType())) {
-            messageService.send(record.value().getMessageText());
+    public void receive(ConsumerRecord<String, MailingDto> message) {
+        log.info("message received: {}", message.value().getMessageText());
+        if (Type.PRIVATE_MESSAGE.equals(message.value().getType())) {
+            messageService.send(message.value().getMessageText());
         } else {
-            emailService.send(record.value().getMessageText());
+            emailService.send(message.value().getMessageText());
         }
     }
 

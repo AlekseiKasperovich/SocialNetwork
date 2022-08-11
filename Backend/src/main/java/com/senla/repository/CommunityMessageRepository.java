@@ -18,7 +18,5 @@ public interface CommunityMessageRepository extends
      * @param pageable    pagination information
      * @return messages on community
      */
-    Page<CommunityMessage> findByCommunityIdOrderByPostedDesc(Long communityId,
-                                                              Pageable pageable);
-
+    Page<CommunityMessage> findByCommunityIdOrderByPostedDesc(Long communityId, Pageable pageable);
 }

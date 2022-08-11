@@ -29,6 +29,8 @@ public class FriendshipServiceImpl implements FriendshipService {
     private final Mapper mapper;
     private final MapStructMapper mapStructMapper;
 
+    private static final String EXCEPTION_MESSAGE = "Access is denied";
+
     /**
      * @param friendshipId friendship ID
      * @param id           id
@@ -42,7 +44,7 @@ public class FriendshipServiceImpl implements FriendshipService {
             return mapStructMapper.friendshipToDto(friendship);
 //            return mapper.map(friendship, FriendshipDto.class);
         }
-        throw new MyAccessDeniedException("Access is denied");
+        throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
     }
 
     /**
@@ -62,7 +64,7 @@ public class FriendshipServiceImpl implements FriendshipService {
             return mapStructMapper.friendshipToDto(friendshipRepository.save(friendship));
 //            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
         }
-        throw new MyAccessDeniedException("Access is denied");
+        throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
     }
 
     /**
@@ -78,7 +80,7 @@ public class FriendshipServiceImpl implements FriendshipService {
             return mapStructMapper.friendshipToDto(friendshipRepository.save(friendship));
 //            return mapper.map(friendshipRepository.save(friendship), FriendshipDto.class);
         }
-        throw new MyAccessDeniedException("Access is denied");
+        throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
     }
 
     /**
@@ -91,7 +93,7 @@ public class FriendshipServiceImpl implements FriendshipService {
         if (friendship.getReceiver().getId().equals(id) || friendship.getSender().getId().equals(id)) {
             friendshipRepository.deleteById(friendshipId);
         } else {
-            throw new MyAccessDeniedException("Access is denied");
+            throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
         }
     }
 

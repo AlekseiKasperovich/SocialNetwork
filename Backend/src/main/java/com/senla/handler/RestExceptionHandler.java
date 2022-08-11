@@ -30,101 +30,55 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private final MessageSource messageSource;
 
     @ExceptionHandler({UserAlreadyExistException.class})
-    public ResponseEntity<Object> handleUserAlreadyExistException(
-            UserAlreadyExistException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.registration.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("User Already Exist Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.CONFLICT.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    public ResponseEntity<Object> handleUserAlreadyExistException(UserAlreadyExistException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.registration.error", HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler({MailException.class})
-    public ResponseEntity<Object> handleMailException(MailException ex,
-                                                      WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.email.error", null,
-                request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Mail Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.SERVICE_UNAVAILABLE.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE,
-                request);
+    public ResponseEntity<Object> handleMailException(MailException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.email.error", HttpStatus.SERVICE_UNAVAILABLE, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.SERVICE_UNAVAILABLE, request);
     }
 
     @ExceptionHandler({EntityNotFoundException.class})
-    public ResponseEntity<Object> handleEntityNotFoundException(
-            EntityNotFoundException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.entity.not.found.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Entity Not Found Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.NOT_FOUND.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.entity.not.found.error", HttpStatus.NOT_FOUND, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler({MyAccessDeniedException.class})
-    public ResponseEntity<Object> handleMyAccessDeniedException(
-            MyAccessDeniedException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.access.denied.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Access Denied Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.FORBIDDEN.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+    public ResponseEntity<Object> handleMyAccessDeniedException(MyAccessDeniedException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.access.denied.error", HttpStatus.FORBIDDEN, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})
-    public ResponseEntity<Object> handleConstraintViolationException(
-            ConstraintViolationException ex, WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.validation.error",
-                null, request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Constraint Violation Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({RuntimeException.class})
-    public ResponseEntity<Object> handleException(RuntimeException ex,
-                                                  WebRequest request) {
-        log.error(ex.getMessage(), ex);
-        String message = messageSource.getMessage("message.error", null,
-                request.getLocale());
-        ExceptionDetails details = ExceptionDetails.builder()
-                .title("Runtime Exception")
-                .detail(ex.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .message(message)
-                .time(LocalDateTime.now()).build();
-        return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR,
-                request);
+    public ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
+        ExceptionDetails details = exceptionDetailsBuilder(
+                ex, "message.error", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
+    private ExceptionDetails exceptionDetailsBuilder(Exception ex, String code, HttpStatus status, WebRequest request) {
+        log.error(ex.getMessage(), ex);
+        String message = messageSource.getMessage(code, null, request.getLocale());
+        return ExceptionDetails.builder()
+                .title(ex.getCause().toString())
+                .detail(ex.getMessage())
+                .status(status.value())
+                .message(message)
+                .time(LocalDateTime.now()).build();
+    }
 }

@@ -31,6 +31,8 @@ public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
     private final Mapper mapper;
 
+    private static final String EXCEPTION_MESSAGE = "Access is denied";
+
     /**
      * @param id message ID
      * @return message
@@ -53,7 +55,7 @@ public class MessageServiceImpl implements MessageService {
         if (message.getSender().getId().equals(id) || message.getReceiver().getId().equals(id)) {
             return mapper.map(message, MessageDto.class);
         }
-        throw new MyAccessDeniedException("Access is denied");
+        throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
     }
 
     /**
@@ -90,7 +92,7 @@ public class MessageServiceImpl implements MessageService {
             message.setBody(createMessageDto.getBody());
             return mapper.map(messageRepository.save(message), MessageDto.class);
         }
-        throw new MyAccessDeniedException("Access is denied");
+        throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
     }
 
     /**
@@ -103,13 +105,13 @@ public class MessageServiceImpl implements MessageService {
         if (message.getSender().getId().equals(id)) {
             messageRepository.deleteById(messageId);
         } else {
-            throw new MyAccessDeniedException("Access is denied");
+            throw new MyAccessDeniedException(EXCEPTION_MESSAGE);
         }
     }
 
     /**
      * @param receiverId receiver ID
-     * @param id      id
+     * @param id         id
      * @param pageable   pagination information
      * @return messages
      */

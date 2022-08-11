@@ -45,7 +45,7 @@ public class AuthController {
      * @return token
      */
     @PostMapping("login")
-    public ResponseEntity<?> createAuthenticationToken(
+    public ResponseEntity<Object> createAuthenticationToken(
             @RequestBody @Valid DtoCreateUser createUserDto) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 createUserDto.getEmail(), createUserDto.getPassword()));
@@ -58,7 +58,7 @@ public class AuthController {
      * @return sent new password to email
      */
     @PostMapping("password/new")
-    public ResponseEntity<?> sendPassword(@RequestBody @Valid ForgotPasswordDto emailDto) {
+    public ResponseEntity<Object> sendPassword(@RequestBody @Valid ForgotPasswordDto emailDto) {
         authRestClient.sendNewPassword(emailDto);
         return ResponseEntity.ok("Your new password has been successfully sent!");
     }

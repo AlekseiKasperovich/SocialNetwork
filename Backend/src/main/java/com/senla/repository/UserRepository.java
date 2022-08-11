@@ -24,6 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
      * @return {@literal true} if an entity with the given email exists,
      * {@literal false} otherwise.
      */
-    Boolean existsByEmail(String email);
+    boolean existsByEmail(String email);
 
 }
