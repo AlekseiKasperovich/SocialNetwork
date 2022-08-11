@@ -1,11 +1,13 @@
+/* (C)2022 */
 package com.senla.dto.community;
 
 import com.senla.dto.user.DtoUser;
+
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 /**
  * @author Aliaksei Kaspiarovich
@@ -18,5 +20,6 @@ public class CommunityDto {
     private Long id;
     private String name;
     private String description;
-    private List<DtoUser> followers;
+    private List<DtoUser>
+            followers;
 }
