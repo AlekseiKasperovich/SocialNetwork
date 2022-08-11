@@ -1,5 +1,5 @@
-# Aliaksei Kaspiarovich 
-![workflow](https://github.com/AlekseiKasperovich/SocialNetwork/actions/workflows/maven.yml/badge.svg)
+# Aliaksei Kaspiarovich
+[![Build](https://github.com/AlekseiKasperovich/SocialNetwork/actions/workflows/maven.yml/badge.svg)](https://github.com/AlekseiKasperovich/SocialNetwork/actions/workflows/maven.yml)
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=AlekseiKasperovich_SocialNetwork)
 ## SpringBoot Social Network Project
 ![image](https://images.theconversation.com/files/198568/original/file-20171211-15358-w51s6s.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip)
