@@ -1,7 +1,7 @@
 package com.senla.consumer;
 
-import com.senla.dto.mailing.MailingDto;
 import com.senla.dto.constants.Type;
+import com.senla.dto.mailing.MailingDto;
 import com.senla.service.EmailService;
 import com.senla.service.MessageService;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +27,4 @@ public class Consumer implements KafkaConsumer {
             emailService.send(message.value().getMessageText());
         }
     }
-
 }

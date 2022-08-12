@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/users",
+@RequestMapping(
+        value = "/api/users",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -35,14 +34,15 @@ public class UserController {
 
     /**
      * @param firstName First Name
-     * @param lastName  Last Name
-     * @param pageable  pagination information
+     * @param lastName Last Name
+     * @param pageable pagination information
      * @return users
      */
     @GetMapping
-    public Page<DtoUser> searchUsers(@RequestParam(required = false) String firstName,
-                                     @RequestParam(required = false) String lastName, Pageable pageable) {
+    public Page<DtoUser> searchUsers(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            Pageable pageable) {
         return userService.searchUsers(firstName, lastName, pageable);
     }
-
 }

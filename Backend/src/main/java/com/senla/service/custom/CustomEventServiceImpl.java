@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -26,14 +24,16 @@ public class CustomEventServiceImpl implements CustomEventService {
      */
     @Override
     public Event findEventById(Long id) {
-        return eventRepository.findById(id)
-                .orElseThrow(()
-                        -> new EventNotFoundException(
-                        String.format("Event with id = %s is not found", id)));
+        return eventRepository
+                .findById(id)
+                .orElseThrow(
+                        () ->
+                                new EventNotFoundException(
+                                        String.format("Event with id = %s is not found", id)));
     }
 
     /**
-     * @param user  user
+     * @param user user
      * @param event event
      */
     @Override
@@ -42,5 +42,4 @@ public class CustomEventServiceImpl implements CustomEventService {
             throw new MyAccessDeniedException("Access is denied");
         }
     }
-
 }

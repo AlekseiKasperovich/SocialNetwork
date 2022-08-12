@@ -1,34 +1,27 @@
 package com.senla.repository;
 
+import static com.senla.prototype.UserPrototype.getUser;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.senla.model.User;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
-
-import static com.senla.prototype.UserPrototype.getUser;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserRepositoryTest {
 
-    @Autowired
-    private UserRepository userRepository;
+    @Autowired private UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    @Autowired private RoleRepository roleRepository;
 
-    /**
-     * Test of findByEmail method, of class UserRepository.
-     */
+    /** Test of findByEmail method, of class UserRepository. */
     @Test
     public void testFindByEmail() {
         User user = getUser();
@@ -39,9 +32,7 @@ public class UserRepositoryTest {
         assertThat(foundUser.get().getEmail()).isEqualTo(user.getEmail());
     }
 
-    /**
-     * Test of existsByEmail method, of class UserRepository.
-     */
+    /** Test of existsByEmail method, of class UserRepository. */
     @Test
     public void testExistsByEmail() {
         User user = getUser();

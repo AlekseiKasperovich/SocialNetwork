@@ -8,5 +8,4 @@ public interface FeignServiceUtil {
 
     @GetMapping(value = "/", consumes = "application/json", produces = "application/json")
     String go();
-
 }

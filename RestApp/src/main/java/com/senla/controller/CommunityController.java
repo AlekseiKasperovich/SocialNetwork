@@ -1,7 +1,8 @@
 package com.senla.controller;
 
-import com.senla.dto.community.CommunityDto;
 import com.senla.client.CommunityRestClient;
+import com.senla.dto.community.CommunityDto;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,13 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/communities",
+@RequestMapping(
+        value = "/api/communities",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor

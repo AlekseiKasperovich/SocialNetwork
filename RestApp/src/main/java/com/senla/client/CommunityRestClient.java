@@ -1,14 +1,11 @@
 package com.senla.client;
 
 import com.senla.dto.community.CommunityDto;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface CommunityRestClient {
 
     CommunityDto getCommunityById(Long communityId);
@@ -18,5 +15,4 @@ public interface CommunityRestClient {
     CommunityDto deleteUser(Long communityId);
 
     Page<CommunityDto> findAll(Pageable pageable, HttpServletRequest request);
-
 }

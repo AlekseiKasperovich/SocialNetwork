@@ -1,8 +1,6 @@
 package com.senla.service;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface PasswordService {
 
     String generatePassword();

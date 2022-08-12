@@ -4,9 +4,7 @@ import com.senla.security.UserDetailsImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public abstract class CurrentUserService {
 
     protected static String getCurrentUserEmail() {
@@ -15,7 +13,9 @@ public abstract class CurrentUserService {
     }
 
     protected static String getCurrentUserId() {
-        UserDetailsImpl user = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetailsImpl user =
+                (UserDetailsImpl)
+                        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Long.toString(user.getId());
     }
 }

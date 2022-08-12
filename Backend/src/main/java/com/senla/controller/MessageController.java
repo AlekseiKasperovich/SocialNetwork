@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/messages",
+@RequestMapping(
+        value = "/api/messages",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -32,61 +31,64 @@ public class MessageController {
 
     /**
      * @param messageId message ID
-     * @param id        id
+     * @param id id
      * @return message
      */
     @GetMapping("{messageId}")
-    public MessageDto getMessageById(@PathVariable Long messageId,
-                                     @RequestHeader("${request.id}") Long id) {
+    public MessageDto getMessageById(
+            @PathVariable Long messageId, @RequestHeader("${request.id}") Long id) {
         return messageService.getMessageById(messageId, id);
     }
 
     /**
-     * @param receiverId       receiver ID
+     * @param receiverId receiver ID
      * @param createMessageDto message body
-     * @param id               id
+     * @param id id
      * @return message
      */
     @PostMapping
-    public MessageDto createMessage(@RequestParam Long receiverId,
-                                    @RequestBody CreateMessageDto createMessageDto,
-                                    @RequestHeader("${request.id}") Long id) {
+    public MessageDto createMessage(
+            @RequestParam Long receiverId,
+            @RequestBody CreateMessageDto createMessageDto,
+            @RequestHeader("${request.id}") Long id) {
         return messageService.createMessage(receiverId, createMessageDto, id);
     }
 
     /**
-     * @param messageId        message ID
+     * @param messageId message ID
      * @param createMessageDto message body
-     * @param id               id
+     * @param id id
      * @return updated message
      */
     @PutMapping("{messageId}")
-    public MessageDto updateMessage(@PathVariable Long messageId,
-                                    @RequestBody CreateMessageDto createMessageDto,
-                                    @RequestHeader("${request.id}") Long id) {
+    public MessageDto updateMessage(
+            @PathVariable Long messageId,
+            @RequestBody CreateMessageDto createMessageDto,
+            @RequestHeader("${request.id}") Long id) {
         return messageService.updateMessage(messageId, createMessageDto, id);
     }
 
     /**
      * @param messageId message ID
-     * @param id        id
+     * @param id id
      */
     @DeleteMapping("{messageId}")
-    public void deleteMessage(@PathVariable Long messageId,
-                              @RequestHeader("${request.id}") Long id) {
+    public void deleteMessage(
+            @PathVariable Long messageId, @RequestHeader("${request.id}") Long id) {
         messageService.deleteMessage(messageId, id);
     }
 
     /**
      * @param receiverId receiver ID
-     * @param id         id
-     * @param pageable   pagination information
+     * @param id id
+     * @param pageable pagination information
      * @return messages
      */
     @GetMapping
-    public Page<MessageDto> findMyMessages(@RequestParam Long receiverId,
-                                           @RequestHeader("${request.id}") Long id, Pageable pageable) {
+    public Page<MessageDto> findMyMessages(
+            @RequestParam Long receiverId,
+            @RequestHeader("${request.id}") Long id,
+            Pageable pageable) {
         return messageService.findAll(receiverId, id, pageable);
     }
-
 }

@@ -8,5 +8,4 @@ import org.mapstruct.Mapper;
 public interface MapStructMapper {
 
     FriendshipDto friendshipToDto(Friendship friendship);
-
 }

@@ -9,9 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -25,10 +23,12 @@ public class CustomUserServiceImpl implements CustomUserService {
      */
     @Override
     public User findUserById(Long id) {
-        return userRepository.findById(id)
-                .orElseThrow(()
-                        -> new UserNotFoundException(
-                        String.format("User with id = %s is not found", id)));
+        return userRepository
+                .findById(id)
+                .orElseThrow(
+                        () ->
+                                new UserNotFoundException(
+                                        String.format("User with id = %s is not found", id)));
     }
 
     /**
@@ -37,21 +37,20 @@ public class CustomUserServiceImpl implements CustomUserService {
      */
     @Override
     public User findUserByEmail(String email) {
-        return userRepository.findByEmail(email)
-                .orElseThrow(()
-                        -> new UserNotFoundException(
-                        String.format("User with email = %s is not found", email)));
+        return userRepository
+                .findByEmail(email)
+                .orElseThrow(
+                        () ->
+                                new UserNotFoundException(
+                                        String.format("User with email = %s is not found", email)));
     }
 
-    /**
-     * @param email user email
-     */
+    /** @param email user email */
     @Override
     public void existsByEmail(String email) {
         if (userRepository.existsByEmail(email)) {
             throw new UserAlreadyExistException(
-                    String.format("There is an account with that email address: = %s",
-                            email));
+                    String.format("There is an account with that email address: = %s", email));
         }
     }
 
@@ -64,5 +63,4 @@ public class CustomUserServiceImpl implements CustomUserService {
     public User save(User user) {
         return userRepository.save(user);
     }
-
 }

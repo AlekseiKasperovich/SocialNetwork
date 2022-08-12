@@ -1,15 +1,12 @@
 package com.senla.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,11 +17,10 @@ public class DtoUser {
     private String firstName;
     private String lastName;
 
-    @JsonFormat(pattern="dd.MM.yyyy")
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthday;
 
     private String sex;
     private String phone;
     private String status;
-
 }

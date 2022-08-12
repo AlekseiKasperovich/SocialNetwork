@@ -3,9 +3,7 @@ package com.senla.service;
 import com.senla.model.Community;
 import com.senla.model.User;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface CustomCommunityService {
 
     Community findCommunityById(Long id);
@@ -15,5 +13,4 @@ public interface CustomCommunityService {
     void delete(Long id);
 
     void checkUserOnCommunity(User user, Community community);
-
 }

@@ -9,6 +9,7 @@ import com.senla.model.Message;
 import com.senla.repository.MessageRepository;
 import com.senla.service.CustomUserService;
 import com.senla.service.MessageService;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -16,11 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -39,14 +36,17 @@ public class MessageServiceImpl implements MessageService {
      */
     @Transactional(readOnly = true)
     public Message findMessageById(Long id) {
-        return messageRepository.findById(id).orElseThrow(
-                () -> new MessageNotFoundException(
-                        String.format("Message with id = %s is not found", id)));
+        return messageRepository
+                .findById(id)
+                .orElseThrow(
+                        () ->
+                                new MessageNotFoundException(
+                                        String.format("Message with id = %s is not found", id)));
     }
 
     /**
      * @param messageId message ID
-     * @param id        id
+     * @param id id
      * @return message
      */
     @Override
@@ -59,20 +59,21 @@ public class MessageServiceImpl implements MessageService {
     }
 
     /**
-     * @param receiverId       receiver ID
+     * @param receiverId receiver ID
      * @param createMessageDto message body
-     * @param id               id
+     * @param id id
      * @return message
      */
     @Override
     public MessageDto createMessage(Long receiverId, CreateMessageDto createMessageDto, Long id) {
-        Message message = Message.builder()
-                .posted(LocalDateTime.now())
-                .sender(userService.findUserById(id))
-                .receiver(userService.findUserById(receiverId))
-                .body(createMessageDto.getBody())
-                .isPrivate(Boolean.TRUE)
-                .build();
+        Message message =
+                Message.builder()
+                        .posted(LocalDateTime.now())
+                        .sender(userService.findUserById(id))
+                        .receiver(userService.findUserById(receiverId))
+                        .body(createMessageDto.getBody())
+                        .isPrivate(Boolean.TRUE)
+                        .build();
         if (id.equals(receiverId)) {
             message.setIsPrivate(Boolean.FALSE);
         }
@@ -80,9 +81,9 @@ public class MessageServiceImpl implements MessageService {
     }
 
     /**
-     * @param messageId        message ID
+     * @param messageId message ID
      * @param createMessageDto message body
-     * @param id               id
+     * @param id id
      * @return updated message
      */
     @Override
@@ -97,7 +98,7 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * @param messageId message ID
-     * @param id        id
+     * @param id id
      */
     @Override
     public void deleteMessage(Long messageId, Long id) {
@@ -111,8 +112,8 @@ public class MessageServiceImpl implements MessageService {
 
     /**
      * @param receiverId receiver ID
-     * @param id         id
-     * @param pageable   pagination information
+     * @param id id
+     * @param pageable pagination information
      * @return messages
      */
     @Override
@@ -126,5 +127,4 @@ public class MessageServiceImpl implements MessageService {
     public void send(String messageText) {
         log.info("Message sent from MessageService");
     }
-
 }

@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/communities",
+@RequestMapping(
+        value = "/api/communities",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -41,8 +40,8 @@ public class CommunityController {
      * @return community
      */
     @PutMapping("{communityId}")
-    public CommunityDto joinToCommunity(@PathVariable Long communityId,
-                                        @RequestHeader("${request.id}") Long id) {
+    public CommunityDto joinToCommunity(
+            @PathVariable Long communityId, @RequestHeader("${request.id}") Long id) {
         return communityService.addUser(communityId, id);
     }
 
@@ -52,8 +51,8 @@ public class CommunityController {
      * @return community
      */
     @DeleteMapping("{communityId}")
-    public CommunityDto leaveCommunity(@PathVariable Long communityId,
-                                       @RequestHeader("${request.id}") Long id) {
+    public CommunityDto leaveCommunity(
+            @PathVariable Long communityId, @RequestHeader("${request.id}") Long id) {
         return communityService.deleteUser(communityId, id);
     }
 

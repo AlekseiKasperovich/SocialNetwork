@@ -1,8 +1,6 @@
 package com.senla.dto.constants;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public enum Gender {
     MALE,
     FEMALE

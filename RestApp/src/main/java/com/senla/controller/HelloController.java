@@ -5,9 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
 @RequiredArgsConstructor
 public class HelloController {
@@ -22,7 +20,5 @@ public class HelloController {
     @GetMapping("/go")
     public String go() {
         return feignServiceUtil.go();
-
     }
-
 }

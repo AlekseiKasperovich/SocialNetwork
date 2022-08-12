@@ -1,7 +1,8 @@
 package com.senla.controller;
 
-import com.senla.dto.user.DtoUser;
 import com.senla.client.UserRestClient;
+import com.senla.dto.user.DtoUser;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,13 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/users",
+@RequestMapping(
+        value = "/api/users",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -37,16 +35,17 @@ public class UserController {
 
     /**
      * @param firstName First Name
-     * @param lastName  Last Name
-     * @param pageable  pagination information
+     * @param lastName Last Name
+     * @param pageable pagination information
      * @param request request
      * @return users
      */
     @GetMapping
-    public Page<DtoUser> searchUsers(@RequestParam(required = false) String firstName,
-                                     @RequestParam(required = false) String lastName, Pageable pageable,
-                                     HttpServletRequest request) {
+    public Page<DtoUser> searchUsers(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            Pageable pageable,
+            HttpServletRequest request) {
         return userRestClient.searchUsers(pageable, request);
     }
-
 }

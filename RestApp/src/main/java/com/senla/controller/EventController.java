@@ -1,8 +1,10 @@
 package com.senla.controller;
 
+import com.senla.client.EventRestClient;
 import com.senla.dto.event.CreateEventDto;
 import com.senla.dto.event.EventDto;
-import com.senla.client.EventRestClient;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,14 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/events",
+@RequestMapping(
+        value = "/api/events",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -50,19 +48,17 @@ public class EventController {
     }
 
     /**
-     * @param eventId        event ID
+     * @param eventId event ID
      * @param createEventDto event name and description
      * @return updated event
      */
     @PutMapping("{eventId}")
-    public EventDto updateEvent(@PathVariable Long eventId,
-                                @Valid @RequestBody CreateEventDto createEventDto) {
+    public EventDto updateEvent(
+            @PathVariable Long eventId, @Valid @RequestBody CreateEventDto createEventDto) {
         return eventRestClient.updateEvent(eventId, createEventDto);
     }
 
-    /**
-     * @param eventId event ID
-     */
+    /** @param eventId event ID */
     @DeleteMapping("{eventId}")
     public void deleteEvent(@PathVariable Long eventId) {
         eventRestClient.deleteEvent(eventId);
@@ -70,23 +66,21 @@ public class EventController {
 
     /**
      * @param eventId event ID
-     * @param userId  user ID
+     * @param userId user ID
      * @return event
      */
     @PutMapping("{eventId}/users/{userId}")
-    public EventDto addUserToEvent(@PathVariable Long eventId,
-                                   @PathVariable Long userId) {
+    public EventDto addUserToEvent(@PathVariable Long eventId, @PathVariable Long userId) {
         return eventRestClient.addUser(eventId, userId);
     }
 
     /**
      * @param eventId event ID
-     * @param userId  user ID
+     * @param userId user ID
      * @return event
      */
     @DeleteMapping("{eventId}/users/{userId}")
-    public EventDto deleteUserFromEvent(@PathVariable Long eventId,
-                                        @PathVariable Long userId) {
+    public EventDto deleteUserFromEvent(@PathVariable Long eventId, @PathVariable Long userId) {
         return eventRestClient.deleteUser(eventId, userId);
     }
 

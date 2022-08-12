@@ -7,9 +7,7 @@ import com.senla.service.IUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 public class MyUserDetailService implements IUserDetailService {

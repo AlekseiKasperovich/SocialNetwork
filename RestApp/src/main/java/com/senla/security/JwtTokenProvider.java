@@ -8,19 +8,16 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -33,11 +30,12 @@ public class JwtTokenProvider {
      * @return token
      */
     public String generateToken(String email) {
-        Date expirationDate = Date.from(
-                LocalDate.now()
-                        .plusDays(jwtProperty.getExpiration())
-                        .atStartOfDay(ZoneId.systemDefault())
-                        .toInstant());
+        Date expirationDate =
+                Date.from(
+                        LocalDate.now()
+                                .plusDays(jwtProperty.getExpiration())
+                                .atStartOfDay(ZoneId.systemDefault())
+                                .toInstant());
         return Jwts.builder()
                 .setSubject(email)
                 .setExpiration(expirationDate)
@@ -51,9 +49,7 @@ public class JwtTokenProvider {
      */
     public boolean validateToken(String token) {
         try {
-            Jwts.parser()
-                    .setSigningKey(jwtProperty.getSecret())
-                    .parseClaimsJws(token);
+            Jwts.parser().setSigningKey(jwtProperty.getSecret()).parseClaimsJws(token);
             return true;
         } catch (ExpiredJwtException e) {
             log.error("Token expired", e);

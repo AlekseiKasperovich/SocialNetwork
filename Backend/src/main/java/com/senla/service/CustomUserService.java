@@ -2,9 +2,7 @@ package com.senla.service;
 
 import com.senla.model.User;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface CustomUserService {
 
     User findUserById(Long id);
