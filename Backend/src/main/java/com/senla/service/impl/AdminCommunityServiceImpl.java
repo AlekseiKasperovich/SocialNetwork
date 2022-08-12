@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -25,7 +23,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 
     /**
      * @param createCommunityDto community name and description
-     * @param id              id
+     * @param id id
      * @return community
      */
     @Override
@@ -36,7 +34,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
     }
 
     /**
-     * @param id                 community ID
+     * @param id community ID
      * @param createCommunityDto community name and description
      * @return updated community
      */
@@ -47,9 +45,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
         return mapper.map(communityService.save(community), CommunityDto.class);
     }
 
-    /**
-     * @param id community ID
-     */
+    /** @param id community ID */
     @Override
     public void deleteCommunity(Long id) {
         communityService.findCommunityById(id);

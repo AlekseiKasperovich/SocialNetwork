@@ -1,13 +1,7 @@
 package com.senla.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,12 +14,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-import java.util.HashSet;
-import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Getter
 @Setter
 @Builder
@@ -37,9 +34,7 @@ import java.util.Set;
 @Table(name = "events")
 public class Event {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+    @Id @GeneratedValue private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -53,11 +48,10 @@ public class Event {
 
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_events", joinColumns = {
-            @JoinColumn(name = "event_id")},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "user_id")},
-            uniqueConstraints = {
-                    @UniqueConstraint(columnNames = {"event_id", "user_id"})})
+    @JoinTable(
+            name = "users_events",
+            joinColumns = {@JoinColumn(name = "event_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"event_id", "user_id"})})
     private Set<User> participants = new HashSet<>();
 }

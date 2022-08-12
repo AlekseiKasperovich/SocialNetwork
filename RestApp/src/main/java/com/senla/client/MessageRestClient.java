@@ -2,14 +2,11 @@ package com.senla.client;
 
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.dto.message.MessageDto;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface MessageRestClient {
 
     MessageDto getMessageById(Long messageId);
@@ -21,5 +18,4 @@ public interface MessageRestClient {
     void deleteMessage(Long messageId);
 
     Page<MessageDto> findAll(Long receiverId, Pageable pageable, HttpServletRequest request);
-
 }

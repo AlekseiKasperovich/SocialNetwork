@@ -26,78 +26,45 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import org.springframework.stereotype.Component;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Component
 public class Mapper extends ConfigurableMapper {
 
     @Override
     protected void configure(MapperFactory factory) {
-        factory.classMap(Role.class, RoleDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Role.class, RoleDto.class).byDefault().register();
 
-        factory.classMap(User.class, DtoUser.class)
-                .byDefault()
-                .register();
+        factory.classMap(User.class, DtoUser.class).byDefault().register();
 
-        factory.classMap(User.class, UserDetailsDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(User.class, UserDetailsDto.class).byDefault().register();
 
         factory.classMap(User.class, DtoCreateUser.class)
                 .exclude("matchingPassword")
                 .byDefault()
                 .register();
 
-        factory.classMap(User.class, UpdateUserDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(User.class, UpdateUserDto.class).byDefault().register();
 
-        factory.classMap(Community.class, CommunityDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Community.class, CommunityDto.class).byDefault().register();
 
-        factory.classMap(Community.class, CreateCommunityDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Community.class, CreateCommunityDto.class).byDefault().register();
 
-        factory.classMap(CommunityMessage.class, CommunityMessageDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(CommunityMessage.class, CommunityMessageDto.class).byDefault().register();
 
-        factory.classMap(CommunityMessage.class, CreateMessageDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(CommunityMessage.class, CreateMessageDto.class).byDefault().register();
 
-        factory.classMap(Event.class, EventDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Event.class, EventDto.class).byDefault().register();
 
-        factory.classMap(Event.class, CreateEventDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Event.class, CreateEventDto.class).byDefault().register();
 
-        factory.classMap(EventMessage.class, EventMessageDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(EventMessage.class, EventMessageDto.class).byDefault().register();
 
-        factory.classMap(EventMessage.class, CreateMessageDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(EventMessage.class, CreateMessageDto.class).byDefault().register();
 
-        factory.classMap(Friendship.class, FriendshipDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Friendship.class, FriendshipDto.class).byDefault().register();
 
-        factory.classMap(Message.class, MessageDto.class)
-                .byDefault()
-                .register();
+        factory.classMap(Message.class, MessageDto.class).byDefault().register();
 
-        factory.classMap(Message.class, CreateMessageDto.class)
-                .byDefault()
-                .register();
-
+        factory.classMap(Message.class, CreateMessageDto.class).byDefault().register();
     }
 }

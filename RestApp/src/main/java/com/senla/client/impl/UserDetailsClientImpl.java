@@ -1,8 +1,8 @@
 package com.senla.client.impl;
 
-import com.senla.dto.user.UserDetailsDto;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.UserDetailsClient;
+import com.senla.dto.user.UserDetailsDto;
 import com.senla.property.RequestProperty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
@@ -10,9 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 public class UserDetailsClientImpl implements UserDetailsClient {
@@ -24,9 +22,12 @@ public class UserDetailsClientImpl implements UserDetailsClient {
 
     @Override
     public UserDetailsDto findByEmail(String email) {
-        return restTemplate.exchange(requestProperty.getHost() + URL,
-                HttpMethod.GET, new HttpEntity<>(httpHeaderBuilder.build(email)),
-                UserDetailsDto.class).getBody();
+        return restTemplate
+                .exchange(
+                        requestProperty.getHost() + URL,
+                        HttpMethod.GET,
+                        new HttpEntity<>(httpHeaderBuilder.build(email)),
+                        UserDetailsDto.class)
+                .getBody();
     }
-
 }

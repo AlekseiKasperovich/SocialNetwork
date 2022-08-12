@@ -8,22 +8,19 @@ import org.passay.PasswordGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 public class PasswordServiceImpl implements PasswordService {
 
     private final PasswordEncoder bCryptPasswordEncoder;
 
-    /**
-     * @return new generated password
-     */
+    /** @return new generated password */
     @Override
     public String generatePassword() {
         PasswordGenerator passwordGenerator = new PasswordGenerator();
-        return passwordGenerator.generatePassword(16,
+        return passwordGenerator.generatePassword(
+                16,
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),
                 new CharacterRule(EnglishCharacterData.LowerCase, 1),
                 new CharacterRule(EnglishCharacterData.Digit, 1));

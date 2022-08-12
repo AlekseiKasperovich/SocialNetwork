@@ -2,33 +2,25 @@ package com.senla.dto.user;
 
 import com.senla.validation.FieldsValueMatch;
 import com.senla.validation.ValidPassword;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@FieldsValueMatch(field = "password",
+@FieldsValueMatch(
+        field = "password",
         fieldMatch = "matchingPassword",
         message = "Passwords do not match!")
 public class DtoCreateUser {
 
-    @Email
-    @NotBlank
-    private String email;
+    @Email @NotBlank private String email;
 
-    @ValidPassword
-    @NotBlank
-    private String password;
+    @ValidPassword @NotBlank private String password;
 
-    @NotBlank
-    private String matchingPassword;
-
+    @NotBlank private String matchingPassword;
 }

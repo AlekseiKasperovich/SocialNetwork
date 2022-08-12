@@ -11,11 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/auth",
+@RequestMapping(
+        value = "/api/auth",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -32,9 +31,7 @@ public class AuthController {
         return authService.registerNewUserAccount(createUserDto);
     }
 
-    /**
-     * @param emailDto user email
-     */
+    /** @param emailDto user email */
     @PostMapping("password/new")
     public void sendPassword(@RequestBody ForgotPasswordDto emailDto) {
         authService.sendNewPassword(emailDto);

@@ -10,9 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -27,9 +25,12 @@ public class CustomCommunityServiceImpl implements CustomCommunityService {
     @Transactional(readOnly = true)
     @Override
     public Community findCommunityById(Long id) {
-        return communityRepository.findById(id).orElseThrow(
-                () -> new CommunityNotFoundException(
-                        String.format("Community with id = %s is not found", id)));
+        return communityRepository
+                .findById(id)
+                .orElseThrow(
+                        () ->
+                                new CommunityNotFoundException(
+                                        String.format("Community with id = %s is not found", id)));
     }
 
     /**
@@ -41,16 +42,14 @@ public class CustomCommunityServiceImpl implements CustomCommunityService {
         return communityRepository.save(community);
     }
 
-    /**
-     * @param id community ID
-     */
+    /** @param id community ID */
     @Override
     public void delete(Long id) {
         communityRepository.deleteById(id);
     }
 
     /**
-     * @param user      user
+     * @param user user
      * @param community community
      */
     @Override
@@ -59,5 +58,4 @@ public class CustomCommunityServiceImpl implements CustomCommunityService {
             throw new MyAccessDeniedException("Access is denied");
         }
     }
-
 }

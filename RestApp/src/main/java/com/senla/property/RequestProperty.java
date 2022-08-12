@@ -13,5 +13,4 @@ public class RequestProperty {
     private String email;
     private String host;
     private String question;
-
 }

@@ -14,9 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -78,5 +76,4 @@ public class CommunityServiceImpl implements CommunityService {
         Page<Community> communityPage = communityRepository.findAll(pageable);
         return communityPage.map(community -> mapper.map(community, CommunityDto.class));
     }
-
 }

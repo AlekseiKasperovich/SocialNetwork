@@ -1,15 +1,12 @@
 package com.senla.dto.community;
 
 import com.senla.dto.user.DtoUser;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

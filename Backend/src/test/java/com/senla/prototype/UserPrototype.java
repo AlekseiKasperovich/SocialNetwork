@@ -1,17 +1,14 @@
 package com.senla.prototype;
 
-import com.senla.dto.user.DtoUser;
 import com.senla.dto.constants.Gender;
 import com.senla.dto.constants.Roles;
 import com.senla.dto.constants.Status;
+import com.senla.dto.user.DtoUser;
 import com.senla.model.Role;
 import com.senla.model.User;
-
 import java.time.LocalDate;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public class UserPrototype {
 
     public static User getUser() {
@@ -20,7 +17,8 @@ public class UserPrototype {
                 .email("test@gmail.com")
                 .password("password")
                 .role(role)
-                .status(Status.ACTIVE).build();
+                .status(Status.ACTIVE)
+                .build();
     }
 
     public static DtoUser getUserDto() {

@@ -19,11 +19,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "api/admin/communities",
+@RequestMapping(
+        value = "api/admin/communities",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -34,36 +33,35 @@ public class AdminCommunityController {
 
     /**
      * @param createCommunityDto community name and description
-     * @param id                 id
+     * @param id id
      * @return community
      */
     @ApiOperation(value = "This method is used to create a community.")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Community successfully created"),
-            @ApiResponse(code = 400, message = "Bad request")
-    })
+    @ApiResponses(
+            value = {
+                @ApiResponse(code = 200, message = "Community successfully created"),
+                @ApiResponse(code = 400, message = "Bad request")
+            })
     @PostMapping
-    public CommunityDto createCommunity(@ApiParam(name = "Community name and description")
-                                        @RequestBody CreateCommunityDto createCommunityDto,
-                                        @ApiParam(name = "id")
-                                        @RequestHeader("${request.id}") Long id) {
+    public CommunityDto createCommunity(
+            @ApiParam(name = "Community name and description") @RequestBody
+                    CreateCommunityDto createCommunityDto,
+            @ApiParam(name = "id") @RequestHeader("${request.id}") Long id) {
         return adminCommunityService.createCommunity(createCommunityDto, id);
     }
 
     /**
-     * @param id                 community ID
+     * @param id community ID
      * @param createCommunityDto community name and description
      * @return updated community
      */
     @PutMapping("{id}")
-    public CommunityDto updateCommunity(@PathVariable Long id,
-                                        @RequestBody CreateCommunityDto createCommunityDto) {
+    public CommunityDto updateCommunity(
+            @PathVariable Long id, @RequestBody CreateCommunityDto createCommunityDto) {
         return adminCommunityService.updateCommunity(id, createCommunityDto);
     }
 
-    /**
-     * @param id community ID
-     */
+    /** @param id community ID */
     @DeleteMapping("{id}")
     public void deleteCommunity(@PathVariable Long id) {
         adminCommunityService.deleteCommunity(id);

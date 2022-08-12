@@ -1,8 +1,8 @@
 package com.senla.service.impl;
 
-import com.senla.dto.user.DtoUser;
 import com.senla.dto.constants.Roles;
 import com.senla.dto.constants.Status;
+import com.senla.dto.user.DtoUser;
 import com.senla.mapper.Mapper;
 import com.senla.model.User;
 import com.senla.service.AdminUserService;
@@ -11,9 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional

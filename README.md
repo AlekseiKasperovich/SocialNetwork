@@ -4,9 +4,9 @@
 ## SpringBoot Social Network Project
 ![image](https://images.theconversation.com/files/198568/original/file-20171211-15358-w51s6s.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=926&fit=clip)
 ## Description
- - [Class Diagram (UML)](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Class%20Diagram.pdf)
- - [Entity Relationship Diagram (MySQL)](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/mysql_db/ERD.pdf)
- - [Entity Relationship Diagram (PostgreSQL)](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/mysql_db/ERD.pdf)
+- [Class Diagram (UML)](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Class%20Diagram.pdf)
+- [Entity Relationship Diagram (MySQL)](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/mysql_db/ERD.pdf)
+- [Entity Relationship Diagram (PostgreSQL)](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/mysql_db/ERD.pdf)
 ## [Functionality](https://github.com/AlekseiKasperovich/SocialNetwork/blob/master/info/class%20diagramm/Functionality.pdf)
 ### Base
 - Registration
@@ -36,11 +36,11 @@
 - Create/update/remove communities
 - Block/unblock user
 
-## Technologies used 
+## Technologies used
 ### Stack:
 - Java 11
 - Spring: SpringBoot, MVC, Data JPA, Security, Mail, DevTools, Validation
-- Maven - tool that can be used for building and managing any Java-based project. 
+- Maven - tool that can be used for building and managing any Java-based project.
 - H2, PostgreSQL - databases.
 - Lombok - reducing boilerplate code.
 - Orika - is a Java Bean mapping framework that recursively copies data from one object to another.
@@ -49,43 +49,43 @@
 - Passay - password validation and generation.
 ### Environment
 - Docker for containerization
- 
- ## Quick start
- 
- ### Required:
- - Java 11
- - Maven 
- - Docker
- 
- ### Steps:
+
+## Quick start
+
+### Required:
+- Java 11
+- Maven
+- Docker
+
+### Steps:
 ```
- - git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
- - cd SocialNetwork
- - mvn clean package 
- - docker-compose up -d
- - Go to http://localhost:8080/swagger-ui/ - read api documentation 
+- git clone https://github.com/AlekseiKasperovich/SocialNetwork.git
+- cd SocialNetwork
+- mvn clean package
+- docker-compose up -d
+- Go to http://localhost:8080/swagger-ui/ - read api documentation
 ```
- ## Postman:
- You can import API specifications directly into Postman. To import data into Postman, select Import in upper left:
-  - select "Upload Files"
-  - choose SocialNetwork\info\postman\postman_backup
-  - click "Import"
+## Postman:
+You can import API specifications directly into Postman. To import data into Postman, select Import in upper left:
+- select "Upload Files"
+- choose SocialNetwork\info\postman\postman_backup
+- click "Import"
 
 Go to {{baseUrl}}/api/auth/login
 - You can login as user with role "Admin":
- - body:
+- body:
 {
-  "email": "admin@gmail.com",
-  "password": "Admin1",
-  "matchingPassword": "Admin1"
+"email": "admin@gmail.com",
+"password": "Admin1",
+"matchingPassword": "Admin1"
 }
 
 ... and with role "User":
- - body:
+- body:
 {
-  "email": "user@gmail.com",
-  "password": "User1",
-  "matchingPassword": "User1"
+"email": "user@gmail.com",
+"password": "User1",
+"matchingPassword": "User1"
 }
 
 Not secure requests:

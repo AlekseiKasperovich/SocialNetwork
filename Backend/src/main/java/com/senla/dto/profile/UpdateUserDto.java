@@ -2,15 +2,12 @@ package com.senla.dto.profile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.senla.dto.constants.Gender;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,5 +21,4 @@ public class UpdateUserDto {
 
     private Gender sex;
     private String phone;
-
 }

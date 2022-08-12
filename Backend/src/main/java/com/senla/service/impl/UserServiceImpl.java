@@ -1,5 +1,7 @@
 package com.senla.service.impl;
 
+import static org.springframework.data.jpa.domain.Specification.where;
+
 import com.senla.dto.user.DtoUser;
 import com.senla.mapper.Mapper;
 import com.senla.model.User;
@@ -14,11 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.data.jpa.domain.Specification.where;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -39,8 +37,8 @@ public class UserServiceImpl implements UserService {
 
     /**
      * @param firstName First Name
-     * @param lastName  Last Name
-     * @param pageable  pagination information
+     * @param lastName Last Name
+     * @param pageable pagination information
      * @return users
      */
     @Override
@@ -49,13 +47,14 @@ public class UserServiceImpl implements UserService {
             Page<User> userPage = userRepository.findAll(pageable);
             return userPage.map(user -> mapper.map(user, DtoUser.class));
         }
-        Specification<User> specification1 = (root, query, criteriaBuilder)
-                -> criteriaBuilder.like(root.get(User_.firstName), "%" + firstName + "%");
-        Specification<User> specification2 = (root, query, criteriaBuilder)
-                -> criteriaBuilder.like(root.get(User_.lastName), "%" + lastName + "%");
-        Page<User> userPage = userRepository.findAll(where(specification1).or(specification2), pageable);
+        Specification<User> specification1 =
+                (root, query, criteriaBuilder) ->
+                        criteriaBuilder.like(root.get(User_.firstName), "%" + firstName + "%");
+        Specification<User> specification2 =
+                (root, query, criteriaBuilder) ->
+                        criteriaBuilder.like(root.get(User_.lastName), "%" + lastName + "%");
+        Page<User> userPage =
+                userRepository.findAll(where(specification1).or(specification2), pageable);
         return userPage.map(user -> mapper.map(user, DtoUser.class));
-
     }
-
 }

@@ -1,5 +1,10 @@
 package com.senla.service.custom;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.senla.dto.constants.Roles;
 import com.senla.model.Role;
 import com.senla.repository.RoleRepository;
@@ -7,14 +12,7 @@ import com.senla.service.RoleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public class RoleServiceTest {
 
     private RoleRepository roleRepository;
@@ -26,9 +24,7 @@ public class RoleServiceTest {
         roleService = new RoleServiceImpl(roleRepository);
     }
 
-    /**
-     * Test of findByName method, of class RoleService.
-     */
+    /** Test of findByName method, of class RoleService. */
     @Test
     public void testFindByName() {
         Role role = new Role(Roles.ROLE_USER);
@@ -37,5 +33,4 @@ public class RoleServiceTest {
         assertThat(foundRole).isNotNull();
         assertThat(foundRole.getName()).isEqualTo(role.getName());
     }
-
 }

@@ -2,9 +2,7 @@ package com.senla.service;
 
 import com.senla.model.Friendship;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface CustomFriendshipService {
 
     Friendship findFriendshipById(Long id);

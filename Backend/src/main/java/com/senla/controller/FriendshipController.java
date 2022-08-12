@@ -16,11 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/friendships",
+@RequestMapping(
+        value = "/api/friendships",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -34,8 +33,8 @@ public class FriendshipController {
      * @return friendship
      */
     @GetMapping("{friendshipId}")
-    public FriendshipDto getFriendshipById(@PathVariable Long friendshipId,
-                                           @RequestHeader("${request.id}") Long id) {
+    public FriendshipDto getFriendshipById(
+            @PathVariable Long friendshipId, @RequestHeader("${request.id}") Long id) {
         return friendshipService.getFriendshipById(friendshipId, id);
     }
 
@@ -45,8 +44,8 @@ public class FriendshipController {
      * @return friendship
      */
     @PostMapping
-    public FriendshipDto addToFriends(@RequestParam Long friendId,
-                                      @RequestHeader("${request.id}") Long id) {
+    public FriendshipDto addToFriends(
+            @RequestParam Long friendId, @RequestHeader("${request.id}") Long id) {
         return friendshipService.createFriendship(friendId, id);
     }
 
@@ -56,8 +55,8 @@ public class FriendshipController {
      * @return accepted friendship
      */
     @PutMapping("{friendshipId}")
-    public FriendshipDto acceptFriendship(@PathVariable Long friendshipId,
-                                          @RequestHeader("${request.id}") Long id) {
+    public FriendshipDto acceptFriendship(
+            @PathVariable Long friendshipId, @RequestHeader("${request.id}") Long id) {
         return friendshipService.acceptFriendship(friendshipId, id);
     }
 
@@ -66,8 +65,8 @@ public class FriendshipController {
      * @param id id
      */
     @DeleteMapping("{friendshipId}")
-    public void declineFriendship(@PathVariable Long friendshipId,
-                                  @RequestHeader("${request.id}") Long id) {
+    public void declineFriendship(
+            @PathVariable Long friendshipId, @RequestHeader("${request.id}") Long id) {
         friendshipService.deleteFriendship(friendshipId, id);
     }
 

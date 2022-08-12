@@ -4,9 +4,7 @@ import com.senla.dto.profile.ChangePasswordDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface ProfileService {
 
     DtoUser getUserProfile(Long id);

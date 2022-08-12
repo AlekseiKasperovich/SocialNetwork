@@ -17,9 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -59,7 +57,7 @@ public class EventServiceImpl implements EventService {
     }
 
     /**
-     * @param eventId        event ID
+     * @param eventId event ID
      * @param createEventDto event name and description
      * @param id id
      * @return updated event
@@ -85,7 +83,7 @@ public class EventServiceImpl implements EventService {
 
     /**
      * @param eventId event ID
-     * @param userId  user ID
+     * @param userId user ID
      * @param id id
      * @return event
      */
@@ -104,7 +102,7 @@ public class EventServiceImpl implements EventService {
 
     /**
      * @param eventId event ID
-     * @param userId  user ID
+     * @param userId user ID
      * @param id id
      * @return event
      */
@@ -135,12 +133,11 @@ public class EventServiceImpl implements EventService {
 
     /**
      * @param event event
-     * @param id    event author ID
+     * @param id event author ID
      */
     private void checkEventAuthor(Event event, Long id) {
         if (!event.getAuthor().getId().equals(id)) {
             throw new MyAccessDeniedException("Access is denied");
         }
     }
-
 }

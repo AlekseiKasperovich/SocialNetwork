@@ -5,9 +5,7 @@ import com.senla.dto.event.EventDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface EventService {
 
     EventDto getEventById(Long eventId, Long id);
@@ -23,5 +21,4 @@ public interface EventService {
     EventDto deleteUser(Long eventId, Long userId, Long id);
 
     Page<EventDto> findMyEvents(Long id, Pageable pageable);
-
 }

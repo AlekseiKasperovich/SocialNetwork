@@ -5,9 +5,7 @@ import com.senla.dto.message.MessageDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface MessageService {
 
     MessageDto getMessageById(Long messageId, Long id);

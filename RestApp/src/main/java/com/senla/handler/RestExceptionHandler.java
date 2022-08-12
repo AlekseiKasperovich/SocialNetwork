@@ -2,6 +2,8 @@ package com.senla.handler;
 
 import com.senla.exception.ExceptionDetails;
 import com.senla.exception.MyAccessDeniedException;
+import java.time.LocalDateTime;
+import javax.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -19,12 +21,7 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import javax.validation.ConstraintViolationException;
-import java.time.LocalDateTime;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Slf4j
 @RestControllerAdvice
 @RequiredArgsConstructor
@@ -33,56 +30,82 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     private final MessageSource messageSource;
 
     @ExceptionHandler({HttpClientErrorException.class})
-    public ResponseEntity<Object> handleHttpClientErrorException(HttpClientErrorException ex, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.http.client.error", HttpStatus.CONFLICT, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
+    public ResponseEntity<Object> handleHttpClientErrorException(
+            HttpClientErrorException ex, WebRequest request) {
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.http.client.error", HttpStatus.CONFLICT, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler({AuthenticationException.class})
-    public ResponseEntity<Object> handleAuthenticationException(AuthenticationException ex, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.authentication.error", HttpStatus.UNAUTHORIZED, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    public ResponseEntity<Object> handleAuthenticationException(
+            AuthenticationException ex, WebRequest request) {
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.authentication.error", HttpStatus.UNAUTHORIZED, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
     @ExceptionHandler({LockedException.class})
     public ResponseEntity<Object> handleLockedException(LockedException ex, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.account.is.locked.error", HttpStatus.UNAUTHORIZED, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.account.is.locked.error", HttpStatus.UNAUTHORIZED, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers,
-                                                                  HttpStatus status, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex,
+            HttpHeaders headers,
+            HttpStatus status,
+            WebRequest request) {
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.error", HttpStatus.INTERNAL_SERVER_ERROR, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.error", HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
-    @ExceptionHandler({MyAccessDeniedException.class, BadCredentialsException.class, ResourceAccessException.class})
-    public ResponseEntity<Object> handleMyAccessDeniedException(RuntimeException ex, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.access.denied.error", HttpStatus.FORBIDDEN, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
+    @ExceptionHandler({
+        MyAccessDeniedException.class,
+        BadCredentialsException.class,
+        ResourceAccessException.class
+    })
+    public ResponseEntity<Object> handleMyAccessDeniedException(
+            RuntimeException ex, WebRequest request) {
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.access.denied.error", HttpStatus.FORBIDDEN, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
     @ExceptionHandler({ConstraintViolationException.class})
-    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex, WebRequest request) {
-        ExceptionDetails details = exceptionDetailsBuilder(
-                ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
-        return handleExceptionInternal(ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    public ResponseEntity<Object> handleConstraintViolationException(
+            ConstraintViolationException ex, WebRequest request) {
+        ExceptionDetails details =
+                exceptionDetailsBuilder(
+                        ex, "message.validation.error", HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(
+                ex, details, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-    private ExceptionDetails exceptionDetailsBuilder(Exception ex, String code, HttpStatus status, WebRequest request) {
+    private ExceptionDetails exceptionDetailsBuilder(
+            Exception ex, String code, HttpStatus status, WebRequest request) {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage(code, null, request.getLocale());
         return ExceptionDetails.builder()
@@ -90,6 +113,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                 .detail(ex.getMessage())
                 .status(status.value())
                 .message(message)
-                .time(LocalDateTime.now()).build();
+                .time(LocalDateTime.now())
+                .build();
     }
 }

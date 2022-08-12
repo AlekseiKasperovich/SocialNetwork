@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/users/profile",
+@RequestMapping(
+        value = "/api/users/profile",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -42,8 +41,8 @@ public class ProfileController {
      * @return updated user profile
      */
     @PutMapping
-    public DtoUser updateProfile(@RequestBody UpdateUserDto updateUserDto,
-                                 @RequestHeader("${request.id}") Long id) {
+    public DtoUser updateProfile(
+            @RequestBody UpdateUserDto updateUserDto, @RequestHeader("${request.id}") Long id) {
         return profileService.updateUser(updateUserDto, id);
     }
 
@@ -53,8 +52,9 @@ public class ProfileController {
      * @return updated user profile
      */
     @PatchMapping
-    public DtoUser changePassword(@RequestBody ChangePasswordDto changePasswordDto,
-                                  @RequestHeader("${request.id}") Long id) {
+    public DtoUser changePassword(
+            @RequestBody ChangePasswordDto changePasswordDto,
+            @RequestHeader("${request.id}") Long id) {
         return profileService.changePassword(changePasswordDto, id);
     }
 

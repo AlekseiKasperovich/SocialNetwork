@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/events",
+@RequestMapping(
+        value = "/api/events",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -35,8 +34,8 @@ public class EventController {
      * @return event
      */
     @GetMapping("{eventId}")
-    public EventDto getEventById(@PathVariable Long eventId,
-                                 @RequestHeader("${request.id}") Long id) {
+    public EventDto getEventById(
+            @PathVariable Long eventId, @RequestHeader("${request.id}") Long id) {
         return eventService.getEventById(eventId, id);
     }
 
@@ -46,21 +45,22 @@ public class EventController {
      * @return event
      */
     @PostMapping
-    public EventDto createEvent(@RequestBody CreateEventDto createEventDto,
-                                @RequestHeader("${request.id}") Long id) {
+    public EventDto createEvent(
+            @RequestBody CreateEventDto createEventDto, @RequestHeader("${request.id}") Long id) {
         return eventService.createEvent(createEventDto, id);
     }
 
     /**
-     * @param eventId        event ID
+     * @param eventId event ID
      * @param createEventDto event name and description
      * @param id id
      * @return updated event
      */
     @PutMapping("{eventId}")
-    public EventDto updateEvent(@PathVariable Long eventId,
-                                @RequestBody CreateEventDto createEventDto,
-                                @RequestHeader("${request.id}") Long id) {
+    public EventDto updateEvent(
+            @PathVariable Long eventId,
+            @RequestBody CreateEventDto createEventDto,
+            @RequestHeader("${request.id}") Long id) {
         return eventService.updateEvent(eventId, createEventDto, id);
     }
 
@@ -69,34 +69,35 @@ public class EventController {
      * @param id id
      */
     @DeleteMapping("{eventId}")
-    public void deleteEvent(@PathVariable Long eventId,
-                            @RequestHeader("${request.id}") Long id) {
+    public void deleteEvent(@PathVariable Long eventId, @RequestHeader("${request.id}") Long id) {
         eventService.deleteEvent(eventId, id);
     }
 
     /**
      * @param eventId event ID
-     * @param userId  user ID
+     * @param userId user ID
      * @param id id
      * @return event
      */
     @PutMapping("{eventId}/users/{userId}")
-    public EventDto addUserToEvent(@PathVariable Long eventId,
-                                   @PathVariable Long userId,
-                                   @RequestHeader("${request.id}") Long id) {
+    public EventDto addUserToEvent(
+            @PathVariable Long eventId,
+            @PathVariable Long userId,
+            @RequestHeader("${request.id}") Long id) {
         return eventService.addUser(eventId, userId, id);
     }
 
     /**
      * @param eventId event ID
-     * @param userId  user ID
+     * @param userId user ID
      * @param id id
      * @return event
      */
     @DeleteMapping("{eventId}/users/{userId}")
-    public EventDto deleteUserFromEvent(@PathVariable Long eventId,
-                                        @PathVariable Long userId,
-                                        @RequestHeader("${request.id}") Long id) {
+    public EventDto deleteUserFromEvent(
+            @PathVariable Long eventId,
+            @PathVariable Long userId,
+            @RequestHeader("${request.id}") Long id) {
         return eventService.deleteUser(eventId, userId, id);
     }
 
@@ -106,8 +107,7 @@ public class EventController {
      * @return events
      */
     @GetMapping
-    public Page<EventDto> findMyEvents(
-            @RequestHeader("${request.id}") Long id, Pageable pageable) {
+    public Page<EventDto> findMyEvents(@RequestHeader("${request.id}") Long id, Pageable pageable) {
         return eventService.findMyEvents(id, pageable);
     }
 }

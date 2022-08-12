@@ -1,14 +1,11 @@
 package com.senla.security;
 
+import java.util.Collection;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Builder
 public class UserDetailsImpl implements UserDetails {
 
@@ -56,5 +53,4 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return isActive;
     }
-
 }

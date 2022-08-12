@@ -4,9 +4,7 @@ import com.senla.dto.friendship.FriendshipDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface FriendshipService {
 
     FriendshipDto getFriendshipById(Long friendshipId, Long id);
@@ -20,5 +18,4 @@ public interface FriendshipService {
     Page<FriendshipDto> findAll(Long id, Pageable pageable);
 
     Page<FriendshipDto> findMyFriendshipRequests(Long id, Pageable pageable);
-
 }

@@ -1,7 +1,8 @@
 package com.senla.controller;
 
-import com.senla.dto.friendship.FriendshipDto;
 import com.senla.client.FriendshipRestClient;
+import com.senla.dto.friendship.FriendshipDto;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,13 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/friendships",
+@RequestMapping(
+        value = "/api/friendships",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -56,9 +54,7 @@ public class FriendshipController {
         return friendshipRestClient.acceptFriendship(friendshipId);
     }
 
-    /**
-     * @param friendshipId friendship ID
-     */
+    /** @param friendshipId friendship ID */
     @DeleteMapping("{friendshipId}")
     public void declineFriendship(@PathVariable Long friendshipId) {
         friendshipRestClient.deleteFriendship(friendshipId);
@@ -70,8 +66,8 @@ public class FriendshipController {
      * @return friend request list
      */
     @GetMapping("requests")
-    public Page<FriendshipDto> findMyFriendshipRequests(Pageable pageable,
-                                                        HttpServletRequest request) {
+    public Page<FriendshipDto> findMyFriendshipRequests(
+            Pageable pageable, HttpServletRequest request) {
         return friendshipRestClient.findMyFriendshipRequests(pageable, request);
     }
 

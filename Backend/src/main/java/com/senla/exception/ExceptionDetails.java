@@ -1,13 +1,10 @@
 package com.senla.exception;
 
+import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Data
 @Builder
 public class ExceptionDetails {

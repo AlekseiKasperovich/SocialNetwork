@@ -3,9 +3,7 @@ package com.senla.service;
 import com.senla.dto.community.CommunityDto;
 import com.senla.dto.community.CreateCommunityDto;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface AdminCommunityService {
 
     CommunityDto createCommunity(CreateCommunityDto createCommunityDto, Long id);

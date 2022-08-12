@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
-@RequestMapping(value = "/api/communities/{communityId}/messages",
+@RequestMapping(
+        value = "/api/communities/{communityId}/messages",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -30,67 +29,74 @@ public class CommunityMessageController {
     private final CommunityMessageService communityMessageService;
 
     /**
-     * @param communityId      community ID
+     * @param communityId community ID
      * @param createMessageDto message body
-     * @param id               id
+     * @param id id
      * @return message
      */
     @PostMapping
-    public CommunityMessageDto createMessage(@PathVariable Long communityId,
-                                             @RequestBody CreateMessageDto createMessageDto,
-                                             @RequestHeader("${request.id}") Long id) {
+    public CommunityMessageDto createMessage(
+            @PathVariable Long communityId,
+            @RequestBody CreateMessageDto createMessageDto,
+            @RequestHeader("${request.id}") Long id) {
         return communityMessageService.createCommunityMessage(communityId, createMessageDto, id);
     }
 
     /**
      * @param communityId community ID
-     * @param messageId   message ID
-     * @param id          id
+     * @param messageId message ID
+     * @param id id
      * @return message
      */
     @GetMapping("{messageId}")
-    public CommunityMessageDto getMessageById(@PathVariable Long communityId,
-                                              @PathVariable Long messageId,
-                                              @RequestHeader("${request.id}") Long id) {
+    public CommunityMessageDto getMessageById(
+            @PathVariable Long communityId,
+            @PathVariable Long messageId,
+            @RequestHeader("${request.id}") Long id) {
         return communityMessageService.getCommunityMessageById(communityId, messageId, id);
     }
 
     /**
-     * @param communityId      community ID
-     * @param messageId        message ID
+     * @param communityId community ID
+     * @param messageId message ID
      * @param createMessageDto message body
-     * @param id               id
+     * @param id id
      * @return updated message
      */
     @PutMapping("{messageId}")
-    public CommunityMessageDto updateMessage(@PathVariable Long communityId,
-                                             @PathVariable Long messageId,
-                                             @RequestBody CreateMessageDto createMessageDto,
-                                             @RequestHeader("${request.id}") Long id) {
-        return communityMessageService.updateCommunityMessage(communityId, messageId, createMessageDto, id);
+    public CommunityMessageDto updateMessage(
+            @PathVariable Long communityId,
+            @PathVariable Long messageId,
+            @RequestBody CreateMessageDto createMessageDto,
+            @RequestHeader("${request.id}") Long id) {
+        return communityMessageService.updateCommunityMessage(
+                communityId, messageId, createMessageDto, id);
     }
 
     /**
      * @param communityId community ID
-     * @param messageId   message ID
-     * @param id          id
+     * @param messageId message ID
+     * @param id id
      */
     @DeleteMapping("{messageId}")
-    public void deleteMessage(@PathVariable Long communityId,
-                              @PathVariable Long messageId,
-                              @RequestHeader("${request.id}") Long id) {
+    public void deleteMessage(
+            @PathVariable Long communityId,
+            @PathVariable Long messageId,
+            @RequestHeader("${request.id}") Long id) {
         communityMessageService.deleteCommunityMessage(communityId, messageId, id);
     }
 
     /**
      * @param communityId community ID
-     * @param id          id
-     * @param pageable    pagination information
+     * @param id id
+     * @param pageable pagination information
      * @return messages
      */
     @GetMapping
-    public Page<CommunityMessageDto> findAllMessages(@PathVariable Long communityId,
-                                                     @RequestHeader("${request.id}") Long id, Pageable pageable) {
+    public Page<CommunityMessageDto> findAllMessages(
+            @PathVariable Long communityId,
+            @RequestHeader("${request.id}") Long id,
+            Pageable pageable) {
         return communityMessageService.findAll(communityId, id, pageable);
     }
 }

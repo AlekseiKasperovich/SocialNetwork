@@ -4,9 +4,7 @@ import com.senla.dto.community.CommunityDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface CommunityService {
 
     CommunityDto getCommunityById(Long id);
