@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.dto.event.EventMessageDto;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.service.EventMessageService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,9 +37,9 @@ public class EventMessageController {
      */
     @PostMapping
     public EventMessageDto createMessage(
-            @PathVariable Long eventId,
+            @PathVariable UUID eventId,
             @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return eventMessageService.createEventMessage(eventId, createMessageDto, id);
     }
 
@@ -50,9 +51,9 @@ public class EventMessageController {
      */
     @GetMapping("{messageId}")
     public EventMessageDto getMessageById(
-            @PathVariable Long eventId,
-            @PathVariable Long messageId,
-            @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID eventId,
+            @PathVariable UUID messageId,
+            @RequestHeader("${request.id}") UUID id) {
         return eventMessageService.getEventMessageById(eventId, messageId, id);
     }
 
@@ -65,10 +66,10 @@ public class EventMessageController {
      */
     @PutMapping("{messageId}")
     public EventMessageDto updateMessage(
-            @PathVariable Long eventId,
-            @PathVariable Long messageId,
+            @PathVariable UUID eventId,
+            @PathVariable UUID messageId,
             @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return eventMessageService.updateEventMessage(eventId, messageId, createMessageDto, id);
     }
 
@@ -79,9 +80,9 @@ public class EventMessageController {
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(
-            @PathVariable Long eventId,
-            @PathVariable Long messageId,
-            @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID eventId,
+            @PathVariable UUID messageId,
+            @RequestHeader("${request.id}") UUID id) {
         eventMessageService.deleteEventMessage(eventId, messageId, id);
     }
 
@@ -93,8 +94,8 @@ public class EventMessageController {
      */
     @GetMapping
     public Page<EventMessageDto> findAllMessages(
-            @PathVariable Long eventId,
-            @RequestHeader("${request.id}") Long id,
+            @PathVariable UUID eventId,
+            @RequestHeader("${request.id}") UUID id,
             Pageable pageable) {
         return eventMessageService.findAll(eventId, id, pageable);
     }

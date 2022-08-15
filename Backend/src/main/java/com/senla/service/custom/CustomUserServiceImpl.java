@@ -5,6 +5,7 @@ import com.senla.exception.UserNotFoundException;
 import com.senla.model.User;
 import com.senla.repository.UserRepository;
 import com.senla.service.CustomUserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class CustomUserServiceImpl implements CustomUserService {
      * @return user
      */
     @Override
-    public User findUserById(Long id) {
+    public User findUserById(UUID id) {
         return userRepository
                 .findById(id)
                 .orElseThrow(

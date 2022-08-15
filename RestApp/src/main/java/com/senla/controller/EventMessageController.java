@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.client.EventMessageRestClient;
 import com.senla.dto.event.EventMessageDto;
 import com.senla.dto.message.CreateMessageDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ public class EventMessageController {
      */
     @GetMapping("{messageId}")
     public EventMessageDto getMessageById(
-            @PathVariable Long eventId, @PathVariable Long messageId) {
+            @PathVariable UUID eventId, @PathVariable UUID messageId) {
         return eventMessageRestClient.getEventMessageById(eventId, messageId);
     }
 
@@ -47,7 +48,7 @@ public class EventMessageController {
      */
     @PostMapping
     public EventMessageDto createMessage(
-            @PathVariable Long eventId, @Valid @RequestBody CreateMessageDto createMessageDto) {
+            @PathVariable UUID eventId, @Valid @RequestBody CreateMessageDto createMessageDto) {
         return eventMessageRestClient.createEventMessage(eventId, createMessageDto);
     }
 
@@ -59,8 +60,8 @@ public class EventMessageController {
      */
     @PutMapping("{messageId}")
     public EventMessageDto updateMessage(
-            @PathVariable Long eventId,
-            @PathVariable Long messageId,
+            @PathVariable UUID eventId,
+            @PathVariable UUID messageId,
             @Valid @RequestBody CreateMessageDto createMessageDto) {
         return eventMessageRestClient.updateEventMessage(eventId, messageId, createMessageDto);
     }
@@ -70,7 +71,7 @@ public class EventMessageController {
      * @param messageId message ID
      */
     @DeleteMapping("{messageId}")
-    public void deleteMessage(@PathVariable Long eventId, @PathVariable Long messageId) {
+    public void deleteMessage(@PathVariable UUID eventId, @PathVariable UUID messageId) {
         eventMessageRestClient.deleteEventMessage(eventId, messageId);
     }
 
@@ -82,7 +83,7 @@ public class EventMessageController {
      */
     @GetMapping
     public Page<EventMessageDto> findAllMessages(
-            @PathVariable Long eventId, Pageable pageable, HttpServletRequest request) {
+            @PathVariable UUID eventId, Pageable pageable, HttpServletRequest request) {
         return eventMessageRestClient.findAll(eventId, pageable, request);
     }
 }

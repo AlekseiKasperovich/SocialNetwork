@@ -1,6 +1,7 @@
 package com.senla.client.impl;
 
 import com.senla.security.UserDetailsImpl;
+import java.util.UUID;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -12,10 +13,10 @@ public abstract class CurrentUserService {
         return authentication == null ? null : authentication.getName();
     }
 
-    protected static String getCurrentUserId() {
+    protected static UUID getCurrentUserId() {
         UserDetailsImpl user =
                 (UserDetailsImpl)
                         SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return Long.toString(user.getId());
+        return user.getId();
     }
 }

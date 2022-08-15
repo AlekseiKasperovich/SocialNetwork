@@ -42,7 +42,7 @@ public class RestResponsePage<T> extends PageImpl<T> {
         super(content, PageRequest.of(number, size), totalElements);
     }
 
-    public RestResponsePage(List<T> content, Pageable pageable, long total) {
+    public RestResponsePage(List<T> content, Pageable pageable, Long total) {
         super(content, pageable, total);
     }
 

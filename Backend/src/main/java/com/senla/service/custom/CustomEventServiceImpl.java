@@ -6,6 +6,7 @@ import com.senla.model.Event;
 import com.senla.model.User;
 import com.senla.repository.EventRepository;
 import com.senla.service.CustomEventService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +24,7 @@ public class CustomEventServiceImpl implements CustomEventService {
      * @return event
      */
     @Override
-    public Event findEventById(Long id) {
+    public Event findEventById(UUID id) {
         return eventRepository
                 .findById(id)
                 .orElseThrow(

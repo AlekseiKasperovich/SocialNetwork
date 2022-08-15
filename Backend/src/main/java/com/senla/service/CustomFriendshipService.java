@@ -1,11 +1,12 @@
 package com.senla.service;
 
 import com.senla.model.Friendship;
+import java.util.UUID;
 
 /** @author Aliaksei Kaspiarovich */
 public interface CustomFriendshipService {
 
-    Friendship findFriendshipById(Long id);
+    Friendship findFriendshipById(UUID id);
 
-    boolean checkFriendship(Long userId, Long friendId);
+    boolean checkFriendship(UUID userId, UUID friendId);
 }

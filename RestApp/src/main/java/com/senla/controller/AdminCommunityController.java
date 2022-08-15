@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.client.AdminCommunityRestClient;
 import com.senla.dto.community.CommunityDto;
 import com.senla.dto.community.CreateCommunityDto;
+import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -41,13 +42,13 @@ public class AdminCommunityController {
      */
     @PutMapping("{id}")
     public CommunityDto updateCommunity(
-            @PathVariable Long id, @Valid @RequestBody CreateCommunityDto createCommunityDto) {
+            @PathVariable UUID id, @Valid @RequestBody CreateCommunityDto createCommunityDto) {
         return adminCommunityRestClient.updateCommunity(id, createCommunityDto);
     }
 
     /** @param id community ID */
     @DeleteMapping("{id}")
-    public void deleteCommunity(@PathVariable Long id) {
+    public void deleteCommunity(@PathVariable UUID id) {
         adminCommunityRestClient.deleteCommunity(id);
     }
 }

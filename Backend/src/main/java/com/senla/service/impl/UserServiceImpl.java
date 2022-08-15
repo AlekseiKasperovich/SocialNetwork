@@ -9,6 +9,7 @@ import com.senla.model.User_;
 import com.senla.repository.UserRepository;
 import com.senla.service.CustomUserService;
 import com.senla.service.UserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService {
      * @return user
      */
     @Override
-    public DtoUser getUserById(Long id) {
+    public DtoUser getUserById(UUID id) {
         return mapper.map(userService.findUserById(id), DtoUser.class);
     }
 

@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.dto.message.MessageDto;
 import com.senla.service.MessageService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +37,7 @@ public class MessageController {
      */
     @GetMapping("{messageId}")
     public MessageDto getMessageById(
-            @PathVariable Long messageId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID messageId, @RequestHeader("${request.id}") UUID id) {
         return messageService.getMessageById(messageId, id);
     }
 
@@ -48,9 +49,9 @@ public class MessageController {
      */
     @PostMapping
     public MessageDto createMessage(
-            @RequestParam Long receiverId,
+            @RequestParam UUID receiverId,
             @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return messageService.createMessage(receiverId, createMessageDto, id);
     }
 
@@ -62,9 +63,9 @@ public class MessageController {
      */
     @PutMapping("{messageId}")
     public MessageDto updateMessage(
-            @PathVariable Long messageId,
+            @PathVariable UUID messageId,
             @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return messageService.updateMessage(messageId, createMessageDto, id);
     }
 
@@ -74,7 +75,7 @@ public class MessageController {
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(
-            @PathVariable Long messageId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID messageId, @RequestHeader("${request.id}") UUID id) {
         messageService.deleteMessage(messageId, id);
     }
 
@@ -86,8 +87,8 @@ public class MessageController {
      */
     @GetMapping
     public Page<MessageDto> findMyMessages(
-            @RequestParam Long receiverId,
-            @RequestHeader("${request.id}") Long id,
+            @RequestParam UUID receiverId,
+            @RequestHeader("${request.id}") UUID id,
             Pageable pageable) {
         return messageService.findAll(receiverId, id, pageable);
     }

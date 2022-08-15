@@ -2,6 +2,7 @@ package com.senla.client;
 
 import com.senla.dto.event.CreateEventDto;
 import com.senla.dto.event.EventDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,17 +10,17 @@ import org.springframework.data.domain.Pageable;
 /** @author Aliaksei Kaspiarovich */
 public interface EventRestClient {
 
-    EventDto getEventById(Long eventId);
+    EventDto getEventById(UUID eventId);
 
     EventDto createEvent(CreateEventDto createEventDto);
 
-    EventDto updateEvent(Long eventId, CreateEventDto createEventDto);
+    EventDto updateEvent(UUID eventId, CreateEventDto createEventDto);
 
-    void deleteEvent(Long eventId);
+    void deleteEvent(UUID eventId);
 
-    EventDto addUser(Long eventId, Long userId);
+    EventDto addUser(UUID eventId, UUID userId);
 
-    EventDto deleteUser(Long eventId, Long userId);
+    EventDto deleteUser(UUID eventId, UUID userId);
 
     Page<EventDto> findMyEvents(Pageable pageable, HttpServletRequest request);
 }

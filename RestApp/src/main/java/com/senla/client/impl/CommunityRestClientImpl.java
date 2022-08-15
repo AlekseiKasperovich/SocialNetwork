@@ -4,6 +4,7 @@ import com.senla.client.CommunityRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.community.CommunityDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -25,7 +26,7 @@ public class CommunityRestClientImpl implements CommunityRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public CommunityDto getCommunityById(Long communityId) {
+    public CommunityDto getCommunityById(UUID communityId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + communityId,
@@ -36,7 +37,7 @@ public class CommunityRestClientImpl implements CommunityRestClient {
     }
 
     @Override
-    public CommunityDto addUser(Long communityId) {
+    public CommunityDto addUser(UUID communityId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + communityId,
@@ -47,7 +48,7 @@ public class CommunityRestClientImpl implements CommunityRestClient {
     }
 
     @Override
-    public CommunityDto deleteUser(Long communityId) {
+    public CommunityDto deleteUser(UUID communityId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + communityId,

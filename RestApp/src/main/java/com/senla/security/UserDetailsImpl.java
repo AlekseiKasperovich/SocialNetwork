@@ -1,6 +1,7 @@
 package com.senla.security;
 
 import java.util.Collection;
+import java.util.UUID;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,13 +10,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Builder
 public class UserDetailsImpl implements UserDetails {
 
-    private Long id;
+    private UUID id;
     private final String username;
     private final String password;
     private final Collection<? extends GrantedAuthority> authorities;
     private final boolean isActive;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 

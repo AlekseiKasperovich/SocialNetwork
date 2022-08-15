@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.dto.event.CreateEventDto;
 import com.senla.dto.event.EventDto;
 import com.senla.service.EventService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public class EventController {
      */
     @GetMapping("{eventId}")
     public EventDto getEventById(
-            @PathVariable Long eventId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID eventId, @RequestHeader("${request.id}") UUID id) {
         return eventService.getEventById(eventId, id);
     }
 
@@ -46,7 +47,7 @@ public class EventController {
      */
     @PostMapping
     public EventDto createEvent(
-            @RequestBody CreateEventDto createEventDto, @RequestHeader("${request.id}") Long id) {
+            @RequestBody CreateEventDto createEventDto, @RequestHeader("${request.id}") UUID id) {
         return eventService.createEvent(createEventDto, id);
     }
 
@@ -58,9 +59,9 @@ public class EventController {
      */
     @PutMapping("{eventId}")
     public EventDto updateEvent(
-            @PathVariable Long eventId,
+            @PathVariable UUID eventId,
             @RequestBody CreateEventDto createEventDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return eventService.updateEvent(eventId, createEventDto, id);
     }
 
@@ -69,7 +70,7 @@ public class EventController {
      * @param id id
      */
     @DeleteMapping("{eventId}")
-    public void deleteEvent(@PathVariable Long eventId, @RequestHeader("${request.id}") Long id) {
+    public void deleteEvent(@PathVariable UUID eventId, @RequestHeader("${request.id}") UUID id) {
         eventService.deleteEvent(eventId, id);
     }
 
@@ -81,9 +82,9 @@ public class EventController {
      */
     @PutMapping("{eventId}/users/{userId}")
     public EventDto addUserToEvent(
-            @PathVariable Long eventId,
-            @PathVariable Long userId,
-            @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID eventId,
+            @PathVariable UUID userId,
+            @RequestHeader("${request.id}") UUID id) {
         return eventService.addUser(eventId, userId, id);
     }
 
@@ -95,9 +96,9 @@ public class EventController {
      */
     @DeleteMapping("{eventId}/users/{userId}")
     public EventDto deleteUserFromEvent(
-            @PathVariable Long eventId,
-            @PathVariable Long userId,
-            @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID eventId,
+            @PathVariable UUID userId,
+            @RequestHeader("${request.id}") UUID id) {
         return eventService.deleteUser(eventId, userId, id);
     }
 
@@ -107,7 +108,7 @@ public class EventController {
      * @return events
      */
     @GetMapping
-    public Page<EventDto> findMyEvents(@RequestHeader("${request.id}") Long id, Pageable pageable) {
+    public Page<EventDto> findMyEvents(@RequestHeader("${request.id}") UUID id, Pageable pageable) {
         return eventService.findMyEvents(id, pageable);
     }
 }

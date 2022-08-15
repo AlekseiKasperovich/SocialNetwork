@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.client.FriendshipRestClient;
 import com.senla.dto.friendship.FriendshipDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public class FriendshipController {
      * @return friendship
      */
     @GetMapping("{friendshipId}")
-    public FriendshipDto getFriendshipById(@PathVariable Long friendshipId) {
+    public FriendshipDto getFriendshipById(@PathVariable UUID friendshipId) {
         return friendshipRestClient.getFriendshipById(friendshipId);
     }
 
@@ -41,7 +42,7 @@ public class FriendshipController {
      * @return friendship
      */
     @PostMapping
-    public FriendshipDto addToFriends(@RequestParam Long friendId) {
+    public FriendshipDto addToFriends(@RequestParam UUID friendId) {
         return friendshipRestClient.createFriendship(friendId);
     }
 
@@ -50,13 +51,13 @@ public class FriendshipController {
      * @return accepted friendship
      */
     @PutMapping("{friendshipId}")
-    public FriendshipDto acceptFriendship(@PathVariable Long friendshipId) {
+    public FriendshipDto acceptFriendship(@PathVariable UUID friendshipId) {
         return friendshipRestClient.acceptFriendship(friendshipId);
     }
 
     /** @param friendshipId friendship ID */
     @DeleteMapping("{friendshipId}")
-    public void declineFriendship(@PathVariable Long friendshipId) {
+    public void declineFriendship(@PathVariable UUID friendshipId) {
         friendshipRestClient.deleteFriendship(friendshipId);
     }
 

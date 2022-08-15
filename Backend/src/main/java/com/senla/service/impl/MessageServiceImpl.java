@@ -10,6 +10,7 @@ import com.senla.repository.MessageRepository;
 import com.senla.service.CustomUserService;
 import com.senla.service.MessageService;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -35,7 +36,7 @@ public class MessageServiceImpl implements MessageService {
      * @return message
      */
     @Transactional(readOnly = true)
-    public Message findMessageById(Long id) {
+    public Message findMessageById(UUID id) {
         return messageRepository
                 .findById(id)
                 .orElseThrow(
@@ -50,7 +51,7 @@ public class MessageServiceImpl implements MessageService {
      * @return message
      */
     @Override
-    public MessageDto getMessageById(Long messageId, Long id) {
+    public MessageDto getMessageById(UUID messageId, UUID id) {
         Message message = findMessageById(messageId);
         if (message.getSender().getId().equals(id) || message.getReceiver().getId().equals(id)) {
             return mapper.map(message, MessageDto.class);
@@ -65,7 +66,7 @@ public class MessageServiceImpl implements MessageService {
      * @return message
      */
     @Override
-    public MessageDto createMessage(Long receiverId, CreateMessageDto createMessageDto, Long id) {
+    public MessageDto createMessage(UUID receiverId, CreateMessageDto createMessageDto, UUID id) {
         Message message =
                 Message.builder()
                         .posted(LocalDateTime.now())
@@ -87,7 +88,7 @@ public class MessageServiceImpl implements MessageService {
      * @return updated message
      */
     @Override
-    public MessageDto updateMessage(Long messageId, CreateMessageDto createMessageDto, Long id) {
+    public MessageDto updateMessage(UUID messageId, CreateMessageDto createMessageDto, UUID id) {
         Message message = findMessageById(messageId);
         if (message.getSender().getId().equals(id)) {
             message.setBody(createMessageDto.getBody());
@@ -101,7 +102,7 @@ public class MessageServiceImpl implements MessageService {
      * @param id id
      */
     @Override
-    public void deleteMessage(Long messageId, Long id) {
+    public void deleteMessage(UUID messageId, UUID id) {
         Message message = findMessageById(messageId);
         if (message.getSender().getId().equals(id)) {
             messageRepository.deleteById(messageId);
@@ -118,7 +119,7 @@ public class MessageServiceImpl implements MessageService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<MessageDto> findAll(Long receiverId, Long id, Pageable pageable) {
+    public Page<MessageDto> findAll(UUID receiverId, UUID id, Pageable pageable) {
         Page<Message> messagePage = messageRepository.findMessages(id, receiverId, pageable);
         return messagePage.map(message -> mapper.map(message, MessageDto.class));
     }

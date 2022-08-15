@@ -7,6 +7,7 @@ import com.senla.model.Community;
 import com.senla.service.AdminCommunityService;
 import com.senla.service.CustomCommunityService;
 import com.senla.service.CustomUserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +28,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
      * @return community
      */
     @Override
-    public CommunityDto createCommunity(CreateCommunityDto createCommunityDto, Long id) {
+    public CommunityDto createCommunity(CreateCommunityDto createCommunityDto, UUID id) {
         Community community = mapper.map(createCommunityDto, Community.class);
         community.getFollowers().add(userService.findUserById(id));
         return mapper.map(communityService.save(community), CommunityDto.class);
@@ -39,7 +40,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
      * @return updated community
      */
     @Override
-    public CommunityDto updateCommunity(Long id, CreateCommunityDto createCommunityDto) {
+    public CommunityDto updateCommunity(UUID id, CreateCommunityDto createCommunityDto) {
         Community community = communityService.findCommunityById(id);
         mapper.map(createCommunityDto, community);
         return mapper.map(communityService.save(community), CommunityDto.class);
@@ -47,7 +48,7 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 
     /** @param id community ID */
     @Override
-    public void deleteCommunity(Long id) {
+    public void deleteCommunity(UUID id) {
         communityService.findCommunityById(id);
         communityService.delete(id);
     }

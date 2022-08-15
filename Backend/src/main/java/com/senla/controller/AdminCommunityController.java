@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,7 +47,7 @@ public class AdminCommunityController {
     public CommunityDto createCommunity(
             @ApiParam(name = "Community name and description") @RequestBody
                     CreateCommunityDto createCommunityDto,
-            @ApiParam(name = "id") @RequestHeader("${request.id}") Long id) {
+            @ApiParam(name = "id") @RequestHeader("${request.id}") UUID id) {
         return adminCommunityService.createCommunity(createCommunityDto, id);
     }
 
@@ -57,13 +58,13 @@ public class AdminCommunityController {
      */
     @PutMapping("{id}")
     public CommunityDto updateCommunity(
-            @PathVariable Long id, @RequestBody CreateCommunityDto createCommunityDto) {
+            @PathVariable UUID id, @RequestBody CreateCommunityDto createCommunityDto) {
         return adminCommunityService.updateCommunity(id, createCommunityDto);
     }
 
     /** @param id community ID */
     @DeleteMapping("{id}")
-    public void deleteCommunity(@PathVariable Long id) {
+    public void deleteCommunity(@PathVariable UUID id) {
         adminCommunityService.deleteCommunity(id);
     }
 }

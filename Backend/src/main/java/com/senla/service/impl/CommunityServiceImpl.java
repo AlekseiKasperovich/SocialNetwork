@@ -8,6 +8,7 @@ import com.senla.repository.CommunityRepository;
 import com.senla.service.CommunityService;
 import com.senla.service.CustomCommunityService;
 import com.senla.service.CustomUserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +31,7 @@ public class CommunityServiceImpl implements CommunityService {
      * @return community
      */
     @Override
-    public CommunityDto getCommunityById(Long id) {
+    public CommunityDto getCommunityById(UUID id) {
         return mapper.map(communityService.findCommunityById(id), CommunityDto.class);
     }
 
@@ -40,7 +41,7 @@ public class CommunityServiceImpl implements CommunityService {
      * @return community
      */
     @Override
-    public CommunityDto addUser(Long communityId, Long id) {
+    public CommunityDto addUser(UUID communityId, UUID id) {
         Community community = communityService.findCommunityById(communityId);
         User user = userService.findUserById(id);
         if (community.getFollowers().add(user)) {
@@ -56,7 +57,7 @@ public class CommunityServiceImpl implements CommunityService {
      * @return community
      */
     @Override
-    public CommunityDto deleteUser(Long communityId, Long id) {
+    public CommunityDto deleteUser(UUID communityId, UUID id) {
         Community community = communityService.findCommunityById(communityId);
         User user = userService.findUserById(id);
         if (community.getFollowers().remove(user)) {

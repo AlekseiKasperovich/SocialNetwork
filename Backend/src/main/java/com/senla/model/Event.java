@@ -2,6 +2,7 @@ package com.senla.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +35,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "events")
 public class Event {
 
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue private UUID id;
 
     @Column(nullable = false)
     private String name;
