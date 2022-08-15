@@ -1,6 +1,7 @@
 package com.senla.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "communities_messages")
 public class CommunityMessage {
 
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue private UUID id;
 
     @Column(nullable = false)
     private LocalDateTime posted;

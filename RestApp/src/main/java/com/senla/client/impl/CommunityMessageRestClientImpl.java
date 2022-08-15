@@ -5,6 +5,7 @@ import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.community.CommunityMessageDto;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,7 +28,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
     private final RequestProperty requestProperty;
 
     @Override
-    public CommunityMessageDto getCommunityMessageById(Long communityId, Long messageId) {
+    public CommunityMessageDto getCommunityMessageById(UUID communityId, UUID messageId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + communityId + MESSAGES + messageId,
@@ -39,7 +40,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
 
     @Override
     public CommunityMessageDto createCommunityMessage(
-            Long communityId, CreateMessageDto createMessageDto) {
+            UUID communityId, CreateMessageDto createMessageDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + communityId + MESSAGES,
@@ -51,7 +52,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
 
     @Override
     public CommunityMessageDto updateCommunityMessage(
-            Long communityId, Long messageId, CreateMessageDto createMessageDto) {
+            UUID communityId, UUID messageId, CreateMessageDto createMessageDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + communityId + MESSAGES + messageId,
@@ -62,7 +63,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
     }
 
     @Override
-    public void deleteCommunityMessage(Long communityId, Long messageId) {
+    public void deleteCommunityMessage(UUID communityId, UUID messageId) {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + communityId + MESSAGES + messageId,
                 HttpMethod.DELETE,
@@ -72,7 +73,7 @@ public class CommunityMessageRestClientImpl implements CommunityMessageRestClien
 
     @Override
     public Page<CommunityMessageDto> findAll(
-            Long communityId, Pageable pageable, HttpServletRequest request) {
+            UUID communityId, Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
         String url;
         if (requestParam == null) {

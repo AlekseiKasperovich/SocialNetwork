@@ -2,6 +2,7 @@ package com.senla.dto.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DtoUser {
 
-    private Long id;
+    private UUID id;
     private String email;
     private String firstName;
     private String lastName;

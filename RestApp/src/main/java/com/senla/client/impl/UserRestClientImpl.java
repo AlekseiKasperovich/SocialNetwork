@@ -4,6 +4,7 @@ import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.UserRestClient;
 import com.senla.dto.user.DtoUser;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -25,7 +26,7 @@ public class UserRestClientImpl implements UserRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public DtoUser getUserById(Long id) {
+    public DtoUser getUserById(UUID id) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + id,

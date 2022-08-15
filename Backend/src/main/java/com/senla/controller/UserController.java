@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.dto.user.DtoUser;
 import com.senla.service.UserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,7 @@ public class UserController {
      * @return user
      */
     @GetMapping("{id}")
-    public DtoUser getUserById(@PathVariable Long id) {
+    public DtoUser getUserById(@PathVariable UUID id) {
         return userService.getUserById(id);
     }
 

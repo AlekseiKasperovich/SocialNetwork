@@ -1,5 +1,6 @@
 package com.senla.model;
 
+import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "friendships")
 public class Friendship {
 
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)

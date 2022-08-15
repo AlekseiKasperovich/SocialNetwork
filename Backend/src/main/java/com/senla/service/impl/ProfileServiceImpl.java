@@ -8,6 +8,7 @@ import com.senla.mapper.Mapper;
 import com.senla.model.User;
 import com.senla.service.CustomUserService;
 import com.senla.service.ProfileService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @return user profile
      */
     @Override
-    public DtoUser getUserProfile(Long id) {
+    public DtoUser getUserProfile(UUID id) {
         return mapper.map(userService.findUserById(id), DtoUser.class);
     }
 
@@ -36,7 +37,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @return updated user profile
      */
     @Override
-    public DtoUser updateUser(UpdateUserDto updateUserDto, Long id) {
+    public DtoUser updateUser(UpdateUserDto updateUserDto, UUID id) {
         User user = userService.findUserById(id);
         mapper.map(updateUserDto, user);
         return mapper.map(userService.save(user), DtoUser.class);
@@ -47,7 +48,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @return updated user profile with status = deleted
      */
     @Override
-    public DtoUser deleteUser(Long id) {
+    public DtoUser deleteUser(UUID id) {
         User user = userService.findUserById(id);
         user.setStatus(Status.DELETED);
         return mapper.map(userService.save(user), DtoUser.class);
@@ -59,7 +60,7 @@ public class ProfileServiceImpl implements ProfileService {
      * @return updated user profile
      */
     @Override
-    public DtoUser changePassword(ChangePasswordDto changePasswordDto, Long id) {
+    public DtoUser changePassword(ChangePasswordDto changePasswordDto, UUID id) {
         User user = userService.findUserById(id);
         user.setPassword(changePasswordDto.getPassword());
         return mapper.map(userService.save(user), DtoUser.class);

@@ -5,6 +5,7 @@ import com.senla.client.MessageRestClient;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.dto.message.MessageDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,7 +28,7 @@ public class MessageRestClientImpl implements MessageRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public MessageDto getMessageById(Long messageId) {
+    public MessageDto getMessageById(UUID messageId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + messageId,
@@ -38,7 +39,7 @@ public class MessageRestClientImpl implements MessageRestClient {
     }
 
     @Override
-    public MessageDto createMessage(Long receiverId, CreateMessageDto createMessageDto) {
+    public MessageDto createMessage(UUID receiverId, CreateMessageDto createMessageDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + RECEIVER + receiverId,
@@ -49,7 +50,7 @@ public class MessageRestClientImpl implements MessageRestClient {
     }
 
     @Override
-    public MessageDto updateMessage(Long messageId, CreateMessageDto createMessageDto) {
+    public MessageDto updateMessage(UUID messageId, CreateMessageDto createMessageDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + messageId,
@@ -60,7 +61,7 @@ public class MessageRestClientImpl implements MessageRestClient {
     }
 
     @Override
-    public void deleteMessage(Long messageId) {
+    public void deleteMessage(UUID messageId) {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + messageId,
                 HttpMethod.DELETE,
@@ -70,7 +71,7 @@ public class MessageRestClientImpl implements MessageRestClient {
 
     @Override
     public Page<MessageDto> findAll(
-            Long receiverId, Pageable pageable, HttpServletRequest request) {
+            UUID receiverId, Pageable pageable, HttpServletRequest request) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost()

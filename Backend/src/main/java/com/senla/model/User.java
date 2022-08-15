@@ -4,6 +4,7 @@ import com.senla.dto.constants.Gender;
 import com.senla.dto.constants.Status;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,7 +35,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "users")
 public class User {
 
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue private UUID id;
 
     @Column(unique = true, nullable = false)
     private String email;

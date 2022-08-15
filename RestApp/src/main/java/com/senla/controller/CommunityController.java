@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.client.CommunityRestClient;
 import com.senla.dto.community.CommunityDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class CommunityController {
      * @return community
      */
     @GetMapping("{communityId}")
-    public CommunityDto getCommunityById(@PathVariable Long communityId) {
+    public CommunityDto getCommunityById(@PathVariable UUID communityId) {
         return communityRestClient.getCommunityById(communityId);
     }
 
@@ -39,7 +40,7 @@ public class CommunityController {
      * @return community
      */
     @PutMapping("{communityId}")
-    public CommunityDto joinToCommunity(@PathVariable Long communityId) {
+    public CommunityDto joinToCommunity(@PathVariable UUID communityId) {
         return communityRestClient.addUser(communityId);
     }
 
@@ -48,7 +49,7 @@ public class CommunityController {
      * @return community
      */
     @DeleteMapping("{communityId}")
-    public CommunityDto leaveCommunity(@PathVariable Long communityId) {
+    public CommunityDto leaveCommunity(@PathVariable UUID communityId) {
         return communityRestClient.deleteUser(communityId);
     }
 

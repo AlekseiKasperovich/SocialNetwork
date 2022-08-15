@@ -1,6 +1,7 @@
 package com.senla.model;
 
 import com.senla.dto.constants.Roles;
+import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Table(name = "roles")
 public class Role {
 
-    @Id @GeneratedValue private Long id;
+    @Id @GeneratedValue private UUID id;
 
     @Enumerated(value = EnumType.STRING)
     @Column(unique = true, nullable = false, updatable = false)

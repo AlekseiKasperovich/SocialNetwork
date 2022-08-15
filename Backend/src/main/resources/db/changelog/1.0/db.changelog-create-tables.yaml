@@ -21,7 +21,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_communities
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -46,7 +46,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_communities_messages
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -61,12 +61,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: sender_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                   name: community_id
-                  type: BIGINT
+                  type: UUID
             tableName: communities_messages
   - changeSet:
       id: 1649846352432-4
@@ -81,7 +81,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_events
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -96,7 +96,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: author_id
-                  type: BIGINT
+                  type: UUID
             tableName: events
   - changeSet:
       id: 1649846352432-5
@@ -111,7 +111,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_events_messages
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -126,12 +126,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: sender_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                   name: event_id
-                  type: BIGINT
+                  type: UUID
             tableName: events_messages
   - changeSet:
       id: 1649846352432-6
@@ -146,17 +146,17 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_friendships
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                   name: sender_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                   name: receiver_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -176,7 +176,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_messages
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -191,12 +191,12 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: sender_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                   name: receiver_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -216,7 +216,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_roles
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -236,7 +236,7 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_users
                   name: id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -266,7 +266,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: role_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
@@ -286,14 +286,14 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_users_communities
                   name: community_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_users_communities
                   name: user_id
-                  type: BIGINT
+                  type: UUID
             tableName: users_communities
   - changeSet:
       id: 1649846352432-11
@@ -308,14 +308,14 @@ databaseChangeLog:
                     primaryKey: true
                     primaryKeyName: pk_users_events
                   name: event_id
-                  type: BIGINT
+                  type: UUID
               - column:
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: pk_users_events
                   name: user_id
-                  type: BIGINT
+                  type: UUID
             tableName: users_events
   - changeSet:
       id: 1649846352432-12

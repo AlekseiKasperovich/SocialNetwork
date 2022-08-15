@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.client.EventRestClient;
 import com.senla.dto.event.CreateEventDto;
 import com.senla.dto.event.EventDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +35,7 @@ public class EventController {
      * @return event
      */
     @GetMapping("{eventId}")
-    public EventDto getEventById(@PathVariable Long eventId) {
+    public EventDto getEventById(@PathVariable UUID eventId) {
         return eventRestClient.getEventById(eventId);
     }
 
@@ -54,13 +55,13 @@ public class EventController {
      */
     @PutMapping("{eventId}")
     public EventDto updateEvent(
-            @PathVariable Long eventId, @Valid @RequestBody CreateEventDto createEventDto) {
+            @PathVariable UUID eventId, @Valid @RequestBody CreateEventDto createEventDto) {
         return eventRestClient.updateEvent(eventId, createEventDto);
     }
 
     /** @param eventId event ID */
     @DeleteMapping("{eventId}")
-    public void deleteEvent(@PathVariable Long eventId) {
+    public void deleteEvent(@PathVariable UUID eventId) {
         eventRestClient.deleteEvent(eventId);
     }
 
@@ -70,7 +71,7 @@ public class EventController {
      * @return event
      */
     @PutMapping("{eventId}/users/{userId}")
-    public EventDto addUserToEvent(@PathVariable Long eventId, @PathVariable Long userId) {
+    public EventDto addUserToEvent(@PathVariable UUID eventId, @PathVariable UUID userId) {
         return eventRestClient.addUser(eventId, userId);
     }
 
@@ -80,7 +81,7 @@ public class EventController {
      * @return event
      */
     @DeleteMapping("{eventId}/users/{userId}")
-    public EventDto deleteUserFromEvent(@PathVariable Long eventId, @PathVariable Long userId) {
+    public EventDto deleteUserFromEvent(@PathVariable UUID eventId, @PathVariable UUID userId) {
         return eventRestClient.deleteUser(eventId, userId);
     }
 

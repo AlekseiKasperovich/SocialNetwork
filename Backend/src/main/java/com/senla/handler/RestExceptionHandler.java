@@ -78,7 +78,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({RuntimeException.class})
     public ResponseEntity<Object> handleException(RuntimeException ex, WebRequest request) {
         ExceptionDetails details =
-                exceptionDetailsBuilder(
+                this.exceptionDetailsBuilder(
                         ex, "message.error", HttpStatus.INTERNAL_SERVER_ERROR, request);
         return handleExceptionInternal(
                 ex, details, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);

@@ -5,6 +5,7 @@ import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.community.CommunityDto;
 import com.senla.dto.community.CreateCommunityDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -33,7 +34,7 @@ public class AdminCommunityRestClientImpl implements AdminCommunityRestClient {
     }
 
     @Override
-    public CommunityDto updateCommunity(Long id, CreateCommunityDto createCommunityDto) {
+    public CommunityDto updateCommunity(UUID id, CreateCommunityDto createCommunityDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + id,
@@ -44,7 +45,7 @@ public class AdminCommunityRestClientImpl implements AdminCommunityRestClient {
     }
 
     @Override
-    public void deleteCommunity(Long id) {
+    public void deleteCommunity(UUID id) {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + id,
                 HttpMethod.DELETE,

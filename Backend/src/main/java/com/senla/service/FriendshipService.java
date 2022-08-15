@@ -1,21 +1,22 @@
 package com.senla.service;
 
 import com.senla.dto.friendship.FriendshipDto;
+import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 /** @author Aliaksei Kaspiarovich */
 public interface FriendshipService {
 
-    FriendshipDto getFriendshipById(Long friendshipId, Long id);
+    FriendshipDto getFriendshipById(UUID friendshipId, UUID id);
 
-    FriendshipDto createFriendship(Long friendId, Long id);
+    FriendshipDto createFriendship(UUID friendId, UUID id);
 
-    FriendshipDto acceptFriendship(Long friendshipId, Long id);
+    FriendshipDto acceptFriendship(UUID friendshipId, UUID id);
 
-    void deleteFriendship(Long friendshipId, Long id);
+    void deleteFriendship(UUID friendshipId, UUID id);
 
-    Page<FriendshipDto> findAll(Long id, Pageable pageable);
+    Page<FriendshipDto> findAll(UUID id, Pageable pageable);
 
-    Page<FriendshipDto> findMyFriendshipRequests(Long id, Pageable pageable);
+    Page<FriendshipDto> findMyFriendshipRequests(UUID id, Pageable pageable);
 }

@@ -13,6 +13,7 @@ import com.senla.service.CommunityMessageService;
 import com.senla.service.CustomCommunityService;
 import com.senla.service.CustomUserService;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      * @return message
      */
     @Transactional(readOnly = true)
-    public CommunityMessage findCommunityMessageById(Long id) {
+    public CommunityMessage findCommunityMessageById(UUID id) {
         return communityMessageRepository
                 .findById(id)
                 .orElseThrow(
@@ -53,7 +54,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      * @return message
      */
     @Override
-    public CommunityMessageDto getCommunityMessageById(Long communityId, Long messageId, Long id) {
+    public CommunityMessageDto getCommunityMessageById(UUID communityId, UUID messageId, UUID id) {
         communityService.checkUserOnCommunity(
                 userService.findUserById(id), communityService.findCommunityById(communityId));
         return mapper.map(findCommunityMessageById(messageId), CommunityMessageDto.class);
@@ -67,7 +68,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      */
     @Override
     public CommunityMessageDto createCommunityMessage(
-            Long communityId, CreateMessageDto createMessageDto, Long id) {
+            UUID communityId, CreateMessageDto createMessageDto, UUID id) {
         Community community = communityService.findCommunityById(communityId);
         User sender = userService.findUserById(id);
         communityService.checkUserOnCommunity(sender, community);
@@ -91,7 +92,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      */
     @Override
     public CommunityMessageDto updateCommunityMessage(
-            Long communityId, Long messageId, CreateMessageDto createMessageDto, Long id) {
+            UUID communityId, UUID messageId, CreateMessageDto createMessageDto, UUID id) {
         User user = userService.findUserById(id);
         communityService.checkUserOnCommunity(
                 user, communityService.findCommunityById(communityId));
@@ -108,7 +109,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      * @param id id
      */
     @Override
-    public void deleteCommunityMessage(Long communityId, Long messageId, Long id) {
+    public void deleteCommunityMessage(UUID communityId, UUID messageId, UUID id) {
         User user = userService.findUserById(id);
         communityService.checkUserOnCommunity(
                 user, communityService.findCommunityById(communityId));
@@ -125,7 +126,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<CommunityMessageDto> findAll(Long communityId, Long id, Pageable pageable) {
+    public Page<CommunityMessageDto> findAll(UUID communityId, UUID id, Pageable pageable) {
         communityService.checkUserOnCommunity(
                 userService.findUserById(id), communityService.findCommunityById(communityId));
         Page<CommunityMessage> communityMessagePage =
@@ -138,7 +139,7 @@ public class CommunityMessageServiceImpl implements CommunityMessageService {
      * @param communityMessage community message
      * @param id message author ID
      */
-    private void checkMessageAuthor(CommunityMessage communityMessage, Long id) {
+    private void checkMessageAuthor(CommunityMessage communityMessage, UUID id) {
         if (!communityMessage.getSender().getId().equals(id)) {
             throw new MyAccessDeniedException("Access is denied");
         }

@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.client.CommunityMessageRestClient;
 import com.senla.dto.community.CommunityMessageDto;
 import com.senla.dto.message.CreateMessageDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,7 @@ public class CommunityMessageController {
      */
     @GetMapping("{messageId}")
     public CommunityMessageDto getMessageById(
-            @PathVariable Long communityId, @PathVariable Long messageId) {
+            @PathVariable UUID communityId, @PathVariable UUID messageId) {
         return communityMessageRestClient.getCommunityMessageById(communityId, messageId);
     }
 
@@ -47,7 +48,7 @@ public class CommunityMessageController {
      */
     @PostMapping
     public CommunityMessageDto createMessage(
-            @PathVariable Long communityId, @Valid @RequestBody CreateMessageDto createMessageDto) {
+            @PathVariable UUID communityId, @Valid @RequestBody CreateMessageDto createMessageDto) {
         return communityMessageRestClient.createCommunityMessage(communityId, createMessageDto);
     }
 
@@ -59,8 +60,8 @@ public class CommunityMessageController {
      */
     @PutMapping("{messageId}")
     public CommunityMessageDto updateMessage(
-            @PathVariable Long communityId,
-            @PathVariable Long messageId,
+            @PathVariable UUID communityId,
+            @PathVariable UUID messageId,
             @Valid @RequestBody CreateMessageDto createMessageDto) {
         return communityMessageRestClient.updateCommunityMessage(
                 communityId, messageId, createMessageDto);
@@ -71,7 +72,7 @@ public class CommunityMessageController {
      * @param messageId message ID
      */
     @DeleteMapping("{messageId}")
-    public void deleteMessage(@PathVariable Long communityId, @PathVariable Long messageId) {
+    public void deleteMessage(@PathVariable UUID communityId, @PathVariable UUID messageId) {
         communityMessageRestClient.deleteCommunityMessage(communityId, messageId);
     }
 
@@ -83,7 +84,7 @@ public class CommunityMessageController {
      */
     @GetMapping
     public Page<CommunityMessageDto> findAllMessages(
-            @PathVariable Long communityId, Pageable pageable, HttpServletRequest request) {
+            @PathVariable UUID communityId, Pageable pageable, HttpServletRequest request) {
         return communityMessageRestClient.findAll(communityId, pageable, request);
     }
 }

@@ -5,6 +5,7 @@ import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.event.EventMessageDto;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,7 +28,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public EventMessageDto getEventMessageById(Long eventId, Long messageId) {
+    public EventMessageDto getEventMessageById(UUID eventId, UUID messageId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId + MESSAGES + messageId,
@@ -38,7 +39,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     }
 
     @Override
-    public EventMessageDto createEventMessage(Long eventId, CreateMessageDto createMessageDto) {
+    public EventMessageDto createEventMessage(UUID eventId, CreateMessageDto createMessageDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId,
@@ -50,7 +51,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
 
     @Override
     public EventMessageDto updateEventMessage(
-            Long eventId, Long messageId, CreateMessageDto createMessageDto) {
+            UUID eventId, UUID messageId, CreateMessageDto createMessageDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId + MESSAGES + messageId,
@@ -61,7 +62,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
     }
 
     @Override
-    public void deleteEventMessage(Long eventId, Long messageId) {
+    public void deleteEventMessage(UUID eventId, UUID messageId) {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + eventId + MESSAGES + messageId,
                 HttpMethod.DELETE,
@@ -71,7 +72,7 @@ public class EventMessageRestClientImpl implements EventMessageRestClient {
 
     @Override
     public Page<EventMessageDto> findAll(
-            Long eventId, Pageable pageable, HttpServletRequest request) {
+            UUID eventId, Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
         String url;
         if (requestParam == null) {

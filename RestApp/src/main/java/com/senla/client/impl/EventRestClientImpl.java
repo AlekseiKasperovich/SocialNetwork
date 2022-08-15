@@ -5,6 +5,7 @@ import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.event.CreateEventDto;
 import com.senla.dto.event.EventDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,7 +28,7 @@ public class EventRestClientImpl implements EventRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public EventDto getEventById(Long eventId) {
+    public EventDto getEventById(UUID eventId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId,
@@ -49,7 +50,7 @@ public class EventRestClientImpl implements EventRestClient {
     }
 
     @Override
-    public EventDto updateEvent(Long eventId, CreateEventDto createEventDto) {
+    public EventDto updateEvent(UUID eventId, CreateEventDto createEventDto) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId,
@@ -60,7 +61,7 @@ public class EventRestClientImpl implements EventRestClient {
     }
 
     @Override
-    public void deleteEvent(Long eventId) {
+    public void deleteEvent(UUID eventId) {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + eventId,
                 HttpMethod.DELETE,
@@ -69,7 +70,7 @@ public class EventRestClientImpl implements EventRestClient {
     }
 
     @Override
-    public EventDto addUser(Long eventId, Long userId) {
+    public EventDto addUser(UUID eventId, UUID userId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId + USERS + userId,
@@ -80,7 +81,7 @@ public class EventRestClientImpl implements EventRestClient {
     }
 
     @Override
-    public EventDto deleteUser(Long eventId, Long userId) {
+    public EventDto deleteUser(UUID eventId, UUID userId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + eventId + USERS + userId,

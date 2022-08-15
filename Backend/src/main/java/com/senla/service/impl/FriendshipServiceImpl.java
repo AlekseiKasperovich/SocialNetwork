@@ -9,6 +9,7 @@ import com.senla.repository.FriendshipRepository;
 import com.senla.service.CustomFriendshipService;
 import com.senla.service.CustomUserService;
 import com.senla.service.FriendshipService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +37,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      */
     @Override
     @Transactional(readOnly = true)
-    public FriendshipDto getFriendshipById(Long friendshipId, Long id) {
+    public FriendshipDto getFriendshipById(UUID friendshipId, UUID id) {
         Friendship friendship = friendshipService.findFriendshipById(friendshipId);
         if (friendship.getReceiver().getId().equals(id)
                 || friendship.getSender().getId().equals(id)) {
@@ -52,7 +53,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      * @return friendship
      */
     @Override
-    public FriendshipDto createFriendship(Long friendId, Long id) {
+    public FriendshipDto createFriendship(UUID friendId, UUID id) {
         if (friendshipRepository.findFriendshipRequest(id, friendId).isEmpty()) {
             Friendship friendship =
                     Friendship.builder()
@@ -73,7 +74,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      * @return accepted friendship
      */
     @Override
-    public FriendshipDto acceptFriendship(Long friendshipId, Long id) {
+    public FriendshipDto acceptFriendship(UUID friendshipId, UUID id) {
         Friendship friendship = friendshipService.findFriendshipById(friendshipId);
         if (friendship.getReceiver().getId().equals(id)) {
             friendship.setAccepted(Boolean.TRUE);
@@ -89,7 +90,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      * @param id id
      */
     @Override
-    public void deleteFriendship(Long friendshipId, Long id) {
+    public void deleteFriendship(UUID friendshipId, UUID id) {
         Friendship friendship = friendshipService.findFriendshipById(friendshipId);
         if (friendship.getReceiver().getId().equals(id)
                 || friendship.getSender().getId().equals(id)) {
@@ -106,7 +107,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<FriendshipDto> findAll(Long id, Pageable pageable) {
+    public Page<FriendshipDto> findAll(UUID id, Pageable pageable) {
         Page<Friendship> friendshipPage = friendshipRepository.findMyFriends(id, pageable);
         return friendshipPage.map(friendship -> mapper.map(friendship, FriendshipDto.class));
     }
@@ -118,7 +119,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<FriendshipDto> findMyFriendshipRequests(Long id, Pageable pageable) {
+    public Page<FriendshipDto> findMyFriendshipRequests(UUID id, Pageable pageable) {
         Page<Friendship> friendshipPage =
                 friendshipRepository.getMyFriendshipRequests(id, pageable);
         return friendshipPage.map(friendship -> mapper.map(friendship, FriendshipDto.class));

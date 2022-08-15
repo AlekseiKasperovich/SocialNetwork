@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.client.MessageRestClient;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.dto.message.MessageDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class MessageController {
      * @return message
      */
     @GetMapping("{messageId}")
-    public MessageDto getMessageById(@PathVariable Long messageId) {
+    public MessageDto getMessageById(@PathVariable UUID messageId) {
         return messageRestClient.getMessageById(messageId);
     }
 
@@ -46,7 +47,7 @@ public class MessageController {
      */
     @PostMapping
     public MessageDto createMessage(
-            @RequestParam Long receiverId, @Valid @RequestBody CreateMessageDto createMessageDto) {
+            @RequestParam UUID receiverId, @Valid @RequestBody CreateMessageDto createMessageDto) {
         return messageRestClient.createMessage(receiverId, createMessageDto);
     }
 
@@ -57,13 +58,13 @@ public class MessageController {
      */
     @PutMapping("{messageId}")
     public MessageDto updateMessage(
-            @PathVariable Long messageId, @Valid @RequestBody CreateMessageDto createMessageDto) {
+            @PathVariable UUID messageId, @Valid @RequestBody CreateMessageDto createMessageDto) {
         return messageRestClient.updateMessage(messageId, createMessageDto);
     }
 
     /** @param messageId message ID */
     @DeleteMapping("{messageId}")
-    public void deleteMessage(@PathVariable Long messageId) {
+    public void deleteMessage(@PathVariable UUID messageId) {
         messageRestClient.deleteMessage(messageId);
     }
 
@@ -75,7 +76,7 @@ public class MessageController {
      */
     @GetMapping
     public Page<MessageDto> findMyMessages(
-            @RequestParam Long receiverId, Pageable pageable, HttpServletRequest request) {
+            @RequestParam UUID receiverId, Pageable pageable, HttpServletRequest request) {
         return messageRestClient.findAll(receiverId, pageable, request);
     }
 }

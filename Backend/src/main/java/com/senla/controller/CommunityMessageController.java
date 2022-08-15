@@ -3,6 +3,7 @@ package com.senla.controller;
 import com.senla.dto.community.CommunityMessageDto;
 import com.senla.dto.message.CreateMessageDto;
 import com.senla.service.CommunityMessageService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,9 +37,9 @@ public class CommunityMessageController {
      */
     @PostMapping
     public CommunityMessageDto createMessage(
-            @PathVariable Long communityId,
+            @PathVariable UUID communityId,
             @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return communityMessageService.createCommunityMessage(communityId, createMessageDto, id);
     }
 
@@ -50,9 +51,9 @@ public class CommunityMessageController {
      */
     @GetMapping("{messageId}")
     public CommunityMessageDto getMessageById(
-            @PathVariable Long communityId,
-            @PathVariable Long messageId,
-            @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID communityId,
+            @PathVariable UUID messageId,
+            @RequestHeader("${request.id}") UUID id) {
         return communityMessageService.getCommunityMessageById(communityId, messageId, id);
     }
 
@@ -65,10 +66,10 @@ public class CommunityMessageController {
      */
     @PutMapping("{messageId}")
     public CommunityMessageDto updateMessage(
-            @PathVariable Long communityId,
-            @PathVariable Long messageId,
+            @PathVariable UUID communityId,
+            @PathVariable UUID messageId,
             @RequestBody CreateMessageDto createMessageDto,
-            @RequestHeader("${request.id}") Long id) {
+            @RequestHeader("${request.id}") UUID id) {
         return communityMessageService.updateCommunityMessage(
                 communityId, messageId, createMessageDto, id);
     }
@@ -80,9 +81,9 @@ public class CommunityMessageController {
      */
     @DeleteMapping("{messageId}")
     public void deleteMessage(
-            @PathVariable Long communityId,
-            @PathVariable Long messageId,
-            @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID communityId,
+            @PathVariable UUID messageId,
+            @RequestHeader("${request.id}") UUID id) {
         communityMessageService.deleteCommunityMessage(communityId, messageId, id);
     }
 
@@ -94,8 +95,8 @@ public class CommunityMessageController {
      */
     @GetMapping
     public Page<CommunityMessageDto> findAllMessages(
-            @PathVariable Long communityId,
-            @RequestHeader("${request.id}") Long id,
+            @PathVariable UUID communityId,
+            @RequestHeader("${request.id}") UUID id,
             Pageable pageable) {
         return communityMessageService.findAll(communityId, id, pageable);
     }

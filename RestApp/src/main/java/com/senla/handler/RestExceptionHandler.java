@@ -109,7 +109,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(ex.getMessage(), ex);
         String message = messageSource.getMessage(code, null, request.getLocale());
         return ExceptionDetails.builder()
-                .title(ex.getCause().toString())
+                .title(ex.getClass().getName())
                 .detail(ex.getMessage())
                 .status(status.value())
                 .message(message)

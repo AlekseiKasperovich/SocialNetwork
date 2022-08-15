@@ -11,6 +11,7 @@ import com.senla.service.CustomEventService;
 import com.senla.service.CustomFriendshipService;
 import com.senla.service.CustomUserService;
 import com.senla.service.EventService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,7 +37,7 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     @Transactional(readOnly = true)
-    public EventDto getEventById(Long eventId, Long id) {
+    public EventDto getEventById(UUID eventId, UUID id) {
         Event event = eventService.findEventById(eventId);
         eventService.checkUserOnEvent(userService.findUserById(id), event);
         return mapper.map(event, EventDto.class);
@@ -48,7 +49,7 @@ public class EventServiceImpl implements EventService {
      * @return event
      */
     @Override
-    public EventDto createEvent(CreateEventDto createEventDto, Long id) {
+    public EventDto createEvent(CreateEventDto createEventDto, UUID id) {
         Event event = mapper.map(createEventDto, Event.class);
         User author = userService.findUserById(id);
         event.setAuthor(author);
@@ -63,7 +64,7 @@ public class EventServiceImpl implements EventService {
      * @return updated event
      */
     @Override
-    public EventDto updateEvent(Long eventId, CreateEventDto createEventDto, Long id) {
+    public EventDto updateEvent(UUID eventId, CreateEventDto createEventDto, UUID id) {
         Event event = eventService.findEventById(eventId);
         checkEventAuthor(event, id);
         mapper.map(createEventDto, event);
@@ -75,7 +76,7 @@ public class EventServiceImpl implements EventService {
      * @param id id
      */
     @Override
-    public void deleteEvent(Long eventId, Long id) {
+    public void deleteEvent(UUID eventId, UUID id) {
         Event event = eventService.findEventById(eventId);
         checkEventAuthor(event, id);
         eventRepository.deleteById(eventId);
@@ -88,7 +89,7 @@ public class EventServiceImpl implements EventService {
      * @return event
      */
     @Override
-    public EventDto addUser(Long eventId, Long userId, Long id) {
+    public EventDto addUser(UUID eventId, UUID userId, UUID id) {
         Event event = eventService.findEventById(eventId);
         User author = userService.findUserById(id);
         checkEventAuthor(event, author.getId());
@@ -107,7 +108,7 @@ public class EventServiceImpl implements EventService {
      * @return event
      */
     @Override
-    public EventDto deleteUser(Long eventId, Long userId, Long id) {
+    public EventDto deleteUser(UUID eventId, UUID userId, UUID id) {
         Event event = eventService.findEventById(eventId);
         User author = userService.findUserById(id);
         checkEventAuthor(event, author.getId());
@@ -126,7 +127,7 @@ public class EventServiceImpl implements EventService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<EventDto> findMyEvents(Long id, Pageable pageable) {
+    public Page<EventDto> findMyEvents(UUID id, Pageable pageable) {
         Page<Event> eventPage = eventRepository.findByAuthorId(id, pageable);
         return eventPage.map(event -> mapper.map(event, EventDto.class));
     }
@@ -135,7 +136,7 @@ public class EventServiceImpl implements EventService {
      * @param event event
      * @param id event author ID
      */
-    private void checkEventAuthor(Event event, Long id) {
+    private void checkEventAuthor(Event event, UUID id) {
         if (!event.getAuthor().getId().equals(id)) {
             throw new MyAccessDeniedException("Access is denied");
         }

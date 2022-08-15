@@ -4,6 +4,7 @@ import com.senla.client.AdminUserRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.user.DtoUser;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -23,7 +24,7 @@ public class AdminUserRestClientImpl implements AdminUserRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public DtoUser blockUser(Long id) {
+    public DtoUser blockUser(UUID id) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + id + BLOCK,
@@ -34,7 +35,7 @@ public class AdminUserRestClientImpl implements AdminUserRestClient {
     }
 
     @Override
-    public DtoUser unblockUser(Long id) {
+    public DtoUser unblockUser(UUID id) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + id + UNBLOCK,

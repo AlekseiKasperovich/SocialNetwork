@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.client.AdminUserRestClient;
 import com.senla.dto.user.DtoUser;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,7 +26,7 @@ public class AdminUserController {
      * @return blocked user
      */
     @PatchMapping("{id}/block")
-    public DtoUser blockUser(@PathVariable Long id) {
+    public DtoUser blockUser(@PathVariable UUID id) {
         return adminUseRestClient.blockUser(id);
     }
 
@@ -34,7 +35,7 @@ public class AdminUserController {
      * @return unblocked user
      */
     @PatchMapping("{id}/unblock")
-    public DtoUser unblockUser(@PathVariable Long id) {
+    public DtoUser unblockUser(@PathVariable UUID id) {
         return adminUseRestClient.unblockUser(id);
     }
 }

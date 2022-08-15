@@ -6,6 +6,7 @@ import com.senla.model.Community;
 import com.senla.model.User;
 import com.senla.repository.CommunityRepository;
 import com.senla.service.CustomCommunityService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class CustomCommunityServiceImpl implements CustomCommunityService {
      */
     @Transactional(readOnly = true)
     @Override
-    public Community findCommunityById(Long id) {
+    public Community findCommunityById(UUID id) {
         return communityRepository
                 .findById(id)
                 .orElseThrow(
@@ -44,7 +45,7 @@ public class CustomCommunityServiceImpl implements CustomCommunityService {
 
     /** @param id community ID */
     @Override
-    public void delete(Long id) {
+    public void delete(UUID id) {
         communityRepository.deleteById(id);
     }
 

@@ -1,6 +1,7 @@
 package com.senla.dto.friendship;
 
 import com.senla.dto.user.DtoUser;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FriendshipDto {
 
-    private Long id;
+    private UUID id;
     private DtoUser sender;
     private DtoUser receiver;
     private Boolean accepted;

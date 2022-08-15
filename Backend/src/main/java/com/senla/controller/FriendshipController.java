@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.dto.friendship.FriendshipDto;
 import com.senla.service.FriendshipService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ public class FriendshipController {
      */
     @GetMapping("{friendshipId}")
     public FriendshipDto getFriendshipById(
-            @PathVariable Long friendshipId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID friendshipId, @RequestHeader("${request.id}") UUID id) {
         return friendshipService.getFriendshipById(friendshipId, id);
     }
 
@@ -45,7 +46,7 @@ public class FriendshipController {
      */
     @PostMapping
     public FriendshipDto addToFriends(
-            @RequestParam Long friendId, @RequestHeader("${request.id}") Long id) {
+            @RequestParam UUID friendId, @RequestHeader("${request.id}") UUID id) {
         return friendshipService.createFriendship(friendId, id);
     }
 
@@ -56,7 +57,7 @@ public class FriendshipController {
      */
     @PutMapping("{friendshipId}")
     public FriendshipDto acceptFriendship(
-            @PathVariable Long friendshipId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID friendshipId, @RequestHeader("${request.id}") UUID id) {
         return friendshipService.acceptFriendship(friendshipId, id);
     }
 
@@ -66,7 +67,7 @@ public class FriendshipController {
      */
     @DeleteMapping("{friendshipId}")
     public void declineFriendship(
-            @PathVariable Long friendshipId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID friendshipId, @RequestHeader("${request.id}") UUID id) {
         friendshipService.deleteFriendship(friendshipId, id);
     }
 
@@ -77,7 +78,7 @@ public class FriendshipController {
      */
     @GetMapping("requests")
     public Page<FriendshipDto> findMyFriendshipRequests(
-            @RequestHeader("${request.id}") Long id, Pageable pageable) {
+            @RequestHeader("${request.id}") UUID id, Pageable pageable) {
         return friendshipService.findMyFriendshipRequests(id, pageable);
     }
 
@@ -88,7 +89,7 @@ public class FriendshipController {
      */
     @GetMapping
     public Page<FriendshipDto> findMyFriends(
-            @RequestHeader("${request.id}") Long id, Pageable pageable) {
+            @RequestHeader("${request.id}") UUID id, Pageable pageable) {
         return friendshipService.findAll(id, pageable);
     }
 }

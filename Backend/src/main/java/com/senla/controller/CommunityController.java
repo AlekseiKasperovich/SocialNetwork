@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.dto.community.CommunityDto;
 import com.senla.service.CommunityService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +31,7 @@ public class CommunityController {
      * @return community
      */
     @GetMapping("{communityId}")
-    public CommunityDto getCommunityById(@PathVariable Long communityId) {
+    public CommunityDto getCommunityById(@PathVariable UUID communityId) {
         return communityService.getCommunityById(communityId);
     }
 
@@ -41,7 +42,7 @@ public class CommunityController {
      */
     @PutMapping("{communityId}")
     public CommunityDto joinToCommunity(
-            @PathVariable Long communityId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID communityId, @RequestHeader("${request.id}") UUID id) {
         return communityService.addUser(communityId, id);
     }
 
@@ -52,7 +53,7 @@ public class CommunityController {
      */
     @DeleteMapping("{communityId}")
     public CommunityDto leaveCommunity(
-            @PathVariable Long communityId, @RequestHeader("${request.id}") Long id) {
+            @PathVariable UUID communityId, @RequestHeader("${request.id}") UUID id) {
         return communityService.deleteUser(communityId, id);
     }
 

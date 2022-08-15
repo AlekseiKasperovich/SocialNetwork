@@ -7,6 +7,7 @@ import com.senla.mapper.Mapper;
 import com.senla.model.User;
 import com.senla.service.AdminUserService;
 import com.senla.service.CustomUserService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ public class AdminUserServiceImpl implements AdminUserService {
      * @return blocked user
      */
     @Override
-    public DtoUser blockUser(Long id) {
+    public DtoUser blockUser(UUID id) {
         User user = userService.findUserById(id);
         if (Roles.ROLE_USER.equals(user.getRole().getName())) {
             user.setStatus(Status.BANNED);
@@ -39,7 +40,7 @@ public class AdminUserServiceImpl implements AdminUserService {
      * @return unblocked user
      */
     @Override
-    public DtoUser unblockUser(Long id) {
+    public DtoUser unblockUser(UUID id) {
         User user = userService.findUserById(id);
         user.setStatus(Status.ACTIVE);
         return mapper.map(userService.save(user), DtoUser.class);

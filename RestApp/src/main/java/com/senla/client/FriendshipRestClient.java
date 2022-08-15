@@ -1,6 +1,7 @@
 package com.senla.client;
 
 import com.senla.dto.friendship.FriendshipDto;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,15 +9,15 @@ import org.springframework.data.domain.Pageable;
 /** @author Aliaksei Kaspiarovich */
 public interface FriendshipRestClient {
 
-    FriendshipDto getFriendshipById(Long friendshipId);
+    FriendshipDto getFriendshipById(UUID friendshipId);
 
     Page<FriendshipDto> findMyFriendshipRequests(Pageable pageable, HttpServletRequest request);
 
-    FriendshipDto createFriendship(Long friendId);
+    FriendshipDto createFriendship(UUID friendId);
 
-    void deleteFriendship(Long friendshipId);
+    void deleteFriendship(UUID friendshipId);
 
-    FriendshipDto acceptFriendship(Long friendshipId);
+    FriendshipDto acceptFriendship(UUID friendshipId);
 
     Page<FriendshipDto> findAll(Pageable pageable, HttpServletRequest request);
 }

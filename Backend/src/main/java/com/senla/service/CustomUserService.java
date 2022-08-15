@@ -1,11 +1,12 @@
 package com.senla.service;
 
 import com.senla.model.User;
+import java.util.UUID;
 
 /** @author Aliaksei Kaspiarovich */
 public interface CustomUserService {
 
-    User findUserById(Long id);
+    User findUserById(UUID id);
 
     User findUserByEmail(String email);
 

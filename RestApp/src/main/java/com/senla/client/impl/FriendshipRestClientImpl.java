@@ -4,6 +4,7 @@ import com.senla.client.FriendshipRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.friendship.FriendshipDto;
 import com.senla.property.RequestProperty;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
@@ -27,7 +28,7 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     private final RequestProperty requestProperty;
 
     @Override
-    public FriendshipDto getFriendshipById(Long friendshipId) {
+    public FriendshipDto getFriendshipById(UUID friendshipId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + friendshipId,
@@ -38,7 +39,7 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     }
 
     @Override
-    public FriendshipDto createFriendship(Long friendId) {
+    public FriendshipDto createFriendship(UUID friendId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + FRIEND + friendId,
@@ -49,7 +50,7 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     }
 
     @Override
-    public FriendshipDto acceptFriendship(Long friendshipId) {
+    public FriendshipDto acceptFriendship(UUID friendshipId) {
         return restTemplate
                 .exchange(
                         requestProperty.getHost() + URL + friendshipId,
@@ -60,7 +61,7 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
     }
 
     @Override
-    public void deleteFriendship(Long friendshipId) {
+    public void deleteFriendship(UUID friendshipId) {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + friendshipId,
                 HttpMethod.DELETE,

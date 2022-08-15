@@ -7,6 +7,7 @@ import com.senla.dto.user.DtoUser;
 import com.senla.model.Role;
 import com.senla.model.User;
 import java.time.LocalDate;
+import java.util.UUID;
 
 /** @author Aliaksei Kaspiarovich */
 public class UserPrototype {
@@ -23,7 +24,7 @@ public class UserPrototype {
 
     public static DtoUser getUserDto() {
         DtoUser user = new DtoUser();
-        user.setId(42L);
+        user.setId(UUID.randomUUID());
         user.setEmail("test@gmail.com");
         user.setBirthday(LocalDate.now());
         user.setFirstName("firstName");

@@ -13,6 +13,7 @@ import com.senla.service.CustomEventService;
 import com.senla.service.CustomUserService;
 import com.senla.service.EventMessageService;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +36,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      * @return message
      */
     @Transactional(readOnly = true)
-    public EventMessage findEventMessageById(Long id) {
+    public EventMessage findEventMessageById(UUID id) {
         return eventMessageRepository
                 .findById(id)
                 .orElseThrow(
@@ -52,7 +53,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      * @return message
      */
     @Override
-    public EventMessageDto getEventMessageById(Long eventId, Long messageId, Long id) {
+    public EventMessageDto getEventMessageById(UUID eventId, UUID messageId, UUID id) {
         eventService.checkUserOnEvent(
                 userService.findUserById(id), eventService.findEventById(eventId));
         return mapper.map(findEventMessageById(messageId), EventMessageDto.class);
@@ -66,7 +67,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      */
     @Override
     public EventMessageDto createEventMessage(
-            Long eventId, CreateMessageDto createMessageDto, Long id) {
+            UUID eventId, CreateMessageDto createMessageDto, UUID id) {
         Event event = eventService.findEventById(eventId);
         User sender = userService.findUserById(id);
         eventService.checkUserOnEvent(sender, event);
@@ -89,7 +90,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      */
     @Override
     public EventMessageDto updateEventMessage(
-            Long eventId, Long messageId, CreateMessageDto createMessageDto, Long id) {
+            UUID eventId, UUID messageId, CreateMessageDto createMessageDto, UUID id) {
         User user = userService.findUserById(id);
         eventService.checkUserOnEvent(user, eventService.findEventById(eventId));
         EventMessage eventMessage = findEventMessageById(messageId);
@@ -104,7 +105,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      * @param id id
      */
     @Override
-    public void deleteEventMessage(Long eventId, Long messageId, Long id) {
+    public void deleteEventMessage(UUID eventId, UUID messageId, UUID id) {
         User user = userService.findUserById(id);
         eventService.checkUserOnEvent(user, eventService.findEventById(eventId));
         EventMessage eventMessage = findEventMessageById(messageId);
@@ -120,7 +121,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<EventMessageDto> findAll(Long eventId, Long id, Pageable pageable) {
+    public Page<EventMessageDto> findAll(UUID eventId, UUID id, Pageable pageable) {
         eventService.checkUserOnEvent(
                 userService.findUserById(id), eventService.findEventById(eventId));
         Page<EventMessage> eventMessagePage =
@@ -132,7 +133,7 @@ public class EventMessageServiceImpl implements EventMessageService {
      * @param eventMessage event message
      * @param id message author ID
      */
-    private void checkMessageAuthor(EventMessage eventMessage, Long id) {
+    private void checkMessageAuthor(EventMessage eventMessage, UUID id) {
         if (!eventMessage.getSender().getId().equals(id)) {
             throw new MyAccessDeniedException("Access is denied");
         }

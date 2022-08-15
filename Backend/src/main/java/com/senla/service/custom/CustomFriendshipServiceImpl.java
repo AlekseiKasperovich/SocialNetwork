@@ -4,6 +4,7 @@ import com.senla.exception.FriendshipNotFoundException;
 import com.senla.model.Friendship;
 import com.senla.repository.FriendshipRepository;
 import com.senla.service.CustomFriendshipService;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ public class CustomFriendshipServiceImpl implements CustomFriendshipService {
      * @return friendship
      */
     @Override
-    public Friendship findFriendshipById(Long id) {
+    public Friendship findFriendshipById(UUID id) {
         return friendshipRepository
                 .findById(id)
                 .orElseThrow(
@@ -36,7 +37,7 @@ public class CustomFriendshipServiceImpl implements CustomFriendshipService {
      * @return {@literal true} if users are friends, {@literal false} otherwise.
      */
     @Override
-    public boolean checkFriendship(Long userId, Long friendId) {
+    public boolean checkFriendship(UUID userId, UUID friendId) {
         return friendshipRepository.findFriendship(userId, friendId).isPresent();
     }
 }
