@@ -1,5 +1,5 @@
-CREATE
-EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 INSERT INTO roles (id, name)
 VALUES (uuid_generate_v4(), 'ROLE_ADMIN');
 INSERT INTO roles (id, name)
