@@ -6,11 +6,9 @@ import com.senla.dto.constants.Roles;
 import com.senla.model.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 /** @author Aliaksei Kaspiarovich */
-@DataJpaTest
-public class RoleRepositoryTest extends DatabaseTest {
+class RoleRepositoryTest extends DatabaseTest {
 
     @Autowired private RoleRepository roleRepository;
 

@@ -9,11 +9,9 @@ import com.senla.prototype.UserPrototype;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 /** @author Aliaksei Kaspiarovich */
-@DataJpaTest
-public class UserRepositoryTest extends DatabaseTest {
+class UserRepositoryTest extends DatabaseTest {
 
     @Autowired private UserRepository userRepository;
 
