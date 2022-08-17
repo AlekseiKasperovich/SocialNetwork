@@ -1,10 +1,10 @@
 package com.senla.repository;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.senla.model.Friendship;
 import com.senla.model.User;
 import java.util.Optional;
+import java.util.UUID;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ class FriendshipRepositoryTest extends DatabaseTest {
     @Autowired private FriendshipRepository friendshipRepository;
 
     @Test
-    void findFriendship() {
+    void givenExistingSenderIdAndReceiverId_whenFindingById_thenReturnFriendship() {
         Optional<User> user1 = userRepository.findByEmail("admin@gmail.com");
         Optional<User> user2 = userRepository.findByEmail("user@gmail.com");
         Friendship friendship =
@@ -26,13 +26,23 @@ class FriendshipRepositoryTest extends DatabaseTest {
                         .accepted(Boolean.TRUE)
                         .build();
         friendshipRepository.save(friendship);
+
         Optional<Friendship> foundFriendship =
                 friendshipRepository.findFriendship(user1.get().getId(), user2.get().getId());
-        assertThat(foundFriendship.get()).isNotNull();
+
+        Assertions.assertTrue(foundFriendship.isPresent());
     }
 
     @Test
-    void findFriendshipRequest() {
+    void givenNonExistingSenderIdAndReceiverId_whenFindingById_thenReturnEmpty() {
+        Optional<Friendship> foundFriendship =
+                friendshipRepository.findFriendship(UUID.randomUUID(), UUID.randomUUID());
+
+        Assertions.assertFalse(foundFriendship.isPresent());
+    }
+
+    @Test
+    void givenExistingSenderIdAndReceiverId_whenFindingById_thenReturnFriendshipRequest() {
         Optional<User> user1 = userRepository.findByEmail("admin@gmail.com");
         Optional<User> user2 = userRepository.findByEmail("user@gmail.com");
         Friendship friendship =
@@ -42,14 +52,24 @@ class FriendshipRepositoryTest extends DatabaseTest {
                         .accepted(Boolean.FALSE)
                         .build();
         friendshipRepository.save(friendship);
-        Optional<Friendship> foundFriendship =
+
+        Optional<Friendship> foundFriendshipRequest =
                 friendshipRepository.findFriendshipRequest(
                         user1.get().getId(), user2.get().getId());
-        assertThat(foundFriendship.get()).isNotNull();
+
+        Assertions.assertTrue(foundFriendshipRequest.isPresent());
     }
 
     @Test
-    void findMyFriends() {
+    void givenNonExistingUsersId_whenFindingById_thenReturnEmpty() {
+        Optional<Friendship> foundFriendshipRequest =
+                friendshipRepository.findFriendshipRequest(UUID.randomUUID(), UUID.randomUUID());
+
+        Assertions.assertFalse(foundFriendshipRequest.isPresent());
+    }
+
+    @Test
+    void givenExistingUserId_whenFindingById_thenReturnMyFriends() {
         Optional<User> user1 = userRepository.findByEmail("admin@gmail.com");
         Optional<User> user2 = userRepository.findByEmail("user@gmail.com");
         Friendship friendship =
@@ -59,12 +79,21 @@ class FriendshipRepositoryTest extends DatabaseTest {
                         .accepted(Boolean.TRUE)
                         .build();
         friendshipRepository.save(friendship);
+
         Page<Friendship> myFriends = friendshipRepository.findMyFriends(user2.get().getId(), null);
-        assertThat(myFriends.get().findFirst().get()).isNotNull();
+
+        Assertions.assertTrue(myFriends.get().findFirst().isPresent());
     }
 
     @Test
-    void getMyFriendshipRequests() {
+    void givenNonExistingUserId_whenFindingById_thenReturnEmpty() {
+        Page<Friendship> myFriends = friendshipRepository.findMyFriends(UUID.randomUUID(), null);
+
+        Assertions.assertFalse(myFriends.get().findFirst().isPresent());
+    }
+
+    @Test
+    void givenExistingUserId_whenFindingById_thenReturnFriendshipRequests() {
         Optional<User> user1 = userRepository.findByEmail("admin@gmail.com");
         Optional<User> user2 = userRepository.findByEmail("user@gmail.com");
         Friendship friendship =
@@ -74,8 +103,18 @@ class FriendshipRepositoryTest extends DatabaseTest {
                         .accepted(Boolean.FALSE)
                         .build();
         friendshipRepository.save(friendship);
+
         Page<Friendship> myFriendshipRequests =
                 friendshipRepository.getMyFriendshipRequests(user2.get().getId(), null);
-        assertThat(myFriendshipRequests.get().findFirst().get()).isNotNull();
+
+        Assertions.assertTrue(myFriendshipRequests.get().findFirst().isPresent());
+    }
+
+    @Test
+    void givenNonExistingId_whenFindingById_thenReturnEmpty() {
+        Page<Friendship> myFriendshipRequests =
+                friendshipRepository.getMyFriendshipRequests(UUID.randomUUID(), null);
+
+        Assertions.assertFalse(myFriendshipRequests.get().findFirst().isPresent());
     }
 }

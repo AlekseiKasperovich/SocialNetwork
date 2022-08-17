@@ -15,7 +15,6 @@ public class CustomUserServiceTest {
         //        userService = new CustomUserServiceImpl(userRepository);
     }
 
-    /** Test of save method, of class CustomUserService. */
     @Test
     public void testSave() {
         //        when(userRepository.save(any())).thenReturn(getUser());

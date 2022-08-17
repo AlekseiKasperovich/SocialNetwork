@@ -15,7 +15,6 @@ public class RoleServiceTest {
         //        roleService = new RoleServiceImpl(roleRepository);
     }
 
-    /** Test of findByName method, of class RoleService. */
     @Test
     public void testFindByName() {
         //        Role role = new Role(Roles.ROLE_USER);
