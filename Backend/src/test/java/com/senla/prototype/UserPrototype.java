@@ -1,10 +1,8 @@
 package com.senla.prototype;
 
 import com.senla.dto.constants.Gender;
-import com.senla.dto.constants.Roles;
 import com.senla.dto.constants.Status;
 import com.senla.dto.user.DtoUser;
-import com.senla.model.Role;
 import com.senla.model.User;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,11 +11,9 @@ import java.util.UUID;
 public class UserPrototype {
 
     public static User getUser() {
-        Role role = new Role(Roles.ROLE_USER);
         return User.builder()
                 .email("test@gmail.com")
                 .password("password")
-                .role(role)
                 .status(Status.ACTIVE)
                 .build();
     }

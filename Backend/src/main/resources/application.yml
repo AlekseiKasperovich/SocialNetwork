@@ -4,7 +4,7 @@ spring:
   kafka:
     consumer:
       auto-offset-reset: earliest
-#      bootstrap-servers: ${BROKER_URL:http://localhost:9092}
+      #      bootstrap-servers: ${BROKER_URL:http://localhost:9092}
       bootstrap-servers: http://broker:9092
       group-id: group_id
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -27,6 +27,8 @@ spring:
           use_second_level_cache: true
           region:
             factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+          ehcache:
+            missing_cache_strategy: create
   mail:
     properties:
       mail:
@@ -48,7 +50,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     password: postgres
     username: postgres
-#    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/social_network_db}
+    #    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/social_network_db}
     url: jdbc:postgresql://postgres:5432/social_network_db
   mvc:
     pathmatch:
