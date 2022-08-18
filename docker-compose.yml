@@ -5,7 +5,7 @@ services:
     image: kasperovich/frontend
     container_name: frontend
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       - backend
       - postgres
@@ -13,19 +13,23 @@ services:
     build: Backend/
     image: kasperovich/backend
     container_name: backend
+    env_file:
+      - ./.env.postgres
     ports:
-      - 8081:8081
+      - "8081:8081"
     depends_on:
       - postgres
   postgres:
     image: postgres:latest
     container_name: postgres
     ports:
-      - 5432:5432
+      - "54320:5432"
+    env_file:
+      - ./.env.postgres
     environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=social_network_db
+      - POSTGRES_USER=${DB_USERNAME:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
+      - POSTGRES_DB=${DB_SOCIAL:-social_network_db}
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:

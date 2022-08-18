@@ -1,26 +1,21 @@
 package com.senla.service.custom;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.senla.dto.constants.Roles;
+import com.senla.model.Role;
+import com.senla.service.RoleService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /** @author Aliaksei Kaspiarovich */
-public class RoleServiceTest {
+public class RoleServiceTest extends AbstractIntegrationTest {
 
-    //    private RoleRepository roleRepository;
-    //    private RoleService roleService;
-
-    @BeforeEach
-    public void setUp() {
-        //        roleRepository = mock(RoleRepository.class);
-        //        roleService = new RoleServiceImpl(roleRepository);
-    }
+    @Autowired private RoleService roleService;
 
     @Test
-    public void testFindByName() {
-        //        Role role = new Role(Roles.ROLE_USER);
-        //        when(roleRepository.findByName(any())).thenReturn(role);
-        //        Role foundRole = roleService.findByName(role.getName());
-        //        assertThat(foundRole).isNotNull();
-        //        assertThat(foundRole.getName()).isEqualTo(role.getName());
+    public void givenExistingRoleName_whenFindingByName_thenReturnRole() {
+        Role foundRole = roleService.findByName(Roles.ROLE_USER);
+        Assertions.assertNotNull(foundRole);
+        Assertions.assertEquals(foundRole.getName(), Roles.ROLE_USER);
     }
 }
