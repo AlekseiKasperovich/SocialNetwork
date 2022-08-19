@@ -24,7 +24,7 @@ class EventRepositoryTest extends DatabaseTest {
 
         Page<Event> foundEvent = eventRepository.findByAuthorId(user.get().getId(), null);
 
-        Assertions.assertEquals(foundEvent.get().findFirst().get().getName(), "Hello");
+        Assertions.assertEquals("Hello", foundEvent.get().findFirst().get().getName());
     }
 
     @Test

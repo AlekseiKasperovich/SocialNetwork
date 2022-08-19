@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /** @author Aliaksei Kaspiarovich */
-public class RoleServiceTest extends AbstractIntegrationTest {
+class RoleServiceTest extends AbstractIntegrationTest {
 
     @Autowired private RoleService roleService;
 
     @Test
-    public void givenExistingRoleName_whenFindingByName_thenReturnRole() {
+    void givenExistingRoleName_whenFindingByName_thenReturnRole() {
         Role foundRole = roleService.findByName(Roles.ROLE_USER);
         Assertions.assertNotNull(foundRole);
-        Assertions.assertEquals(foundRole.getName(), Roles.ROLE_USER);
+        Assertions.assertEquals(Roles.ROLE_USER, foundRole.getName());
     }
 }
