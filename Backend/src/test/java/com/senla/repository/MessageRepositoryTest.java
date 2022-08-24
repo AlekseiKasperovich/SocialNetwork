@@ -33,7 +33,7 @@ class MessageRepositoryTest extends DatabaseTest {
         Page<Message> foundMessage =
                 messageRepository.findMessages(user1.get().getId(), user2.get().getId(), null);
 
-        Assertions.assertEquals(foundMessage.get().findFirst().get().getBody(), "Hello");
+        Assertions.assertEquals("Hello", foundMessage.get().findFirst().get().getBody());
     }
 
     @Test

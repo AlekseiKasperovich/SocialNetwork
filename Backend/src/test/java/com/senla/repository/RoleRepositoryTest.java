@@ -12,9 +12,9 @@ class RoleRepositoryTest extends DatabaseTest {
     @Autowired private RoleRepository roleRepository;
 
     @Test
-    public void givenExistingRoleName_whenFindingByName_thenReturnRole() {
+    void givenExistingRoleName_whenFindingByName_thenReturnRole() {
         Role foundRole = roleRepository.findByName(Roles.ROLE_USER);
         Assertions.assertNotNull(foundRole);
-        Assertions.assertEquals(foundRole.getName(), Roles.ROLE_USER);
+        Assertions.assertEquals(Roles.ROLE_USER, foundRole.getName());
     }
 }

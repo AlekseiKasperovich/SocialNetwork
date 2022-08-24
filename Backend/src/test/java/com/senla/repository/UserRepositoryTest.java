@@ -12,17 +12,17 @@ class UserRepositoryTest extends DatabaseTest {
     @Autowired private UserRepository userRepository;
 
     @Test
-    public void givenExistingEmail_whenFindingByEmail_thenReturnUser() {
+    void givenExistingEmail_whenFindingByEmail_thenReturnUser() {
         String email = "user@gmail.com";
 
         Optional<User> foundUser = userRepository.findByEmail(email);
 
         Assertions.assertTrue(foundUser.isPresent());
-        Assertions.assertEquals(foundUser.get().getEmail(), email);
+        Assertions.assertEquals(email, foundUser.get().getEmail());
     }
 
     @Test
-    public void givenNonExistingEmail_whenFindingByEmail_thenReturnEmpty() {
+    void givenNonExistingEmail_whenFindingByEmail_thenReturnEmpty() {
         String email = "some_any_other@gmail.com";
 
         Optional<User> foundUser = userRepository.findByEmail(email);
@@ -31,7 +31,7 @@ class UserRepositoryTest extends DatabaseTest {
     }
 
     @Test
-    public void givenExistingEmail_whenFindingByEmail_thenReturnTrue() {
+    void givenExistingEmail_whenFindingByEmail_thenReturnTrue() {
         String email = "user@gmail.com";
 
         boolean result = userRepository.existsByEmail(email);
@@ -40,7 +40,7 @@ class UserRepositoryTest extends DatabaseTest {
     }
 
     @Test
-    public void givenNonExistingEmail_whenFindingByEmail_thenReturnFalse() {
+    void givenNonExistingEmail_whenFindingByEmail_thenReturnFalse() {
         String email = "some_any_other@gmail.com";
 
         boolean result = userRepository.existsByEmail(email);
