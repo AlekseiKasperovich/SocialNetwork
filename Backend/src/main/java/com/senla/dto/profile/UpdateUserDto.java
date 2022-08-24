@@ -1,9 +1,9 @@
 package com.senla.dto.profile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.senla.dto.constants.Gender;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UpdateUserDto {
 
     private String firstName;
@@ -19,6 +20,6 @@ public class UpdateUserDto {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate birthday;
 
-    private Gender sex;
+    private String sex;
     private String phone;
 }
