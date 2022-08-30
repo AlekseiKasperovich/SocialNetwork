@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 /** @author Aliaksei Kaspiarovich */
 @RestController
 @RequestMapping(
-        value = "${api.prefix}" + "/users/details",
+        value = "api/users/details",
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
