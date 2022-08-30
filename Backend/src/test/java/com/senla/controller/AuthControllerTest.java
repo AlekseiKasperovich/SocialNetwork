@@ -1,7 +1,5 @@
 package com.senla.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
 import com.senla.dto.user.ForgotPasswordDto;
