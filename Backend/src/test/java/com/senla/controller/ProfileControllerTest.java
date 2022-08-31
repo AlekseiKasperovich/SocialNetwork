@@ -6,10 +6,8 @@ import com.senla.dto.profile.ChangePasswordDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 import com.senla.dto.user.UserDetailsDto;
-
 import java.time.LocalDate;
 import java.util.UUID;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.*;

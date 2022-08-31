@@ -16,8 +16,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 @DirtiesContext
 public class AbstractMockControllerTest {
 
-    @Autowired
-    protected MockMvc mockMvc;
+    @Autowired protected MockMvc mockMvc;
 
     static PostgreSQLContainer<?> DATABASE = new PostgreSQLContainer<>("postgres:latest");
 
