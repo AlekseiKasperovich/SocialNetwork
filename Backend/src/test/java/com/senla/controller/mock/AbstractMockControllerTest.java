@@ -14,7 +14,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @DirtiesContext
-public class AbstractMockControllerTest {
+public abstract class AbstractMockControllerTest {
 
     @Autowired protected MockMvc mockMvc;
 
