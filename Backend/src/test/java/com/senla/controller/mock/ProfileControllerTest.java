@@ -1,7 +1,6 @@
 package com.senla.controller.mock;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,12 +8,15 @@ import com.senla.dto.constants.Gender;
 import com.senla.dto.constants.Status;
 import com.senla.dto.profile.ChangePasswordDto;
 import com.senla.dto.profile.UpdateUserDto;
+import com.senla.dto.user.DtoUser;
 import com.senla.service.CustomUserService;
 import java.time.LocalDate;
 import java.util.UUID;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.test.web.servlet.MvcResult;
 
 class ProfileControllerTest extends AbstractMockControllerTest {
 
@@ -30,24 +32,29 @@ class ProfileControllerTest extends AbstractMockControllerTest {
     @Test
     void givenExistingId_whenFindingById_thenReturnUserProfile() throws Exception {
         UUID id = getUserId();
-        mockMvc.perform(
-                        get("/api/users/profile")
-                                .header("id", id)
-                                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id.toString()))
-                .andDo(print());
+
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                get("/api/users/profile")
+                                        .header("id", id)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        DtoUser returnedUser =
+                objectMapper.readValue(mvcResult.getResponse().getContentAsString(), DtoUser.class);
+        Assertions.assertEquals(id, returnedUser.getId());
     }
 
     @Test
     void givenNonExistingId_whenFindingById_thenTrowException() throws Exception {
         UUID id = UUID.randomUUID();
+
         mockMvc.perform(
                         get("/api/users/profile")
                                 .header("id", id)
                                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andDo(print());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -61,15 +68,20 @@ class ProfileControllerTest extends AbstractMockControllerTest {
                         .sex(Gender.MALE.name())
                         .phone("123456789")
                         .build();
-        mockMvc.perform(
-                        put("/api/users/profile")
-                                .content(objectMapper.writeValueAsString(updateUserDto))
-                                .header("id", id)
-                                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().json(objectMapper.writeValueAsString(updateUserDto)))
-                .andExpect(jsonPath("$.id").value(id.toString()))
-                .andDo(print());
+
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                put("/api/users/profile")
+                                        .content(objectMapper.writeValueAsString(updateUserDto))
+                                        .header("id", id)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        DtoUser returnedUser =
+                objectMapper.readValue(mvcResult.getResponse().getContentAsString(), DtoUser.class);
+        Assertions.assertEquals(id, returnedUser.getId());
+        Assertions.assertEquals(updateUserDto.getFirstName(), returnedUser.getFirstName());
     }
 
     @Test
@@ -83,13 +95,13 @@ class ProfileControllerTest extends AbstractMockControllerTest {
                         .sex(Gender.MALE.name())
                         .phone("123456789")
                         .build();
+
         mockMvc.perform(
                         put("/api/users/profile")
                                 .content(objectMapper.writeValueAsString(updateUserDto))
                                 .header("id", id)
                                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andDo(print());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -100,14 +112,19 @@ class ProfileControllerTest extends AbstractMockControllerTest {
                         .password("newpassword")
                         .matchingPassword("newpassword")
                         .build();
-        mockMvc.perform(
-                        patch("/api/users/profile")
-                                .content(objectMapper.writeValueAsString(changePasswordDto))
-                                .header("id", id)
-                                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id.toString()))
-                .andDo(print());
+
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                patch("/api/users/profile")
+                                        .content(objectMapper.writeValueAsString(changePasswordDto))
+                                        .header("id", id)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        DtoUser returnedUser =
+                objectMapper.readValue(mvcResult.getResponse().getContentAsString(), DtoUser.class);
+        Assertions.assertEquals(id, returnedUser.getId());
     }
 
     @Test
@@ -118,36 +135,41 @@ class ProfileControllerTest extends AbstractMockControllerTest {
                         .password("newpassword")
                         .matchingPassword("newpassword")
                         .build();
+
         mockMvc.perform(
                         patch("/api/users/profile")
                                 .content(objectMapper.writeValueAsString(changePasswordDto))
                                 .header("id", id)
                                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andDo(print());
+                .andExpect(status().isNotFound());
     }
 
     @Test
     void givenExistingId_whenFindingById_thenReturnDeletedProfile() throws Exception {
         UUID id = getUserId();
-        mockMvc.perform(
-                        delete("/api/users/profile")
-                                .header("id", id)
-                                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id.toString()))
-                .andExpect(jsonPath("$.status").value(Status.DELETED.name()))
-                .andDo(print());
+
+        MvcResult mvcResult =
+                mockMvc.perform(
+                                delete("/api/users/profile")
+                                        .header("id", id)
+                                        .contentType(MediaType.APPLICATION_JSON))
+                        .andExpect(status().isOk())
+                        .andReturn();
+
+        DtoUser returnedUser =
+                objectMapper.readValue(mvcResult.getResponse().getContentAsString(), DtoUser.class);
+        Assertions.assertEquals(id, returnedUser.getId());
+        Assertions.assertEquals(Status.DELETED.name(), returnedUser.getStatus());
     }
 
     @Test
     void givenNonExistingId_whenFindingById_thenReturnStatusNotFound() throws Exception {
         UUID id = UUID.randomUUID();
+
         mockMvc.perform(
                         delete("/api/users/profile")
                                 .header("id", id)
                                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound())
-                .andDo(print());
+                .andExpect(status().isNotFound());
     }
 }

@@ -77,7 +77,7 @@ class ProfileControllerTest extends AbstractControllerTest {
                         "/api/users/profile", HttpMethod.PUT, request, DtoUser.class);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
-        Assertions.assertEquals("firstName", response.getBody().getFirstName());
+        Assertions.assertEquals(updateUserDto.getFirstName(), response.getBody().getFirstName());
     }
 
     @Test
