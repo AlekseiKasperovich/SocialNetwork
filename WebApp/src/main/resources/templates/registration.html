@@ -39,6 +39,11 @@
                     Registration completed successfully!
                 </div>
             </div>
+            <div th:if="${param.fail}">
+                <div class="alert alert-info">
+                    Registration failed!
+                </div>
+            </div>
             <div class="card-body">
                 <form
                         method="post"
@@ -75,7 +80,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label class="form-label">Repeat Password</label>
+                        <label class="form-label">Repeat password</label>
                         <input
                                 class="form-control"
                                 id="matchingPassword"
@@ -84,8 +89,8 @@
                                 th:field="*{matchingPassword}"
                                 type="password"
                         />
-                        <p th:errors="*{password}" class="text-danger"
-                           th:if="${#fields.hasErrors('password')}"></p>
+                        <p th:errors="*{matchingPassword}" class="text-danger"
+                           th:if="${#fields.hasErrors('matchingPassword')}"></p>
                     </div>
 
                     <div class="form-group">

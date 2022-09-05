@@ -11,4 +11,11 @@ logging:
     com:
       senla: INFO
 request:
-  host: http://frontend:8080
+  host: http://localhost:8080/api
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
