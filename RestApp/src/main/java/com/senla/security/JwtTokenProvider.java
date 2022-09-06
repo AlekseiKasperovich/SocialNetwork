@@ -1,5 +1,6 @@
 package com.senla.security;
 
+import com.senla.dto.token.TokenDto;
 import com.senla.exception.MyAccessDeniedException;
 import com.senla.property.JwtProperty;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -29,18 +30,22 @@ public class JwtTokenProvider {
      * @param email user email
      * @return token
      */
-    public String generateToken(String email) {
+    public TokenDto generateToken(String email) {
         Date expirationDate =
                 Date.from(
                         LocalDate.now()
                                 .plusDays(jwtProperty.getExpiration())
                                 .atStartOfDay(ZoneId.systemDefault())
                                 .toInstant());
-        return Jwts.builder()
-                .setSubject(email)
-                .setExpiration(expirationDate)
-                .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
-                .compact();
+        return TokenDto.builder()
+                .token(
+                        jwtProperty.getBearer()
+                                + Jwts.builder()
+                                        .setSubject(email)
+                                        .setExpiration(expirationDate)
+                                        .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
+                                        .compact())
+                .build();
     }
 
     /**

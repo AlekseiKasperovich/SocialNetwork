@@ -1,9 +1,11 @@
 package com.senla.controller;
 
 import com.senla.client.AuthRestClient;
+import com.senla.dto.token.TokenDto;
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
 import com.senla.dto.user.ForgotPasswordDto;
+import com.senla.dto.user.LoginUserDto;
 import com.senla.security.JwtTokenProvider;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,17 +41,15 @@ public class AuthController {
     }
 
     /**
-     * @param createUserDto user email and password
+     * @param loginUserDto user email and password
      * @return token
      */
     @PostMapping("login")
-    public ResponseEntity<Object> createAuthenticationToken(
-            @RequestBody @Valid DtoCreateUser createUserDto) {
+    public TokenDto createAuthenticationToken(@RequestBody @Valid LoginUserDto loginUserDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        createUserDto.getEmail(), createUserDto.getPassword()));
-        String token = jwtTokenProvider.generateToken(createUserDto.getEmail());
-        return ResponseEntity.ok("Token: " + token);
+                        loginUserDto.getEmail(), loginUserDto.getPassword()));
+        return jwtTokenProvider.generateToken(loginUserDto.getEmail());
     }
 
     /**
