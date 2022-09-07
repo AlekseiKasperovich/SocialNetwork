@@ -31,13 +31,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-
-            <div th:if="${param.error}">
-                <div class="alert alert-danger">Invalid Email or Password</div>
-            </div>
             <div class="card">
                 <div class="card-header">
                     <h2 class="text-center">Login Form</h2>
+                </div>
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                        Login completed successfully!
+                    </div>
+                </div>
+                <div th:if="${param.fail}">
+                    <div class="alert alert-info">
+                        <p th:text="${message}"></p>
+                    </div>
                 </div>
                 <div class="card-body">
                     <form

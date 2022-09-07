@@ -3,6 +3,7 @@ package com.senla.web.controller;
 import com.senla.web.dto.token.TokenDto;
 import com.senla.web.dto.user.DtoCreateUser;
 import com.senla.web.dto.user.LoginUserDto;
+import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.exception.UserAlreadyExistException;
 import com.senla.web.service.AuthService;
 import javax.validation.Valid;
@@ -58,12 +59,16 @@ public class AuthController {
     public String login(
             @ModelAttribute("user") @Valid LoginUserDto loginUserDto,
             BindingResult result,
-            Model model) {
+            RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             return "login";
         }
-        TokenDto token = authService.login(loginUserDto);
-        System.out.println(token);
-        return null;
+        try {
+            TokenDto token = authService.login(loginUserDto);
+        } catch (MyAccessDeniedException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/login?fail";
+        }
+        return "redirect:/login?success";
     }
 }

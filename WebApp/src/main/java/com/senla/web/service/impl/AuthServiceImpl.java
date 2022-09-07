@@ -3,6 +3,7 @@ package com.senla.web.service.impl;
 import com.senla.web.dto.token.TokenDto;
 import com.senla.web.dto.user.DtoCreateUser;
 import com.senla.web.dto.user.LoginUserDto;
+import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.exception.UserAlreadyExistException;
 import com.senla.web.feign.AuthClient;
 import com.senla.web.service.AuthService;
@@ -30,6 +31,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public TokenDto login(LoginUserDto loginUserDto) {
-        return authClient.login(loginUserDto);
+        try {
+            return authClient.login(loginUserDto);
+        } catch (FeignException.Unauthorized ex) {
+            System.out.println(ex.getMessage());
+            throw new MyAccessDeniedException("Your account has been deleted or blocked");
+        } catch (FeignException.Forbidden ex) {
+            System.out.println(ex.getMessage());
+            throw new MyAccessDeniedException("Incorrect email or password");
+        }
     }
 }
