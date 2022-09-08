@@ -1,10 +1,12 @@
 package com.senla.web.controller;
 
-import com.senla.web.dto.token.TokenDto;
 import com.senla.web.dto.user.DtoCreateUser;
+import com.senla.web.dto.user.ForgotPasswordDto;
 import com.senla.web.dto.user.LoginUserDto;
 import com.senla.web.exception.MyAccessDeniedException;
+import com.senla.web.exception.MyServerErrorException;
 import com.senla.web.exception.UserAlreadyExistException;
+import com.senla.web.exception.UserNotFoundException;
 import com.senla.web.service.AuthService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping(value = "auth")
 public class AuthController {
 
     private final AuthService authService;
@@ -37,19 +40,19 @@ public class AuthController {
         }
         if (!userDto.getPassword().equals(userDto.getMatchingPassword())) {
             redirectAttributes.addFlashAttribute("message", "Passwords do not match!");
-            return "redirect:/registration?fail";
+            return "redirect:/auth/registration?fail";
         }
         try {
             authService.registerNewUserAccount(userDto);
         } catch (UserAlreadyExistException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
-            return "redirect:/registration?fail";
+            return "redirect:/auth/registration?fail";
         }
-        return "redirect:/registration?success";
+        return "redirect:/auth/registration?success";
     }
 
     @GetMapping("login")
-    public String login(Model model) {
+    public String showLoginForm(Model model) {
         LoginUserDto user = new LoginUserDto();
         model.addAttribute("user", user);
         return "login";
@@ -64,11 +67,38 @@ public class AuthController {
             return "login";
         }
         try {
-            TokenDto token = authService.login(loginUserDto);
+            authService.login(loginUserDto);
         } catch (MyAccessDeniedException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
-            return "redirect:/login?fail";
+            return "redirect:/auth/login?fail";
         }
-        return "redirect:/login?success";
+        return "redirect:/users/profile";
+    }
+
+    @GetMapping("password/new")
+    public String showResetPasswordForm(Model model) {
+        ForgotPasswordDto email = new ForgotPasswordDto();
+        model.addAttribute("email", email);
+        return "resetPassword";
+    }
+
+    @PostMapping("password/new/save")
+    public String newPassword(
+            @ModelAttribute("email") @Valid ForgotPasswordDto forgotPasswordDto,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "resetPassword";
+        }
+        try {
+            authService.sendPassword(forgotPasswordDto);
+        } catch (UserNotFoundException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/auth/password/new?fail";
+        } catch (MyServerErrorException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            return "redirect:/auth/password/new?fail";
+        }
+        return "redirect:/auth/password/new?success";
     }
 }

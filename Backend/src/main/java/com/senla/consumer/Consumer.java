@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@ConditionalOnProperty(value = "kafka.enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = "kafka.enable", havingValue = "false", matchIfMissing = false)
 public class Consumer implements KafkaConsumer {
 
     private final MessageService messageService;
