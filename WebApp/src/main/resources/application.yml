@@ -13,6 +13,8 @@ logging:
 request:
   host: http://localhost:8080/api
 feign:
+  hystrix:
+    enabled: false
   client:
     config:
       default:

@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/auth/registration}">Register</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/registration}">Register</a>
                 </li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                     <form
                             method="post"
                             role="form"
-                            th:action="@{/auth/login/save}"
+                            th:action="@{/login/save}"
                             th:object="${user}"
                             class="form-horizontal"
                     >
@@ -82,7 +82,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <span> Forgot password? <a th:href="@{/auth/password/new}">Reset password</a></span>
+                            <span> Forgot password? <a th:href="@{/password/new}">Reset password</a></span>
                         </div>
                     </form>
                 </div>

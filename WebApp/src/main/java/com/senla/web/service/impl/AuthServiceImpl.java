@@ -16,8 +16,6 @@ import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,8 +23,6 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final AuthClient authClient;
-
-    private final UserDetailsService userDetailsService;
 
     @Override
     public void registerNewUserAccount(DtoCreateUser createUserDto) {
@@ -43,12 +39,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public void login(LoginUserDto loginUserDto) {
         try {
-            TokenDto tokenDto = authClient.login(loginUserDto);
+            TokenDto tokenDto = authClient.login(loginUserDto).getBody();
             if (tokenDto != null) {
                 String token = tokenDto.getToken();
-                //                UserDetails currentUserDetails =
-                // userDetailsService.loadUserByUsername(loginUserDto.getEmail());
-                UserDetails currentUserDetails =
+                CurrentUserDetails currentUserDetails =
                         CurrentUserDetails.builder()
                                 .email(loginUserDto.getEmail())
                                 .token(token)
@@ -58,6 +52,8 @@ public class AuthServiceImpl implements AuthService {
                         new UsernamePasswordAuthenticationToken(
                                 currentUserDetails, null, currentUserDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                System.out.println(authentication.getName());
+                System.out.println(token);
             }
         } catch (FeignException.Unauthorized ex) {
             throw new MyAccessDeniedException("Your account has been deleted or blocked");

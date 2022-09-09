@@ -1,3 +1,8 @@
 package com.senla.web.service;
 
-public interface ProfileService {}
+import com.senla.web.dto.user.DtoUser;
+
+public interface ProfileService {
+
+    DtoUser getCurrentUserProfile();
+}

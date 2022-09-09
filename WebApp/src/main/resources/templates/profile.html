@@ -19,10 +19,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/auth/registration}">Register</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/users/profile}">My
+                        profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/auth/login}">Login</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
                 </li>
             </ul>
         </div>
@@ -31,7 +32,7 @@
 <br/><br/>
 <div class="container">
     <div class="row">
-        <h1 class="text-center" th:text="${profile}"></h1>
+        <h1 class="text-center" th:text="${hello}"></h1>
     </div>
 </div>
 </body>

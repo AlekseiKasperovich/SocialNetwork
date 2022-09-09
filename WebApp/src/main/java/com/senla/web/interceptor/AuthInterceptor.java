@@ -11,11 +11,13 @@ public class AuthInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        System.out.println("AuthInterceptor");
+        System.out.println("AuthInterceptor before");
 
         if (SecurityUtil.isAuthenticated()) {
             CurrentUserDetails currentUserDetails = SecurityUtil.getCurrentUser();
             String token = currentUserDetails.getPassword();
+            System.out.println(token);
+            System.out.println("AuthInterceptor after");
             requestTemplate.header("Authorization", token);
             requestTemplate.header("Content-Type", "application/json");
             requestTemplate.header("Accept", "application/json");

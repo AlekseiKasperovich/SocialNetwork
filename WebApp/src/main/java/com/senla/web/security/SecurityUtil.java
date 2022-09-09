@@ -1,11 +1,13 @@
 package com.senla.web.security;
 
 import java.util.List;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public final class SecurityUtil {
+
     public static final List<GrantedAuthority> AUTHORITIES =
             List.of(new SimpleGrantedAuthority("ROLE_USER"));
 
