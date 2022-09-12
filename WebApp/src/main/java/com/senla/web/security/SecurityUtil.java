@@ -1,7 +1,6 @@
 package com.senla.web.security;
 
 import java.util.List;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,3 +22,14 @@ public final class SecurityUtil {
         throw new RuntimeException();
     }
 }
+//    protected static String getCurrentUserEmail() {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        return authentication == null ? null : authentication.getName();
+//    }
+//
+//    protected static UUID getCurrentUserId() {
+//        UserDetailsImpl user =
+//                (UserDetailsImpl)
+//                        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        return user.getId();
+//    }

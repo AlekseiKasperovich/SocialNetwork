@@ -1,7 +1,6 @@
 package com.senla.web.security;
 
 import java.util.Collection;
-
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -12,9 +12,8 @@ logging:
       senla: INFO
 request:
   host: http://localhost:8080/api
+feign.autoconfiguration.jackson.enabled: true
 feign:
-  hystrix:
-    enabled: false
   client:
     config:
       default:

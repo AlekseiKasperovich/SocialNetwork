@@ -1,7 +1,6 @@
 package com.senla.web.controller;
 
 import com.senla.web.dto.user.DtoCreateUser;
-import com.senla.web.dto.user.DtoUser;
 import com.senla.web.dto.user.ForgotPasswordDto;
 import com.senla.web.dto.user.LoginUserDto;
 import com.senla.web.exception.MyAccessDeniedException;
@@ -9,10 +8,7 @@ import com.senla.web.exception.MyServerErrorException;
 import com.senla.web.exception.UserAlreadyExistException;
 import com.senla.web.exception.UserNotFoundException;
 import com.senla.web.service.AuthService;
-
 import javax.validation.Valid;
-
-import com.senla.web.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

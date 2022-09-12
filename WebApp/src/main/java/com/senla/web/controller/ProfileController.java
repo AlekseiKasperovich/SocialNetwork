@@ -5,9 +5,7 @@ import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -18,12 +16,12 @@ public class ProfileController {
     private final ProfileService profileService;
 
     @GetMapping
-    public String showUserProfile(Model model) {
+    public String showUserProfile() {
         try {
             DtoUser user = profileService.getCurrentUserProfile();
             System.out.println(user);
         } catch (MyAccessDeniedException ex) {
-            model.addAttribute("profile", ex.getMessage());
+            System.out.println(ex.getMessage());
         }
         return "profile";
     }

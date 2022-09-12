@@ -26,6 +26,6 @@ role:
   admin: ADMIN
 request:
   question: '?'
-  host: http://backend:8081
+  host: http://localhost:8081
   email: "email"
   id: "id"
