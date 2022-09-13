@@ -1,16 +1,26 @@
 package com.senla.web.feign;
 
+import com.senla.web.dto.profile.ChangePasswordDto;
+import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
-import feign.Headers;
-import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "ProfileClient", url = "${request.host}")
-@Headers({"Authorization: {token}"})
+@Component
+@FeignClient(name = "ProfileClient", url = ("${request.host}" + "/users/profile"))
 public interface ProfileClient {
 
-    @GetMapping(value = "/users/profile")
-    ResponseEntity<DtoUser> getProfile(@Param("token") String token);
+    @GetMapping
+    ResponseEntity<DtoUser> getProfile();
+
+    @PutMapping
+    ResponseEntity<DtoUser> updateProfile(UpdateUserDto updateUserDto);
+
+    @PatchMapping
+    ResponseEntity<DtoUser> changePassword(ChangePasswordDto changePasswordDto);
+
+    @DeleteMapping
+    void deleteProfile();
 }

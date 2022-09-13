@@ -40,13 +40,45 @@
     </div>
 </nav>
 <br/><br/>
-<div th:object="${user}">
-    <p>Email: <span th:text="*{email}"></span></p>
-    <p>Name: <span th:text="*{firstName}"></span></p>
-    <p>Surname: <span th:text="*{lastName}"></span></p>
-    <p>Date of birth: <span th:text="*{birthday}"></span></p>
-    <p>Sex: <span th:text="*{sex}"></span></p>
-    <p>Phone: <span th:text="*{phone}"></span></p>
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Delete Profile Form</h2>
+            </div>
+            <div th:if="${param.fail}">
+                <div class="alert alert-info">
+                    <p th:text="${message}"></p>
+                </div>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/users/profile/delete}"
+                        th:object="${email}"
+                >
+                    <div class="form-group mb-3">
+                        <label class="control-label"> Email</label>
+                        <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                th:field="*{email}"
+                                class="form-control"
+                                placeholder="Enter email address"
+                        />
+                        <p th:errors="*{email}" class="text-danger"
+                           th:if="${#fields.hasErrors('email')}"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Delete profile!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

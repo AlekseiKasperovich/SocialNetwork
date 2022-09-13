@@ -47,7 +47,8 @@ public class AuthController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/registration?fail";
         }
-        return "redirect:/registration?success";
+        redirectAttributes.addFlashAttribute("message", "Registration completed successfully!");
+        return "redirect:/login?success";
     }
 
     @GetMapping("login")
@@ -71,8 +72,7 @@ public class AuthController {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/login?fail";
         }
-        redirectAttributes.addFlashAttribute("hello", "Hello " + loginUserDto.getEmail());
-        return "redirect:/profile";
+        return "redirect:/users/profile";
     }
 
     @GetMapping("password/new")
@@ -97,10 +97,5 @@ public class AuthController {
             return "redirect:/password/new?fail";
         }
         return "redirect:/password/new?success";
-    }
-
-    @GetMapping("/profile")
-    public String showUserProfilePage() {
-        return "profile";
     }
 }

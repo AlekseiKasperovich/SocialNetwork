@@ -37,7 +37,7 @@
                 </div>
                 <div th:if="${param.success}">
                     <div class="alert alert-info">
-                        Login completed successfully!
+                        <p th:text="${message}"></p>
                     </div>
                 </div>
                 <div th:if="${param.fail}">

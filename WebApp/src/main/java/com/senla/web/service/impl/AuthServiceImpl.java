@@ -52,8 +52,6 @@ public class AuthServiceImpl implements AuthService {
                         new UsernamePasswordAuthenticationToken(
                                 currentUserDetails, null, currentUserDetails.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                System.out.println(authentication.getName());
-                System.out.println(token);
             }
         } catch (FeignException.Unauthorized ex) {
             throw new MyAccessDeniedException("Your account has been deleted or blocked");

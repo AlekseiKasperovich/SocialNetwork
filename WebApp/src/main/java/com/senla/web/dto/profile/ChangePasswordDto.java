@@ -2,6 +2,7 @@ package com.senla.web.dto.profile;
 
 import com.senla.web.validation.ValidPassword;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ChangePasswordDto {
 
-    @ValidPassword @NotBlank private String password;
+    @Size(min = 5, max = 16)
+    @ValidPassword
+    @NotBlank
+    private String password;
 
     @NotBlank private String matchingPassword;
 }
