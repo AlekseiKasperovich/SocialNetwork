@@ -2,6 +2,7 @@ package com.senla.web.controller;
 
 import com.senla.web.dto.profile.ChangePasswordDto;
 import com.senla.web.dto.profile.EmailDto;
+import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.ProfileService;
@@ -29,6 +30,25 @@ public class ProfileController {
         DtoUser user = profileService.getCurrentUserProfile();
         model.addAttribute("user", user);
         return "profile";
+    }
+
+    @GetMapping("update")
+    public String showUpdateProfileForm(Model model) {
+        UpdateUserDto updateUserDto = new UpdateUserDto();
+        model.addAttribute("user", updateUserDto);
+        return "updateProfile";
+    }
+
+    @PostMapping("update")
+    public String updateProfile(
+            @ModelAttribute("user") @Valid UpdateUserDto updateUserDto,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "updateProfile";
+        }
+        profileService.updateProfile(updateUserDto);
+        return "redirect:/users/profile";
     }
 
     @GetMapping("password")

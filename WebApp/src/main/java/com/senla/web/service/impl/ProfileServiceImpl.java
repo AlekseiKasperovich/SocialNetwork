@@ -20,13 +20,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public DtoUser updateUserProfile(UpdateUserDto updateUserDto) {
-        return profileClient.updateProfile(updateUserDto).getBody();
+    public void updateProfile(UpdateUserDto updateUserDto) {
+        profileClient.updateProfile(updateUserDto);
     }
 
     @Override
-    public DtoUser changePassword(ChangePasswordDto changePasswordDto) {
-        return profileClient.changePassword(changePasswordDto).getBody();
+    public void changePassword(ChangePasswordDto changePasswordDto) {
+        profileClient.changePassword(changePasswordDto);
     }
 
     @Override

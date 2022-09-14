@@ -19,7 +19,7 @@ public interface ProfileClient {
     ResponseEntity<DtoUser> updateProfile(UpdateUserDto updateUserDto);
 
     @PatchMapping
-    ResponseEntity<DtoUser> changePassword(ChangePasswordDto changePasswordDto);
+    void changePassword(ChangePasswordDto changePasswordDto);
 
     @DeleteMapping
     void deleteProfile();

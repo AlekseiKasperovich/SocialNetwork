@@ -1,11 +1,11 @@
 package com.senla.dto.profile;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /** @author Aliaksei Kaspiarovich */
 @Data
@@ -17,7 +17,7 @@ public class UpdateUserDto {
     private String firstName;
     private String lastName;
 
-    @JsonFormat(pattern = "dd.MM.yyyy")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate birthday;
 
     private String sex;

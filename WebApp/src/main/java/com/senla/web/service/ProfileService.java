@@ -8,9 +8,9 @@ public interface ProfileService {
 
     DtoUser getCurrentUserProfile();
 
-    DtoUser updateUserProfile(UpdateUserDto updateUserDto);
+    void updateProfile(UpdateUserDto updateUserDto);
 
-    DtoUser changePassword(ChangePasswordDto changePasswordDto);
+    void changePassword(ChangePasswordDto changePasswordDto);
 
     void deleteProfile();
 }
