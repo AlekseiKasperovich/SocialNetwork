@@ -7,12 +7,16 @@ import com.senla.dto.user.DtoUser;
 import com.senla.dto.user.ForgotPasswordDto;
 import com.senla.dto.user.LoginUserDto;
 import com.senla.security.JwtTokenProvider;
+import com.senla.security.UserDetailsImpl;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +34,7 @@ public class AuthController {
     private final AuthRestClient authRestClient;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
 
     /**
      * @param createUserDto user email and password
@@ -46,10 +51,16 @@ public class AuthController {
      */
     @PostMapping("login")
     public TokenDto createAuthenticationToken(@RequestBody @Valid LoginUserDto loginUserDto) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginUserDto.getEmail(), loginUserDto.getPassword()));
-        return jwtTokenProvider.generateToken(loginUserDto.getEmail());
+        Authentication authentication =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                loginUserDto.getEmail(), loginUserDto.getPassword()));
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        SimpleGrantedAuthority authority =
+                (SimpleGrantedAuthority) userDetails.getAuthorities().stream().findFirst().get();
+        String role = authority.getAuthority();
+        return jwtTokenProvider.generateToken(
+                userDetails.getUsername(), role, userDetails.getId().toString());
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.senla.web.security;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -9,8 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public final class SecurityUtil {
 
-    public static final List<GrantedAuthority> AUTHORITIES =
-            List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    private static final List<GrantedAuthority> ANONYMOUS_AUTHORITIES =
+            List.of(new SimpleGrantedAuthority("ROLE_ANONYMOUS"));
 
     public static boolean isAuthenticated() {
         return SecurityContextHolder.getContext().getAuthentication() != null;
@@ -24,8 +25,16 @@ public final class SecurityUtil {
         throw new RuntimeException();
     }
 
+    public static List<SimpleGrantedAuthority> mapRoleToAuthorities(String role) {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role));
+        return authorities;
+    }
+
     public static Authentication createAnonymousPrincipal() {
         return new AnonymousAuthenticationToken(
-                "user", new CurrentUserDetails(AUTHORITIES, null, null), AUTHORITIES);
+                "Anonymous",
+                new CurrentUserDetails(ANONYMOUS_AUTHORITIES, null, null),
+                ANONYMOUS_AUTHORITIES);
     }
 }

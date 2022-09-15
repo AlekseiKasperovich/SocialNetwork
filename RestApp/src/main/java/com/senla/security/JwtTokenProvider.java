@@ -3,18 +3,15 @@ package com.senla.security;
 import com.senla.dto.token.TokenDto;
 import com.senla.exception.MyAccessDeniedException;
 import com.senla.property.JwtProperty;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
+import java.util.*;
+import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -28,9 +25,13 @@ public class JwtTokenProvider {
 
     /**
      * @param email user email
+     * @param role user role
      * @return token
      */
-    public TokenDto generateToken(String email) {
+    public TokenDto generateToken(String email, String role, String id) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("authorities", role);
+        claims.put("id", id);
         Date expirationDate =
                 Date.from(
                         LocalDate.now()
@@ -41,10 +42,12 @@ public class JwtTokenProvider {
                 .token(
                         jwtProperty.getBearer()
                                 + Jwts.builder()
+                                        .setClaims(claims)
                                         .setSubject(email)
                                         .setExpiration(expirationDate)
                                         .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
                                         .compact())
+                .role(role)
                 .build();
     }
 
@@ -81,6 +84,34 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+    }
+
+    public List<SimpleGrantedAuthority> getRoleFromToken(String token) {
+        Claims claims =
+                Jwts.parser()
+                        .setSigningKey(jwtProperty.getSecret())
+                        .parseClaimsJws(token)
+                        .getBody();
+        Function<Claims, String> claimsListFunction =
+                cl -> {
+                    return (String) cl.get("authorities");
+                };
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(claimsListFunction.apply(claims)));
+        return authorities;
+    }
+
+    public UUID getIdFromToken(String token) {
+        Claims claims =
+                Jwts.parser()
+                        .setSigningKey(jwtProperty.getSecret())
+                        .parseClaimsJws(token)
+                        .getBody();
+        Function<Claims, String> claimsFunction =
+                cl -> {
+                    return (String) cl.get("id");
+                };
+        return UUID.fromString(claimsFunction.apply(claims));
     }
 
     /**

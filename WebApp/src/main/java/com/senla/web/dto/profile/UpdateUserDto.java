@@ -21,7 +21,6 @@ public class UpdateUserDto {
     @NotBlank private String lastName;
 
     @Past
-    //    @DateTimeFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull
     private LocalDate birthday;

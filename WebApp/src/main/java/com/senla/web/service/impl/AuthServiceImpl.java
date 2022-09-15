@@ -46,7 +46,7 @@ public class AuthServiceImpl implements AuthService {
                         CurrentUserDetails.builder()
                                 .email(loginUserDto.getEmail())
                                 .token(token)
-                                .authorities(SecurityUtil.AUTHORITIES)
+                                .authorities(SecurityUtil.mapRoleToAuthorities(tokenDto.getRole()))
                                 .build();
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
