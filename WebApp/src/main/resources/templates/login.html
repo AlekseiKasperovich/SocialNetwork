@@ -1,14 +1,28 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
->
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>Social Network</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <style>
+        .pass {
+            position: relative;
+        }
+
+        .icon-pass {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -18,22 +32,15 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/registration}">Register</a>
-                </li>
-            </ul>
-        </div>
     </div>
 </nav>
-<br/><br/>
+<br/><br/><br/><br/>
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="text-center">Login Form</h2>
+                    <h2 class="text-center">Welcome back, Log in</h2>
                 </div>
                 <div th:if="${param.success}">
                     <div class="alert alert-info">
@@ -61,34 +68,56 @@
                                     name="email"
                                     th:field="*{email}"
                                     class="form-control"
-                                    placeholder="Enter email address"
-                            />
+                                    placeholder="Write your email"
+                                    required>
                             <p th:errors="*{email}" class="text-danger"
                                th:if="${#fields.hasErrors('email')}"></p>
                         </div>
 
                         <div class="form-group mb-3">
                             <label class="control-label"> Password</label>
-                            <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    th:field="*{password}"
-                                    class="form-control"
-                                    placeholder="Enter password"
-                            />
-                            <p th:errors="*{password}" class="text-danger"
-                               th:if="${#fields.hasErrors('password')}"></p>
+                            <div class="form-group mb-3 pass">
+                                <span class="icon-pass" id="icon-pass">&#128065;</span>
+                                <input
+                                        class="form-control"
+                                        id="pass"
+                                        maxlength="16"
+                                        minlength="5"
+                                        name="password"
+                                        placeholder="Write your password"
+                                        required
+                                        size="16"
+                                        th:field="*{password}"
+                                        type="password"
+                                />
+                                <p th:errors="*{password}" class="text-danger"
+                                   th:if="${#fields.hasErrors('password')}"></p>
+                            </div>
                         </div>
                         <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                            <span> Forgot password? <a th:href="@{/password/new}">Reset password</a></span>
+                            <button type="submit" class="btn btn-primary">Login</button>
                         </div>
+
+                        Not a member yet? <a th:href="@{/registration}">Sign up</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+
+    const inputPass = document.getElementById('pass');
+    const iconPass = document.getElementById('icon-pass');
+
+    iconPass.addEventListener('click', () => {
+        if (inputPass.getAttribute('type') === 'password') {
+            inputPass.setAttribute('type', 'text');
+        } else {
+            inputPass.setAttribute('type', 'password');
+        }
+    });
+
+</script>
 </body>
 </html>

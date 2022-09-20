@@ -1,5 +1,8 @@
 package com.senla.web.controller;
 
+import com.senla.web.security.SecurityUtil;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,8 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HelloController {
 
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("welcome", "Welcome to Social Network");
-        return "index";
+    public String home() {
+        if (SecurityUtil.isAuthenticated()
+                && SecurityContextHolder.getContext().getAuthentication().getClass()
+                != AnonymousAuthenticationToken.class) {
+            return "redirect:/users/profile";
+        }
+        return "redirect:/login";
     }
 }
