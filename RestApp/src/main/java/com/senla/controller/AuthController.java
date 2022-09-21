@@ -8,7 +8,9 @@ import com.senla.dto.user.ForgotPasswordDto;
 import com.senla.dto.user.LoginUserDto;
 import com.senla.security.JwtTokenProvider;
 import com.senla.security.UserDetailsImpl;
+
 import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/** @author Aliaksei Kaspiarovich */
+/**
+ * @author Aliaksei Kaspiarovich
+ */
 @RestController
 @RequestMapping(
         value = "/api/auth",
@@ -34,7 +38,6 @@ public class AuthController {
     private final AuthRestClient authRestClient;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
 
     /**
      * @param createUserDto user email and password
@@ -67,9 +70,15 @@ public class AuthController {
      * @param emailDto user email
      * @return sent new password to email
      */
-    @PostMapping("password/new")
-    public ResponseEntity<Object> sendPassword(@RequestBody @Valid ForgotPasswordDto emailDto) {
-        authRestClient.sendNewPassword(emailDto);
+    @PostMapping("password/generate")
+    public ResponseEntity<Object> generatePassword(@RequestBody @Valid ForgotPasswordDto emailDto) {
+        authRestClient.generateNewPassword(emailDto);
         return ResponseEntity.ok("Your new password has been successfully sent!");
+    }
+
+    @PostMapping("password/reset")
+    public ResponseEntity<Object> resetPassword(@RequestBody @Valid ForgotPasswordDto emailDto) {
+        authRestClient.resetPassword(emailDto);
+        return ResponseEntity.ok("Check your email!");
     }
 }

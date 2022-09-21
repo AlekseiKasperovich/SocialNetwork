@@ -69,7 +69,8 @@
                                     th:field="*{email}"
                                     class="form-control"
                                     placeholder="Write your email"
-                                    required>
+                                    required
+                            />
                             <p th:errors="*{email}" class="text-danger"
                                th:if="${#fields.hasErrors('email')}"></p>
                         </div>
@@ -94,10 +95,10 @@
                                    th:if="${#fields.hasErrors('password')}"></p>
                             </div>
                         </div>
+                        <span><a th:href="@{/password/new}">Forgot password?</a></span>
                         <div class="form-group mb-3">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
-
                         Not a member yet? <a th:href="@{/registration}">Sign up</a>
                     </form>
                 </div>

@@ -10,5 +10,5 @@ public interface AuthService {
 
     void login(LoginUserDto loginUserDto);
 
-    void sendPassword(ForgotPasswordDto forgotPasswordDto);
+    void resetPassword(ForgotPasswordDto forgotPasswordDto, String action);
 }

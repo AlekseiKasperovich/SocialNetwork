@@ -2,14 +2,10 @@ package com.senla.controller;
 
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
-import com.senla.dto.user.ForgotPasswordDto;
 import com.senla.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** @author Aliaksei Kaspiarovich */
 @RestController
@@ -31,9 +27,16 @@ public class AuthController {
         return authService.registerNewUserAccount(createUserDto);
     }
 
-    /** @param emailDto user email */
-    @PostMapping("password/new")
-    public void sendPassword(@RequestBody ForgotPasswordDto emailDto) {
-        authService.sendNewPassword(emailDto);
+    /** @param email user email */
+    @PostMapping("password/generate")
+    public void generatePassword(@RequestHeader("${request.email}") String email) {
+        authService.generatePassword(email);
+    }
+
+    @PostMapping("password/reset")
+    public void resetPassword(
+            @RequestHeader("${request.email}") String email,
+            @RequestHeader("${request.token}") String token) {
+        authService.resetPassword(email, token);
     }
 }

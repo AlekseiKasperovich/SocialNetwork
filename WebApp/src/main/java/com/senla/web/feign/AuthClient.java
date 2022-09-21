@@ -19,6 +19,9 @@ public interface AuthClient {
     @PostMapping(value = "auth/login")
     ResponseEntity<TokenDto> login(@RequestBody LoginUserDto loginUserDto);
 
-    @PostMapping(value = "auth/password/new")
-    void sendPassword(@RequestBody ForgotPasswordDto forgotPasswordDto);
+    @PostMapping(value = "auth/password/generate")
+    void generatePassword(@RequestBody ForgotPasswordDto forgotPasswordDto);
+
+    @PostMapping(value = "auth/password/reset")
+    void resetPassword(ForgotPasswordDto forgotPasswordDto);
 }

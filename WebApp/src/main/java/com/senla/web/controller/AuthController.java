@@ -1,5 +1,6 @@
 package com.senla.web.controller;
 
+import com.senla.web.dto.profile.ChangePasswordDto;
 import com.senla.web.dto.user.DtoCreateUser;
 import com.senla.web.dto.user.ForgotPasswordDto;
 import com.senla.web.dto.user.LoginUserDto;
@@ -8,13 +9,17 @@ import com.senla.web.exception.MyServerErrorException;
 import com.senla.web.exception.UserAlreadyExistException;
 import com.senla.web.exception.UserNotFoundException;
 import com.senla.web.service.AuthService;
+
 import javax.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
 
 @Controller
 @RequiredArgsConstructor
@@ -76,7 +81,7 @@ public class AuthController {
     }
 
     @GetMapping("password/new")
-    public String showResetPasswordForm(Model model) {
+    public String showEmailForm(Model model) {
         ForgotPasswordDto email = new ForgotPasswordDto();
         model.addAttribute("email", email);
         return "resetPassword";
@@ -86,16 +91,27 @@ public class AuthController {
     public String newPassword(
             @ModelAttribute("email") @Valid ForgotPasswordDto forgotPasswordDto,
             BindingResult result,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,
+            @RequestParam(value = "action") String action) {
         if (result.hasErrors()) {
             return "resetPassword";
         }
         try {
-            authService.sendPassword(forgotPasswordDto);
+            authService.resetPassword(forgotPasswordDto, action);
         } catch (UserNotFoundException | MyServerErrorException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/password/new?fail";
         }
-        return "redirect:/password/new?success";
+        redirectAttributes.addFlashAttribute("message", "Please check your email!");
+        return "redirect:/login?success";
     }
+
+    @GetMapping("password/reset/{token}")
+    public String showResetPasswordForm(@PathVariable String token, Model model) {
+        System.out.println(token);
+        ChangePasswordDto changePasswordDto = new ChangePasswordDto();
+        model.addAttribute("password", changePasswordDto);
+        return "resetPasswordForm";
+    }
+
 }

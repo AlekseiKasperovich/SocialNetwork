@@ -2,11 +2,12 @@ package com.senla.controller;
 
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
-import com.senla.dto.user.ForgotPasswordDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.*;
+import org.springframework.test.annotation.DirtiesContext;
 
+@DirtiesContext
 class AuthControllerTest extends AbstractControllerTest {
 
     @Test
@@ -51,14 +52,14 @@ class AuthControllerTest extends AbstractControllerTest {
     @Test
     void givenExistingEmail_whenSendPassword_thenSaveNewPassword() {
         String email = "user@gmail.com";
-        ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto(email);
         HttpHeaders headers = new HttpHeaders();
+        headers.set("email", email);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity request = new HttpEntity<>(forgotPasswordDto, headers);
+        HttpEntity request = new HttpEntity<>(null, headers);
 
         ResponseEntity<Object> response =
                 testRestTemplate.exchange(
-                        "/api/auth/password/new", HttpMethod.POST, request, Object.class);
+                        "/api/auth/password/generate", HttpMethod.POST, request, Object.class);
 
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -66,14 +67,14 @@ class AuthControllerTest extends AbstractControllerTest {
     @Test
     void givenNonExistingEmail_whenSendPassword_thenStatusNotFound() {
         String email = "another@gmail.com";
-        ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto(email);
         HttpHeaders headers = new HttpHeaders();
+        headers.set("email", email);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity request = new HttpEntity<>(forgotPasswordDto, headers);
+        HttpEntity request = new HttpEntity<>(null, headers);
 
         ResponseEntity<Object> response =
                 testRestTemplate.exchange(
-                        "/api/auth/password/new", HttpMethod.POST, request, Object.class);
+                        "/api/auth/password/generate", HttpMethod.POST, request, Object.class);
 
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }

@@ -4,18 +4,22 @@ import com.senla.dto.token.TokenDto;
 import com.senla.exception.MyAccessDeniedException;
 import com.senla.property.JwtProperty;
 import io.jsonwebtoken.*;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-/** @author Aliaksei Kaspiarovich */
+/**
+ * @author Aliaksei Kaspiarovich
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -23,9 +27,23 @@ public class JwtTokenProvider {
 
     private final JwtProperty jwtProperty;
 
+    public String generateToken(String email) {
+        Date expirationDate =
+                Date.from(
+                        LocalDate.now()
+                                .plusDays(jwtProperty.getLinkExpiration())
+                                .atStartOfDay(ZoneId.systemDefault())
+                                .toInstant());
+        return Jwts.builder()
+                .setSubject(email)
+                .setExpiration(expirationDate)
+                .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
+                .compact();
+    }
+
     /**
      * @param email user email
-     * @param role user role
+     * @param role  user role
      * @return token
      */
     public TokenDto generateToken(String email, String role, String id) {
@@ -35,18 +53,18 @@ public class JwtTokenProvider {
         Date expirationDate =
                 Date.from(
                         LocalDate.now()
-                                .plusDays(jwtProperty.getExpiration())
+                                .plusDays(jwtProperty.getTokenExpiration())
                                 .atStartOfDay(ZoneId.systemDefault())
                                 .toInstant());
         return TokenDto.builder()
                 .token(
                         jwtProperty.getBearer()
                                 + Jwts.builder()
-                                        .setClaims(claims)
-                                        .setSubject(email)
-                                        .setExpiration(expirationDate)
-                                        .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
-                                        .compact())
+                                .setClaims(claims)
+                                .setSubject(email)
+                                .setExpiration(expirationDate)
+                                .signWith(SignatureAlgorithm.HS512, jwtProperty.getSecret())
+                                .compact())
                 .role(role)
                 .build();
     }
@@ -93,9 +111,7 @@ public class JwtTokenProvider {
                         .parseClaimsJws(token)
                         .getBody();
         Function<Claims, String> claimsListFunction =
-                cl -> {
-                    return (String) cl.get("authorities");
-                };
+                cl -> (String) cl.get("authorities");
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(claimsListFunction.apply(claims)));
         return authorities;
@@ -108,9 +124,7 @@ public class JwtTokenProvider {
                         .parseClaimsJws(token)
                         .getBody();
         Function<Claims, String> claimsFunction =
-                cl -> {
-                    return (String) cl.get("id");
-                };
+                cl -> (String) cl.get("id");
         return UUID.fromString(claimsFunction.apply(claims));
     }
 

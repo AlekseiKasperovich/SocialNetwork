@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService {
 
     private final AuthClient authClient;
+    private static final String GENERATE = "generate";
+    private static final String RESET = "reset";
 
     @Override
     public void registerNewUserAccount(DtoCreateUser createUserDto) {
@@ -61,9 +63,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void sendPassword(ForgotPasswordDto forgotPasswordDto) {
+    public void resetPassword(ForgotPasswordDto forgotPasswordDto, String action) {
         try {
-            authClient.sendPassword(forgotPasswordDto);
+            if (GENERATE.equals(action)) {
+                authClient.generatePassword(forgotPasswordDto);
+            } else if (RESET.equals(action)) {
+                authClient.resetPassword(forgotPasswordDto);
+            }
         } catch (FeignException.Conflict ex) {
             throw new UserNotFoundException(
                     String.format(
