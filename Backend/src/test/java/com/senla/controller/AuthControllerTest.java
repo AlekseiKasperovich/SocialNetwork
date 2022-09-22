@@ -5,9 +5,7 @@ import com.senla.dto.user.DtoUser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.*;
-import org.springframework.test.annotation.DirtiesContext;
 
-@DirtiesContext
 class AuthControllerTest extends AbstractControllerTest {
 
     @Test

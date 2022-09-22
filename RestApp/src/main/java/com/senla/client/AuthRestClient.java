@@ -3,10 +3,9 @@ package com.senla.client;
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
 import com.senla.dto.user.ForgotPasswordDto;
+import com.senla.dto.user.ResetPasswordDto;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 public interface AuthRestClient {
 
     DtoUser registerNewUserAccount(DtoCreateUser createUserDto);
@@ -14,4 +13,6 @@ public interface AuthRestClient {
     void generateNewPassword(ForgotPasswordDto emailDto);
 
     void resetPassword(ForgotPasswordDto emailDto);
+
+    void changePassword(ResetPasswordDto resetPasswordDto);
 }

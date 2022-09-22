@@ -13,7 +13,8 @@ public class HelloController {
     public String home() {
         if (SecurityUtil.isAuthenticated()
                 && SecurityContextHolder.getContext().getAuthentication().getClass()
-                        != AnonymousAuthenticationToken.class) {
+                        != AnonymousAuthenticationToken.class
+                && SecurityUtil.getCurrentUser().getPassword() != null) {
             return "redirect:/users/profile";
         }
         return "redirect:/login";

@@ -1,9 +1,12 @@
 package com.senla.web.service.impl;
 
+import com.senla.web.dto.profile.ChangePasswordDto;
+import com.senla.web.dto.profile.EmailDto;
 import com.senla.web.dto.token.TokenDto;
 import com.senla.web.dto.user.DtoCreateUser;
 import com.senla.web.dto.user.ForgotPasswordDto;
 import com.senla.web.dto.user.LoginUserDto;
+import com.senla.web.dto.user.ResetPasswordDto;
 import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.exception.MyServerErrorException;
 import com.senla.web.exception.UserAlreadyExistException;
@@ -79,5 +82,19 @@ public class AuthServiceImpl implements AuthService {
                     "Something went wrong! Your new password was not sent, please try again"
                             + " later!");
         }
+    }
+
+    @Override
+    public EmailDto validateToken(TokenDto token) {
+        return authClient.validateToken(token).getBody();
+    }
+
+    @Override
+    public void changePassword(ChangePasswordDto changePasswordDto, String email) {
+        ResetPasswordDto resetPasswordDto = new ResetPasswordDto();
+        resetPasswordDto.setPassword(changePasswordDto.getPassword());
+        resetPasswordDto.setMatchingPassword(changePasswordDto.getMatchingPassword());
+        resetPasswordDto.setEmail(email);
+        authClient.changePassword(resetPasswordDto);
     }
 }

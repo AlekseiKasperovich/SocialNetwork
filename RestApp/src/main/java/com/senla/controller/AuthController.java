@@ -1,16 +1,12 @@
 package com.senla.controller;
 
 import com.senla.client.AuthRestClient;
+import com.senla.dto.profile.EmailDto;
 import com.senla.dto.token.TokenDto;
-import com.senla.dto.user.DtoCreateUser;
-import com.senla.dto.user.DtoUser;
-import com.senla.dto.user.ForgotPasswordDto;
-import com.senla.dto.user.LoginUserDto;
+import com.senla.dto.user.*;
 import com.senla.security.JwtTokenProvider;
 import com.senla.security.UserDetailsImpl;
-
 import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +14,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @RestController
 @RequestMapping(
         value = "/api/auth",
@@ -80,5 +70,22 @@ public class AuthController {
     public ResponseEntity<Object> resetPassword(@RequestBody @Valid ForgotPasswordDto emailDto) {
         authRestClient.resetPassword(emailDto);
         return ResponseEntity.ok("Check your email!");
+    }
+
+    @PostMapping("password/reset/validate")
+    public EmailDto validateToken(@RequestBody TokenDto tokenDto) {
+        String token = tokenDto.getToken();
+        if (jwtTokenProvider.validateToken(token)) {
+            String email = jwtTokenProvider.getUsernameFromToken(token);
+            return new EmailDto(email);
+        }
+        return null;
+    }
+
+    @PatchMapping("password/reset/change")
+    public ResponseEntity<Object> changePassword(
+            @Valid @RequestBody ResetPasswordDto resetPasswordDto) {
+        authRestClient.changePassword(resetPasswordDto);
+        return ResponseEntity.ok("Password has been successfully change!");
     }
 }

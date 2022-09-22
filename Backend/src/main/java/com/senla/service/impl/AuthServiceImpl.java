@@ -4,6 +4,7 @@ import com.senla.dto.constants.Roles;
 import com.senla.dto.constants.Status;
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
+import com.senla.dto.user.ResetPasswordDto;
 import com.senla.mapper.Mapper;
 import com.senla.model.User;
 import com.senla.service.AuthService;
@@ -65,9 +66,16 @@ public class AuthServiceImpl implements AuthService {
                 user.getEmail(),
                 emailBody,
                 "If you would like to change your password, please follow this link: "
-                        + "http://localhost:8082/password/reset?token="
+                        + "http://localhost:8082/password/reset/"
                         + token
                         + " Please note that this link expires 24 hours from when this email was"
                         + " delivered, so be sure to reset your password immediately.");
+    }
+
+    @Override
+    public void changePassword(ResetPasswordDto resetPasswordDto) {
+        User user = userService.findUserByEmail(resetPasswordDto.getEmail());
+        user.setPassword(resetPasswordDto.getPassword());
+        userService.save(user);
     }
 }

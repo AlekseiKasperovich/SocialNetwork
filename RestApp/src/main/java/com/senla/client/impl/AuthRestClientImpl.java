@@ -5,6 +5,7 @@ import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
 import com.senla.dto.user.ForgotPasswordDto;
+import com.senla.dto.user.ResetPasswordDto;
 import com.senla.property.RequestProperty;
 import com.senla.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-/**
- * @author Aliaksei Kaspiarovich
- */
+/** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
 public class AuthRestClientImpl implements AuthRestClient {
@@ -25,6 +24,7 @@ public class AuthRestClientImpl implements AuthRestClient {
     private static final String REGISTRATION = "registration";
     private static final String PASSWORD_GENERATE = "password/generate";
     private static final String PASSWORD_RESET = "password/reset";
+    private static final String PASSWORD_RESET_CHANGE = "password/reset/change";
     private final PasswordEncoder bCryptPasswordEncoder;
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
@@ -62,7 +62,22 @@ public class AuthRestClientImpl implements AuthRestClient {
         restTemplate.exchange(
                 requestProperty.getHost() + URL + PASSWORD_RESET,
                 HttpMethod.POST,
-                new HttpEntity<>(null, httpHeaderBuilder.build(email, jwtTokenProvider.generateToken(email))),
+                new HttpEntity<>(
+                        null,
+                        httpHeaderBuilder.build(email, jwtTokenProvider.generateToken(email))),
+                Void.class);
+    }
+
+    @Override
+    public void changePassword(ResetPasswordDto resetPasswordDto) {
+        String hashPassword = bCryptPasswordEncoder.encode(resetPasswordDto.getPassword());
+        resetPasswordDto.setPassword(hashPassword);
+        resetPasswordDto.setMatchingPassword(hashPassword);
+        restTemplate.exchange(
+                requestProperty.getHost() + URL + PASSWORD_RESET_CHANGE,
+                HttpMethod.PATCH,
+                new HttpEntity<>(
+                        resetPasswordDto, httpHeaderBuilder.build(resetPasswordDto.getEmail())),
                 Void.class);
     }
 }

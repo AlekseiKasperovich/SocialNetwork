@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
+import com.senla.dto.user.ResetPasswordDto;
 import com.senla.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -38,5 +39,10 @@ public class AuthController {
             @RequestHeader("${request.email}") String email,
             @RequestHeader("${request.token}") String token) {
         authService.resetPassword(email, token);
+    }
+
+    @PatchMapping("password/reset/change")
+    public void changePassword(@RequestBody ResetPasswordDto resetPasswordDto) {
+        authService.changePassword(resetPasswordDto);
     }
 }

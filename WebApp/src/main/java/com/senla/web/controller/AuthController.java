@@ -1,6 +1,8 @@
 package com.senla.web.controller;
 
 import com.senla.web.dto.profile.ChangePasswordDto;
+import com.senla.web.dto.profile.EmailDto;
+import com.senla.web.dto.token.TokenDto;
 import com.senla.web.dto.user.DtoCreateUser;
 import com.senla.web.dto.user.ForgotPasswordDto;
 import com.senla.web.dto.user.LoginUserDto;
@@ -8,18 +10,18 @@ import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.exception.MyServerErrorException;
 import com.senla.web.exception.UserAlreadyExistException;
 import com.senla.web.exception.UserNotFoundException;
+import com.senla.web.security.CurrentUserDetails;
+import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.AuthService;
-
 import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.ArrayList;
 
 @Controller
 @RequiredArgsConstructor
@@ -103,15 +105,60 @@ public class AuthController {
             return "redirect:/password/new?fail";
         }
         redirectAttributes.addFlashAttribute("message", "Please check your email!");
-        return "redirect:/login?success";
+        return "redirect:/password/new?success";
     }
 
     @GetMapping("password/reset/{token}")
-    public String showResetPasswordForm(@PathVariable String token, Model model) {
-        System.out.println(token);
+    public String showResetPasswordForm(
+            @PathVariable String token, Model model, RedirectAttributes redirectAttributes) {
+        EmailDto emailDto = authService.validateToken(new TokenDto(token, null));
+        if (emailDto != null) {
+            CurrentUserDetails currentUserDetails =
+                    CurrentUserDetails.builder()
+                            .email(emailDto.getEmail())
+                            .authorities(SecurityUtil.mapRoleToAuthorities("passwordResetUser"))
+                            .build();
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            currentUserDetails, null, currentUserDetails.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            ChangePasswordDto changePasswordDto = new ChangePasswordDto();
+            model.addAttribute("password", changePasswordDto);
+            return "resetPasswordForm";
+        } else {
+            redirectAttributes.addFlashAttribute(
+                    "message", "Something went wrong, please try again!");
+            return "redirect:/password/new?fail";
+        }
+    }
+
+    @GetMapping("reset/password")
+    public String showResetPasswordForm(Model model) {
         ChangePasswordDto changePasswordDto = new ChangePasswordDto();
         model.addAttribute("password", changePasswordDto);
         return "resetPasswordForm";
     }
 
+    @PostMapping("reset/password")
+    public String resetPassword(
+            @ModelAttribute("password") @Valid ChangePasswordDto changePasswordDto,
+            BindingResult result,
+            RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            return "resetPasswordForm";
+        }
+        if (!changePasswordDto.getPassword().equals(changePasswordDto.getMatchingPassword())) {
+            redirectAttributes.addFlashAttribute("message", "Passwords do not match!");
+            return "redirect:/reset/password?fail";
+        }
+        if (SecurityUtil.isAuthenticated()) {
+            String email = SecurityUtil.getCurrentUser().getUsername();
+            authService.changePassword(changePasswordDto, email);
+        }
+        SecurityContextHolder.getContext()
+                .setAuthentication(SecurityUtil.createAnonymousPrincipal());
+        redirectAttributes.addFlashAttribute(
+                "message", "Password change successfully! Please login with your new password!");
+        return "redirect:/login?success";
+    }
 }
