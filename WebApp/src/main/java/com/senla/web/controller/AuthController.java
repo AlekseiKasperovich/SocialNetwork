@@ -29,6 +29,8 @@ public class AuthController {
 
     private final AuthService authService;
 
+    private static final String MESSAGE = "message";
+
     @GetMapping("registration")
     public String showRegistrationForm(Model model) {
         DtoCreateUser user = new DtoCreateUser();
@@ -45,16 +47,16 @@ public class AuthController {
             return "registration";
         }
         if (!userDto.getPassword().equals(userDto.getMatchingPassword())) {
-            redirectAttributes.addFlashAttribute("message", "Passwords do not match!");
+            redirectAttributes.addFlashAttribute(MESSAGE, "Passwords do not match!");
             return "redirect:/registration?fail";
         }
         try {
             authService.registerNewUserAccount(userDto);
         } catch (UserAlreadyExistException ex) {
-            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/registration?fail";
         }
-        redirectAttributes.addFlashAttribute("message", "Registration completed successfully!");
+        redirectAttributes.addFlashAttribute(MESSAGE, "Registration completed successfully!");
         return "redirect:/login?success";
     }
 
@@ -76,7 +78,7 @@ public class AuthController {
         try {
             authService.login(loginUserDto);
         } catch (MyAccessDeniedException ex) {
-            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/login?fail";
         }
         return "redirect:/users/profile";
@@ -101,35 +103,35 @@ public class AuthController {
         try {
             authService.resetPassword(forgotPasswordDto, action);
         } catch (UserNotFoundException | MyServerErrorException ex) {
-            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/password/new?fail";
         }
-        redirectAttributes.addFlashAttribute("message", "Please check your email!");
+        redirectAttributes.addFlashAttribute(MESSAGE, "Please check your email!");
         return "redirect:/password/new?success";
     }
 
     @GetMapping("password/reset/{token}")
     public String showResetPasswordForm(
             @PathVariable String token, Model model, RedirectAttributes redirectAttributes) {
-        EmailDto emailDto = authService.validateToken(new TokenDto(token, null));
-        if (emailDto != null) {
-            CurrentUserDetails currentUserDetails =
-                    CurrentUserDetails.builder()
-                            .email(emailDto.getEmail())
-                            .authorities(SecurityUtil.mapRoleToAuthorities("passwordResetUser"))
-                            .build();
-            UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(
-                            currentUserDetails, null, currentUserDetails.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            ChangePasswordDto changePasswordDto = new ChangePasswordDto();
-            model.addAttribute("password", changePasswordDto);
-            return "resetPasswordForm";
-        } else {
-            redirectAttributes.addFlashAttribute(
-                    "message", "Something went wrong, please try again!");
+        EmailDto emailDto;
+        try {
+            emailDto = authService.validateToken(new TokenDto(token, null));
+        } catch (MyAccessDeniedException ex) {
+            redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/password/new?fail";
         }
+        CurrentUserDetails currentUserDetails =
+                CurrentUserDetails.builder()
+                        .email(emailDto.getEmail())
+                        .authorities(SecurityUtil.mapRoleToAuthorities("ROLE_RESET_PASSWORD"))
+                        .build();
+        UsernamePasswordAuthenticationToken authentication =
+                new UsernamePasswordAuthenticationToken(
+                        currentUserDetails, null, currentUserDetails.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        ChangePasswordDto changePasswordDto = new ChangePasswordDto();
+        model.addAttribute("password", changePasswordDto);
+        return "resetPasswordForm";
     }
 
     @GetMapping("reset/password")
@@ -148,7 +150,7 @@ public class AuthController {
             return "resetPasswordForm";
         }
         if (!changePasswordDto.getPassword().equals(changePasswordDto.getMatchingPassword())) {
-            redirectAttributes.addFlashAttribute("message", "Passwords do not match!");
+            redirectAttributes.addFlashAttribute(MESSAGE, "Passwords do not match!");
             return "redirect:/reset/password?fail";
         }
         if (SecurityUtil.isAuthenticated()) {
@@ -158,7 +160,7 @@ public class AuthController {
         SecurityContextHolder.getContext()
                 .setAuthentication(SecurityUtil.createAnonymousPrincipal());
         redirectAttributes.addFlashAttribute(
-                "message", "Password change successfully! Please login with your new password!");
+                MESSAGE, "Password change successfully! Please login with your new password!");
         return "redirect:/login?success";
     }
 }

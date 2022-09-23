@@ -86,7 +86,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public EmailDto validateToken(TokenDto token) {
-        return authClient.validateToken(token).getBody();
+        try {
+            return authClient.validateToken(token).getBody();
+        } catch (FeignException.Forbidden ex) {
+            throw new MyAccessDeniedException("Link expired! Please try again!");
+        }
     }
 
     @Override

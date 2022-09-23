@@ -25,6 +25,8 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
+    private static final String MESSAGE = "message";
+
     @GetMapping
     public String showUserProfile(Model model) {
         DtoUser user = profileService.getCurrentUserProfile();
@@ -41,9 +43,7 @@ public class ProfileController {
 
     @PostMapping("update")
     public String updateProfile(
-            @ModelAttribute("user") @Valid UpdateUserDto updateUserDto,
-            BindingResult result,
-            RedirectAttributes redirectAttributes) {
+            @ModelAttribute("user") @Valid UpdateUserDto updateUserDto, BindingResult result) {
         if (result.hasErrors()) {
             return "updateProfile";
         }
@@ -67,14 +67,14 @@ public class ProfileController {
             return "changePassword";
         }
         if (!changePasswordDto.getPassword().equals(changePasswordDto.getMatchingPassword())) {
-            redirectAttributes.addFlashAttribute("message", "Passwords do not match!");
+            redirectAttributes.addFlashAttribute(MESSAGE, "Passwords do not match!");
             return "redirect:/users/profile/password?fail";
         }
         profileService.changePassword(changePasswordDto);
         SecurityContextHolder.getContext()
                 .setAuthentication(SecurityUtil.createAnonymousPrincipal());
         redirectAttributes.addFlashAttribute(
-                "message", "Password change successfully! Please login with your new password!");
+                MESSAGE, "Password change successfully! Please login with your new password!");
         return "redirect:/login?success";
     }
 
@@ -99,12 +99,11 @@ public class ProfileController {
                 SecurityContextHolder.getContext()
                         .setAuthentication(SecurityUtil.createAnonymousPrincipal());
                 redirectAttributes.addFlashAttribute(
-                        "message",
-                        "Profile delete successfully! Please register your new account!");
+                        MESSAGE, "Profile delete successfully! Please register your new account!");
                 return "redirect:/registration?success";
             }
         }
-        redirectAttributes.addFlashAttribute("message", "Don't joke, this is not your email!");
+        redirectAttributes.addFlashAttribute(MESSAGE, "Don't joke, this is not your email!");
         return "redirect:/users/profile/delete?fail";
     }
 }
