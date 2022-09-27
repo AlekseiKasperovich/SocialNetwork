@@ -1,0 +1,16 @@
+body {
+    background-color: coral;
+}
+
+.pass {
+    position: relative;
+}
+
+.icon-pass {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
