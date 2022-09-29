@@ -3,55 +3,67 @@
 <head th:replace="fragments/head :: head">
 </head>
 <body>
-<header>
-    <div th:replace="fragments/nav :: nav"/>
-</header>
-<main>
-    <section>
-        <br/><br/><br/><br/>
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/users/profile}">Profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/users/profile/update}">Update</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/users/profile/password}">Change password</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/users/profile/delete}">Delete profile</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
-            </li>
-        </ul>
-        <table class="table" th:object="${user}">
-            <thead>
-            <tr>
-                <th>Email:</th>
-                <th>Name:</th>
-                <th>Surname:</th>
-                <th>Date of birth:</th>
-                <th>Sex:</th>
-                <th>Phone:</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td th:text="*{email}"></td>
-                <td th:text="*{firstName}"></td>
-                <td th:text="*{lastName}"></td>
-                <td th:text="*{birthday}"></td>
-                <td th:text="*{sex}"></td>
-                <td th:text="*{phone}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-</main>
-<footer>
-    <div th:replace="fragments/footer :: footer"/>
-</footer>
+<div class="wrapper">
+    <header>
+        <div th:replace="fragments/nav :: nav"/>
+    </header>
+    <main>
+        <section>
+            <div class="row align-items-center">
+                <div class="col">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/users/profile}">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               th:href="@{/users/profile/update}">Update</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/users/profile/password}">Change
+                                password</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/users/profile/delete}">Delete
+                                profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="col">
+                    <table class="table" th:object="${user}">
+                        <thead>
+                        <tr>
+                            <th>Email:</th>
+                            <th>Name:</th>
+                            <th>Surname:</th>
+                            <th>Date of birth:</th>
+                            <th>Sex:</th>
+                            <th>Phone:</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td th:text="*{email}"></td>
+                            <td th:text="*{firstName}"></td>
+                            <td th:text="*{lastName}"></td>
+                            <td th:text="*{birthday}"></td>
+                            <td th:text="*{sex}"></td>
+                            <td th:text="*{phone}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div th:replace="fragments/footer :: footer"/>
+    </footer>
+</div>
 </body>
 </html>
