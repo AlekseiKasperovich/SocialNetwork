@@ -17,12 +17,12 @@
                                 <h2 class="text-center">Sign up </h2>
                             </div>
                             <div th:if="${param.success}">
-                                <div class="alert alert-info">
+                                <div class="alert alert-success">
                                     <p th:text="${message}"></p>
                                 </div>
                             </div>
                             <div th:if="${param.fail}">
-                                <div class="alert alert-info">
+                                <div class="alert alert-danger">
                                     <p th:text="${message}"></p>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@
                                         th:object="${user}"
                                 >
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Email</label>
+                                        <label class="control-label">Email</label>
                                         <input
                                                 class="form-control"
                                                 id="email"
@@ -49,7 +49,7 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label class="form-label"><abbr title="Password must contain:
+                                        <label class="control-label"><abbr title="Password must contain:
                         - a minimum of 1 lower case letter [a-z]
                         - a minimum of 1 upper case letter [A-Z]
                         - a minimum of 1 numeric character [0-9]
@@ -71,7 +71,7 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label class="form-label">Repeat password</label>
+                                        <label class="control-label">Repeat password</label>
                                         <input
                                                 class="form-control"
                                                 id="matchingPassword"

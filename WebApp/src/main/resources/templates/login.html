@@ -15,14 +15,15 @@
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="text-center">Welcome back, Log in</h2>
+
                             </div>
                             <div th:if="${param.success}">
-                                <div class="alert alert-info">
+                                <div class="alert alert-success">
                                     <p th:text="${message}"></p>
                                 </div>
                             </div>
                             <div th:if="${param.fail}">
-                                <div class="alert alert-info">
+                                <div class="alert alert-danger">
                                     <p th:text="${message}"></p>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                                         </div>
                                     </div>
                                     <span><a th:href="@{/password/new}">Forgot password?</a></span>
-                                    <div class="form-group mb-3">
+                                    <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Login</button>
                                     </div>
                                     Not a member yet? <a th:href="@{/registration}">Sign up</a>
@@ -86,7 +87,7 @@
         <div th:replace="fragments/footer :: footer"/>
     </footer>
 </div>
->
+
 <script>
     const inputPass = document.getElementById('pass');
     const iconPass = document.getElementById('icon-pass');

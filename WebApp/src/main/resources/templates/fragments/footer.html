@@ -1,7 +1,36 @@
 <div th:fragment="footer">
-    <div>
-        <hr/>
-        <p class="text-center">&copy; Brest 2022</p>
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <span class="mb-3 mb-md-0">© 2022 Social Network, Inc</span>
+            </div>
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <!-- Telegram -->
+                <li class="ms-3">
+                    <a class="btn text-white btn-floating m-1" target="_blank"
+                       style="background-color: #0088cc;"
+                       href="https://t.me/alekseiKasperovich"
+                       role="button">
+                        <i class="fab fa-telegram"></i></a>
+                </li>
+                <!-- Linkedin -->
+                <li class="ms-3">
+                    <a class="btn text-white btn-floating m-1" target="_blank"
+                       style="background-color: #0A66C2;"
+                       href="https://www.linkedin.com/in/aliaksei-kaspiarovich/"
+                       role="button">
+                        <i class="fab fa-linkedin-in"></i></a>
+                </li>
+                <!-- Github -->
+                <li class="ms-3">
+                    <a class="btn text-white btn-floating m-1" target="_blank"
+                       style="background-color: #333333;"
+                       href="https://github.com/AlekseiKasperovich"
+                       role="button">
+                        <i class="fab fa-github"></i></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 
