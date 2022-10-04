@@ -6,9 +6,7 @@ import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.ProfileService;
-
 import javax.validation.Valid;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -33,10 +31,6 @@ public class ProfileController {
     public String showUserProfile(Model model) {
         DtoUser user = profileService.getCurrentUserProfile();
         model.addAttribute("user", user);
-        UpdateUserDto updateUserDto = new UpdateUserDto();
-        model.addAttribute("updateUser", updateUserDto);
-        ChangePasswordDto changePasswordDto = new ChangePasswordDto();
-        model.addAttribute("password", changePasswordDto);
         return "profile";
     }
 
@@ -49,9 +43,10 @@ public class ProfileController {
 
     @PostMapping("update")
     public String updateProfile(
-            @ModelAttribute("user") @Valid UpdateUserDto updateUserDto, BindingResult result) {
+            @ModelAttribute("updateUser") @Valid UpdateUserDto updateUserDto,
+            BindingResult result) {
         if (result.hasErrors()) {
-            return "profile";
+            return "updateProfile";
         }
         profileService.updateProfile(updateUserDto);
         return "redirect:/users/profile";

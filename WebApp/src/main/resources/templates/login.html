@@ -12,6 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 offset-md-3">
+
                         <div class="card">
                             <div class="card-header">
                                 <h2 class="text-center">Welcome back, Log in</h2>
@@ -70,12 +71,18 @@
                                                th:if="${#fields.hasErrors('password')}"></p>
                                         </div>
                                     </div>
-                                    <span><a th:href="@{/password/new}">Forgot password?</a></span>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Login</button>
                                     </div>
-                                    Not a member yet? <a th:href="@{/registration}">Sign up</a>
                                 </form>
+                            </div>
+                            <div class="list-group list-group-horizontal">
+                                <a th:href="@{/registration}"
+                                   class="list-group-item list-group-item-action"> Not a member yet? Sign up
+                                </a>
+                                <a th:href="@{/password/new}"
+                                   class="list-group-item list-group-item-action">Forgot password?
+                                </a>
                             </div>
                         </div>
                     </div>

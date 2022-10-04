@@ -8,95 +8,102 @@
         <div th:replace="fragments/nav :: nav"/>
     </header>
     <main>
-        <section>
-            <div class="container">
-                <div class="col-md-6 offset-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="text-center">Update Profile</h2>
-                        </div>
-
-                        <div class="card-body">
-                            <form
-                                    method="post"
-                                    role="form"
-                                    th:action="@{/users/profile/update}"
-                                    th:object="${user}">
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Name</label>
-                                    <input
-                                            class="form-control"
-                                            id="Name"
-                                            name="Name"
-                                            placeholder="Enter your name"
-                                            th:field="*{firstName}"
-                                            type="text"
-                                    />
-                                    <p th:errors="*{firstName}" class="text-danger"
-                                       th:if="${#fields.hasErrors('firstName')}"></p>
+        <section class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div th:replace="fragments/sideNav :: sideNav"/>
+                </div>
+                <div class="col-md-10">
+                    <div class="container">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="text-center">Update Profile</h2>
                                 </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Surname</label>
-                                    <input
-                                            class="form-control"
-                                            id="Surname"
-                                            name="Surname"
-                                            placeholder="Enter your surname"
-                                            th:field="*{lastName}"
-                                            type="text"
-                                    />
-                                    <p th:errors="*{lastName}" class="text-danger"
-                                       th:if="${#fields.hasErrors('lastName')}"></p>
-                                </div>
-
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Gender</label>
-                                    <div th:each="model : ${T(com.senla.web.dto.constants.Gender).values()}">
-                                        <div class="custom-control custom-radio custom-control-inline">
-                                            <input type="radio" th:field="*{sex}" th:value="${model}"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" th:for="${#ids.prev('sex')}"
-                                                   th:text="${model}">sex</label>
+                                <div class="card-body">
+                                    <form
+                                            method="post"
+                                            role="form"
+                                            th:action="@{/users/profile/update}"
+                                            th:object="${updateUser}">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Name</label>
+                                            <input
+                                                    class="form-control"
+                                                    id="Name"
+                                                    name="Name"
+                                                    placeholder="Enter your name"
+                                                    th:field="*{firstName}"
+                                                    type="text"
+                                            />
+                                            <p th:errors="*{firstName}" class="text-danger"
+                                               th:if="${#fields.hasErrors('firstName')}"></p>
                                         </div>
-                                    </div>
-                                    <p th:errors="*{sex}" class="text-danger"
-                                       th:if="${#fields.hasErrors('sex')}"></p>
-                                </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Date of birth</label>
-                                    <input
-                                            class="form-control"
-                                            id="Date of birth"
-                                            name="Date of birth"
-                                            placeholder="Enter your date of birth"
-                                            th:field="*{birthday}"
-                                            th:value="*{birthday}"
-                                            type="date"
-                                    />
-                                    <p th:errors="*{birthday}" class="text-danger"
-                                       th:if="${#fields.hasErrors('birthday')}"></p>
-                                </div>
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Surname</label>
+                                            <input
+                                                    class="form-control"
+                                                    id="Surname"
+                                                    name="Surname"
+                                                    placeholder="Enter your surname"
+                                                    th:field="*{lastName}"
+                                                    type="text"
+                                            />
+                                            <p th:errors="*{lastName}" class="text-danger"
+                                               th:if="${#fields.hasErrors('lastName')}"></p>
+                                        </div>
 
-                                <div class="form-group mb-3">
-                                    <label class="form-label">Phone</label>
-                                    <input
-                                            class="form-control"
-                                            id="Phone"
-                                            name="Phone"
-                                            placeholder="Enter your phone"
-                                            th:field="*{phone}"
-                                            type="tel"
-                                    />
-                                    <p th:errors="*{phone}" class="text-danger"
-                                       th:if="${#fields.hasErrors('phone')}"></p>
-                                </div>
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Gender</label>
+                                            <div th:each="model : ${T(com.senla.web.dto.constants.Gender).values()}">
+                                                <div class="custom-control custom-radio custom-control-inline">
+                                                    <input type="radio" th:field="*{sex}" th:value="${model}"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label" th:for="${#ids.prev('sex')}"
+                                                           th:text="${model}">sex</label>
+                                                </div>
+                                            </div>
+                                            <p th:errors="*{sex}" class="text-danger"
+                                               th:if="${#fields.hasErrors('sex')}"></p>
+                                        </div>
 
-                                <div class="form-group">
-                                    <button class="btn btn-primary" type="submit">Update</button>
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Date of birth</label>
+                                            <input
+                                                    class="form-control"
+                                                    id="Date of birth"
+                                                    name="Date of birth"
+                                                    placeholder="Enter your date of birth"
+                                                    th:field="*{birthday}"
+                                                    th:value="*{birthday}"
+                                                    type="date"
+                                            />
+                                            <p th:errors="*{birthday}" class="text-danger"
+                                               th:if="${#fields.hasErrors('birthday')}"></p>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">Phone</label>
+                                            <input
+                                                    class="form-control"
+                                                    id="Phone"
+                                                    name="Phone"
+                                                    placeholder="Enter your phone"
+                                                    th:field="*{phone}"
+                                                    type="tel"
+                                            />
+                                            <p th:errors="*{phone}" class="text-danger"
+                                               th:if="${#fields.hasErrors('phone')}"></p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button class="btn btn-primary" type="submit">Update</button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
