@@ -14,59 +14,31 @@
                     <div th:replace="fragments/sideNav :: sideNav"/>
                 </div>
                 <div class="col-md-10">
-                    <!--                    <section id="users">-->
-                    <!--                        <div class="container-fluid">-->
-                    <!--                            <div class="row">-->
-                    <!--                                <div class="col">-->
-                    <!--                                    <div class="card">-->
-                    <!--                                        <table class="table table-striped">-->
-                    <!--                                            <thead class="table-secondary">-->
-                    <!--                                            <tr>-->
-                    <!--                                                <th class="text-uppercase">Name</th>-->
-                    <!--                                                <th class="text-uppercase text-center">Surname</th>-->
-                    <!--                                                <th class="text-center text-uppercase">Birthday</th>-->
-                    <!--                                                <th></th>-->
-                    <!--                                            </tr>-->
-                    <!--                                            </thead>-->
-
-                    <!--                                            <tbody>-->
-                    <!--                                            <tr th:each="player : ${players}">-->
-                    <!--                                                <td th:text="${player.firstName}"></td>-->
-                    <!--                                                <td th:text="${player.surname}" class="text-center"></td>-->
-                    <!--                                                <td th:text="${player.birthday}" class="text-center"></td>-->
-                    <!--                                                <td class="text-end">-->
-                    <!--                                <span data-bs-toggle="modal" data-bs-target="#biographyDialog"-->
-                    <!--                                      th:attr="data-id=${player.playerId},data-name=${player.playerId}">-->
-                    <!--                                 <a href="#" class="btn-sm btn btn-success"-->
-                    <!--                                    title="biography">-->
-                    <!--                                    <i class="bi bi-info-square"></i>-->
-                    <!--                                    <span class="d-none d-md-inline"></span>-->
-                    <!--                                </a>-->
-                    <!--                                </span>-->
-
-                    <!--                                                    <a href="player.html"-->
-                    <!--                                                       th:href="@{|/player/${player.playerId}|}"-->
-                    <!--                                                       class="btn-md btn-outline-secondary"-->
-                    <!--                                                       title="Edit player">-->
-                    <!--                                                        <i class="bi bi-pencil"></i>-->
-                    <!--                                                        <span class="d-none d-md-inline">Edit</span>-->
-                    <!--                                                    </a>-->
-                    <!--                                                    <span data-bs-toggle="modal" data-bs-target="#deleteDialog"-->
-                    <!--                                                          th:attr="data-id=${player.playerId},data-name=${player.firstName}">-->
-                    <!--                                <a href="#" class="btn-md btn-outline-secondary"-->
-                    <!--                                   title="delete player"><i class="bi bi-trash"></i>-->
-                    <!--                                    <span class="d-none d-md-inline">Delete</span>-->
-                    <!--                                </a>-->
-                    <!--                                </span>-->
-                    <!--                                                </td>-->
-                    <!--                                            </tr>-->
-                    <!--                                            </tbody>-->
-                    <!--                                        </table>-->
-                    <!--                                    </div>-->
-                    <!--                                </div>-->
-                    <!--                            </div>-->
-                    <!--                        </div>-->
-                    <!--                    </section>-->
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered" th:object="${users}">
+                            <thead class="table-dark">
+                            <tr>
+                                <th>Email:</th>
+                                <th>Name:</th>
+                                <th>Surname:</th>
+                                <th>Date of birth:</th>
+                                <th>Sex:</th>
+                                <th>Phone:</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.firstName}"></td>
+                                <td th:text="${user.lastName}"></td>
+                                <td th:text="${user.birthday}"></td>
+                                <td th:text="${user.sex}"></td>
+                                <td th:text="${user.phone}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </section>

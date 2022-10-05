@@ -2,6 +2,7 @@ package com.senla.web.controller;
 
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.service.UserService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ public class UserController {
 
     @GetMapping
     public String showUsers(Model model) {
-        Page<DtoUser> users = userService.getUsers();
-        System.out.println(users);
+        Page<DtoUser> pageUsers = userService.getUsers();
+        List<DtoUser> users = pageUsers.getContent();
         model.addAttribute("users", users);
         return "users";
     }

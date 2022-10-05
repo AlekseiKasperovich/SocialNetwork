@@ -5,6 +5,8 @@ import com.senla.web.feign.UserClient;
 import com.senla.web.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<DtoUser> getUsers() {
-        return userClient.getUsers().getBody();
+        Pageable page = PageRequest.of(0, 20);
+        return userClient.getUsers(page).getBody();
     }
 }
