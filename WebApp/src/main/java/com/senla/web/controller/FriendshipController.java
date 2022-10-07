@@ -3,8 +3,10 @@ package com.senla.web.controller;
 import com.senla.web.dto.friendship.FriendshipDto;
 import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.service.FriendshipService;
+
 import java.util.List;
 import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,7 @@ public class FriendshipController {
 
     private static final String MESSAGE = "message";
 
-    @PostMapping("{friendId}")
+    @PostMapping("add/{friendId}")
     public String addFriend(@PathVariable UUID friendId, RedirectAttributes redirectAttributes) {
         try {
             friendshipService.sendFriendshipRequest(friendId);
@@ -32,9 +34,14 @@ public class FriendshipController {
             redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/users?fail";
         }
-
         redirectAttributes.addFlashAttribute(MESSAGE, "Request sent successfully");
         return "redirect:/users?success";
+    }
+
+    @PostMapping("delete/{friendshipId}")
+    public String deleteFriend(@PathVariable UUID friendshipId) {
+        friendshipService.deleteFriend(friendshipId);
+        return "redirect:/friends";
     }
 
     @GetMapping
@@ -43,5 +50,13 @@ public class FriendshipController {
         List<FriendshipDto> friendships = pageFriendship.getContent();
         model.addAttribute("friendships", friendships);
         return "friends";
+    }
+
+    @GetMapping("requests/pending")
+    public String getPendingRequests(Model model) {
+        Page<FriendshipDto> pageFriendship = friendshipService.getPendingRequests();
+        List<FriendshipDto> friendships = pageFriendship.getContent();
+        model.addAttribute("friendships", friendships);
+        return "pendingRequests";
     }
 }

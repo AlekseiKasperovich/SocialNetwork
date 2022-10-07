@@ -1,17 +1,27 @@
 package com.senla.web.feign;
 
 import com.senla.web.dto.friendship.FriendshipDto;
+
 import java.util.UUID;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "FriendshipClient", url = "${request.host}")
+@FeignClient(name = "FriendshipClient", url = "${request.host}" + "/friendships")
 public interface FriendshipClient {
 
-    @PostMapping(value = "friendships")
+    @PostMapping
     void sendFriendshipRequest(@RequestParam UUID friendId);
 
-    Page<FriendshipDto> getFriends();
+    @GetMapping
+    ResponseEntity<Page<FriendshipDto>> getFriends(Pageable page);
+
+    @DeleteMapping("{friendshipId}")
+    void deleteFriend(@PathVariable UUID friendshipId);
+    
+    @GetMapping("requests")
+    ResponseEntity<Page<FriendshipDto>> getPendingRequests(Pageable page);
 }

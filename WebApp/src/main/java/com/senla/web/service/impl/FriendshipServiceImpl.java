@@ -5,9 +5,13 @@ import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.feign.FriendshipClient;
 import com.senla.web.service.FriendshipService;
 import feign.FeignException;
+
 import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,6 +34,18 @@ public class FriendshipServiceImpl implements FriendshipService {
 
     @Override
     public Page<FriendshipDto> getFriends() {
-        return friendshipClient.getFriends();
+        Pageable page = PageRequest.of(0, 20);
+        return friendshipClient.getFriends(page).getBody();
+    }
+
+    @Override
+    public void deleteFriend(UUID friendshipId) {
+        friendshipClient.deleteFriend(friendshipId);
+    }
+
+    @Override
+    public Page<FriendshipDto> getPendingRequests() {
+        Pageable page = PageRequest.of(0, 20);
+        return friendshipClient.getPendingRequests(page).getBody();
     }
 }

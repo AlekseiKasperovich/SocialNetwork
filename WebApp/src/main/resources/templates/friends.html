@@ -16,55 +16,37 @@
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="text-center">Users</h2>
-                        </div>
-                        <div th:if="${param.success}">
-                            <div class="alert alert-success">
-                                <p th:text="${message}"></p>
-                            </div>
-                        </div>
-                        <div th:if="${param.fail}">
-                            <div class="alert alert-danger">
-                                <p th:text="${message}"></p>
-                            </div>
+                            <h2 class="text-center">Friends</h2>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-hover table-bordered" th:object="${friendships}">
                                     <thead class="table-dark">
                                     <tr>
-                                        <th>Email:</th>
-                                        <th>Name:</th>
-                                        <th>Surname:</th>
-                                        <th>Date of birth:</th>
-                                        <th>Sex:</th>
-                                        <th>Phone:</th>
+                                        <th>Sender:</th>
+                                        <th>Receiver:</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="friendships : ${friendships}">
-                                        <td th:text="${friendships.}"></td>
-                                        <td th:text="${user.firstName}"></td>
-                                        <td th:text="${user.lastName}"></td>
-                                        <td th:text="${user.birthday}"></td>
-                                        <td th:text="${user.sex}"></td>
-                                        <td th:text="${user.phone}"></td>
+                                    <tr th:each="friendship : ${friendships}">
+                                        <td th:text="${friendship.sender.email}"></td>
+                                        <td th:text="${friendship.receiver.email}"></td>
                                         <td>
                                             <form method="post"
-                                                  th:action="@{|/friends/${user.id}|}">
+                                                  th:action="@{|/friends/delete/${friendship.id}|}">
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-primary"
                                                             data-bs-toggle="tooltip"
-                                                            title="Add friend"><i class="fa-solid fa-user-plus"></i>
+                                                            title="Unfriend"><i class="fa-sharp fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
                                             </form>
                                         </td>
                                         <td>
                                             <form method="post"
-                                                  th:action="@{|/messages/${user.id}|}">
+                                                  th:action="@{|/messages/${friendship.id}|}">
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-primary"
                                                             data-bs-toggle="tooltip"
