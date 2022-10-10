@@ -16,39 +16,27 @@
                 <div class="col-md-10">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="text-center">Pending requests</h2>
+                            <h2 class="text-center">Outgoing requests</h2>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-hover table-bordered" th:object="${pending}">
+                                <table class="table table-hover table-bordered" th:object="${outgoing}">
                                     <thead class="table-dark">
                                     <tr>
-                                        <th>Sender:</th>
-                                        <th></th>
+                                        <th>Receiver:</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr th:each="friendship : ${pending}">
-                                        <td th:text="${friendship.sender.email}"></td>
+                                    <tr th:each="friendship : ${outgoing}">
+                                        <td th:text="${friendship.receiver.email}"></td>
                                         <td>
                                             <form method="post"
-                                                  th:action="@{|/friends/accept/${friendship.id}|}">
+                                                  th:action="@{|/friends/requests/outgoing/delete/${friendship.id}|}">
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-primary"
                                                             data-bs-toggle="tooltip"
-                                                            title="Accept"><i class="fa-solid fa-circle-check"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form method="post"
-                                                  th:action="@{|/friends/decline/${friendship.id}|}">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary"
-                                                            data-bs-toggle="tooltip"
-                                                            title="Decline"><i class="fa-sharp fa-solid fa-trash"></i>
+                                                            title="Delete"><i class="fa-sharp fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
                                             </form>

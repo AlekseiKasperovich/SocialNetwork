@@ -54,4 +54,7 @@ public interface FriendshipRepository extends JpaRepository<Friendship, UUID> {
      */
     @Query("SELECT f FROM Friendship f WHERE (f.receiver.id = :userId AND f.accepted = false)")
     Page<Friendship> getMyFriendshipRequests(@Param("userId") UUID userId, Pageable pageable);
+
+    @Query("SELECT f FROM Friendship f WHERE (f.sender.id = :userId AND f.accepted = false)")
+    Page<Friendship> getOutgoingFriendshipRequests(@Param("userId") UUID userId, Pageable pageable);
 }

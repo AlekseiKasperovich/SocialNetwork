@@ -3,10 +3,8 @@ package com.senla.web.controller;
 import com.senla.web.dto.friendship.FriendshipDto;
 import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.service.FriendshipService;
-
 import java.util.List;
 import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -56,7 +54,33 @@ public class FriendshipController {
     public String getPendingRequests(Model model) {
         Page<FriendshipDto> pageFriendship = friendshipService.getPendingRequests();
         List<FriendshipDto> friendships = pageFriendship.getContent();
-        model.addAttribute("friendships", friendships);
+        model.addAttribute("pending", friendships);
         return "pendingRequests";
+    }
+
+    @PostMapping("accept/{friendshipId}")
+    public String acceptFriendship(@PathVariable UUID friendshipId) {
+        friendshipService.acceptFriendshipRequest(friendshipId);
+        return "redirect:/friends/requests/pending";
+    }
+
+    @PostMapping("decline/{friendshipId}")
+    public String declineFriendship(@PathVariable UUID friendshipId) {
+        friendshipService.deleteFriend(friendshipId);
+        return "redirect:/friends/requests/pending";
+    }
+
+    @GetMapping("requests/outgoing")
+    public String getOutgoingRequests(Model model) {
+        Page<FriendshipDto> pageFriendship = friendshipService.getOutgoingRequests();
+        List<FriendshipDto> friendships = pageFriendship.getContent();
+        model.addAttribute("outgoing", friendships);
+        return "outgoingRequests";
+    }
+
+    @PostMapping("requests/outgoing/delete/{friendshipId}")
+    public String deleteFriendship(@PathVariable UUID friendshipId) {
+        friendshipService.deleteFriend(friendshipId);
+        return "redirect:/friends/requests/outgoing";
     }
 }

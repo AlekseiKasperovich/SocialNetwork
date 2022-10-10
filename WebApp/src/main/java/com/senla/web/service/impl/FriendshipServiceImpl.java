@@ -5,9 +5,7 @@ import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.feign.FriendshipClient;
 import com.senla.web.service.FriendshipService;
 import feign.FeignException;
-
 import java.util.UUID;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -47,5 +45,16 @@ public class FriendshipServiceImpl implements FriendshipService {
     public Page<FriendshipDto> getPendingRequests() {
         Pageable page = PageRequest.of(0, 20);
         return friendshipClient.getPendingRequests(page).getBody();
+    }
+
+    @Override
+    public void acceptFriendshipRequest(UUID friendshipId) {
+        friendshipClient.acceptFriendship(friendshipId);
+    }
+
+    @Override
+    public Page<FriendshipDto> getOutgoingRequests() {
+        Pageable page = PageRequest.of(0, 20);
+        return friendshipClient.getOutgoingRequests(page).getBody();
     }
 }

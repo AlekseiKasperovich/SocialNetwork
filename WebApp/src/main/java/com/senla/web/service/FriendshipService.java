@@ -1,9 +1,7 @@
 package com.senla.web.service;
 
 import com.senla.web.dto.friendship.FriendshipDto;
-
 import java.util.UUID;
-
 import org.springframework.data.domain.Page;
 
 public interface FriendshipService {
@@ -15,4 +13,8 @@ public interface FriendshipService {
     void deleteFriend(UUID friendshipId);
 
     Page<FriendshipDto> getPendingRequests();
+
+    void acceptFriendshipRequest(UUID friendshipId);
+
+    Page<FriendshipDto> getOutgoingRequests();
 }

@@ -19,4 +19,6 @@ public interface FriendshipService {
     Page<FriendshipDto> findAll(UUID id, Pageable pageable);
 
     Page<FriendshipDto> findMyFriendshipRequests(UUID id, Pageable pageable);
+
+    Page<FriendshipDto> findOutgoingFriendshipRequests(UUID id, Pageable pageable);
 }

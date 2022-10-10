@@ -24,6 +24,7 @@ public class FriendshipRestClientImpl extends CurrentUserService implements Frie
     private static final String URL = "/api/friendships/";
     private static final String FRIEND = "?friendId=";
     private static final String REQUESTS = "requests";
+    private static final String OUTGOING = "/outgoing";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
     private final RequestProperty requestProperty;
@@ -106,6 +107,31 @@ public class FriendshipRestClientImpl extends CurrentUserService implements Frie
             url = requestProperty.getHost() + URL;
         } else {
             url = requestProperty.getHost() + URL + requestProperty.getQuestion() + requestParam;
+        }
+        return restTemplate
+                .exchange(
+                        url,
+                        HttpMethod.GET,
+                        new HttpEntity<>(httpHeaderBuilder.build()),
+                        new ParameterizedTypeReference<RestResponsePage<FriendshipDto>>() {})
+                .getBody();
+    }
+
+    @Override
+    public Page<FriendshipDto> findOutgoingFriendshipRequests(
+            Pageable pageable, HttpServletRequest request) {
+        String requestParam = request.getQueryString();
+        String url;
+        if (requestParam == null) {
+            url = requestProperty.getHost() + URL + REQUESTS + OUTGOING;
+        } else {
+            url =
+                    requestProperty.getHost()
+                            + URL
+                            + REQUESTS
+                            + OUTGOING
+                            + requestProperty.getQuestion()
+                            + requestParam;
         }
         return restTemplate
                 .exchange(

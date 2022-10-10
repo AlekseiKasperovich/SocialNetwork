@@ -14,6 +14,17 @@
                     <div th:replace="fragments/sideNav :: sideNav"/>
                 </div>
                 <div class="col-md-10">
+                    <nav class="navbar bg-light">
+                        <div class="container-fluid">
+                            <form class="d-flex" role="search" method="post" th:action="@{/users?}">
+                                <input class="form-control me-2" type="search" placeholder="firstname"
+                                       aria-label="Search">
+                                <input class="form-control me-2" type="search" placeholder="lastname"
+                                       aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </nav>
                     <div class="card">
                         <div class="card-header">
                             <h2 class="text-center">Users</h2>
