@@ -16,11 +16,12 @@
                 <div class="col-md-10">
                     <nav class="navbar bg-light">
                         <div class="container-fluid">
-                            <form class="d-flex" role="search" method="post" th:action="@{/users?}">
-                                <input class="form-control me-2" type="search" placeholder="firstname"
-                                       aria-label="Search">
-                                <input class="form-control me-2" type="search" placeholder="lastname"
-                                       aria-label="Search">
+                            <form class="d-flex" role="search" method="post" th:object="${search}"
+                                  th:action="@{/users/search}">
+                                <input class="form-control me-2" type="search" placeholder="first name"
+                                       aria-label="Search" th:field="*{firstName}">
+                                <input class="form-control me-2" type="search" placeholder="last name"
+                                       aria-label="Search" th:field="*{lastName}">
                                 <button class="btn btn-outline-success" type="submit">Search</button>
                             </form>
                         </div>
@@ -45,8 +46,8 @@
                                     <thead class="table-dark">
                                     <tr>
                                         <th>Email:</th>
-                                        <th>Name:</th>
-                                        <th>Surname:</th>
+                                        <th>First name:</th>
+                                        <th>Last name:</th>
                                         <th>Date of birth:</th>
                                         <th>Sex:</th>
                                         <th>Phone:</th>
