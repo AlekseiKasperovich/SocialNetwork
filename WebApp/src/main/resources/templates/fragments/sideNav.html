@@ -16,7 +16,7 @@
                        role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa-solid fa-user-group"></i><span> Friends</span></a>
-                    </a>
+
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" th:href="@{/friends}">
                             <i class="fa-solid fa-user-group"></i> My friends</a></li>
@@ -33,8 +33,23 @@
                 <a th:href="@{/users}" class="list-group-item list-group-item-action">
                     <i class="fa-solid fa-users"></i><span> Users</span></a>
                 <div sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a th:href="@{/admin}" class="list-group-item list-group-item-action">
-                        <i class="fa-solid fa-screwdriver-wrench"></i><span> Admin</span></a></div>
+                    <div class="dropdown">
+                        <a class="list-group-item list-group-item-action dropdown-toggle" href="#"
+                           role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-screwdriver-wrench"></i><span> Admin</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/admin}"> My page</a></li>
+                            <li><h5 class="dropdown-header">
+                                <i class="fa-solid fa-users-line"></i></i> Communities</h5></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/community}"> Create community</a></li>
+                            <li><h5 class="dropdown-header">
+                                <i class="fa-solid fa-address-book"></i> Users</h5></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/unblock}"> Blocked users</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <a th:href="@{/logout}" class="list-group-item list-group-item-action">
                     <i class="fa-sharp fa-solid fa-right-from-bracket"></i><span> Logout</span></a>
             </div>

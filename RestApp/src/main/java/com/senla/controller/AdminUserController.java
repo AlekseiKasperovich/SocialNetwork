@@ -3,12 +3,12 @@ package com.senla.controller;
 import com.senla.client.AdminUserRestClient;
 import com.senla.dto.user.DtoUser;
 import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /** @author Aliaksei Kaspiarovich */
 @RestController
@@ -37,5 +37,10 @@ public class AdminUserController {
     @PatchMapping("{id}/unblock")
     public DtoUser unblockUser(@PathVariable UUID id) {
         return adminUseRestClient.unblockUser(id);
+    }
+
+    @GetMapping("banned")
+    public Page<DtoUser> getBannedUsers(Pageable pageable, HttpServletRequest request) {
+        return adminUseRestClient.getBannedUsers(pageable, request);
     }
 }

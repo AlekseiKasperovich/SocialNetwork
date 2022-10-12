@@ -7,6 +7,8 @@ import com.senla.repository.UserRepository;
 import com.senla.service.CustomUserService;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,5 +65,10 @@ public class CustomUserServiceImpl implements CustomUserService {
     @Transactional
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public Page<User> findBannedUsers(Pageable pageable) {
+        return userRepository.findBannedUsers(pageable);
     }
 }
