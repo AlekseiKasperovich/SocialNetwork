@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div th:replace="fragments/nav :: nav"/>
+    </header>
+    <main>
+        <section class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div th:replace="fragments/sideNav :: sideNav"/>
+                </div>
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="text-center">Communities</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered" th:object="${communities}">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th>Name:</th>
+                                        <th>Description:</th>
+                                        <th></th>
+                                        <th></th>
+                                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <th></th>
+                                            <th></th>
+                                        </div>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="community : ${communities}">
+                                        <td th:text="${community.name}"></td>
+                                        <td th:text="${community.description}"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <td>
+                                                <form method="post"
+                                                      th:action="@{|/admin/community/update/${community.id}|}">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary"
+                                                                data-bs-toggle="tooltip"
+                                                                title="Update"><i class="fa-solid fa-pen"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </td>
+
+                                            <td>
+                                                <form method="post"
+                                                      th:action="@{|/admin/community/delete/${community.id}|}">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary"
+                                                                data-bs-toggle="tooltip"
+                                                                title="Delete"><i
+                                                                class="fa-sharp fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div th:replace="fragments/footer :: footer"/>
+    </footer>
+</div>
+</body>
+</html>
