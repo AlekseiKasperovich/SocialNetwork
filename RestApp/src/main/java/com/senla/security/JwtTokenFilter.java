@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -19,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(
@@ -27,9 +24,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String token = jwtTokenProvider.getTokenFromRequest(request);
         if (token != null && jwtTokenProvider.validateToken(token)) {
-            String email = jwtTokenProvider.getUsernameFromToken(token);
-            UserDetails userDetails = userDetailsService.loadUserByUsername(email);
-            if (userDetails.isAccountNonLocked()) {
+            if (SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetailsImpl userDetails =
+                        UserDetailsImpl.builder()
+                                .id(jwtTokenProvider.getIdFromToken(token))
+                                .username(jwtTokenProvider.getUsernameFromToken(token))
+                                .authorities(jwtTokenProvider.getRoleFromToken(token))
+                                .build();
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails, null, userDetails.getAuthorities());

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div th:replace="fragments/nav :: nav"/>
+    </header>
+    <main>
+        <section class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <div th:replace="fragments/sideNav :: sideNav"/>
+                </div>
+                <div class="col-md-10">
+                    <nav class="navbar bg-light">
+                        <div class="container-fluid">
+                            <form class="d-flex" role="search" method="post" th:object="${search}"
+                                  th:action="@{/users/search}">
+                                <input class="form-control me-2" type="search" placeholder="first name"
+                                       aria-label="Search" th:field="*{firstName}">
+                                <input class="form-control me-2" type="search" placeholder="last name"
+                                       aria-label="Search" th:field="*{lastName}">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </nav>
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="text-center">Users</h2>
+                        </div>
+                        <div th:if="${param.success}">
+                            <div class="alert alert-success">
+                                <p th:text="${message}"></p>
+                            </div>
+                        </div>
+                        <div th:if="${param.fail}">
+                            <div class="alert alert-danger">
+                                <p th:text="${message}"></p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-bordered" th:object="${users}">
+                                    <thead class="table-dark">
+                                    <tr>
+                                        <th>Email:</th>
+                                        <th>First name:</th>
+                                        <th>Last name:</th>
+                                        <th>Date of birth:</th>
+                                        <th>Sex:</th>
+                                        <th>Phone:</th>
+                                        <th></th>
+                                        <th></th>
+                                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <th></th>
+                                        </div>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="user : ${users}">
+                                        <td th:text="${user.email}"></td>
+                                        <td th:text="${user.firstName}"></td>
+                                        <td th:text="${user.lastName}"></td>
+                                        <td th:text="${user.birthday}"></td>
+                                        <td th:text="${user.sex}"></td>
+                                        <td th:text="${user.phone}"></td>
+                                        <td>
+                                            <form method="post"
+                                                  th:action="@{|/friends/add/${user.id}|}">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary"
+                                                            data-bs-toggle="tooltip"
+                                                            title="Add friend"><i class="fa-solid fa-user-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post"
+                                                  th:action="@{|/messages/${user.id}|}">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary"
+                                                            data-bs-toggle="tooltip"
+                                                            title="Send message"><i class="fa-solid fa-envelope"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                        <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                            <td>
+                                                <form method="post"
+                                                      th:action="@{|/admin/block/${user.id}|}">
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-primary"
+                                                                data-bs-toggle="tooltip"
+                                                                title="Block user"><i class="fa-solid fa-user-lock"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div th:replace="fragments/footer :: footer"/>
+    </footer>
+</div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.senla.client.impl;
 import com.senla.client.FriendshipRestClient;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.dto.friendship.FriendshipDto;
+import com.senla.exception.MyAccessDeniedException;
 import com.senla.property.RequestProperty;
 import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +19,12 @@ import org.springframework.web.client.RestTemplate;
 /** @author Aliaksei Kaspiarovich */
 @Service
 @RequiredArgsConstructor
-public class FriendshipRestClientImpl implements FriendshipRestClient {
+public class FriendshipRestClientImpl extends CurrentUserService implements FriendshipRestClient {
 
     private static final String URL = "/api/friendships/";
     private static final String FRIEND = "?friendId=";
     private static final String REQUESTS = "requests";
+    private static final String OUTGOING = "/outgoing";
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
     private final RequestProperty requestProperty;
@@ -40,13 +42,17 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
 
     @Override
     public FriendshipDto createFriendship(UUID friendId) {
-        return restTemplate
-                .exchange(
-                        requestProperty.getHost() + URL + FRIEND + friendId,
-                        HttpMethod.POST,
-                        new HttpEntity<>(httpHeaderBuilder.build()),
-                        FriendshipDto.class)
-                .getBody();
+        if (!friendId.equals(getCurrentUserId())) {
+            return restTemplate
+                    .exchange(
+                            requestProperty.getHost() + URL + FRIEND + friendId,
+                            HttpMethod.POST,
+                            new HttpEntity<>(httpHeaderBuilder.build()),
+                            FriendshipDto.class)
+                    .getBody();
+        } else {
+            throw new MyAccessDeniedException("You cannot send a request to yourself");
+        }
     }
 
     @Override
@@ -101,6 +107,31 @@ public class FriendshipRestClientImpl implements FriendshipRestClient {
             url = requestProperty.getHost() + URL;
         } else {
             url = requestProperty.getHost() + URL + requestProperty.getQuestion() + requestParam;
+        }
+        return restTemplate
+                .exchange(
+                        url,
+                        HttpMethod.GET,
+                        new HttpEntity<>(httpHeaderBuilder.build()),
+                        new ParameterizedTypeReference<RestResponsePage<FriendshipDto>>() {})
+                .getBody();
+    }
+
+    @Override
+    public Page<FriendshipDto> findOutgoingFriendshipRequests(
+            Pageable pageable, HttpServletRequest request) {
+        String requestParam = request.getQueryString();
+        String url;
+        if (requestParam == null) {
+            url = requestProperty.getHost() + URL + REQUESTS + OUTGOING;
+        } else {
+            url =
+                    requestProperty.getHost()
+                            + URL
+                            + REQUESTS
+                            + OUTGOING
+                            + requestProperty.getQuestion()
+                            + requestParam;
         }
         return restTemplate
                 .exchange(

@@ -48,14 +48,28 @@ public class UserServiceImpl implements UserService {
             Page<User> userPage = userRepository.findAll(pageable);
             return userPage.map(user -> mapper.map(user, DtoUser.class));
         }
-        Specification<User> specification1 =
-                (root, query, criteriaBuilder) ->
-                        criteriaBuilder.like(root.get(User_.firstName), "%" + firstName + "%");
-        Specification<User> specification2 =
-                (root, query, criteriaBuilder) ->
-                        criteriaBuilder.like(root.get(User_.lastName), "%" + lastName + "%");
-        Page<User> userPage =
-                userRepository.findAll(where(specification1).or(specification2), pageable);
+        Specification<User> specification = null;
+        if (firstName != null) {
+            Specification<User> specification1 =
+                    (root, query, criteriaBuilder) ->
+                            criteriaBuilder.like(
+                                    criteriaBuilder.lower(root.get(User_.firstName)),
+                                    "%" + firstName.toLowerCase() + "%");
+            specification = specification1;
+        }
+        if (lastName != null) {
+            Specification<User> specification2 =
+                    (root, query, criteriaBuilder) ->
+                            criteriaBuilder.like(
+                                    criteriaBuilder.lower(root.get(User_.lastName)),
+                                    "%" + lastName.toLowerCase() + "%");
+            if (specification != null) {
+                specification = specification.or(specification2);
+            } else {
+                specification = specification2;
+            }
+        }
+        Page<User> userPage = userRepository.findAll(where(specification), pageable);
         return userPage.map(user -> mapper.map(user, DtoUser.class));
     }
 }

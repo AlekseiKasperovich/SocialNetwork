@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
-import com.senla.dto.user.ForgotPasswordDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,24 +57,22 @@ class AuthControllerTest extends AbstractMockControllerTest {
     @Test
     void givenExistingEmail_whenSendPassword_thenSaveNewPassword() throws Exception {
         String email = "user@gmail.com";
-        ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto(email);
 
         mockMvc.perform(
-                        post("/api/auth/password/new")
-                                .content(objectMapper.writeValueAsString(forgotPasswordDto))
-                                .contentType(MediaType.APPLICATION_JSON))
+                        post("/api/auth/password/generate")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .header("email", email))
                 .andExpect(status().isOk());
     }
 
     @Test
     void givenNonExistingEmail_whenSendPassword_thenStatusNotFound() throws Exception {
         String email = "another@gmail.com";
-        ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto(email);
 
         mockMvc.perform(
-                        post("/api/auth/password/new")
-                                .content(objectMapper.writeValueAsString(forgotPasswordDto))
-                                .contentType(MediaType.APPLICATION_JSON))
+                        post("/api/auth/password/generate")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .header("email", email))
                 .andExpect(status().isNotFound());
     }
 }

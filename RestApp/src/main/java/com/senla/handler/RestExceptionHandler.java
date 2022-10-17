@@ -44,9 +44,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             AuthenticationException ex, WebRequest request) {
         ExceptionDetails details =
                 exceptionDetailsBuilder(
-                        ex, "message.authentication.error", HttpStatus.UNAUTHORIZED, request);
+                        ex, "message.authentication.error", HttpStatus.FORBIDDEN, request);
         return handleExceptionInternal(
-                ex, details, new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+                ex, details, new HttpHeaders(), HttpStatus.FORBIDDEN, request);
     }
 
     @ExceptionHandler({LockedException.class})

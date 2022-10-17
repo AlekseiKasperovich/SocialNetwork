@@ -82,6 +82,12 @@ public class FriendshipController {
         return friendshipService.findMyFriendshipRequests(id, pageable);
     }
 
+    @GetMapping("requests/outgoing")
+    public Page<FriendshipDto> findOutgoingFriendshipRequests(
+            @RequestHeader("${request.id}") UUID id, Pageable pageable) {
+        return friendshipService.findOutgoingFriendshipRequests(id, pageable);
+    }
+
     /**
      * @param id id
      * @param pageable pagination information

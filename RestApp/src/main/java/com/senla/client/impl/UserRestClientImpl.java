@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserRestClientImpl implements UserRestClient {
 
     private static final String URL = "/api/users/";
+
     private final RestTemplate restTemplate;
     private final HttpHeaderBuilder httpHeaderBuilder;
     private final RequestProperty requestProperty;

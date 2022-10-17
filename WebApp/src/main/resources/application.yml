@@ -1,0 +1,23 @@
+server:
+  error:
+    include-stacktrace: always
+    include-exception: 'true'
+    include-message: always
+  port: '8082'
+logging:
+  level:
+    org:
+      springframework: INFO
+    com:
+      senla: INFO
+request:
+  host: http://localhost:8080/api
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+role:
+  admin: ADMIN

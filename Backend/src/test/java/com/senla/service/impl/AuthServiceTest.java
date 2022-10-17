@@ -2,7 +2,6 @@ package com.senla.service.impl;
 
 import com.senla.dto.user.DtoCreateUser;
 import com.senla.dto.user.DtoUser;
-import com.senla.dto.user.ForgotPasswordDto;
 import com.senla.exception.UserAlreadyExistException;
 import com.senla.exception.UserNotFoundException;
 import com.senla.model.User;
@@ -52,9 +51,8 @@ class AuthServiceTest extends AbstractIntegrationTest {
     void givenExistingEmail_whenSendPassword_thenSaveNewPassword() {
         String email = "user@gmail.com";
         User beforeUpdatePassword = customUserService.findUserByEmail(email);
-        ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto(email);
 
-        authService.sendNewPassword(forgotPasswordDto);
+        authService.generatePassword(email);
 
         User afterUpdatePassword = customUserService.findUserByEmail(email);
 
@@ -66,9 +64,8 @@ class AuthServiceTest extends AbstractIntegrationTest {
     @Test
     void givenNonExistingEmail_whenSendPassword_thenTrowException() {
         String email = "another@gmail.com";
-        ForgotPasswordDto forgotPasswordDto = new ForgotPasswordDto(email);
 
         Assertions.assertThrows(
-                UserNotFoundException.class, () -> authService.sendNewPassword(forgotPasswordDto));
+                UserNotFoundException.class, () -> authService.generatePassword(email));
     }
 }

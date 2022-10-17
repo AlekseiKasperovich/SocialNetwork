@@ -70,6 +70,7 @@ logging:
 email:
   body: "Your new password"
 request:
+  token: "token"
   email: "email"
   id: "id"
 topic:

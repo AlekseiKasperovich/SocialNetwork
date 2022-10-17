@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+</head>
+<body>
+<div th:fragment="sideNav">
+    <nav>
+        <div class="position-sticky">
+            <div class="list-group">
+                <a th:href="@{/users/profile}" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-user"></i><span> My profile</span></a>
+                <a th:href="@{/messages}" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-message"></i><span> Messages</span></a>
+                <div class="dropdown">
+                    <a class="list-group-item list-group-item-action dropdown-toggle" href="#"
+                       role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user-group"></i><span> Friends</span></a>
+
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/friends}">
+                            <i class="fa-solid fa-user-group"></i> My friends</a></li>
+                        <li><h5 class="dropdown-header"><i class="fa-solid fa-code-pull-request"></i> Friend requests
+                        </h5></li>
+                        <li><a class="dropdown-item" th:href="@{/friends/requests/pending}"> Pending</a></li>
+                        <li><a class="dropdown-item" th:href="@{/friends/requests/outgoing}"> Outgoing</a></li>
+                    </ul>
+                </div>
+                <a th:href="@{/communities}" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-users-line"></i><span> Communities</span></a>
+                <a th:href="@{/events}" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-calendar-days"></i><span> Events</span></a>
+                <a th:href="@{/users}" class="list-group-item list-group-item-action">
+                    <i class="fa-solid fa-users"></i><span> Users</span></a>
+                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                    <div class="dropdown">
+                        <a class="list-group-item list-group-item-action dropdown-toggle" href="#"
+                           role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-screwdriver-wrench"></i><span> Admin</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/admin}"> My page</a></li>
+                            <li><h5 class="dropdown-header">
+                                <i class="fa-solid fa-users-line"></i></i> Communities</h5></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/community}"> Create community</a></li>
+                            <li><h5 class="dropdown-header">
+                                <i class="fa-solid fa-address-book"></i> Users</h5></li>
+                            <li><a class="dropdown-item" th:href="@{/admin/unblock}"> Blocked users</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <a th:href="@{/logout}" class="list-group-item list-group-item-action">
+                    <i class="fa-sharp fa-solid fa-right-from-bracket"></i><span> Logout</span></a>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
+

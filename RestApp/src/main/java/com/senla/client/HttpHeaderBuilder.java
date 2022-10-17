@@ -8,4 +8,6 @@ public interface HttpHeaderBuilder {
     HttpHeaders build();
 
     HttpHeaders build(String email);
+
+    HttpHeaders build(String email, String token);
 }

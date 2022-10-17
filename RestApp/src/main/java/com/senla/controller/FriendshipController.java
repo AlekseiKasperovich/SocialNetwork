@@ -72,6 +72,12 @@ public class FriendshipController {
         return friendshipRestClient.findMyFriendshipRequests(pageable, request);
     }
 
+    @GetMapping("requests/outgoing")
+    public Page<FriendshipDto> findOutgoingFriendshipRequests(
+            Pageable pageable, HttpServletRequest request) {
+        return friendshipRestClient.findOutgoingFriendshipRequests(pageable, request);
+    }
+
     /**
      * @param pageable pagination information
      * @param request request

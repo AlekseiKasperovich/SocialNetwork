@@ -26,4 +26,11 @@ public class HttpHeaderBuilderImpl extends CurrentUserService implements HttpHea
         headers.set(requestProperty.getEmail(), email);
         return headers;
     }
+
+    @Override
+    public HttpHeaders build(String email, String token) {
+        headers.set(requestProperty.getEmail(), email);
+        headers.set(requestProperty.getToken(), token);
+        return headers;
+    }
 }

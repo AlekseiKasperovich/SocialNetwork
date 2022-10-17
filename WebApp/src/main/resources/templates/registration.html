@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<header>
+    <div th:replace="fragments/nav :: nav"/>
+</header>
+<div class="wrapper">
+    <main>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-center">Sign up </h2>
+                            </div>
+                            <div th:if="${param.success}">
+                                <div class="alert alert-success">
+                                    <p th:text="${message}"></p>
+                                </div>
+                            </div>
+                            <div th:if="${param.fail}">
+                                <div class="alert alert-danger">
+                                    <p th:text="${message}"></p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form
+                                        method="post"
+                                        role="form"
+                                        th:action="@{/registration/save}"
+                                        th:object="${user}"
+                                >
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Email</label>
+                                        <input
+                                                class="form-control"
+                                                id="email"
+                                                name="email"
+                                                placeholder="Enter email address"
+                                                th:field="*{email}"
+                                                type="email"
+                                                required
+                                        />
+                                        <p th:errors="*{email}" class="text-danger"
+                                           th:if="${#fields.hasErrors('email')}"></p>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label"><abbr title="Password must contain:
+                        - a minimum of 1 lower case letter [a-z]
+                        - a minimum of 1 upper case letter [A-Z]
+                        - a minimum of 1 numeric character [0-9]
+                        - any combination of between 5 to 16 characters">Password</abbr></label>
+                                        <input
+                                                class="form-control"
+                                                id="password"
+                                                name="password"
+                                                placeholder="Enter password"
+                                                th:field="*{password}"
+                                                type="password"
+                                                minlength="5"
+                                                maxlength="16"
+                                                size="16"
+                                                required
+                                        />
+                                        <p th:errors="*{password}" class="text-danger"
+                                           th:if="${#fields.hasErrors('password')}"></p>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label">Repeat password</label>
+                                        <input
+                                                class="form-control"
+                                                id="matchingPassword"
+                                                name="matchingPassword"
+                                                placeholder="Repeat password"
+                                                th:field="*{matchingPassword}"
+                                                type="password"
+                                                minlength="5"
+                                                maxlength="16"
+                                                size="16"
+                                                required
+                                        />
+                                        <p th:errors="*{matchingPassword}" class="text-danger"
+                                           th:if="${#fields.hasErrors('matchingPassword')}"></p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="list-group list-group-horizontal">
+                                <a th:href="@{/login}"
+                                   class="list-group-item list-group-item-action"> Already have an account? Login
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div th:replace="fragments/footer :: footer"/>
+    </footer>
+</div>
+</body>
+</html>

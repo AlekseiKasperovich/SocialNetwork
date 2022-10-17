@@ -1,5 +1,15 @@
 version: "3.3"
 services:
+  ui:
+    build: WebApp/
+    image: kasperovich/web
+    container_name: web
+    ports:
+      - "8082:8082"
+    depends_on:
+      - backend
+      - frontend
+      - postgres
   frontend:
     build: RestApp/
     image: kasperovich/frontend

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div th:replace="fragments/nav :: nav"/>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="text-center">Welcome back, Log in</h2>
+
+                            </div>
+                            <div th:if="${param.success}">
+                                <div class="alert alert-success">
+                                    <p th:text="${message}"></p>
+                                </div>
+                            </div>
+                            <div th:if="${param.fail}">
+                                <div class="alert alert-danger">
+                                    <p th:text="${message}"></p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <form
+                                        method="post"
+                                        role="form"
+                                        th:action="@{/login/save}"
+                                        th:object="${user}"
+                                        class="form-horizontal"
+                                >
+                                    <div class="form-group mb-3">
+                                        <label class="control-label"> Email</label>
+                                        <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                th:field="*{email}"
+                                                class="form-control"
+                                                placeholder="Write your email"
+                                                required
+                                        />
+                                        <p th:errors="*{email}" class="text-danger"
+                                           th:if="${#fields.hasErrors('email')}"></p>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label class="control-label"> Password</label>
+                                        <div class="form-group mb-3 pass">
+                                            <span class="icon-pass" id="icon-pass">&#128065;</span>
+                                            <input
+                                                    class="form-control"
+                                                    id="pass"
+                                                    maxlength="16"
+                                                    minlength="5"
+                                                    name="password"
+                                                    placeholder="Write your password"
+                                                    required
+                                                    size="16"
+                                                    th:field="*{password}"
+                                                    type="password"
+                                            />
+                                            <p th:errors="*{password}" class="text-danger"
+                                               th:if="${#fields.hasErrors('password')}"></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="list-group list-group-horizontal">
+                                <a th:href="@{/registration}"
+                                   class="list-group-item list-group-item-action"> Not a member yet? Sign up
+                                </a>
+                                <a th:href="@{/password/new}"
+                                   class="list-group-item list-group-item-action">Forgot password?
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div th:replace="fragments/footer :: footer"/>
+    </footer>
+</div>
+
+<script>
+    const inputPass = document.getElementById('pass');
+    const iconPass = document.getElementById('icon-pass');
+
+    iconPass.addEventListener('click', () => {
+        if (inputPass.getAttribute('type') === 'password') {
+            inputPass.setAttribute('type', 'text');
+        } else {
+            inputPass.setAttribute('type', 'password');
+        }
+    });
+</script>
+</body>
+</html>

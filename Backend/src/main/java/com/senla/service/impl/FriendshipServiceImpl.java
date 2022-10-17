@@ -124,4 +124,12 @@ public class FriendshipServiceImpl implements FriendshipService {
                 friendshipRepository.getMyFriendshipRequests(id, pageable);
         return friendshipPage.map(friendship -> mapper.map(friendship, FriendshipDto.class));
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<FriendshipDto> findOutgoingFriendshipRequests(UUID id, Pageable pageable) {
+        Page<Friendship> friendshipPage =
+                friendshipRepository.getOutgoingFriendshipRequests(id, pageable);
+        return friendshipPage.map(friendship -> mapper.map(friendship, FriendshipDto.class));
+    }
 }

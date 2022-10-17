@@ -30,6 +30,7 @@
     <modules>
         <module>Backend</module>
         <module>RestApp</module>
+        <module>WebApp</module>
     </modules>
 
     <build>
