@@ -49,6 +49,7 @@ public class AuthServiceImpl implements AuthService {
                 String token = tokenDto.getToken();
                 CurrentUserDetails currentUserDetails =
                         CurrentUserDetails.builder()
+                                .id(tokenDto.getId())
                                 .email(loginUserDto.getEmail())
                                 .token(token)
                                 .authorities(SecurityUtil.mapRoleToAuthorities(tokenDto.getRole()))

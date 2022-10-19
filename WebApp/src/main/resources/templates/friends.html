@@ -23,16 +23,21 @@
                                 <table class="table table-hover table-bordered" th:object="${friendships}">
                                     <thead class="table-dark">
                                     <tr>
-                                        <th>Sender:</th>
-                                        <th>Receiver:</th>
+                                        <th>Friend:</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="friendship : ${friendships}">
-                                        <td th:text="${friendship.sender.email}"></td>
-                                        <td th:text="${friendship.receiver.email}"></td>
+                                        <td th:text="${friendship.friend.email}"></td>
+                                        <td>
+                                            <a th:href="@{|/messages/${friendship.friend.id}|}" role="button"
+                                               class="btn btn-primary"
+                                               data-bs-toggle="tooltip"
+                                               title="Send message"><i class="fa-solid fa-envelope"></i>
+                                            </a>
+                                        </td>
                                         <td>
                                             <form method="post"
                                                   th:action="@{|/friends/delete/${friendship.id}|}">
@@ -44,17 +49,7 @@
                                                 </div>
                                             </form>
                                         </td>
-                                        <td>
-                                            <form method="post"
-                                                  th:action="@{|/messages/${friendship.id}|}">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary"
-                                                            data-bs-toggle="tooltip"
-                                                            title="Send message"><i class="fa-solid fa-envelope"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
-                                        </td>
+
                                     </tr>
                                     </tbody>
                                 </table>

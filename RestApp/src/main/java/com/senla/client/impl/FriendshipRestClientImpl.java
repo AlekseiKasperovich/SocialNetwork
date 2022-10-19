@@ -100,7 +100,7 @@ public class FriendshipRestClientImpl extends CurrentUserService implements Frie
     }
 
     @Override
-    public Page<FriendshipDto> findAll(Pageable pageable, HttpServletRequest request) {
+    public Page<FriendshipDto> findMyFriends(Pageable pageable, HttpServletRequest request) {
         String requestParam = request.getQueryString();
         String url;
         if (requestParam == null) {

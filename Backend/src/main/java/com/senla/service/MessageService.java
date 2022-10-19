@@ -17,7 +17,7 @@ public interface MessageService {
 
     void deleteMessage(UUID messageId, UUID id);
 
-    Page<MessageDto> findAll(UUID receiverId, UUID id, Pageable pageable);
+    Page<MessageDto> findMyMessages(UUID receiverId, UUID id, Pageable pageable);
 
     void send(String messageText);
 }

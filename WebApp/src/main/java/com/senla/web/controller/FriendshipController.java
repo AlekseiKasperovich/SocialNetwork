@@ -1,5 +1,6 @@
 package com.senla.web.controller;
 
+import com.senla.web.dto.friendship.FriendDto;
 import com.senla.web.dto.friendship.FriendshipDto;
 import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.service.FriendshipService;
@@ -44,9 +45,8 @@ public class FriendshipController {
 
     @GetMapping
     public String getFriends(Model model) {
-        Page<FriendshipDto> pageFriendship = friendshipService.getFriends();
-        List<FriendshipDto> friendships = pageFriendship.getContent();
-        model.addAttribute("friendships", friendships);
+        List<FriendDto> friends = friendshipService.getFriends();
+        model.addAttribute("friendships", friends);
         return "friends";
     }
 

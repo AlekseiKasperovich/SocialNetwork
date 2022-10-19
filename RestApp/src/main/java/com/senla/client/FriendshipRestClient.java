@@ -19,7 +19,7 @@ public interface FriendshipRestClient {
 
     FriendshipDto acceptFriendship(UUID friendshipId);
 
-    Page<FriendshipDto> findAll(Pageable pageable, HttpServletRequest request);
+    Page<FriendshipDto> findMyFriends(Pageable pageable, HttpServletRequest request);
 
     Page<FriendshipDto> findOutgoingFriendshipRequests(
             Pageable pageable, HttpServletRequest request);

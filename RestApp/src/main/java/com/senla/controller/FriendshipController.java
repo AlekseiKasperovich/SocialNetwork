@@ -85,6 +85,6 @@ public class FriendshipController {
      */
     @GetMapping
     public Page<FriendshipDto> findMyFriends(Pageable pageable, HttpServletRequest request) {
-        return friendshipRestClient.findAll(pageable, request);
+        return friendshipRestClient.findMyFriends(pageable, request);
     }
 }

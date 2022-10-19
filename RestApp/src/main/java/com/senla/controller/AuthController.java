@@ -52,8 +52,7 @@ public class AuthController {
         SimpleGrantedAuthority authority =
                 (SimpleGrantedAuthority) userDetails.getAuthorities().stream().findFirst().get();
         String role = authority.getAuthority();
-        return jwtTokenProvider.generateToken(
-                userDetails.getUsername(), role, userDetails.getId().toString());
+        return jwtTokenProvider.generateToken(userDetails.getUsername(), role, userDetails.getId());
     }
 
     /**

@@ -1,5 +1,6 @@
-package com.senla.dto.token;
+package com.senla.web.dto.friendship;
 
+import com.senla.web.dto.user.DtoUser;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,14 +8,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TokenDto {
+@Builder
+public class FriendDto {
 
     private UUID id;
-
-    private String token;
-
-    private String role;
+    private DtoUser friend;
 }

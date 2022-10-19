@@ -34,7 +34,7 @@ public final class SecurityUtil {
     public static Authentication createAnonymousPrincipal() {
         return new AnonymousAuthenticationToken(
                 "Anonymous",
-                new CurrentUserDetails(ANONYMOUS_AUTHORITIES, null, null),
+                new CurrentUserDetails(null, ANONYMOUS_AUTHORITIES, null, null),
                 ANONYMOUS_AUTHORITIES);
     }
 }

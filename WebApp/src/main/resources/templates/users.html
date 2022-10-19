@@ -78,15 +78,10 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="post"
-                                                  th:action="@{|/messages/${user.id}|}">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary"
-                                                            data-bs-toggle="tooltip"
-                                                            title="Send message"><i class="fa-solid fa-envelope"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            <a th:href="@{|/messages/${user.id}|}" role="button" class="btn btn-primary"
+                                               data-bs-toggle="tooltip"
+                                               title="Send message"><i class="fa-solid fa-envelope"></i>
+                                            </a>
                                         </td>
                                         <div sec:authorize="hasRole('ROLE_ADMIN')">
                                             <td>

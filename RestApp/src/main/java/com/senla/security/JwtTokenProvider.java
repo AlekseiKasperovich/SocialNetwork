@@ -42,10 +42,10 @@ public class JwtTokenProvider {
      * @param role user role
      * @return token
      */
-    public TokenDto generateToken(String email, String role, String id) {
+    public TokenDto generateToken(String email, String role, UUID id) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", role);
-        claims.put("id", id);
+        claims.put("id", id.toString());
         Date expirationDate =
                 Date.from(
                         LocalDate.now()
@@ -53,6 +53,7 @@ public class JwtTokenProvider {
                                 .atStartOfDay(ZoneId.systemDefault())
                                 .toInstant());
         return TokenDto.builder()
+                .id(id)
                 .token(
                         jwtProperty.getBearer()
                                 + Jwts.builder()

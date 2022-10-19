@@ -90,6 +90,12 @@ public class MessageController {
             @RequestParam UUID receiverId,
             @RequestHeader("${request.id}") UUID id,
             Pageable pageable) {
-        return messageService.findAll(receiverId, id, pageable);
+        return messageService.findMyMessages(receiverId, id, pageable);
     }
+
+    //    @GetMapping
+    //    public Page<MessageDto> findMyChats(@RequestHeader("${request.id}") UUID id, Pageable
+    // pageable) {
+    //        return messageService.findMyChats(id, pageable);
+    //    }
 }

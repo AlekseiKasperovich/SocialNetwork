@@ -1,10 +1,14 @@
 package com.senla.web.service.impl;
 
+import com.senla.web.dto.friendship.FriendDto;
 import com.senla.web.dto.friendship.FriendshipDto;
 import com.senla.web.exception.MyAccessDeniedException;
 import com.senla.web.feign.FriendshipClient;
+import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.FriendshipService;
 import feign.FeignException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,9 +35,28 @@ public class FriendshipServiceImpl implements FriendshipService {
     }
 
     @Override
-    public Page<FriendshipDto> getFriends() {
+    public List<FriendDto> getFriends() {
         Pageable page = PageRequest.of(0, 20);
-        return friendshipClient.getFriends(page).getBody();
+        Page<FriendshipDto> pageFriendship = friendshipClient.getFriends(page).getBody();
+        List<FriendshipDto> friendships = pageFriendship.getContent();
+        List<FriendDto> friends = new ArrayList<>();
+        friendships.forEach(
+                f -> {
+                    FriendDto friendDto =
+                            FriendDto.builder()
+                                    .id(f.getId())
+                                    .friend(
+                                            f.getSender()
+                                                            .getId()
+                                                            .equals(
+                                                                    SecurityUtil.getCurrentUser()
+                                                                            .getId())
+                                                    ? f.getReceiver()
+                                                    : f.getSender())
+                                    .build();
+                    friends.add(friendDto);
+                });
+        return friends;
     }
 
     @Override

@@ -23,7 +23,14 @@ public interface MessageRepository extends JpaRepository<Message, UUID> {
             value =
                     "SELECT m FROM Message m WHERE (m.sender.id = :user1 AND m.receiver.id ="
                         + " :user2) OR (m.sender.id = :user2 AND m.receiver.id = :user1) ORDER BY"
-                        + " m.posted DESC")
+                        + " m.posted")
     Page<Message> findMessages(
             @Param("user1") UUID user1, @Param("user2") UUID user2, Pageable pageable);
+
+    @Query(
+            value =
+                    "SELECT m FROM Message m WHERE m.posted IN (SELECT MAX(posted) FROM Message"
+                        + " GROUP BY sender, receiver)  AND (m.sender.id = :user OR m.receiver.id"
+                        + " = :user) AND m.isPrivate=false")
+    Page<Message> findChats(@Param("user") UUID user, Pageable pageable);
 }

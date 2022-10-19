@@ -16,7 +16,7 @@ public interface FriendshipService {
 
     void deleteFriendship(UUID friendshipId, UUID id);
 
-    Page<FriendshipDto> findAll(UUID id, Pageable pageable);
+    Page<FriendshipDto> findMyFriends(UUID id, Pageable pageable);
 
     Page<FriendshipDto> findMyFriendshipRequests(UUID id, Pageable pageable);
 
