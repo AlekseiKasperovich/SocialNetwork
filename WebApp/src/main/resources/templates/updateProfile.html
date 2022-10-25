@@ -22,12 +22,22 @@
                                 </div>
 
                                 <div class="card-body">
-                                    <form
-                                            method="post"
-                                            role="form"
-                                            th:action="@{/users/profile/update}"
-                                            th:object="${updateUser}">
+                                    <form enctype="multipart/form-data"
+                                          method="post"
+                                          role="form"
+                                          th:action="@{/users/profile/update}"
+                                          th:object="${updateUser}">
                                         <div class="form-group mb-3">
+                                            <label class="form-label">Photo</label>
+                                            <input
+                                                    class="form-control"
+                                                    id="Photo"
+                                                    name="Photo"
+                                                    placeholder="Select a file to upload"
+                                                    th:field="*{image}"
+                                                    type="file"
+                                                    accept="image/png, image/jpeg"
+                                            />
                                             <label class="form-label">Name</label>
                                             <input
                                                     class="form-control"

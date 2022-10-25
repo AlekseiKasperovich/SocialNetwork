@@ -1,6 +1,7 @@
 package com.senla.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -49,4 +50,17 @@ public class Message {
 
     @Column(nullable = false)
     private Boolean isPrivate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Message message = (Message) o;
+        return Objects.equals(id, message.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

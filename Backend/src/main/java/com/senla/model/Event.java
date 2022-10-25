@@ -1,6 +1,7 @@
 package com.senla.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Cacheable;
@@ -55,4 +56,17 @@ public class Event {
             inverseJoinColumns = {@JoinColumn(name = "user_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"event_id", "user_id"})})
     private Set<User> participants = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Event event = (Event) o;
+        return Objects.equals(id, event.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

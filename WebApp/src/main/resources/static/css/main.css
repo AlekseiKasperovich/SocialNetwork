@@ -23,3 +23,8 @@ main {
     transform: translateY(-50%);
     cursor: pointer;
 }
+
+.social-img {
+    width: 150px;
+    height: 150px;
+}
