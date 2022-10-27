@@ -8,14 +8,13 @@ import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.ProfileService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -24,6 +23,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProfileController {
 
     private final ProfileService profileService;
+
+    //    private final ImageValidator imageValidator;
 
     private static final String MESSAGE = "message";
 
@@ -50,6 +51,18 @@ public class ProfileController {
         }
         profileService.updateProfile(updateUserDto);
         return "redirect:/users/profile";
+    }
+
+    @PostMapping(
+            value = "update/image",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String updateImage(
+            @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+        System.out.println(file.getOriginalFilename());
+        System.out.println(file.getSize());
+        redirectAttributes.addFlashAttribute(
+                "message", "You successfully uploaded " + file.getOriginalFilename() + "!");
+        return "redirect:/users/profile/update?success";
     }
 
     @GetMapping("password")
