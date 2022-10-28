@@ -25,6 +25,11 @@
                                         <p th:text="${message}"></p>
                                     </div>
                                 </div>
+                                <div th:if="${param.fail}">
+                                    <div class="alert alert-danger">
+                                        <p th:text="${message}"></p>
+                                    </div>
+                                </div>
                                 <div class="card-body">
 
                                     <form enctype="multipart/form-data"

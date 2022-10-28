@@ -4,8 +4,11 @@ import com.senla.web.dto.profile.ChangePasswordDto;
 import com.senla.web.dto.profile.EmailDto;
 import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
+import com.senla.web.exception.ImageUploadException;
 import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.ProfileService;
+import com.senla.web.validator.ImageValidator;
+import java.util.Optional;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -24,7 +27,7 @@ public class ProfileController {
 
     private final ProfileService profileService;
 
-    //    private final ImageValidator imageValidator;
+    private final ImageValidator imageValidator;
 
     private static final String MESSAGE = "message";
 
@@ -58,10 +61,18 @@ public class ProfileController {
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public String updateImage(
             @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
-        System.out.println(file.getOriginalFilename());
-        System.out.println(file.getSize());
+        Optional<String> mimeType = Optional.ofNullable(file.getContentType());
+        try {
+            imageValidator.imageTypeCheck(mimeType);
+            imageValidator.imageSizeCheck(file);
+            System.out.println(file.getOriginalFilename());
+            System.out.println(file.getSize());
+        } catch (ImageUploadException ex) {
+            redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
+            return "redirect:/users/profile/update?fail";
+        }
         redirectAttributes.addFlashAttribute(
-                "message", "You successfully uploaded " + file.getOriginalFilename() + "!");
+                MESSAGE, "You successfully uploaded " + file.getOriginalFilename() + "!");
         return "redirect:/users/profile/update?success";
     }
 

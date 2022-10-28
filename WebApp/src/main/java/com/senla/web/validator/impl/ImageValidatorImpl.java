@@ -3,21 +3,19 @@ package com.senla.web.validator.impl;
 import com.senla.web.exception.ImageUploadException;
 import com.senla.web.validator.ImageValidator;
 import java.util.Optional;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class ImageValidatorImpl implements ImageValidator {
 
-    //    @Value("${app.image.preferences.file-size}")
+    @Value("${app.image.file-size}")
     private Integer fileSize;
 
     @Override
     public void imageSizeCheck(MultipartFile file) {
-        long originSizeMB = 0;
-        if (file != null) {
-            originSizeMB = file.getSize() / (1024 * 1024);
-        }
+        long originSizeMB = file.getSize() / (1024 * 1024);
         if (originSizeMB > fileSize) {
             throw new ImageUploadException(
                     String.format("Image size must be less then %s megabytes", fileSize));

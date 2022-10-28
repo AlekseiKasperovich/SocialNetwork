@@ -21,16 +21,17 @@ feign:
         loggerLevel: full
 role:
   admin: ADMIN
-
+app:
+  image:
+    file-size: 50
 spring:
   servlet:
     multipart:
-      max-file-size: ${MINIO_MAX_UPLOAD_FILE_SIZE:10MB}
-      max-request-size: ${MINIO_MAX_UPLOAD_FILE_SIZE:10MB}
-    minio:
-      url: ${MINIO_HOST:http://localhost:9000}
-      bucket:
-        common: ${MINIO_ROOT_PACKAGE:storage}
-        image: ${MINIO_PUBLIC_PACKAGE:public}
-      access-key: ${MINIO_LOGIN:file0storage}
-      secret-key: ${MINIO_PASS:file0storage}
+      max-file-size: ${MINIO_MAX_UPLOAD_FILE_SIZE:100MB}
+      max-request-size: ${MINIO_MAX_UPLOAD_FILE_SIZE:100MB}
+  minio:
+    url: ${MINIO_HOST:http://localhost:9000}
+    bucket:
+      image: ${MINIO_IMAGE_PACKAGE:image}
+    access-key: ${MINIO_LOGIN:imageStorage}
+    secret-key: ${MINIO_PASS:imageStorage}
