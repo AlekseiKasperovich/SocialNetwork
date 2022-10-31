@@ -1,49 +1,27 @@
 package com.senla.web.handler;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @ControllerAdvice
 public class ResponseExceptionHandler {
 
-    @ExceptionHandler(SizeLimitExceededException.class)
-    public ModelAndView handleUserNotFoundException(HttpServletRequest request, SizeLimitExceededException e) {
-        log.error(">>>>>>>>>> User Not Found Exception");
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public String handleMaxUploadSizeExceededException(
+            RedirectAttributes redirectAttributes, MaxUploadSizeExceededException e) {
         log.error(e.getMessage(), e);
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("message", e.getMessage());
-        modelAndView.setViewName("service/user-not-found");
-
-        return modelAndView;
-    }
-
-    @ExceptionHandler(SocialNetworkException.class)
-    public ModelAndView handleSocialNetworkException(HttpServletRequest request, SocialNetworkException e) {
-        log.error(">>>>>>>>>> Social Network Exception");
-        log.error(e.getMessage(), e);
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("service/something-went-wrong");
-
-        return modelAndView;
+        redirectAttributes.addFlashAttribute(
+                "message", "You could not upload file bigger then 50 MB");
+        return "redirect:/users/profile/update?fail";
     }
 
     @ExceptionHandler(Exception.class)
-    public ModelAndView handleAnyException(HttpServletRequest request, Exception e) {
-        log.error(">>>>>>>>>> Exception");
+    public String handleAnyException(Exception e) {
         log.error(e.getMessage(), e);
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("service/something-went-wrong");
-
-        return modelAndView;
+        return "error";
     }
-
 }

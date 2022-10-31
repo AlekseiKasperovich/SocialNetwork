@@ -6,6 +6,7 @@ import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.exception.ImageUploadException;
 import com.senla.web.security.SecurityUtil;
+import com.senla.web.service.ImageService;
 import com.senla.web.service.ProfileService;
 import com.senla.web.validator.ImageValidator;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class ProfileController {
     private final ProfileService profileService;
 
     private final ImageValidator imageValidator;
+    private final ImageService imageService;
 
     private static final String MESSAGE = "message";
 
@@ -67,6 +69,7 @@ public class ProfileController {
             imageValidator.imageSizeCheck(file);
             System.out.println(file.getOriginalFilename());
             System.out.println(file.getSize());
+            imageService.uploadImage(file);
         } catch (ImageUploadException ex) {
             redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/users/profile/update?fail";

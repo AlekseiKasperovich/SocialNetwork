@@ -1,3 +1,8 @@
 package com.senla.web.service;
 
-public interface MinioService {}
+import org.springframework.web.multipart.MultipartFile;
+
+public interface MinioService {
+
+    String upload(MultipartFile file, String bucketName);
+}

@@ -1,3 +1,8 @@
 package com.senla.web.service;
 
-public interface ImageService {}
+import org.springframework.web.multipart.MultipartFile;
+
+public interface ImageService {
+
+    String uploadImage(MultipartFile file);
+}

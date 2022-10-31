@@ -4,6 +4,9 @@ server:
     include-exception: 'true'
     include-message: always
   port: '8082'
+  tomcat:
+    max-swallow-size: -1
+
 logging:
   level:
     org:

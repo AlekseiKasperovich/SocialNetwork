@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/head :: head">
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <div th:replace="fragments/nav :: nav"/>
+    </header>
+    <main>
+        <div class="container-fluid">
+            <h1>Your are not allowed to see this page.</h1>
+            <a th:href="@{/}" class="btn btn-primary" role="button">Back</a>
+        </div>
+    </main>
+    <footer>
+        <div th:replace="fragments/footer :: footer"/>
+    </footer>
+</div>
+</body>
+</html>
