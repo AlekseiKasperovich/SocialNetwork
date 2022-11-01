@@ -1,6 +1,7 @@
 package com.senla.web.feign;
 
 import com.senla.web.dto.profile.ChangePasswordDto;
+import com.senla.web.dto.profile.ImageDto;
 import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -23,4 +24,7 @@ public interface ProfileClient {
 
     @DeleteMapping
     void deleteProfile();
+
+    @PatchMapping("/image")
+    void updateImage(ImageDto image);
 }

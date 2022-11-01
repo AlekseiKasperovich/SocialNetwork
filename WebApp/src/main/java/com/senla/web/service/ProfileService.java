@@ -1,6 +1,7 @@
 package com.senla.web.service;
 
 import com.senla.web.dto.profile.ChangePasswordDto;
+import com.senla.web.dto.profile.ImageDto;
 import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 
@@ -13,4 +14,6 @@ public interface ProfileService {
     void changePassword(ChangePasswordDto changePasswordDto);
 
     void deleteProfile();
+
+    void updateImage(ImageDto image);
 }

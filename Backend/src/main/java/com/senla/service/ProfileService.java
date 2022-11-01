@@ -1,6 +1,7 @@
 package com.senla.service;
 
 import com.senla.dto.profile.ChangePasswordDto;
+import com.senla.dto.profile.ImageDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 import java.util.UUID;
@@ -15,4 +16,6 @@ public interface ProfileService {
     DtoUser changePassword(ChangePasswordDto changePasswordDto, UUID id);
 
     DtoUser deleteUser(UUID id);
+
+    void updateImage(ImageDto imageDto, UUID id);
 }

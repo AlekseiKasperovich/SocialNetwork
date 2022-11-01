@@ -2,6 +2,7 @@ package com.senla.service.impl;
 
 import com.senla.dto.constants.Status;
 import com.senla.dto.profile.ChangePasswordDto;
+import com.senla.dto.profile.ImageDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 import com.senla.mapper.Mapper;
@@ -52,6 +53,13 @@ public class ProfileServiceImpl implements ProfileService {
         User user = userService.findUserById(id);
         user.setStatus(Status.DELETED);
         return mapper.map(userService.save(user), DtoUser.class);
+    }
+
+    @Override
+    public void updateImage(ImageDto imageDto, UUID id) {
+        User user = userService.findUserById(id);
+        user.setImage(UUID.fromString(imageDto.getImage()));
+        userService.save(user);
     }
 
     /**

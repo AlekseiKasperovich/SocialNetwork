@@ -2,6 +2,7 @@ package com.senla.controller;
 
 import com.senla.client.ProfileRestClient;
 import com.senla.dto.profile.ChangePasswordDto;
+import com.senla.dto.profile.ImageDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 import javax.validation.Valid;
@@ -54,5 +55,10 @@ public class ProfileController {
     @DeleteMapping
     public DtoUser deleteProfile() {
         return profileRestClient.deleteUser();
+    }
+
+    @PatchMapping("/image")
+    public void updateImage(@Valid @RequestBody ImageDto image) {
+        profileRestClient.updateImage(image);
     }
 }

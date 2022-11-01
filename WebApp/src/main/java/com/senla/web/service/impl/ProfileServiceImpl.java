@@ -1,10 +1,12 @@
 package com.senla.web.service.impl;
 
 import com.senla.web.dto.profile.ChangePasswordDto;
+import com.senla.web.dto.profile.ImageDto;
 import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.feign.ProfileClient;
 import com.senla.web.service.ProfileService;
+import java.awt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,10 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public void deleteProfile() {
         profileClient.deleteProfile();
+    }
+
+    @Override
+    public void updateImage(ImageDto image) {
+        profileClient.updateImage(image);
     }
 }

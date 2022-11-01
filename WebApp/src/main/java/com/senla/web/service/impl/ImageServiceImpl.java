@@ -1,7 +1,9 @@
 package com.senla.web.service.impl;
 
+import com.senla.web.dto.profile.ImageDto;
 import com.senla.web.service.ImageService;
 import com.senla.web.service.MinioService;
+import com.senla.web.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,12 @@ public class ImageServiceImpl implements ImageService {
 
     private final MinioService minioService;
 
+    private final ProfileService profileService;
+
     @Override
-    public String uploadImage(MultipartFile file) {
-        return minioService.upload(file, bucketName);
+    public void uploadImage(MultipartFile file) {
+        String uniqFileName = minioService.upload(file, bucketName);
+        ImageDto image = new ImageDto(uniqFileName);
+        profileService.updateImage(image);
     }
 }

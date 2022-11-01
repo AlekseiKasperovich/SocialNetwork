@@ -1,6 +1,7 @@
 package com.senla.controller;
 
 import com.senla.dto.profile.ChangePasswordDto;
+import com.senla.dto.profile.ImageDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 import com.senla.service.ProfileService;
@@ -66,5 +67,11 @@ public class ProfileController {
     @DeleteMapping
     public DtoUser deleteProfile(@RequestHeader("${request.id}") UUID id) {
         return profileService.deleteUser(id);
+    }
+
+    @PatchMapping("/image")
+    public void updateImage(
+            @RequestBody ImageDto imageDto, @RequestHeader("${request.id}") UUID id) {
+        profileService.updateImage(imageDto, id);
     }
 }

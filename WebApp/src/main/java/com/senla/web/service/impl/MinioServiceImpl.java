@@ -38,7 +38,7 @@ public class MinioServiceImpl implements MinioService {
                 | IOException
                 | GeneralSecurityException e) {
             log.error(e.getMessage());
-            throw new ImageUploadException(e.getMessage());
+            throw new ImageUploadException("Something went wrong.");
         }
     }
 }

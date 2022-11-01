@@ -117,10 +117,11 @@
             <artifactId>springfox-bean-validators</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.4.2.Final</version>
+            <version>1.5.2.Final</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.testcontainers/testcontainers -->
@@ -149,7 +150,7 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
         </dependency>
-        
+
     </dependencies>
 
     <build>

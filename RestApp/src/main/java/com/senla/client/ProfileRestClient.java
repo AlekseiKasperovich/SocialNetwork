@@ -1,6 +1,7 @@
 package com.senla.client;
 
 import com.senla.dto.profile.ChangePasswordDto;
+import com.senla.dto.profile.ImageDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 
@@ -14,4 +15,6 @@ public interface ProfileRestClient {
     DtoUser changePassword(ChangePasswordDto changePasswordDto);
 
     DtoUser deleteUser();
+
+    void updateImage(ImageDto image);
 }

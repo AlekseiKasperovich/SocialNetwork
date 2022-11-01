@@ -25,5 +25,5 @@ public class DtoUser {
     private String phone;
     private String status;
 
-    private String image;
+    private UUID image;
 }
