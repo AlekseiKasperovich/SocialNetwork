@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 
 public interface UserService {
 
+    DtoUser getUser();
+
     Page<DtoUser> getUsers();
 
     Page<DtoUser> getUsers(SearchUserDto searchUserDto);

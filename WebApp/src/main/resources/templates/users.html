@@ -10,10 +10,10 @@
     <main>
         <section class="container-fluid">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 container-fluid">
                     <div th:replace="fragments/sideNav :: sideNav"/>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10 container-fluid">
                     <nav class="navbar bg-light">
                         <div class="container-fluid">
                             <form class="d-flex" role="search" method="post" th:object="${search}"
@@ -62,8 +62,9 @@
                                     <tbody>
                                     <tr th:each="user : ${users}">
                                         <td><img th:if="${user.image != null}"
-                                                 class="rounded img-thumbnail"
-                                                 th:src="@{'/' + ${user.image}}" alt="Your profile image">
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{|/users/profile/image/${user.image}|}"
+                                                 alt="Your profile image">
                                             <img th:unless="${user.image != null}"
                                                  class="rounded img-thumbnail social-img"
                                                  th:src="@{/img/default.png}" alt="Your profile image">

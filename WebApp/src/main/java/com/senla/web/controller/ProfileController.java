@@ -10,6 +10,7 @@ import com.senla.web.service.ImageService;
 import com.senla.web.service.ProfileService;
 import com.senla.web.validator.ImageValidator;
 import java.util.Optional;
+import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -67,8 +68,6 @@ public class ProfileController {
         try {
             imageValidator.imageTypeCheck(mimeType);
             imageValidator.imageSizeCheck(file);
-            System.out.println(file.getOriginalFilename());
-            System.out.println(file.getSize());
             imageService.uploadImage(file);
         } catch (ImageUploadException ex) {
             redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
@@ -77,6 +76,12 @@ public class ProfileController {
         redirectAttributes.addFlashAttribute(
                 MESSAGE, "You successfully uploaded " + file.getOriginalFilename() + "!");
         return "redirect:/users/profile/update?success";
+    }
+
+    @ResponseBody
+    @GetMapping("/image/{imageName}")
+    public byte[] downloadImage(@PathVariable UUID imageName) {
+        return imageService.downloadImage(imageName);
     }
 
     @GetMapping("password")
