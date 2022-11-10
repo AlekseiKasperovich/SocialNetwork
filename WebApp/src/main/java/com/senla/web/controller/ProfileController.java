@@ -81,7 +81,7 @@ public class ProfileController {
     @ResponseBody
     @GetMapping("/image/{imageName}")
     public byte[] downloadImage(@PathVariable UUID imageName) {
-        return imageService.downloadImage(imageName);
+        return imageService.downloadImage(imageName.toString());
     }
 
     @GetMapping("password")

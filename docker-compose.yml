@@ -57,6 +57,17 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 imageStorage imageStorage;
+      /usr/bin/mc mb myminio/image;
+      /usr/bin/mc policy set public myminio/image;
+      exit 0;
+      "
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:

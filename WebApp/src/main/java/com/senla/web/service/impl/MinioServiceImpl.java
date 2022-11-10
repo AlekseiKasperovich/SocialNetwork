@@ -16,6 +16,7 @@ import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,12 +54,14 @@ public class MinioServiceImpl implements MinioService {
         try (InputStream object =
                 minioClient.getObject(
                         GetObjectArgs.builder().bucket(bucketName).object(imageName).build())) {
+            System.out.println("minio");
             return IOUtils.toByteArray(object);
         } catch (MinioException | GeneralSecurityException | IOException e) {
             throw new ImageDownloadException("Something went wrong.");
         }
     }
 
+    @CacheEvict(value = "images", key = "#imageName")
     @Override
     public void removeObject(String imageName, String bucketName) {
         try {

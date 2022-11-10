@@ -23,13 +23,22 @@
                                 <table class="table table-hover table-bordered" th:object="${friendships}">
                                     <thead class="table-dark">
                                     <tr>
-                                        <th>Friend:</th>
+                                        <th>Photo:</th>
+                                        <th>Email:</th>
                                         <th></th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr th:each="friendship : ${friendships}">
+                                        <td><img th:if="${friendship.friend.image != null}"
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{|/users/profile/image/${friendship.friend.image}|}"
+                                                 alt="Your profile image">
+                                            <img th:unless="${friendship.friend.image != null}"
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{/img/default.png}" alt="Your profile image">
+                                        </td>
                                         <td th:text="${friendship.friend.email}"></td>
                                         <td>
                                             <a th:href="@{|/messages/${friendship.friend.id}|}" role="button"
