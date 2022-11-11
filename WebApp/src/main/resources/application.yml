@@ -38,3 +38,8 @@ spring:
       image: ${MINIO_IMAGE_PACKAGE:image}
     access-key: ${MINIO_LOGIN:imageStorage}
     secret-key: ${MINIO_PASS:imageStorage}
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379

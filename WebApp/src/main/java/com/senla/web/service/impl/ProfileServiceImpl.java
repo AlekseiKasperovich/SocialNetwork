@@ -6,7 +6,6 @@ import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.feign.ProfileClient;
 import com.senla.web.service.ProfileService;
-import java.awt.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

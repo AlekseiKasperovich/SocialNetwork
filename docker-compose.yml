@@ -40,6 +40,11 @@ services:
       - POSTGRES_USER=${DB_USERNAME:-postgres}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
       - POSTGRES_DB=${DB_SOCIAL:-social_network_db}
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
   minio:
     image: 'bitnami/minio:latest'
     container_name: minio

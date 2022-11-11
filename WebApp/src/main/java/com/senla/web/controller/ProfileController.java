@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -78,6 +79,7 @@ public class ProfileController {
         return "redirect:/users/profile/update?success";
     }
 
+    @Cacheable(value = "images")
     @ResponseBody
     @GetMapping("/image/{imageName}")
     public byte[] downloadImage(@PathVariable UUID imageName) {

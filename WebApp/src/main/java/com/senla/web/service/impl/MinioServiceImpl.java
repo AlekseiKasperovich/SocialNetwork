@@ -54,7 +54,7 @@ public class MinioServiceImpl implements MinioService {
         try (InputStream object =
                 minioClient.getObject(
                         GetObjectArgs.builder().bucket(bucketName).object(imageName).build())) {
-            System.out.println("minio");
+            log.info("Go to minio");
             return IOUtils.toByteArray(object);
         } catch (MinioException | GeneralSecurityException | IOException e) {
             throw new ImageDownloadException("Something went wrong.");

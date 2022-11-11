@@ -8,7 +8,6 @@ import com.senla.web.service.ProfileService;
 import com.senla.web.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +33,6 @@ public class ImageServiceImpl implements ImageService {
         profileService.updateImage(image);
     }
 
-    @Cacheable(value = "images")
     @Override
     public byte[] downloadImage(String imageName) {
         return minioService.getMinioObjectAsBytes(imageName, bucketName);
