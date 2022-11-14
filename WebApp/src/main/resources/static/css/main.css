@@ -23,3 +23,10 @@ main {
     transform: translateY(-50%);
     cursor: pointer;
 }
+
+.social-img {
+    width: 100%;
+    max-width: 100px;
+    height: 100%;
+    max-height: 100px;
+}

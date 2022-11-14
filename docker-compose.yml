@@ -40,6 +40,39 @@ services:
       - POSTGRES_USER=${DB_USERNAME:-postgres}
       - POSTGRES_PASSWORD=${DB_PASSWORD:-postgres}
       - POSTGRES_DB=${DB_SOCIAL:-social_network_db}
+  redis:
+    container_name: redis
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  minio:
+    image: 'bitnami/minio:latest'
+    container_name: minio
+    hostname: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - ./.env.minio
+    environment:
+      MINIO_ROOT_USER: "imageStorage"
+      MINIO_ROOT_PASSWORD: "imageStorage"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 imageStorage imageStorage;
+      /usr/bin/mc mb myminio/image;
+      /usr/bin/mc policy set public myminio/image;
+      exit 0;
+      "
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -50,7 +83,7 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - 29092:29092
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

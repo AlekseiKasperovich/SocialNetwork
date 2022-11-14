@@ -115,7 +115,7 @@ public class AuthController {
             @PathVariable String token, Model model, RedirectAttributes redirectAttributes) {
         EmailDto emailDto;
         try {
-            emailDto = authService.validateToken(new TokenDto(token, null));
+            emailDto = authService.validateToken(new TokenDto(null, token, null));
         } catch (MyAccessDeniedException ex) {
             redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
             return "redirect:/password/new?fail";

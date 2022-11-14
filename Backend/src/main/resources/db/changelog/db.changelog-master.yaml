@@ -1,5 +1,7 @@
 databaseChangeLog:
-  - includeAll:
-      path: db/changelog/1.0/
+  - include:
+      file: db/changelog/1.0/db.changelog-create-tables.yaml
+  - include:
+      file: db/changelog/1.0/02-changeset-01-11-2022.yaml
   - includeAll:
       path: db/changelog/data/

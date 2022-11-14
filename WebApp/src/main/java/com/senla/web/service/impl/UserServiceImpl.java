@@ -3,6 +3,7 @@ package com.senla.web.service.impl;
 import com.senla.web.dto.user.DtoUser;
 import com.senla.web.dto.user.SearchUserDto;
 import com.senla.web.feign.UserClient;
+import com.senla.web.security.SecurityUtil;
 import com.senla.web.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,11 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserClient userClient;
+
+    @Override
+    public DtoUser getUser() {
+        return userClient.getUser(SecurityUtil.getCurrentUser().getId()).getBody();
+    }
 
     @Override
     public Page<DtoUser> getUsers() {

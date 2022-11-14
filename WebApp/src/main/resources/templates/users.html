@@ -10,10 +10,10 @@
     <main>
         <section class="container-fluid">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 container-fluid">
                     <div th:replace="fragments/sideNav :: sideNav"/>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-10 container-fluid">
                     <nav class="navbar bg-light">
                         <div class="container-fluid">
                             <form class="d-flex" role="search" method="post" th:object="${search}"
@@ -45,6 +45,7 @@
                                 <table class="table table-hover table-bordered" th:object="${users}">
                                     <thead class="table-dark">
                                     <tr>
+                                        <th>Photo:</th>
                                         <th>Email:</th>
                                         <th>First name:</th>
                                         <th>Last name:</th>
@@ -60,6 +61,14 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="user : ${users}">
+                                        <td><img th:if="${user.image != null}"
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{|/users/profile/image/${user.image}|}"
+                                                 alt="Your profile image">
+                                            <img th:unless="${user.image != null}"
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{/img/default.png}" alt="Your profile image">
+                                        </td>
                                         <td th:text="${user.email}"></td>
                                         <td th:text="${user.firstName}"></td>
                                         <td th:text="${user.lastName}"></td>
@@ -78,15 +87,10 @@
                                             </form>
                                         </td>
                                         <td>
-                                            <form method="post"
-                                                  th:action="@{|/messages/${user.id}|}">
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary"
-                                                            data-bs-toggle="tooltip"
-                                                            title="Send message"><i class="fa-solid fa-envelope"></i>
-                                                    </button>
-                                                </div>
-                                            </form>
+                                            <a th:href="@{|/messages/${user.id}|}" role="button" class="btn btn-primary"
+                                               data-bs-toggle="tooltip"
+                                               title="Send message"><i class="fa-solid fa-envelope"></i>
+                                            </a>
                                         </td>
                                         <div sec:authorize="hasRole('ROLE_ADMIN')">
                                             <td>

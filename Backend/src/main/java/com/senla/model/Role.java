@@ -1,6 +1,7 @@
 package com.senla.model;
 
 import com.senla.dto.constants.Roles;
+import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -36,5 +37,18 @@ public class Role {
 
     public Role(Roles name) {
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Role role = (Role) o;
+        return Objects.equals(id, role.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

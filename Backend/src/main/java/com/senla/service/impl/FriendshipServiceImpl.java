@@ -107,7 +107,7 @@ public class FriendshipServiceImpl implements FriendshipService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<FriendshipDto> findAll(UUID id, Pageable pageable) {
+    public Page<FriendshipDto> findMyFriends(UUID id, Pageable pageable) {
         Page<Friendship> friendshipPage = friendshipRepository.findMyFriends(id, pageable);
         return friendshipPage.map(friendship -> mapper.map(friendship, FriendshipDto.class));
     }

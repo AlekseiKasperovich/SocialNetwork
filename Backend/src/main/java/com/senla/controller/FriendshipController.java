@@ -96,6 +96,6 @@ public class FriendshipController {
     @GetMapping
     public Page<FriendshipDto> findMyFriends(
             @RequestHeader("${request.id}") UUID id, Pageable pageable) {
-        return friendshipService.findAll(id, pageable);
+        return friendshipService.findMyFriends(id, pageable);
     }
 }

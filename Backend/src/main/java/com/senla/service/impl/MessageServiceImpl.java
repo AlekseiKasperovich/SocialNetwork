@@ -119,7 +119,7 @@ public class MessageServiceImpl implements MessageService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<MessageDto> findAll(UUID receiverId, UUID id, Pageable pageable) {
+    public Page<MessageDto> findMyMessages(UUID receiverId, UUID id, Pageable pageable) {
         Page<Message> messagePage = messageRepository.findMessages(id, receiverId, pageable);
         return messagePage.map(message -> mapper.map(message, MessageDto.class));
     }

@@ -62,6 +62,8 @@ public class User {
     @Column(nullable = false)
     private Status status;
 
+    private UUID image;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

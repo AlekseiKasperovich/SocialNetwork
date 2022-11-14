@@ -4,18 +4,23 @@ import com.senla.web.dto.profile.ChangePasswordDto;
 import com.senla.web.dto.profile.EmailDto;
 import com.senla.web.dto.profile.UpdateUserDto;
 import com.senla.web.dto.user.DtoUser;
+import com.senla.web.exception.ImageUploadException;
 import com.senla.web.security.SecurityUtil;
+import com.senla.web.service.ImageService;
 import com.senla.web.service.ProfileService;
+import com.senla.web.validator.ImageValidator;
+import java.util.Optional;
+import java.util.UUID;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -24,6 +29,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProfileController {
 
     private final ProfileService profileService;
+
+    private final ImageValidator imageValidator;
+    private final ImageService imageService;
 
     private static final String MESSAGE = "message";
 
@@ -50,6 +58,32 @@ public class ProfileController {
         }
         profileService.updateProfile(updateUserDto);
         return "redirect:/users/profile";
+    }
+
+    @PostMapping(
+            value = "update/image",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String updateImage(
+            @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+        Optional<String> mimeType = Optional.ofNullable(file.getContentType());
+        try {
+            imageValidator.imageTypeCheck(mimeType);
+            imageValidator.imageSizeCheck(file);
+            imageService.uploadImage(file);
+        } catch (ImageUploadException ex) {
+            redirectAttributes.addFlashAttribute(MESSAGE, ex.getMessage());
+            return "redirect:/users/profile/update?fail";
+        }
+        redirectAttributes.addFlashAttribute(
+                MESSAGE, "You successfully uploaded " + file.getOriginalFilename() + "!");
+        return "redirect:/users/profile/update?success";
+    }
+
+    @Cacheable(value = "images")
+    @ResponseBody
+    @GetMapping("/image/{imageName}")
+    public byte[] downloadImage(@PathVariable UUID imageName) {
+        return imageService.downloadImage(imageName.toString());
     }
 
     @GetMapping("password")

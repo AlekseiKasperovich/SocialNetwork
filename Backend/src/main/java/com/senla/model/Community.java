@@ -1,6 +1,7 @@
 package com.senla.model;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.Cacheable;
@@ -50,4 +51,17 @@ public class Community {
             inverseJoinColumns = {@JoinColumn(name = "user_id")},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"community_id", "user_id"})})
     private Set<User> followers = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Community community = (Community) o;
+        return Objects.equals(id, community.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

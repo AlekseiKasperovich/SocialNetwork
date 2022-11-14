@@ -3,6 +3,7 @@ package com.senla.client.impl;
 import com.senla.client.HttpHeaderBuilder;
 import com.senla.client.ProfileRestClient;
 import com.senla.dto.profile.ChangePasswordDto;
+import com.senla.dto.profile.ImageDto;
 import com.senla.dto.profile.UpdateUserDto;
 import com.senla.dto.user.DtoUser;
 import com.senla.property.RequestProperty;
@@ -70,5 +71,14 @@ public class ProfileRestClientImpl implements ProfileRestClient {
                         new HttpEntity<>(httpHeaderBuilder.build()),
                         DtoUser.class)
                 .getBody();
+    }
+
+    @Override
+    public void updateImage(ImageDto image) {
+        restTemplate.exchange(
+                requestProperty.getHost() + URL + "/image",
+                HttpMethod.PATCH,
+                new HttpEntity<>(image, httpHeaderBuilder.build()),
+                Void.class);
     }
 }

@@ -1,5 +1,6 @@
 package com.senla.model;
 
+import java.util.Objects;
 import java.util.UUID;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -42,4 +43,17 @@ public class Friendship {
 
     @Column(nullable = false)
     private Boolean accepted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Friendship that = (Friendship) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

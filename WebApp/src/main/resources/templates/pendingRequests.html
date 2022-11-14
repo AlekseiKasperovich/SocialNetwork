@@ -23,6 +23,7 @@
                                 <table class="table table-hover table-bordered" th:object="${pending}">
                                     <thead class="table-dark">
                                     <tr>
+                                        <th>Photo:</th>
                                         <th>Sender:</th>
                                         <th></th>
                                         <th></th>
@@ -30,6 +31,14 @@
                                     </thead>
                                     <tbody>
                                     <tr th:each="friendship : ${pending}">
+                                        <td><img th:if="${friendship.sender.image != null}"
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{|/users/profile/image/${friendship.sender.image}|}"
+                                                 alt="Your profile image">
+                                            <img th:unless="${friendship.sender.image != null}"
+                                                 class="rounded img-thumbnail social-img"
+                                                 th:src="@{/img/default.png}" alt="Your profile image">
+                                        </td>
                                         <td th:text="${friendship.sender.email}"></td>
                                         <td>
                                             <form method="post"

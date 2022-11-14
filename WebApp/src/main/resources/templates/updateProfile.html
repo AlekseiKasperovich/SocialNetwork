@@ -20,13 +20,41 @@
                                 <div class="card-header">
                                     <h2 class="text-center">Update Profile</h2>
                                 </div>
-
+                                <div th:if="${param.success}">
+                                    <div class="alert alert-success">
+                                        <p th:text="${message}"></p>
+                                    </div>
+                                </div>
+                                <div th:if="${param.fail}">
+                                    <div class="alert alert-danger">
+                                        <p th:text="${message}"></p>
+                                    </div>
+                                </div>
                                 <div class="card-body">
-                                    <form
-                                            method="post"
-                                            role="form"
-                                            th:action="@{/users/profile/update}"
-                                            th:object="${updateUser}">
+
+                                    <form enctype="multipart/form-data"
+                                          method="post"
+                                          role="form"
+                                          th:action="@{/users/profile/update/image}"
+                                    >
+                                        <div class="form-group mb-3">
+                                            <label class="form-label" path="file">Photo</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" id="file" name="file"
+                                                       aria-describedby="inputGroupFileAddon04"
+                                                       aria-label="Upload photo"
+                                                       accept="image/*" required>
+                                                <button class="btn btn-primary" type="submit"
+                                                        id="inputGroupFileAddon04">Upload photo
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <form method="post"
+                                          role="form"
+                                          th:action="@{/users/profile/update}"
+                                          th:object="${updateUser}">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Name</label>
                                             <input
@@ -36,6 +64,7 @@
                                                     placeholder="Enter your name"
                                                     th:field="*{firstName}"
                                                     type="text"
+                                                    required
                                             />
                                             <p th:errors="*{firstName}" class="text-danger"
                                                th:if="${#fields.hasErrors('firstName')}"></p>
@@ -50,6 +79,7 @@
                                                     placeholder="Enter your surname"
                                                     th:field="*{lastName}"
                                                     type="text"
+                                                    required
                                             />
                                             <p th:errors="*{lastName}" class="text-danger"
                                                th:if="${#fields.hasErrors('lastName')}"></p>
@@ -60,7 +90,7 @@
                                             <div th:each="model : ${T(com.senla.web.dto.constants.Gender).values()}">
                                                 <div class="custom-control custom-radio custom-control-inline">
                                                     <input type="radio" th:field="*{sex}" th:value="${model}"
-                                                           class="custom-control-input">
+                                                           class="custom-control-input" required>
                                                     <label class="custom-control-label" th:for="${#ids.prev('sex')}"
                                                            th:text="${model}">sex</label>
                                                 </div>
@@ -79,6 +109,7 @@
                                                     th:field="*{birthday}"
                                                     th:value="*{birthday}"
                                                     type="date"
+                                                    required
                                             />
                                             <p th:errors="*{birthday}" class="text-danger"
                                                th:if="${#fields.hasErrors('birthday')}"></p>
@@ -93,6 +124,7 @@
                                                     placeholder="Enter your phone"
                                                     th:field="*{phone}"
                                                     type="tel"
+                                                    required
                                             />
                                             <p th:errors="*{phone}" class="text-danger"
                                                th:if="${#fields.hasErrors('phone')}"></p>
