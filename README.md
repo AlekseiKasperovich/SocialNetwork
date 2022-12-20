@@ -21,8 +21,10 @@
 - Login
 - View own profile
 - Update/delete profile
+- Update photo
 - Change password
 - Send new password to email, if you forgot your password
+- Send reset password link to email, if you forgot your password
 - Search for other users
 - View other users profiles
 - Send/update/delete private/public messages
@@ -50,7 +52,7 @@
 ### Stack:
 
 - Java 11
-- Spring: SpringBoot, MVC, Data JPA, Security, Mail, DevTools, Validation
+- Spring: SpringBoot, MVC, Data JPA, Security, Cloud, Mail, DevTools, Validation
 - Maven - tool that can be used for building and managing any Java-based project.
 - H2, PostgreSQL - databases.
 - Lombok - reducing boilerplate code.
@@ -58,6 +60,13 @@
 - JSON Web Token - allows you to decode, verify and generate JWT.
 - SpringFox - JSON API documentation for spring based applications.
 - Passay - password validation and generation.
+- MiniO - image storage
+- Redis - image cache
+- Thymeleaf is a modern server-side Java template engine for both web and standalone environments.
+- Bootstrap - powerful, extensible, and feature-packed frontend toolkit.
+- HTML/CSS
+- Junit5, Mockito, MockMvc, Testcontainers - testing tools / libraries
+- Liquibase - Fast database change. Fluid delivery.
 
 ### Environment
 
@@ -79,6 +88,10 @@
 - mvn clean package
 - docker-compose -f docker-compose.yml up -d --build
 - Go to http://localhost:8080/swagger-ui/ - read api documentation
+- Go to http://localhost:8082/ - test user interface with credentials:
+  email - admin@gmail.com; password - Admin1
+  email - user@gmail.com; password - User1
+  or register and use your profile.
 ```
 
 ## Postman:
@@ -93,18 +106,18 @@ Go to {{baseUrl}}/api/auth/login
 
 - You can login as user with role "Admin":
 - body:
-{
-"email": "admin@gmail.com",
-"password": "Admin1"
-}
+  {
+  "email": "admin@gmail.com",
+  "password": "Admin1"
+  }
 
 ... and with role "User":
 
 - body:
-{
-"email": "user@gmail.com",
-"password": "User1"
-}
+  {
+  "email": "user@gmail.com",
+  "password": "User1"
+  }
 
 Not secure requests:
 
